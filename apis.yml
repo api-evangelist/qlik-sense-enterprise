@@ -1,0 +1,146 @@
+name: Qlik Sense Enterprise APIs
+description: Collection of APIs for Qlik Sense Enterprise, a modern analytics platform for business intelligence and data visualization
+image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+tags:
+- analytics
+- business intelligence
+- data visualization
+- enterprise
+- REST API
+created: '2024'
+modified: '2024'
+url: https://apis.json/qlik-sense-enterprise
+specificationVersion: '0.18'
+apis:
+- name: Qlik Sense Repository Service API
+  description: Core API for managing Qlik Sense Enterprise resources including apps, streams, users, and security
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+  humanUrl: https://help.qlik.com/en-US/sense-developer/
+  baseUrl: https://{server}:{port}/qrs
+  tags:
+  - repository
+  - management
+  - security
+  - apps
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: OpenAPI
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Authentication
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html?page=8
+  contact:
+  - type: Support
+    url: https://community.qlik.com/
+- name: Qlik Sense Engine API
+  description: JSON-RPC based API for interacting with the Qlik Associative Engine, including data model manipulation and calculations
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+  humanUrl: https://help.qlik.com/en-US/sense-developer/
+  baseUrl: wss://{server}:{port}/app/{appId}
+  tags:
+  - engine
+  - data model
+  - calculations
+  - websocket
+  - JSON-RPC
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/EngineAPI/index.html
+  - type: API Reference
+    url: https://qlik.dev/apis/json-rpc/qix
+  - type: Enigma.js Library
+    url: https://github.com/qlik-oss/enigma.js/
+  contact:
+  - type: Support
+    url: https://community.qlik.com/
+- name: Qlik Sense Proxy Service API
+  description: API for managing sessions, virtual proxies, and authentication
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+  humanUrl: https://help.qlik.com/en-US/sense-developer/
+  baseUrl: https://{server}:{port}/qps
+  tags:
+  - proxy
+  - sessions
+  - authentication
+  - virtual proxy
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/ProxyServiceAPI/index.html
+  - type: Session Management
+    url: https://help.qlik.com/en-US/sense-developer/APIs/ProxyServiceAPI/index.html
+  contact:
+  - type: Support
+    url: https://community.qlik.com/
+- name: Qlik Sense Capabilities API
+  description: High-level JavaScript API for embedding and extending Qlik Sense visualizations and mashups
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+  humanUrl: https://help.qlik.com/en-US/sense-developer/
+  baseUrl: https://{server}/resources
+  tags:
+  - visualization
+  - mashup
+  - embedding
+  - javascript
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/CapabilityAPIs/index.html
+  - type: Mashup Tutorial
+    url: https://help.qlik.com/en-US/sense-developer/Subsystems/Mashups/Content/Sense_Mashups/mashups-getting-started.htm
+  - type: Visualization Extensions
+    url: https://help.qlik.com/en-US/sense-developer/Subsystems/Extensions/Content/Sense_Extensions/extensions-getting-started.htm
+  contact:
+  - type: Support
+    url: https://community.qlik.com/
+- name: Qlik Sense Data Connection API
+  description: API for managing data connections and data sources
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+  humanUrl: https://help.qlik.com/en-US/sense-developer/
+  baseUrl: https://{server}:{port}/qrs/dataconnection
+  tags:
+  - data connection
+  - data sources
+  - integration
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Endpoints
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html?page=24
+  contact:
+  - type: Support
+    url: https://community.qlik.com/
+- name: Qlik Sense Licenses API
+  description: API for managing licenses, license allocations, and user access
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+  humanUrl: https://help.qlik.com/en-US/sense-developer/
+  baseUrl: https://{server}:{port}/qrs/license
+  tags:
+  - licensing
+  - user access
+  - allocation
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: License Management
+    url: https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  contact:
+  - type: Support
+    url: https://community.qlik.com/
+common:
+- type: Portal
+  url: https://qlik.dev/
+- type: Terms of Service
+  url: https://www.qlik.com/us/legal/terms-of-use
+- type: Privacy Policy
+  url: https://www.qlik.com/us/legal/privacy
+- type: Getting Started
+  url: https://help.qlik.com/en-US/sense-developer/Subsystems/Platform/Content/Sense_PlatformOverview/Introduction/dev-plat-intro.htm
+- type: Support
+  url: https://community.qlik.com/
+- type: GitHub
+  url: https://github.com/qlik-oss
+- type: Blog
+  url: https://www.qlik.com/blog
+maintainers:
+- name: Qlik
+  email: developer@qlik.com
+  url: https://www.qlik.com
