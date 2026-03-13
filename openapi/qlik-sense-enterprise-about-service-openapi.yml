@@ -1,0 +1,249 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense About Service API
+  description: >-
+    REST API for retrieving product information about a Qlik Sense site,
+    including system details, installed components, external URLs, and
+    third-party software information. The About Service API provides read-only
+    endpoints that return JSON-formatted information about the Qlik Sense
+    deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+  - url: https://{server}/api/about/v1
+    description: About Service API via HTTPS
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+security:
+  - xrfkey: []
+tags:
+  - name: System Info
+    description: Retrieve system-level information about the Qlik Sense site
+  - name: Components
+    description: Retrieve information about installed components
+  - name: External URLs
+    description: Retrieve configured external URL information
+  - name: Third Party
+    description: Retrieve third-party software information
+paths:
+  /systeminfo:
+    get:
+      operationId: getSystemInfo
+      summary: Get system information
+      description: >-
+        Retrieves system information about the Qlik Sense site including the
+        product name, version, release label, and deployment details.
+      tags:
+        - System Info
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: System information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /components:
+    get:
+      operationId: getComponents
+      summary: Get installed components
+      description: >-
+        Retrieves a list of all components installed in the Qlik Sense system,
+        including their names, versions, and status information.
+      tags:
+        - Components
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Component list returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Component'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /externalurls:
+    get:
+      operationId: getExternalUrls
+      summary: Get external URLs
+      description: >-
+        Retrieves the external URL configuration for the Qlik Sense site,
+        including the hub URI, QMC URI, and API endpoint URIs that are
+        accessible from outside the deployment.
+      tags:
+        - External URLs
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: External URLs returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalUrls'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /thirdparty:
+    get:
+      operationId: getThirdPartyInfo
+      summary: Get third-party software information
+      description: >-
+        Retrieves information about third-party software components included
+        in the Qlik Sense installation, including their names, versions, and
+        license information.
+      tags:
+        - Third Party
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Third-party information returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThirdPartySoftware'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: >-
+        Cross-site request forgery prevention key. Must be 16 arbitrary
+        characters and must match the Xrfkey query parameter.
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: >-
+        Cross-site request forgery prevention key. Must be 16 arbitrary
+        characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    SystemInfo:
+      type: object
+      properties:
+        productName:
+          type: string
+          description: Name of the Qlik Sense product
+        version:
+          type: string
+          description: Full product version string
+        releaseLabel:
+          type: string
+          description: Release label (e.g., November 2025)
+        deploymentType:
+          type: string
+          description: Type of deployment
+        nodeType:
+          type: string
+          description: >-
+            Type of the node providing this information (Central or Non-central)
+        isMultiNode:
+          type: boolean
+          description: Whether this is a multi-node deployment
+        isCentral:
+          type: boolean
+          description: Whether this node is the central node
+        siteIdentifier:
+          type: string
+          format: uuid
+          description: Unique identifier of the Qlik Sense site
+    Component:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Component name
+        version:
+          type: string
+          description: Component version
+        status:
+          type: string
+          description: Component status
+        hostName:
+          type: string
+          description: Hostname where the component is installed
+        serviceType:
+          type: string
+          description: Type of service (e.g., Engine, Proxy, Repository, Scheduler)
+        serviceState:
+          type: integer
+          description: >-
+            Numeric state of the service (0=Initializing, 1=CertificatesNotInstalled,
+            2=Running, 3=Disabled, 4=Error)
+        uri:
+          type: string
+          format: uri
+          description: URI of the component service
+    ExternalUrls:
+      type: object
+      properties:
+        hubUri:
+          type: string
+          format: uri
+          description: External URL to access the Qlik Sense Hub
+        qmcUri:
+          type: string
+          format: uri
+          description: External URL to access the Qlik Management Console
+        apiUri:
+          type: string
+          format: uri
+          description: External URL for API access
+        resultUri:
+          type: string
+          format: uri
+          description: External URL for result access
+    ThirdPartySoftware:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the third-party software
+        version:
+          type: string
+          description: Version of the third-party software
+        license:
+          type: string
+          description: License type or identifier
+        url:
+          type: string
+          format: uri
+          description: URL for the third-party software project or license

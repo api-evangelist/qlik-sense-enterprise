@@ -1,0 +1,851 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Licenses API
+  description: >-
+    REST API endpoints within the Qlik Sense Repository Service for managing
+    licenses, license allocations, and user access types in Qlik Sense
+    Enterprise. This API enables programmatic management of license enablement
+    files (LEF), access type rules, and user license assignments including
+    Professional, Analyzer, and Token access types.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-licenses
+servers:
+  - url: https://{server}:4242/qrs
+    description: Direct QRS connection via certificate authentication
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+  - url: https://{server}/qrs
+    description: QRS connection via Qlik Sense Proxy Service
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+security:
+  - xrfkey: []
+  - certificate: []
+tags:
+  - name: License
+    description: >-
+      Manage Qlik Sense license information including LEF download and
+      license status
+  - name: Access Type
+    description: >-
+      Manage user access types and license allocations
+  - name: License Rule
+    description: >-
+      Manage license rules that control automatic license assignment
+  - name: License Audit
+    description: >-
+      Audit license rule evaluations and access type assignments
+paths:
+  /license:
+    get:
+      operationId: getLicense
+      summary: Get license information
+      description: >-
+        Retrieves the current license information for the Qlik Sense site,
+        including the license key, serial number, product level, and
+        expiration details.
+      tags:
+        - License
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: License information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: setLicense
+      summary: Set license
+      description: >-
+        Sets or updates the license for the Qlik Sense site using a license
+        key and control number.
+      tags:
+        - License
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseSet'
+      responses:
+        '200':
+          description: License set successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/download:
+    get:
+      operationId: downloadLef
+      summary: Download license enablement file
+      description: >-
+        Downloads the license enablement file (LEF) for the current Qlik
+        Sense license. The LEF contains the license key and configuration
+        details.
+      tags:
+        - License
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: License enablement file content returned
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: LEF file content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/accesstypeinfo:
+    get:
+      operationId: getAccessTypeInfo
+      summary: Get access type information
+      description: >-
+        Retrieves information about available access types and their current
+        allocation status, including the total number of tokens or user
+        allocations available and in use.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Access type information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTypeInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/accesstypeoverview:
+    get:
+      operationId: getAccessTypeOverview
+      summary: Get access type overview
+      description: >-
+        Retrieves an overview of all access types showing total, allocated,
+        available, quarantined, and excess counts for each type.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Access type overview returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTypeOverview'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/professionalaccesstype:
+    get:
+      operationId: getProfessionalAccessTypes
+      summary: List professional access allocations
+      description: >-
+        Retrieves a list of all professional access type allocations,
+        showing which users have been assigned professional access licenses.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Professional access allocations returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessTypeAllocation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createProfessionalAccessType
+      summary: Allocate professional access
+      description: >-
+        Allocates a professional access license to a specified user.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessTypeAllocationCreate'
+      responses:
+        '201':
+          description: Professional access allocated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTypeAllocation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/professionalaccesstype/{id}:
+    get:
+      operationId: getProfessionalAccessType
+      summary: Get professional access allocation by ID
+      description: >-
+        Retrieves a single professional access type allocation by its ID.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Professional access allocation returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTypeAllocation'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteProfessionalAccessType
+      summary: Deallocate professional access
+      description: >-
+        Removes a professional access license allocation from a user. The
+        user enters a quarantine period before the license becomes available
+        for reassignment.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Professional access deallocated successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/analyzeraccesstype:
+    get:
+      operationId: getAnalyzerAccessTypes
+      summary: List analyzer access allocations
+      description: >-
+        Retrieves a list of all analyzer access type allocations, showing
+        which users have been assigned analyzer access licenses.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Analyzer access allocations returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessTypeAllocation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createAnalyzerAccessType
+      summary: Allocate analyzer access
+      description: >-
+        Allocates an analyzer access license to a specified user.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessTypeAllocationCreate'
+      responses:
+        '201':
+          description: Analyzer access allocated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTypeAllocation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/analyzeraccesstype/{id}:
+    get:
+      operationId: getAnalyzerAccessType
+      summary: Get analyzer access allocation by ID
+      description: >-
+        Retrieves a single analyzer access type allocation by its ID.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Analyzer access allocation returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTypeAllocation'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteAnalyzerAccessType
+      summary: Deallocate analyzer access
+      description: >-
+        Removes an analyzer access license allocation from a user.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Analyzer access deallocated successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/loginaccesstype:
+    get:
+      operationId: getLoginAccessTypes
+      summary: List login access allocations
+      description: >-
+        Retrieves a list of all login (token-based) access type allocations.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Login access allocations returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoginAccessAllocation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/useraccesstype:
+    get:
+      operationId: getUserAccessTypes
+      summary: List user access allocations
+      description: >-
+        Retrieves a list of all named user access type allocations.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: User access allocations returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessTypeAllocation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createUserAccessType
+      summary: Allocate user access
+      description: >-
+        Allocates a named user access license to a specified user.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessTypeAllocationCreate'
+      responses:
+        '201':
+          description: User access allocated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTypeAllocation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/useraccesstype/{id}:
+    delete:
+      operationId: deleteUserAccessType
+      summary: Deallocate user access
+      description: >-
+        Removes a named user access license allocation from a user.
+      tags:
+        - Access Type
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: User access deallocated successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /licenserule:
+    get:
+      operationId: getLicenseRules
+      summary: List license rules
+      description: >-
+        Retrieves a list of all license rules that control automatic license
+        assignment based on user properties and conditions.
+      tags:
+        - License Rule
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: License rules returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LicenseRule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /licenserule/full:
+    get:
+      operationId: getLicenseRulesFull
+      summary: List license rules with full details
+      description: >-
+        Retrieves a list of all license rules in full format including rule
+        definitions and actions.
+      tags:
+        - License Rule
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Full license rules returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LicenseRule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /licenserule/{id}:
+    get:
+      operationId: getLicenseRule
+      summary: Get license rule by ID
+      description: >-
+        Retrieves a single license rule by its unique identifier.
+      tags:
+        - License Rule
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: License rule returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseRule'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /licenserule/audit:
+    post:
+      operationId: auditLicenseRules
+      summary: Audit license rules
+      description: >-
+        Evaluates license rules to determine which access types would be
+        assigned to users based on the current rule configuration.
+      tags:
+        - License Audit
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseAuditRequest'
+      responses:
+        '200':
+          description: License rule audit results returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseAuditResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: >-
+        Cross-site request forgery prevention key. Must be 16 arbitrary
+        characters.
+    certificate:
+      type: mutualTLS
+      description: >-
+        Client certificate authentication for direct QRS access on port 4242.
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: >-
+        Cross-site request forgery prevention key matching the X-Qlik-Xrfkey
+        header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: Filter expression
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    License:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: License name
+        serial:
+          type: string
+          description: License serial number
+        key:
+          type: string
+          description: License key
+        lef:
+          type: string
+          description: License enablement file content
+        isExpired:
+          type: boolean
+          description: Whether the license has expired
+        expiredReason:
+          type: string
+          description: Reason for license expiration
+        isBlacklisted:
+          type: boolean
+          description: Whether the license serial is blacklisted
+        isInvalid:
+          type: boolean
+          description: Whether the license is invalid
+        productLevel:
+          type: string
+          description: >-
+            Product level (e.g., Professional, Enterprise)
+        numberOfCores:
+          type: integer
+          description: Number of cores allowed by the license
+        timelimited:
+          type: string
+          format: date-time
+          description: Time limit for the license
+        schemaPath:
+          type: string
+    LicenseSet:
+      type: object
+      properties:
+        serial:
+          type: string
+          description: License serial number
+        control:
+          type: string
+          description: License control number
+        name:
+          type: string
+          description: License holder name
+        organization:
+          type: string
+          description: License holder organization
+        lef:
+          type: string
+          description: License enablement file content
+      required:
+        - serial
+        - control
+    AccessTypeInfo:
+      type: object
+      properties:
+        totalTokens:
+          type: integer
+          description: Total number of tokens available
+        availableTokens:
+          type: integer
+          description: Number of tokens currently available
+        usedTokens:
+          type: integer
+          description: Number of tokens in use
+        totalProfessional:
+          type: integer
+          description: Total professional access licenses
+        usedProfessional:
+          type: integer
+          description: Professional licenses in use
+        totalAnalyzer:
+          type: integer
+          description: Total analyzer access licenses
+        usedAnalyzer:
+          type: integer
+          description: Analyzer licenses in use
+    AccessTypeOverview:
+      type: object
+      properties:
+        professional:
+          $ref: '#/components/schemas/AccessTypeSummary'
+        analyzer:
+          $ref: '#/components/schemas/AccessTypeSummary'
+        userAccess:
+          $ref: '#/components/schemas/AccessTypeSummary'
+        loginAccess:
+          $ref: '#/components/schemas/AccessTypeSummary'
+    AccessTypeSummary:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total licenses of this type
+        allocated:
+          type: integer
+          description: Currently allocated licenses
+        available:
+          type: integer
+          description: Currently available licenses
+        quarantined:
+          type: integer
+          description: Licenses in quarantine period
+        excess:
+          type: integer
+          description: Excess allocations beyond total
+    AccessTypeAllocation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            userDirectory:
+              type: string
+            userId:
+              type: string
+        quarantined:
+          type: boolean
+          description: Whether the allocation is in quarantine
+        quarantineEnd:
+          type: string
+          format: date-time
+          description: When the quarantine period ends
+        schemaPath:
+          type: string
+    AccessTypeAllocationCreate:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: User ID to allocate access to
+          required:
+            - id
+      required:
+        - user
+    LoginAccessAllocation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            userDirectory:
+              type: string
+            userId:
+              type: string
+        tokensUsed:
+          type: integer
+          description: Number of tokens consumed by this login access
+        schemaPath:
+          type: string
+    LicenseRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: License rule name
+        category:
+          type: string
+          description: Rule category
+        type:
+          type: integer
+          description: Rule type
+        rule:
+          type: string
+          description: Rule definition expression
+        resourceFilter:
+          type: string
+          description: Resource filter expression
+        actions:
+          type: integer
+          description: Allowed actions (bitwise)
+        comment:
+          type: string
+          description: Rule description
+        disabled:
+          type: boolean
+          description: Whether the rule is disabled
+        schemaPath:
+          type: string
+    LicenseAuditRequest:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: Type of resource to audit
+        resourceFilter:
+          type: string
+          description: Filter for resources
+        userFilter:
+          type: string
+          description: Filter for users
+    LicenseAuditResult:
+      type: object
+      properties:
+        matrix:
+          type: array
+          items:
+            type: object
+          description: Audit result matrix showing rule evaluations
+        schemaPath:
+          type: string

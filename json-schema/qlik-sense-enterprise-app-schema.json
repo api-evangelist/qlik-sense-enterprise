@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.api.dev/qlik-sense-enterprise/app.json",
+  "title": "Qlik Sense Application",
+  "description": "A Qlik Sense application (app) containing data models, visualizations, sheets, stories, and bookmarks. Apps are the primary container for analytics content in Qlik Sense Enterprise.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier (GUID) assigned by the repository"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the app was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the app was last modified. Used for optimistic concurrency control."
+    },
+    "modifiedByUserName": {
+      "type": "string",
+      "description": "Username of the user who last modified the app"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the application",
+      "minLength": 1
+    },
+    "appId": {
+      "type": "string",
+      "description": "Internal application identifier used by the engine"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the application's purpose and content"
+    },
+    "publishTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the app was published to a stream"
+    },
+    "published": {
+      "type": "boolean",
+      "description": "Whether the app is currently published to a stream",
+      "default": false
+    },
+    "stream": {
+      "$ref": "#/$defs/StreamReference",
+      "description": "The stream the app is published to, if any"
+    },
+    "fileSize": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Size of the application QVF file in bytes",
+      "minimum": 0
+    },
+    "lastReloadTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last successful data reload"
+    },
+    "thumbnail": {
+      "type": "string",
+      "description": "Relative path to the application thumbnail image"
+    },
+    "savedInProductVersion": {
+      "type": "string",
+      "description": "Qlik Sense product version the app was last saved in"
+    },
+    "migrationHash": {
+      "type": "string",
+      "description": "Hash indicating the migration state of the app"
+    },
+    "availabilityStatus": {
+      "type": "integer",
+      "description": "Availability status of the app",
+      "enum": [0, 1],
+      "default": 0
+    },
+    "owner": {
+      "$ref": "#/$defs/UserReference",
+      "description": "The user who owns the application"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TagReference"
+      },
+      "description": "Tags applied to the application for categorization"
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CustomPropertyValue"
+      },
+      "description": "Custom property values assigned to the application"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of privileges the current user has on this app"
+    },
+    "schemaPath": {
+      "type": "string",
+      "description": "Schema path identifying the entity type in the QRS"
+    }
+  },
+  "required": ["name"],
+  "$defs": {
+    "StreamReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UserReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userDirectory": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TagReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomPropertyValue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedByUserName": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": {
+              "type": "string"
+            },
+            "valueType": {
+              "type": "string"
+            }
+          }
+        },
+        "value": {
+          "type": "string"
+        },
+        "schemaPath": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

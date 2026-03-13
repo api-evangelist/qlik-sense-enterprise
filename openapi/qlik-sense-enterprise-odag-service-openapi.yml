@@ -1,0 +1,631 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense ODAG Service API
+  description: >-
+    REST API for on-demand app generation (ODAG), enabling the creation of
+    Qlik Sense apps dynamically by linking selection apps to template apps
+    through navigation links. The ODAG service validates user selections,
+    queues app generation requests, and manages the lifecycle of generated apps.
+  version: 3.4.1
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-odag-service
+  x-stabilityIndex: stable
+servers:
+  - url: https://{server}/api/odag/v1
+    description: ODAG Service API endpoint
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+security:
+  - xrfkey: []
+tags:
+  - name: About
+    description: ODAG service metadata
+  - name: Links
+    description: >-
+      Manage navigation links that connect selection apps to template apps
+      for on-demand app generation
+  - name: Requests
+    description: >-
+      Manage on-demand app generation requests including submission, status
+      tracking, and app lifecycle operations
+paths:
+  /about:
+    get:
+      operationId: getOdagAbout
+      summary: Get ODAG service information
+      description: >-
+        Retrieves basic information about the ODAG service including its
+        version and stability index.
+      tags:
+        - About
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: ODAG service information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagAbout'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /links:
+    get:
+      operationId: getOdagLinks
+      summary: List navigation links
+      description: >-
+        Retrieves a list of ODAG navigation links and their properties. Each
+        link connects a selection app to a template app for on-demand app
+        generation.
+      tags:
+        - Links
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Navigation links returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OdagLink'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOdagLink
+      summary: Create navigation link
+      description: >-
+        Creates a new navigation link that enables ODAG navigation from a
+        designated selection app to a template app. Links created via the API
+        do not appear in the list of available navigation links in the UI.
+      tags:
+        - Links
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OdagLinkCreate'
+      responses:
+        '201':
+          description: Navigation link created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagLink'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /links/{linkId}:
+    get:
+      operationId: getOdagLink
+      summary: Get navigation link by ID
+      description: >-
+        Retrieves a single ODAG navigation link by its unique identifier.
+      tags:
+        - Links
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/LinkIdParam'
+      responses:
+        '200':
+          description: Navigation link returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagLink'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateOdagLink
+      summary: Update navigation link
+      description: >-
+        Updates an existing ODAG navigation link configuration.
+      tags:
+        - Links
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/LinkIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OdagLinkUpdate'
+      responses:
+        '200':
+          description: Navigation link updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagLink'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteOdagLink
+      summary: Delete navigation link
+      description: >-
+        Deletes an ODAG navigation link. Generated apps associated with the
+        link are not affected.
+      tags:
+        - Links
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/LinkIdParam'
+      responses:
+        '204':
+          description: Navigation link deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /links/{linkId}/requests:
+    get:
+      operationId: getOdagLinkRequests
+      summary: List requests for a navigation link
+      description: >-
+        Returns a list of ODAG requests for a specific link, optionally
+        matching a set of conditions defined by additional parameters.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/LinkIdParam'
+      responses:
+        '200':
+          description: Request list returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: submitOdagRequest
+      summary: Submit app generation request
+      description: >-
+        Submits a new app generation request to the ODAG service. The request
+        is queued after validating the user selection state against the
+        navigation link property settings and rules.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/LinkIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OdagRequestCreate'
+      responses:
+        '201':
+          description: Request successfully queued for app generation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '400':
+          description: >-
+            Selection app is in an invalid state or request payload is invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Invalid link ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests:
+    get:
+      operationId: getOdagRequests
+      summary: List all ODAG requests
+      description: >-
+        Returns a list of ODAG request objects matching the combination of
+        search criteria provided as query parameters.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Request list returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OdagRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}:
+    get:
+      operationId: getOdagRequest
+      summary: Get ODAG request by ID
+      description: >-
+        Retrieves a single ODAG request by its unique identifier, including
+        the current status and generated app information.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/RequestIdParam'
+      responses:
+        '200':
+          description: Request returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateOdagRequest
+      summary: Update ODAG request
+      description: >-
+        Updates an existing ODAG request, such as changing its status or
+        metadata.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/RequestIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OdagRequestUpdate'
+      responses:
+        '200':
+          description: Request updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}/app:
+    delete:
+      operationId: deleteOdagRequestApp
+      summary: Remove generated app from request
+      description: >-
+        Removes the generated app associated with an ODAG request. The app
+        is deleted from the repository.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/RequestIdParam'
+      responses:
+        '204':
+          description: Generated app removed successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}/reloadApp:
+    post:
+      operationId: reloadOdagRequestApp
+      summary: Reload generated app
+      description: >-
+        Triggers a reload of the generated app associated with an ODAG request,
+        refreshing its data from the template and selection state.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/RequestIdParam'
+      responses:
+        '200':
+          description: App reload triggered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}/renameApp:
+    post:
+      operationId: renameOdagRequestApp
+      summary: Rename generated app
+      description: >-
+        Renames the generated app associated with an ODAG request.
+      tags:
+        - Requests
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/RequestIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New name for the generated app
+              required:
+                - name
+      responses:
+        '200':
+          description: App renamed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: >-
+        Cross-site request forgery prevention key. Must be 16 arbitrary
+        characters.
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: >-
+        Cross-site request forgery prevention key matching the X-Qlik-Xrfkey
+        header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    LinkIdParam:
+      name: linkId
+      in: path
+      required: true
+      description: Unique identifier of the navigation link
+      schema:
+        type: string
+        format: uuid
+    RequestIdParam:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier of the ODAG request
+      schema:
+        type: string
+        format: uuid
+  responses:
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    OdagAbout:
+      type: object
+      properties:
+        version:
+          type: string
+          description: ODAG service version
+        stabilityIndex:
+          type: string
+          description: API stability level (e.g., stable)
+    OdagLink:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique link identifier
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the link was created
+        modifiedDate:
+          type: string
+          format: date-time
+          description: Date the link was last modified
+        name:
+          type: string
+          description: Navigation link name
+        selectionAppId:
+          type: string
+          format: uuid
+          description: ID of the selection app
+        templateAppId:
+          type: string
+          format: uuid
+          description: ID of the template app
+        properties:
+          $ref: '#/components/schemas/OdagLinkProperties'
+        owner:
+          type: string
+          description: Owner user identifier
+        status:
+          type: string
+          description: Link status
+    OdagLinkCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Navigation link name
+        selectionAppId:
+          type: string
+          format: uuid
+          description: ID of the selection app
+        templateAppId:
+          type: string
+          format: uuid
+          description: ID of the template app
+        properties:
+          $ref: '#/components/schemas/OdagLinkProperties'
+      required:
+        - name
+        - selectionAppId
+        - templateAppId
+    OdagLinkUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated navigation link name
+        properties:
+          $ref: '#/components/schemas/OdagLinkProperties'
+    OdagLinkProperties:
+      type: object
+      properties:
+        rowEstExpr:
+          type: string
+          description: Expression for estimating the number of rows in the generated app
+        bindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/OdagBinding'
+          description: Field bindings between selection and template apps
+        genAppAccessible:
+          type: boolean
+          description: Whether generated apps are accessible to users
+        publishTo:
+          type: string
+          description: Stream ID to publish generated apps to
+        retention:
+          type: object
+          properties:
+            maxAge:
+              type: integer
+              description: Maximum age in minutes before a generated app is removed
+            maxCount:
+              type: integer
+              description: Maximum number of generated apps to retain per user
+    OdagBinding:
+      type: object
+      properties:
+        selectionField:
+          type: string
+          description: Field name in the selection app
+        templateField:
+          type: string
+          description: Field name in the template app
+        selectionType:
+          type: string
+          description: Type of selection binding
+    OdagRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique request identifier
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the request was created
+        modifiedDate:
+          type: string
+          format: date-time
+          description: Date the request was last modified
+        linkId:
+          type: string
+          format: uuid
+          description: ID of the navigation link
+        selectionAppId:
+          type: string
+          format: uuid
+          description: ID of the selection app
+        templateAppId:
+          type: string
+          format: uuid
+          description: ID of the template app
+        generatedAppId:
+          type: string
+          format: uuid
+          description: ID of the generated app (available after generation completes)
+        generatedAppName:
+          type: string
+          description: Name of the generated app
+        owner:
+          type: string
+          description: Owner user identifier
+        status:
+          type: string
+          enum:
+            - queued
+            - loading
+            - completed
+            - failed
+            - cancelled
+          description: Current status of the ODAG request
+        statusMessage:
+          type: string
+          description: Detailed status message
+        selectionState:
+          type: object
+          description: Captured selection state from the selection app
+    OdagRequestCreate:
+      type: object
+      properties:
+        selectionState:
+          type: object
+          description: >-
+            Current selection state from the selection app to use for
+            generating the on-demand app
+      required:
+        - selectionState
+    OdagRequestUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Updated status for the request

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.api.dev/qlik-sense-enterprise/security-rule.json",
+  "title": "Qlik Sense Security Rule",
+  "description": "A security rule defines access control policies for Qlik Sense resources. Rules use a condition expression, resource filter, and action bitmask to control which users can perform which operations on which resources. Rules can apply in the QMC context, the Hub context, or both.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier (GUID) assigned by the repository"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the rule was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the rule was last modified"
+    },
+    "modifiedByUserName": {
+      "type": "string",
+      "description": "Username of the user who last modified the rule"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the security rule",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "description": "Rule category (e.g., Security, Sync)"
+    },
+    "type": {
+      "type": "integer",
+      "description": "Rule type identifier"
+    },
+    "rule": {
+      "type": "string",
+      "description": "Rule condition expression using Qlik Sense security rule syntax. Evaluates user and resource properties to determine access."
+    },
+    "resourceFilter": {
+      "type": "string",
+      "description": "Resource filter expression defining which resources the rule applies to (e.g., App_*, Stream_*)"
+    },
+    "actions": {
+      "type": "integer",
+      "description": "Bitwise combination of allowed actions: 1=Create, 2=Read, 4=Update, 8=Delete, 16=Export, 32=Publish, 64=ChangeOwner, 128=ChangeRole"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Human-readable description or comment about the rule's purpose"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the rule is currently disabled",
+      "default": false
+    },
+    "ruleContext": {
+      "type": "integer",
+      "description": "Context in which the rule applies",
+      "enum": [0, 1, 2],
+      "default": 0
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TagReference"
+      },
+      "description": "Tags applied to the security rule"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of privileges the current user has on this rule"
+    },
+    "schemaPath": {
+      "type": "string",
+      "description": "Schema path identifying the entity type in the QRS"
+    }
+  },
+  "required": ["name", "rule", "resourceFilter", "actions"],
+  "$defs": {
+    "TagReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

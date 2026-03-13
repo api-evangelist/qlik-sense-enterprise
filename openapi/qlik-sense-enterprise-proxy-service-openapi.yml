@@ -1,0 +1,470 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Proxy Service API
+  description: >-
+    REST API for managing user sessions, virtual proxies, load balancing, and
+    authentication within the Qlik Sense Proxy Service (QPS). The QPS manages
+    site authentication, session handling, and load balancing across Qlik Sense
+    Engine Services. The API exposes endpoints for the Session module, Load
+    Balancing module, and Proxy operations.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-proxy-service
+servers:
+  - url: https://{server}:4243/qps
+    description: >-
+      Backend QPS API for services to query and modify proxy state (port 4243)
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+  - url: https://{server}/{virtualProxy}/qps
+    description: >-
+      Frontend QPS API accessed via a virtual proxy access point (port 443)
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+      virtualProxy:
+        default: ''
+        description: Virtual proxy prefix
+security:
+  - xrfkey: []
+  - certificate: []
+tags:
+  - name: About
+    description: Retrieve QPS API metadata and endpoint descriptions
+  - name: Session
+    description: >-
+      Manage user sessions including listing, retrieving, and deleting sessions
+  - name: User
+    description: Manage proxy sessions by user identity
+  - name: Load Balancing
+    description: >-
+      Engine load balancing decisions for distributing app sessions across
+      Qlik Sense Engine Services
+  - name: Health
+    description: Health check and service status endpoints
+paths:
+  /about:
+    get:
+      operationId: getProxyAbout
+      summary: Get QPS API information
+      description: >-
+        Retrieves basic information about the Qlik Sense Proxy Service API,
+        including the build version.
+      tags:
+        - About
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: QPS API information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProxyAbout'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /about/description:
+    get:
+      operationId: getProxyApiDescription
+      summary: Get complete endpoint description
+      description: >-
+        Retrieves a complete list of all endpoints available in the QPS API.
+        This serves as the API discovery mechanism.
+      tags:
+        - About
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: API endpoint descriptions returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EndpointDescription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /session:
+    get:
+      operationId: getSessions
+      summary: List all sessions
+      description: >-
+        Retrieves a list of all active user sessions managed by the proxy
+        service. Each session represents an authenticated user connection.
+      tags:
+        - Session
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: List of active sessions returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /session/{id}:
+    get:
+      operationId: getSession
+      summary: Get session by ID
+      description: >-
+        Retrieves a specific user session by its unique session identifier.
+      tags:
+        - Session
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - name: id
+          in: path
+          required: true
+          description: Unique session identifier
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Session returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteSession
+      summary: Delete session
+      description: >-
+        Performs a teardown of all connections for a session. The Session module
+        is notified, and the logout module is also notified if there are no
+        more sessions for the user.
+      tags:
+        - Session
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - name: id
+          in: path
+          required: true
+          description: Unique session identifier to delete
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Session deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/{userDirectory}/{userId}:
+    get:
+      operationId: getUserSessions
+      summary: Get sessions for a user
+      description: >-
+        Retrieves all active sessions for a specific user identified by their
+        user directory and user ID.
+      tags:
+        - User
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - name: userDirectory
+          in: path
+          required: true
+          description: Name of the user directory the user belongs to
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          description: User identifier within the user directory
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User sessions returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteUserSessions
+      summary: Delete all sessions for a user
+      description: >-
+        Deletes all active sessions for a specific user, effectively logging
+        the user out of all Qlik Sense connections.
+      tags:
+        - User
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - name: userDirectory
+          in: path
+          required: true
+          description: Name of the user directory
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          description: User identifier within the user directory
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User sessions deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/{userDirectory}/{userId}/session-count:
+    get:
+      operationId: getUserSessionCount
+      summary: Get session count for a user
+      description: >-
+        Returns the number of active sessions for a specific user.
+      tags:
+        - User
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - name: userDirectory
+          in: path
+          required: true
+          description: Name of the user directory
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          description: User identifier within the user directory
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Session count returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: integer
+                    description: Number of active sessions
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /loadbalancing/prioritize:
+    post:
+      operationId: prioritizeLoadBalancing
+      summary: Prioritize engine services for load balancing
+      description: >-
+        Prioritizes Qlik Sense Engine Services (QES) for a user and an app.
+        The Load Balancing module makes load balancing decisions for engine
+        sessions to distribute load across available engine services.
+      tags:
+        - Load Balancing
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadBalancingRequest'
+      responses:
+        '200':
+          description: Engine service prioritization returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadBalancingResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /health:
+    get:
+      operationId: getProxyHealth
+      summary: Check proxy service health
+      description: >-
+        Returns the health status of the Qlik Sense Proxy Service.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Proxy service is healthy
+        '503':
+          description: Proxy service is unhealthy
+components:
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: >-
+        Cross-site request forgery prevention key. Must be 16 arbitrary
+        characters and must match the Xrfkey query parameter.
+    certificate:
+      type: mutualTLS
+      description: >-
+        Client certificate authentication using certificates exported from
+        Qlik Sense.
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: >-
+        Cross-site request forgery prevention key. Must be 16 arbitrary
+        characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  responses:
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    ProxyAbout:
+      type: object
+      properties:
+        buildVersion:
+          type: string
+          description: QPS build version
+        buildDate:
+          type: string
+          description: QPS build date
+    EndpointDescription:
+      type: object
+      properties:
+        method:
+          type: string
+          description: HTTP method
+        path:
+          type: string
+          description: Endpoint path
+        description:
+          type: string
+          description: Endpoint description
+    Session:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+          description: Unique session identifier
+        userDirectory:
+          type: string
+          description: User directory name
+        userId:
+          type: string
+          description: User identifier within the user directory
+        userName:
+          type: string
+          description: Display name of the user
+        sessionStart:
+          type: string
+          format: date-time
+          description: Timestamp when the session was created
+        lastActive:
+          type: string
+          format: date-time
+          description: Timestamp of last activity on this session
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionAttribute'
+          description: Session attributes including roles and groups
+    SessionAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Attribute name
+        values:
+          type: array
+          items:
+            type: string
+          description: Attribute values
+    LoadBalancingRequest:
+      type: object
+      properties:
+        userDirectory:
+          type: string
+          description: User directory name
+        userId:
+          type: string
+          description: User identifier
+        appId:
+          type: string
+          format: uuid
+          description: Application ID to load balance for
+      required:
+        - userDirectory
+        - userId
+        - appId
+    LoadBalancingResult:
+      type: object
+      properties:
+        engineServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngineServicePriority'
+          description: Prioritized list of engine services
+    EngineServicePriority:
+      type: object
+      properties:
+        engineId:
+          type: string
+          format: uuid
+          description: Engine service identifier
+        hostName:
+          type: string
+          description: Hostname of the engine node
+        port:
+          type: integer
+          description: Port of the engine service
+        priority:
+          type: integer
+          description: Priority ranking (lower is higher priority)
+        isAppOpen:
+          type: boolean
+          description: Whether the app is already open on this engine

@@ -1,0 +1,232 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "qlik": "https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "App": {
+      "@id": "schema:SoftwareApplication",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "description": "schema:description",
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "owner": {
+          "@id": "schema:creator",
+          "@type": "schema:Person"
+        },
+        "published": "schema:isAccessibleForFree",
+        "publishTime": {
+          "@id": "schema:datePublished",
+          "@type": "xsd:dateTime"
+        },
+        "fileSize": {
+          "@id": "schema:contentSize",
+          "@type": "xsd:integer"
+        },
+        "thumbnail": "schema:thumbnailUrl",
+        "stream": "schema:isPartOf",
+        "tags": "schema:keywords",
+        "savedInProductVersion": "schema:softwareVersion"
+      }
+    },
+
+    "Stream": {
+      "@id": "schema:Collection",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "owner": {
+          "@id": "schema:creator",
+          "@type": "schema:Person"
+        },
+        "tags": "schema:keywords"
+      }
+    },
+
+    "User": {
+      "@id": "schema:Person",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "userId": "schema:identifier",
+        "userDirectory": "schema:memberOf",
+        "roles": "schema:hasOccupation",
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "inactive": "schema:accountablePerson",
+        "tags": "schema:keywords"
+      }
+    },
+
+    "DataConnection": {
+      "@id": "dcat:DataService",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "type": "dcterms:type",
+        "connectionstring": "dcat:endpointURL",
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "owner": {
+          "@id": "schema:creator",
+          "@type": "schema:Person"
+        },
+        "tags": "schema:keywords"
+      }
+    },
+
+    "SecurityRule": {
+      "@id": "schema:DigitalDocumentPermission",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "rule": "schema:description",
+        "resourceFilter": "schema:targetCollection",
+        "actions": "schema:permissionType",
+        "comment": "schema:description",
+        "disabled": "schema:expires",
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "ReloadTask": {
+      "@id": "schema:Action",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "enabled": "schema:potentialAction",
+        "app": {
+          "@id": "schema:object",
+          "@type": "schema:SoftwareApplication"
+        },
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "tags": "schema:keywords"
+      }
+    },
+
+    "Session": {
+      "@id": "schema:InteractionCounter",
+      "@context": {
+        "sessionId": "@id",
+        "userId": "schema:identifier",
+        "userName": "schema:name",
+        "userDirectory": "schema:memberOf",
+        "sessionStart": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "lastActive": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Extension": {
+      "@id": "schema:SoftwareApplication",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "owner": {
+          "@id": "schema:creator",
+          "@type": "schema:Person"
+        },
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "tags": "schema:keywords"
+      }
+    },
+
+    "License": {
+      "@id": "schema:DigitalDocument",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "serial": "schema:serialNumber",
+        "key": "schema:identifier",
+        "isExpired": "schema:expires",
+        "productLevel": "schema:version"
+      }
+    },
+
+    "ServerNode": {
+      "@id": "schema:WebAPI",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "hostName": "schema:url",
+        "isCentral": "schema:mainEntity"
+      }
+    },
+
+    "Tag": {
+      "@id": "schema:DefinedTerm",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name"
+      }
+    },
+
+    "CustomProperty": {
+      "@id": "schema:PropertyValue",
+      "@context": {
+        "id": "@id",
+        "name": "schema:propertyID",
+        "choiceValues": "schema:value",
+        "objectTypes": "schema:additionalType"
+      }
+    }
+  }
+}

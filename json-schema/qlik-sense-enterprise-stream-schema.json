@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.api.dev/qlik-sense-enterprise/stream.json",
+  "title": "Qlik Sense Stream",
+  "description": "A Qlik Sense stream is a logical grouping mechanism for organizing and distributing published applications. Streams control access to published apps through security rules, enabling administrators to manage which users can see and interact with specific analytics content.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier (GUID) assigned by the repository"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the stream was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the stream was last modified"
+    },
+    "modifiedByUserName": {
+      "type": "string",
+      "description": "Username of the user who last modified the stream"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the stream",
+      "minLength": 1
+    },
+    "owner": {
+      "$ref": "#/$defs/UserReference",
+      "description": "The user who owns the stream"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TagReference"
+      },
+      "description": "Tags applied to the stream"
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CustomPropertyValue"
+      },
+      "description": "Custom property values assigned to the stream"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of privileges the current user has on this stream"
+    },
+    "schemaPath": {
+      "type": "string",
+      "description": "Schema path identifying the entity type in the QRS"
+    }
+  },
+  "required": ["name"],
+  "$defs": {
+    "UserReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userDirectory": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TagReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomPropertyValue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "definition": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": {
+              "type": "string"
+            },
+            "valueType": {
+              "type": "string"
+            }
+          }
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

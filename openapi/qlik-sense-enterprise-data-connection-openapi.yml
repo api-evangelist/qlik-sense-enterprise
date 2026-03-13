@@ -1,0 +1,465 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Data Connection API
+  description: >-
+    REST API endpoints within the Qlik Sense Repository Service for managing
+    data connections and data sources used by Qlik Sense applications. Data
+    connections define how Qlik Sense connects to external databases, files,
+    and web services for data loading and real-time queries.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-data-connection
+servers:
+  - url: https://{server}:4242/qrs
+    description: Direct QRS connection via certificate authentication
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+  - url: https://{server}/qrs
+    description: QRS connection via Qlik Sense Proxy Service
+    variables:
+      server:
+        default: localhost
+        description: Qlik Sense server hostname
+security:
+  - xrfkey: []
+  - certificate: []
+tags:
+  - name: Data Connection
+    description: >-
+      Manage data connections used by Qlik Sense applications for loading data
+      from external sources
+paths:
+  /dataconnection:
+    get:
+      operationId: getDataConnections
+      summary: List data connections
+      description: >-
+        Retrieves a list of all data connections in condensed format, optionally
+        filtered by a query expression. Returns connections accessible to the
+        authenticated user based on security rules.
+      tags:
+        - Data Connection
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+        - $ref: '#/components/parameters/OrderByParam'
+        - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: List of data connections returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataConnectionCondensed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createDataConnection
+      summary: Create data connection
+      description: >-
+        Creates a new data connection for use by Qlik Sense applications. The
+        connection defines the provider type, connection string, and credentials
+        for accessing an external data source.
+      tags:
+        - Data Connection
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataConnectionCreate'
+      responses:
+        '201':
+          description: Data connection created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataConnection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /dataconnection/full:
+    get:
+      operationId: getDataConnectionsFull
+      summary: List data connections with full details
+      description: >-
+        Retrieves a list of all data connections in full format including owner,
+        tags, custom properties, and connection string details.
+      tags:
+        - Data Connection
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+        - $ref: '#/components/parameters/OrderByParam'
+        - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: Full list of data connections returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataConnection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /dataconnection/count:
+    get:
+      operationId: getDataConnectionsCount
+      summary: Count data connections
+      description: >-
+        Returns the number of data connections matching an optional filter
+        expression.
+      tags:
+        - Data Connection
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Data connection count returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityCount'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /dataconnection/{id}:
+    get:
+      operationId: getDataConnection
+      summary: Get data connection by ID
+      description: >-
+        Retrieves a single data connection by its unique identifier in full
+        format.
+      tags:
+        - Data Connection
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+        - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: Data connection returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataConnection'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateDataConnection
+      summary: Update data connection
+      description: >-
+        Updates an existing data connection. The complete entity including the
+        unchanged modifiedDate must be provided in the request body.
+      tags:
+        - Data Connection
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataConnection'
+      responses:
+        '200':
+          description: Data connection updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataConnection'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteDataConnection
+      summary: Delete data connection
+      description: >-
+        Permanently deletes a data connection from the repository. Applications
+        referencing this connection will no longer be able to load data from it.
+      tags:
+        - Data Connection
+      parameters:
+        - $ref: '#/components/parameters/XrfKeyParam'
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Data connection deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: >-
+        Cross-site request forgery prevention key. Must be 16 arbitrary
+        characters.
+    certificate:
+      type: mutualTLS
+      description: >-
+        Client certificate authentication for direct QRS access on port 4242.
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: >-
+        Cross-site request forgery prevention key matching the X-Qlik-Xrfkey
+        header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the data connection
+      schema:
+        type: string
+        format: uuid
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: >-
+        Filter expression using syntax: property operator value (e.g.,
+        name eq 'MyConnection')
+      schema:
+        type: string
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by
+      schema:
+        type: string
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to returned entities
+      schema:
+        type: boolean
+        default: false
+  responses:
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested data connection was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Update conflict due to concurrent modification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    DataConnection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the connection was created
+        modifiedDate:
+          type: string
+          format: date-time
+          description: Date the connection was last modified
+        modifiedByUserName:
+          type: string
+          description: Username of the last modifier
+        name:
+          type: string
+          description: Data connection name
+        connectionstring:
+          type: string
+          description: >-
+            Connection string for the data source including provider-specific
+            parameters
+        type:
+          type: string
+          description: >-
+            Connection provider type (e.g., QvOdbcConnectorPackage.exe,
+            QvOleDbConnectorPackage.exe, folder, web)
+        logOn:
+          type: integer
+          description: >-
+            Logon mode (0=ServiceUser, 1=CurrentUser)
+        architecture:
+          type: integer
+          description: >-
+            Connection architecture (0=Undefined, 1=x86, 2=x64)
+        engineObjectId:
+          type: string
+          format: uuid
+          description: Engine object identifier for the connection
+        username:
+          type: string
+          description: Username for connection authentication
+        password:
+          type: string
+          description: Password for connection authentication (write-only, not returned in responses)
+          writeOnly: true
+        owner:
+          $ref: '#/components/schemas/UserCondensed'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagCondensed'
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomPropertyValue'
+        privileges:
+          type: array
+          items:
+            type: string
+        schemaPath:
+          type: string
+          description: Schema path for this entity type
+      required:
+        - name
+        - connectionstring
+        - type
+    DataConnectionCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Data connection name
+        connectionstring:
+          type: string
+          description: Connection string for the data source
+        type:
+          type: string
+          description: Connection provider type
+        logOn:
+          type: integer
+          description: Logon mode
+        architecture:
+          type: integer
+          description: Connection architecture
+        username:
+          type: string
+          description: Username for connection authentication
+        password:
+          type: string
+          description: Password for connection authentication
+      required:
+        - name
+        - connectionstring
+        - type
+    DataConnectionCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectionstring:
+          type: string
+        type:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    UserCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        userDirectory:
+          type: string
+        userId:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        definition:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+        value:
+          type: string

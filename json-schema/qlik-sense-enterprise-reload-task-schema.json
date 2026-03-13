@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.api.dev/qlik-sense-enterprise/reload-task.json",
+  "title": "Qlik Sense Reload Task",
+  "description": "A reload task defines a scheduled or manually triggered operation to reload data in a Qlik Sense application from its connected data sources. Tasks track execution history, status, and can be configured with retry policies and triggers.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier (GUID) assigned by the repository"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the task was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the task was last modified"
+    },
+    "modifiedByUserName": {
+      "type": "string",
+      "description": "Username of the user who last modified the task"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the reload task",
+      "minLength": 1
+    },
+    "taskType": {
+      "type": "integer",
+      "description": "Task type identifier (0=ReloadTask)"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the task is enabled for execution",
+      "default": true
+    },
+    "taskSessionTimeout": {
+      "type": "integer",
+      "description": "Maximum execution time in minutes before the task is terminated",
+      "minimum": 0
+    },
+    "maxRetries": {
+      "type": "integer",
+      "description": "Maximum number of automatic retry attempts on failure",
+      "minimum": 0,
+      "default": 0
+    },
+    "app": {
+      "$ref": "#/$defs/AppReference",
+      "description": "The application this reload task is associated with"
+    },
+    "isManuallyTriggered": {
+      "type": "boolean",
+      "description": "Whether the task requires manual triggering rather than scheduled execution",
+      "default": false
+    },
+    "operational": {
+      "$ref": "#/$defs/TaskOperational",
+      "description": "Operational information including last execution result and next execution time"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TagReference"
+      },
+      "description": "Tags applied to the task"
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CustomPropertyValue"
+      },
+      "description": "Custom property values assigned to the task"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of privileges the current user has on this task"
+    },
+    "schemaPath": {
+      "type": "string",
+      "description": "Schema path identifying the entity type in the QRS"
+    }
+  },
+  "required": ["name"],
+  "$defs": {
+    "AppReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "appId": {
+          "type": "string"
+        },
+        "publishTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "published": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TaskOperational": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "lastExecutionResult": {
+          "$ref": "#/$defs/ExecutionResult"
+        },
+        "nextExecution": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Scheduled time of the next execution"
+        }
+      }
+    },
+    "ExecutionResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "executingNodeName": {
+          "type": "string",
+          "description": "Hostname of the node that executed the task"
+        },
+        "status": {
+          "type": "integer",
+          "description": "Execution status code",
+          "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the execution started"
+        },
+        "stopTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the execution completed"
+        },
+        "duration": {
+          "type": "integer",
+          "description": "Execution duration in milliseconds",
+          "minimum": 0
+        }
+      }
+    },
+    "TagReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomPropertyValue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "definition": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

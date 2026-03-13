@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.api.dev/qlik-sense-enterprise/user.json",
+  "title": "Qlik Sense User",
+  "description": "A Qlik Sense user represents an identity imported from an external user directory (such as Active Directory or LDAP) into the Qlik Sense repository. Users are associated with user directories, can be assigned roles, and have their access controlled by security and license rules.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier (GUID) assigned by the repository"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the user was created in the repository"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the user was last modified"
+    },
+    "modifiedByUserName": {
+      "type": "string",
+      "description": "Username of the user who last modified this record"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the user"
+    },
+    "userDirectory": {
+      "type": "string",
+      "description": "Name of the user directory the user was imported from (e.g., Active Directory domain name)",
+      "minLength": 1
+    },
+    "userId": {
+      "type": "string",
+      "description": "Unique user identifier within the user directory (e.g., sAMAccountName)",
+      "minLength": 1
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Roles assigned to the user, used in security and license rule evaluation"
+    },
+    "inactive": {
+      "type": "boolean",
+      "description": "Whether the user account is inactive",
+      "default": false
+    },
+    "removedExternally": {
+      "type": "boolean",
+      "description": "Whether the user has been removed from the external user directory",
+      "default": false
+    },
+    "blacklisted": {
+      "type": "boolean",
+      "description": "Whether the user is blacklisted from accessing Qlik Sense",
+      "default": false
+    },
+    "deleteProhibited": {
+      "type": "boolean",
+      "description": "Whether deletion of this user is prohibited (e.g., system accounts)",
+      "default": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TagReference"
+      },
+      "description": "Tags applied to the user for categorization"
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CustomPropertyValue"
+      },
+      "description": "Custom property values assigned to the user"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of privileges the current user has on this user entity"
+    },
+    "schemaPath": {
+      "type": "string",
+      "description": "Schema path identifying the entity type in the QRS"
+    }
+  },
+  "required": ["userId", "userDirectory"],
+  "$defs": {
+    "TagReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "privileges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomPropertyValue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "definition": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": {
+              "type": "string"
+            },
+            "valueType": {
+              "type": "string"
+            }
+          }
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

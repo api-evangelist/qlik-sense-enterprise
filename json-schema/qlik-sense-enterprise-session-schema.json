@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.api.dev/qlik-sense-enterprise/session.json",
+  "title": "Qlik Sense Proxy Session",
+  "description": "A proxy session represents an authenticated user connection managed by the Qlik Sense Proxy Service. Sessions track user identity, activity timestamps, and session attributes including roles and group memberships.",
+  "type": "object",
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique session identifier"
+    },
+    "userDirectory": {
+      "type": "string",
+      "description": "Name of the user directory the session user belongs to"
+    },
+    "userId": {
+      "type": "string",
+      "description": "User identifier within the user directory"
+    },
+    "userName": {
+      "type": "string",
+      "description": "Display name of the session user"
+    },
+    "sessionStart": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the session was created"
+    },
+    "lastActive": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last activity on this session"
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SessionAttribute"
+      },
+      "description": "Session attributes passed from the authentication source, including roles and group memberships"
+    }
+  },
+  "$defs": {
+    "SessionAttribute": {
+      "type": "object",
+      "description": "A key-value attribute associated with a session",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Attribute name (e.g., group, role)"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Attribute values"
+        }
+      }
+    }
+  }
+}

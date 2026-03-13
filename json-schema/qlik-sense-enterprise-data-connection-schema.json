@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.api.dev/qlik-sense-enterprise/data-connection.json",
+  "title": "Qlik Sense Data Connection",
+  "description": "A data connection defines how Qlik Sense connects to an external data source for loading data into applications. Connections specify the provider type, connection string, authentication credentials, and the architecture of the connector.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier (GUID) assigned by the repository"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the data connection was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the data connection was last modified"
+    },
+    "modifiedByUserName": {
+      "type": "string",
+      "description": "Username of the user who last modified the connection"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the data connection",
+      "minLength": 1
+    },
+    "connectionstring": {
+      "type": "string",
+      "description": "Connection string containing provider-specific parameters for connecting to the data source"
+    },
+    "type": {
+      "type": "string",
+      "description": "Connection provider type identifier (e.g., QvOdbcConnectorPackage.exe, QvOleDbConnectorPackage.exe, folder, web)"
+    },
+    "logOn": {
+      "type": "integer",
+      "description": "Logon mode for the connection",
+      "enum": [0, 1],
+      "default": 0
+    },
+    "architecture": {
+      "type": "integer",
+      "description": "Connector architecture",
+      "enum": [0, 1, 2],
+      "default": 0
+    },
+    "engineObjectId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Engine object identifier associated with the connection"
+    },
+    "username": {
+      "type": "string",
+      "description": "Username for authenticating to the data source"
+    },
+    "password": {
+      "type": "string",
+      "description": "Password for authenticating to the data source (write-only)",
+      "writeOnly": true
+    },
+    "owner": {
+      "$ref": "#/$defs/UserReference",
+      "description": "The user who owns the data connection"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TagReference"
+      },
+      "description": "Tags applied to the data connection"
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CustomPropertyValue"
+      },
+      "description": "Custom property values assigned to the data connection"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of privileges the current user has on this connection"
+    },
+    "schemaPath": {
+      "type": "string",
+      "description": "Schema path identifying the entity type in the QRS"
+    }
+  },
+  "required": ["name", "connectionstring", "type"],
+  "$defs": {
+    "UserReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userDirectory": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "TagReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomPropertyValue": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "definition": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
