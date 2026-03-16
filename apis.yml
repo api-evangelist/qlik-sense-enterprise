@@ -1,284 +1,72 @@
+aid: qlik-sense-enterprise
 name: Qlik Sense Enterprise APIs
-description: Collection of APIs for Qlik Sense Enterprise, a modern analytics platform for business intelligence and data visualization
-image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
+description: Collection of APIs for Qlik Sense Enterprise, a modern analytics platform
+  for business intelligence and data visualization.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- analytics
-- business intelligence
-- data visualization
-- enterprise
-- REST API
-created: '2024'
-modified: '2026-03-04'
-url: https://apis.json/qlik-sense-enterprise
-specificationVersion: '0.18'
+  - Analytics
+  - Business Intelligence
+  - Data Visualization
+  - Enterprise
+  - REST API
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/qlik-sense-enterprise/refs/heads/main/apis.yml
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
-- name: Qlik Sense Repository Service API
-  description: Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-  baseUrl: https://{server}:{port}/qrs
-  tags:
-  - Repository
-  - Management
-  - Security
-  - Apps
-  - Administration
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-  - type: Reference
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Reference-Redirect.htm
-  - type: Getting Started
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Getting-Started.htm
-  - type: Authentication
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
-  - type: OpenAPI
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Access-OpenAPI-Spec.htm
-  - type: OpenAPI
-    url: openapi/qlik-sense-enterprise-repository-service-openapi.yml
-  - type: JSONSchema
-    url: json-schema/qlik-sense-enterprise-app-schema.json
-  - type: JSONSchema
-    url: json-schema/qlik-sense-enterprise-stream-schema.json
-  - type: JSONSchema
-    url: json-schema/qlik-sense-enterprise-user-schema.json
-  - type: JSONSchema
-    url: json-schema/qlik-sense-enterprise-security-rule-schema.json
-  - type: JSONSchema
-    url: json-schema/qlik-sense-enterprise-reload-task-schema.json
-  - type: JSON-LD
-    url: json-ld/qlik-sense-enterprise-context.jsonld
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense Engine JSON API
-  description: WebSocket protocol API using JSON-RPC for interacting with the Qlik Associative Engine, enabling data model manipulation, calculations, and hypercube queries.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
-  baseUrl: wss://{server}:{port}/app/{appId}
-  tags:
-  - Engine
-  - Data Model
-  - Calculations
-  - WebSocket
-  - JSON-RPC
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
-  - type: Reference
-    url: https://qlik.dev/apis/json-rpc/qix
-  - type: SDKs
-    url: https://github.com/qlik-oss/enigma.js/
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense Proxy Service API
-  description: REST API for managing user sessions, virtual proxies, load balancing, and authentication within the Qlik Sense Proxy Service.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
-  baseUrl: https://{server}:{port}/qps
-  tags:
-  - Proxy
-  - Sessions
-  - Authentication
-  - Load Balancing
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
-  - type: Reference
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Proxy-API.htm
-  - type: OpenAPI
-    url: openapi/qlik-sense-enterprise-proxy-service-openapi.yml
-  - type: JSONSchema
-    url: json-schema/qlik-sense-enterprise-session-schema.json
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense Capability APIs
-  description: High-level JavaScript APIs for embedding and extending Qlik Sense visualizations and mashups, including App, Bookmark, Field, Global, Navigation, Selection, Table, Theme, Variable, and Visualization APIs.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/capability-apis-reference.htm
-  baseUrl: https://{server}/resources
-  tags:
-  - Visualization
-  - Mashup
-  - Embedding
-  - JavaScript
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/capability-apis-reference.htm
-  - type: Reference
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/CapabilityAPIs/qlik-interface-interface.htm
-  - type: Getting Started
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/Mashups/Content/Sense_Mashups/mashups-getting-started.htm
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense Data Connection API
-  description: REST API endpoints within the Repository Service for managing data connections and data sources used by Qlik Sense applications.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-  baseUrl: https://{server}:{port}/qrs/dataconnection
-  tags:
-  - Data Connection
-  - Data Sources
-  - Integration
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-  - type: OpenAPI
-    url: openapi/qlik-sense-enterprise-data-connection-openapi.yml
-  - type: JSONSchema
-    url: json-schema/qlik-sense-enterprise-data-connection-schema.json
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense Licenses API
-  description: REST API endpoints within the Repository Service for managing licenses, license allocations, and user access types in Qlik Sense Enterprise.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-  baseUrl: https://{server}:{port}/qrs/license
-  tags:
-  - Licensing
-  - User Access
-  - Allocation
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-  - type: OpenAPI
-    url: openapi/qlik-sense-enterprise-licenses-openapi.yml
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense About Service API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/AboutServiceAPI/Content/Sense_AboutServiceAPI/AboutServiceAPI-Introduction.htm
-  baseUrl: https://{server}/api/about/v1
-  tags:
-  - Product Information
-  - System
-  - Components
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/AboutServiceAPI/Content/Sense_AboutServiceAPI/AboutServiceAPI-Introduction.htm
-  - type: OpenAPI
-    url: openapi/qlik-sense-enterprise-about-service-openapi.yml
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense ODAG Service API
-  description: REST API for on-demand app generation, enabling the creation of Qlik Sense apps dynamically by linking selection apps to template apps through navigation links.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/ODAGserviceAPI/Content/Home.htm
-  baseUrl: https://{server}/api/odag/v1
-  tags:
-  - On-Demand
-  - App Generation
-  - Templates
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/ODAGserviceAPI/Content/Home.htm
-  - type: OpenAPI
-    url: openapi/qlik-sense-enterprise-odag-service-openapi.yml
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense User Directory Connector API
-  description: .NET API for building custom user directory connectors to import users and groups into Qlik Sense from external identity sources.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/UserDirectoryConnectorAPI/Content/Sense_UserDirectoryConnectorAPI/UDCAPI-Introduction.htm
-  baseUrl: https://{server}:{port}/qrs/userdirectory
-  tags:
-  - User Directory
-  - Identity
-  - Connectors
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/UserDirectoryConnectorAPI/Content/Sense_UserDirectoryConnectorAPI/UDCAPI-Introduction.htm
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense App Integration API
-  description: URL-based API for embedding complete Qlik Sense apps into web pages using iframes, with support for passing parameters and applying selections.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/app-integration-api.htm
-  baseUrl: https://{server}/sense/app/{appId}
-  tags:
-  - Integration
-  - Embedding
-  - IFrame
-  - Apps
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/app-integration-api.htm
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense Single Integration API
-  description: URL-based API for embedding individual Qlik Sense visualizations into web pages using iframes, allowing single object embedding with applied selections.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/single-integration-api.htm
-  baseUrl: https://{server}/single
-  tags:
-  - Integration
-  - Embedding
-  - Visualization
-  - IFrame
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/single-integration-api.htm
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
-- name: Qlik Sense Extension API
-  description: JavaScript API providing methods and properties for creating custom visualization extensions that extend the built-in visualization capabilities of Qlik Sense.
-  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo-2x.png
-  humanUrl: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/extensions-api-reference.htm
-  baseUrl: https://{server}/resources
-  tags:
-  - Extensions
-  - Visualization
-  - Customization
-  - JavaScript
-  properties:
-  - type: Documentation
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/APIs/Content/Sense_ClientAPIs/extensions-api-reference.htm
-  - type: Getting Started
-    url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/Extensions/Content/Sense_Extensions/extensions-introduction.htm
-  contact:
-  - type: Support
-    url: https://community.qlik.com/
+  - aid: qlik-sense-enterprise:qlik-sense-repository-service-api
+    name: Qlik Sense Repository Service API
+    description: Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console.
+    humanURL: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+    tags:
+      - Repository
+      - Management
+      - Security
+    properties:
+      - type: Documentation
+        url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+      - type: Authentication
+        url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - aid: qlik-sense-enterprise:qlik-sense-engine-json-api
+    name: Qlik Sense Engine JSON API
+    description: WebSocket protocol API using JSON-RPC for interacting with the Qlik Associative Engine.
+    humanURL: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
+    tags:
+      - Engine
+      - WebSocket
+      - JSON-RPC
+    properties:
+      - type: Documentation
+        url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
 common:
-- type: Portal
-  url: https://qlik.dev/
-- type: Documentation
-  url: https://help.qlik.com/en-US/sense-developer/November2025/Content/Sense_Helpsites/APIs-and-SDKs.htm
-- type: Getting Started
-  url: https://help.qlik.com/en-US/sense-developer/November2025/Content/Sense_Helpsites/getting-started-developer.htm
-- type: Authentication
-  url: https://qlik.dev/toolkits/qlik-api/authentication/
-- type: Blog
-  url: https://www.qlik.com/blog
-- type: Status
-  url: https://status.qlikcloud.com/
-- type: Support
-  url: https://community.qlik.com/t5/Support/ct-p/qlikSupport
-- type: Terms of Service
-  url: https://www.qlik.com/us/legal/terms-of-use
-- type: Privacy Policy
-  url: https://www.qlik.com/us/legal/privacy
-- type: GitHub Organization
-  url: https://github.com/qlik-oss
-- type: Community
-  url: https://community.qlik.com/
-- type: Website
-  url: https://www.qlik.com/
-- type: Login
-  url: https://qlikid.qlik.com/
-- type: Sign Up
-  url: https://register.myqlik.qlik.com/
+  - type: Portal
+    url: https://qlik.dev/
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/November2025/Content/Sense_Helpsites/APIs-and-SDKs.htm
+  - type: Authentication
+    url: https://qlik.dev/toolkits/qlik-api/authentication/
+  - type: Blog
+    url: https://www.qlik.com/blog
+  - type: Status
+    url: https://status.qlikcloud.com/
+  - type: Support
+    url: https://community.qlik.com/t5/Support/ct-p/qlikSupport
+  - type: TermsOfService
+    url: https://www.qlik.com/us/legal/terms-of-use
+  - type: PrivacyPolicy
+    url: https://www.qlik.com/us/legal/privacy
+  - type: GitHubOrganization
+    url: https://github.com/qlik-oss
+  - type: Community
+    url: https://community.qlik.com/
+  - type: Website
+    url: https://www.qlik.com/
+  - type: Login
+    url: https://qlikid.qlik.com/
+  - type: SignUp
+    url: https://register.myqlik.qlik.com/
 maintainers:
-- name: Kin Lane
-  email: kin@apievangelist.com
-  url: https://www.qlik.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
