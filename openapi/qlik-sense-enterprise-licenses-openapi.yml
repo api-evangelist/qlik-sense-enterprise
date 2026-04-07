@@ -33,19 +33,19 @@ security:
   - xrfkey: []
   - certificate: []
 tags:
+  - name: Access Type
+    description: >-
+      Manage user access types and license allocations
   - name: License
     description: >-
       Manage Qlik Sense license information including LEF download and
       license status
-  - name: Access Type
-    description: >-
-      Manage user access types and license allocations
-  - name: License Rule
-    description: >-
-      Manage license rules that control automatic license assignment
   - name: License Audit
     description: >-
       Audit license rule evaluations and access type assignments
+  - name: License Rule
+    description: >-
+      Manage license rules that control automatic license assignment
 paths:
   /license:
     get:

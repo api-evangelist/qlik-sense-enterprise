@@ -1,7 +1,6 @@
 aid: qlik-sense-enterprise
 name: Qlik Sense Enterprise
-description: Collection of APIs for Qlik Sense Enterprise, a modern analytics platform
-  for business intelligence and data visualization.
+description: Collection of APIs for Qlik Sense Enterprise, a modern analytics platform for business intelligence and data visualization.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -21,8 +20,8 @@ apis:
     description: Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console.
     humanURL: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
     tags:
-      - Repository
       - Management
+      - Repository
       - Security
     properties:
       - type: Documentation
@@ -35,8 +34,8 @@ apis:
     humanURL: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
     tags:
       - Engine
-      - WebSocket
       - JSON-RPC
+      - WebSocket
     properties:
       - type: Documentation
         url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm

@@ -40,17 +40,17 @@ security:
 tags:
   - name: About
     description: Retrieve QPS API metadata and endpoint descriptions
+  - name: Health
+    description: Health check and service status endpoints
+  - name: Load Balancing
+    description: >-
+      Engine load balancing decisions for distributing app sessions across
+      Qlik Sense Engine Services
   - name: Session
     description: >-
       Manage user sessions including listing, retrieving, and deleting sessions
   - name: User
     description: Manage proxy sessions by user identity
-  - name: Load Balancing
-    description: >-
-      Engine load balancing decisions for distributing app sessions across
-      Qlik Sense Engine Services
-  - name: Health
-    description: Health check and service status endpoints
 paths:
   /about:
     get:

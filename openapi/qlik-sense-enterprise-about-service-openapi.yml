@@ -26,12 +26,12 @@ servers:
 security:
   - xrfkey: []
 tags:
-  - name: System Info
-    description: Retrieve system-level information about the Qlik Sense site
   - name: Components
     description: Retrieve information about installed components
   - name: External URLs
     description: Retrieve configured external URL information
+  - name: System Info
+    description: Retrieve system-level information about the Qlik Sense site
   - name: Third Party
     description: Retrieve third-party software information
 paths:

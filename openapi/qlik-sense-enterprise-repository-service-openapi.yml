@@ -44,12 +44,8 @@ tags:
     description: Manage shared and app-specific content libraries
   - name: Custom Property
     description: Manage custom properties for tagging and categorizing entities
-  - name: Data Connection
-    description: Manage data connections and data sources
   - name: Extension
     description: Manage visualization extensions
-  - name: License
-    description: Manage licenses, access types, and license allocations
   - name: Notification
     description: Subscribe to and manage change notifications
   - name: Reload Task
@@ -60,8 +56,6 @@ tags:
     description: Manage server nodes in a multi-node deployment
   - name: Stream
     description: Manage streams for organizing and distributing apps
-  - name: Tag
-    description: Manage tags for categorizing entities
   - name: Task
     description: Start and stop tasks including reload and external program tasks
   - name: User
@@ -1580,8 +1574,7 @@ paths:
       operationId: getTags
       summary: Qlik Sense Enterprise List tags
       description: Retrieves a list of all tags in condensed format.
-      tags:
-        - Tag
+      tags: []
       parameters:
         - $ref: '#/components/parameters/XrfKeyParam'
         - $ref: '#/components/parameters/FilterParam'
@@ -1601,8 +1594,7 @@ paths:
       operationId: createTag
       summary: Qlik Sense Enterprise Create tag
       description: Creates a new tag for categorizing entities.
-      tags:
-        - Tag
+      tags: []
       parameters:
         - $ref: '#/components/parameters/XrfKeyParam'
       requestBody:
@@ -1627,8 +1619,7 @@ paths:
       operationId: getTag
       summary: Qlik Sense Enterprise Get tag by ID
       description: Retrieves a single tag by its unique identifier.
-      tags:
-        - Tag
+      tags: []
       parameters:
         - $ref: '#/components/parameters/XrfKeyParam'
         - $ref: '#/components/parameters/IdParam'
@@ -1647,8 +1638,7 @@ paths:
       operationId: updateTag
       summary: Qlik Sense Enterprise Update tag
       description: Updates an existing tag.
-      tags:
-        - Tag
+      tags: []
       parameters:
         - $ref: '#/components/parameters/XrfKeyParam'
         - $ref: '#/components/parameters/IdParam'
@@ -1673,8 +1663,7 @@ paths:
       operationId: deleteTag
       summary: Qlik Sense Enterprise Delete tag
       description: Permanently deletes a tag.
-      tags:
-        - Tag
+      tags: []
       parameters:
         - $ref: '#/components/parameters/XrfKeyParam'
         - $ref: '#/components/parameters/IdParam'
