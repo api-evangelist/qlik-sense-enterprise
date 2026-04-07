@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Qlik Sense Proxy Service API
+  title: Qlik Sense Enterprise Qlik Sense Proxy Service API
   description: >-
     REST API for managing user sessions, virtual proxies, load balancing, and
     authentication within the Qlik Sense Proxy Service (QPS). The QPS manages
@@ -55,7 +55,7 @@ paths:
   /about:
     get:
       operationId: getProxyAbout
-      summary: Get QPS API information
+      summary: Qlik Sense Enterprise Get QPS API information
       description: >-
         Retrieves basic information about the Qlik Sense Proxy Service API,
         including the build version.
@@ -75,7 +75,7 @@ paths:
   /about/description:
     get:
       operationId: getProxyApiDescription
-      summary: Get complete endpoint description
+      summary: Qlik Sense Enterprise Get complete endpoint description
       description: >-
         Retrieves a complete list of all endpoints available in the QPS API.
         This serves as the API discovery mechanism.
@@ -97,7 +97,7 @@ paths:
   /session:
     get:
       operationId: getSessions
-      summary: List all sessions
+      summary: Qlik Sense Enterprise List all sessions
       description: >-
         Retrieves a list of all active user sessions managed by the proxy
         service. Each session represents an authenticated user connection.
@@ -119,7 +119,7 @@ paths:
   /session/{id}:
     get:
       operationId: getSession
-      summary: Get session by ID
+      summary: Qlik Sense Enterprise Get session by ID
       description: >-
         Retrieves a specific user session by its unique session identifier.
       tags:
@@ -146,7 +146,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteSession
-      summary: Delete session
+      summary: Qlik Sense Enterprise Delete session
       description: >-
         Performs a teardown of all connections for a session. The Session module
         is notified, and the logout module is also notified if there are no
@@ -172,7 +172,7 @@ paths:
   /user/{userDirectory}/{userId}:
     get:
       operationId: getUserSessions
-      summary: Get sessions for a user
+      summary: Qlik Sense Enterprise Get sessions for a user
       description: >-
         Retrieves all active sessions for a specific user identified by their
         user directory and user ID.
@@ -207,7 +207,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteUserSessions
-      summary: Delete all sessions for a user
+      summary: Qlik Sense Enterprise Delete all sessions for a user
       description: >-
         Deletes all active sessions for a specific user, effectively logging
         the user out of all Qlik Sense connections.
@@ -237,7 +237,7 @@ paths:
   /user/{userDirectory}/{userId}/session-count:
     get:
       operationId: getUserSessionCount
-      summary: Get session count for a user
+      summary: Qlik Sense Enterprise Get session count for a user
       description: >-
         Returns the number of active sessions for a specific user.
       tags:
@@ -272,7 +272,7 @@ paths:
   /loadbalancing/prioritize:
     post:
       operationId: prioritizeLoadBalancing
-      summary: Prioritize engine services for load balancing
+      summary: Qlik Sense Enterprise Prioritize engine services for load balancing
       description: >-
         Prioritizes Qlik Sense Engine Services (QES) for a user and an app.
         The Load Balancing module makes load balancing decisions for engine
@@ -301,7 +301,7 @@ paths:
   /health:
     get:
       operationId: getProxyHealth
-      summary: Check proxy service health
+      summary: Qlik Sense Enterprise Check proxy service health
       description: >-
         Returns the health status of the Qlik Sense Proxy Service.
       tags:

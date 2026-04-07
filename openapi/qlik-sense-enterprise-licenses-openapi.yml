@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Qlik Sense Licenses API
+  title: Qlik Sense Enterprise Qlik Sense Licenses API
   description: >-
     REST API endpoints within the Qlik Sense Repository Service for managing
     licenses, license allocations, and user access types in Qlik Sense
@@ -50,7 +50,7 @@ paths:
   /license:
     get:
       operationId: getLicense
-      summary: Get license information
+      summary: Qlik Sense Enterprise Get license information
       description: >-
         Retrieves the current license information for the Qlik Sense site,
         including the license key, serial number, product level, and
@@ -70,7 +70,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: setLicense
-      summary: Set license
+      summary: Qlik Sense Enterprise Set license
       description: >-
         Sets or updates the license for the Qlik Sense site using a license
         key and control number.
@@ -98,7 +98,7 @@ paths:
   /license/download:
     get:
       operationId: downloadLef
-      summary: Download license enablement file
+      summary: Qlik Sense Enterprise Download license enablement file
       description: >-
         Downloads the license enablement file (LEF) for the current Qlik
         Sense license. The LEF contains the license key and configuration
@@ -120,7 +120,7 @@ paths:
   /license/accesstypeinfo:
     get:
       operationId: getAccessTypeInfo
-      summary: Get access type information
+      summary: Qlik Sense Enterprise Get access type information
       description: >-
         Retrieves information about available access types and their current
         allocation status, including the total number of tokens or user
@@ -141,7 +141,7 @@ paths:
   /license/accesstypeoverview:
     get:
       operationId: getAccessTypeOverview
-      summary: Get access type overview
+      summary: Qlik Sense Enterprise Get access type overview
       description: >-
         Retrieves an overview of all access types showing total, allocated,
         available, quarantined, and excess counts for each type.
@@ -161,7 +161,7 @@ paths:
   /license/professionalaccesstype:
     get:
       operationId: getProfessionalAccessTypes
-      summary: List professional access allocations
+      summary: Qlik Sense Enterprise List professional access allocations
       description: >-
         Retrieves a list of all professional access type allocations,
         showing which users have been assigned professional access licenses.
@@ -183,7 +183,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createProfessionalAccessType
-      summary: Allocate professional access
+      summary: Qlik Sense Enterprise Allocate professional access
       description: >-
         Allocates a professional access license to a specified user.
       tags:
@@ -210,7 +210,7 @@ paths:
   /license/professionalaccesstype/{id}:
     get:
       operationId: getProfessionalAccessType
-      summary: Get professional access allocation by ID
+      summary: Qlik Sense Enterprise Get professional access allocation by ID
       description: >-
         Retrieves a single professional access type allocation by its ID.
       tags:
@@ -231,7 +231,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteProfessionalAccessType
-      summary: Deallocate professional access
+      summary: Qlik Sense Enterprise Deallocate professional access
       description: >-
         Removes a professional access license allocation from a user. The
         user enters a quarantine period before the license becomes available
@@ -251,7 +251,7 @@ paths:
   /license/analyzeraccesstype:
     get:
       operationId: getAnalyzerAccessTypes
-      summary: List analyzer access allocations
+      summary: Qlik Sense Enterprise List analyzer access allocations
       description: >-
         Retrieves a list of all analyzer access type allocations, showing
         which users have been assigned analyzer access licenses.
@@ -273,7 +273,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createAnalyzerAccessType
-      summary: Allocate analyzer access
+      summary: Qlik Sense Enterprise Allocate analyzer access
       description: >-
         Allocates an analyzer access license to a specified user.
       tags:
@@ -300,7 +300,7 @@ paths:
   /license/analyzeraccesstype/{id}:
     get:
       operationId: getAnalyzerAccessType
-      summary: Get analyzer access allocation by ID
+      summary: Qlik Sense Enterprise Get analyzer access allocation by ID
       description: >-
         Retrieves a single analyzer access type allocation by its ID.
       tags:
@@ -321,7 +321,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteAnalyzerAccessType
-      summary: Deallocate analyzer access
+      summary: Qlik Sense Enterprise Deallocate analyzer access
       description: >-
         Removes an analyzer access license allocation from a user.
       tags:
@@ -339,7 +339,7 @@ paths:
   /license/loginaccesstype:
     get:
       operationId: getLoginAccessTypes
-      summary: List login access allocations
+      summary: Qlik Sense Enterprise List login access allocations
       description: >-
         Retrieves a list of all login (token-based) access type allocations.
       tags:
@@ -361,7 +361,7 @@ paths:
   /license/useraccesstype:
     get:
       operationId: getUserAccessTypes
-      summary: List user access allocations
+      summary: Qlik Sense Enterprise List user access allocations
       description: >-
         Retrieves a list of all named user access type allocations.
       tags:
@@ -382,7 +382,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createUserAccessType
-      summary: Allocate user access
+      summary: Qlik Sense Enterprise Allocate user access
       description: >-
         Allocates a named user access license to a specified user.
       tags:
@@ -409,7 +409,7 @@ paths:
   /license/useraccesstype/{id}:
     delete:
       operationId: deleteUserAccessType
-      summary: Deallocate user access
+      summary: Qlik Sense Enterprise Deallocate user access
       description: >-
         Removes a named user access license allocation from a user.
       tags:
@@ -427,7 +427,7 @@ paths:
   /licenserule:
     get:
       operationId: getLicenseRules
-      summary: List license rules
+      summary: Qlik Sense Enterprise List license rules
       description: >-
         Retrieves a list of all license rules that control automatic license
         assignment based on user properties and conditions.
@@ -450,7 +450,7 @@ paths:
   /licenserule/full:
     get:
       operationId: getLicenseRulesFull
-      summary: List license rules with full details
+      summary: Qlik Sense Enterprise List license rules with full details
       description: >-
         Retrieves a list of all license rules in full format including rule
         definitions and actions.
@@ -473,7 +473,7 @@ paths:
   /licenserule/{id}:
     get:
       operationId: getLicenseRule
-      summary: Get license rule by ID
+      summary: Qlik Sense Enterprise Get license rule by ID
       description: >-
         Retrieves a single license rule by its unique identifier.
       tags:
@@ -495,7 +495,7 @@ paths:
   /licenserule/audit:
     post:
       operationId: auditLicenseRules
-      summary: Audit license rules
+      summary: Qlik Sense Enterprise Audit license rules
       description: >-
         Evaluates license rules to determine which access types would be
         assigned to users based on the current rule configuration.

@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Qlik Sense Data Connection API
+  title: Qlik Sense Enterprise Qlik Sense Data Connection API
   description: >-
     REST API endpoints within the Qlik Sense Repository Service for managing
     data connections and data sources used by Qlik Sense applications. Data
@@ -40,7 +40,7 @@ paths:
   /dataconnection:
     get:
       operationId: getDataConnections
-      summary: List data connections
+      summary: Qlik Sense Enterprise List data connections
       description: >-
         Retrieves a list of all data connections in condensed format, optionally
         filtered by a query expression. Returns connections accessible to the
@@ -65,7 +65,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createDataConnection
-      summary: Create data connection
+      summary: Qlik Sense Enterprise Create data connection
       description: >-
         Creates a new data connection for use by Qlik Sense applications. The
         connection defines the provider type, connection string, and credentials
@@ -94,7 +94,7 @@ paths:
   /dataconnection/full:
     get:
       operationId: getDataConnectionsFull
-      summary: List data connections with full details
+      summary: Qlik Sense Enterprise List data connections with full details
       description: >-
         Retrieves a list of all data connections in full format including owner,
         tags, custom properties, and connection string details.
@@ -119,7 +119,7 @@ paths:
   /dataconnection/count:
     get:
       operationId: getDataConnectionsCount
-      summary: Count data connections
+      summary: Qlik Sense Enterprise Count data connections
       description: >-
         Returns the number of data connections matching an optional filter
         expression.
@@ -140,7 +140,7 @@ paths:
   /dataconnection/{id}:
     get:
       operationId: getDataConnection
-      summary: Get data connection by ID
+      summary: Qlik Sense Enterprise Get data connection by ID
       description: >-
         Retrieves a single data connection by its unique identifier in full
         format.
@@ -163,7 +163,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateDataConnection
-      summary: Update data connection
+      summary: Qlik Sense Enterprise Update data connection
       description: >-
         Updates an existing data connection. The complete entity including the
         unchanged modifiedDate must be provided in the request body.
@@ -193,7 +193,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteDataConnection
-      summary: Delete data connection
+      summary: Qlik Sense Enterprise Delete data connection
       description: >-
         Permanently deletes a data connection from the repository. Applications
         referencing this connection will no longer be able to load data from it.

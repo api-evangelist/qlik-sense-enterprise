@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Qlik Sense Repository Service API
+  title: Qlik Sense Enterprise Qlik Sense Repository Service API
   description: >-
     Core REST API for managing Qlik Sense Enterprise resources including apps,
     streams, users, security rules, and all configuration available through the
@@ -74,7 +74,7 @@ paths:
   /about:
     get:
       operationId: getAbout
-      summary: Get QRS API information
+      summary: Qlik Sense Enterprise Get QRS API information
       description: >-
         Retrieves basic information about the QRS API including the build
         version and the database identifier.
@@ -94,7 +94,7 @@ paths:
   /about/api/description:
     get:
       operationId: getApiDescription
-      summary: Get API endpoint descriptions
+      summary: Qlik Sense Enterprise Get API endpoint descriptions
       description: >-
         Retrieves a description of all available QRS API endpoints, optionally
         filtered by HTTP method and in an extended format.
@@ -139,7 +139,7 @@ paths:
   /about/api/default:
     get:
       operationId: getApiDefaults
-      summary: Get default values for all entity types
+      summary: Qlik Sense Enterprise Get default values for all entity types
       description: >-
         Retrieves the default values for all entity types in the QRS,
         optionally including list entries.
@@ -165,7 +165,7 @@ paths:
   /about/api/enums:
     get:
       operationId: getApiEnums
-      summary: Get enumeration types
+      summary: Qlik Sense Enterprise Get enumeration types
       description: >-
         Retrieves all enumeration types used across the QRS API, including
         their allowed values.
@@ -185,7 +185,7 @@ paths:
   /app:
     get:
       operationId: getApps
-      summary: List applications
+      summary: Qlik Sense Enterprise List applications
       description: >-
         Retrieves a list of Qlik Sense applications in condensed format,
         optionally filtered by a query expression.
@@ -210,7 +210,7 @@ paths:
   /app/full:
     get:
       operationId: getAppsFull
-      summary: List applications with full details
+      summary: Qlik Sense Enterprise List applications with full details
       description: >-
         Retrieves a list of Qlik Sense applications in full format including
         all properties, owner, stream, tags, and custom properties.
@@ -235,7 +235,7 @@ paths:
   /app/count:
     get:
       operationId: getAppsCount
-      summary: Count applications
+      summary: Qlik Sense Enterprise Count applications
       description: >-
         Returns the number of applications matching an optional filter
         expression.
@@ -256,7 +256,7 @@ paths:
   /app/{id}:
     get:
       operationId: getApp
-      summary: Get application by ID
+      summary: Qlik Sense Enterprise Get application by ID
       description: >-
         Retrieves a single Qlik Sense application by its unique identifier,
         returned in full format.
@@ -279,7 +279,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateApp
-      summary: Update application
+      summary: Qlik Sense Enterprise Update application
       description: >-
         Updates an existing Qlik Sense application. The complete entity
         including the unchanged modifiedDate must be provided in the request
@@ -311,7 +311,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteApp
-      summary: Delete application
+      summary: Qlik Sense Enterprise Delete application
       description: >-
         Permanently deletes a Qlik Sense application from the repository.
       tags:
@@ -329,7 +329,7 @@ paths:
   /app/import:
     post:
       operationId: importApp
-      summary: Import application
+      summary: Qlik Sense Enterprise Import application
       description: >-
         Imports a Qlik Sense application from a QVF file. The file is uploaded
         as the request body and the application name and other attributes are
@@ -377,7 +377,7 @@ paths:
   /app/{id}/copy:
     post:
       operationId: copyApp
-      summary: Copy application
+      summary: Qlik Sense Enterprise Copy application
       description: >-
         Creates a copy of an existing Qlik Sense application. Requires Read
         and Duplicate permissions on the source application.
@@ -411,7 +411,7 @@ paths:
   /app/{id}/export:
     get:
       operationId: exportApp
-      summary: Export application
+      summary: Qlik Sense Enterprise Export application
       description: >-
         Exports a Qlik Sense application as a QVF file. Returns a download
         path that can be used to retrieve the exported file.
@@ -440,7 +440,7 @@ paths:
   /app/{id}/publish:
     put:
       operationId: publishApp
-      summary: Publish application to a stream
+      summary: Qlik Sense Enterprise Publish application to a stream
       description: >-
         Publishes a Qlik Sense application to a specified stream, making it
         available to users with access to that stream.
@@ -475,7 +475,7 @@ paths:
   /app/{id}/reload:
     post:
       operationId: reloadApp
-      summary: Reload application data
+      summary: Qlik Sense Enterprise Reload application data
       description: >-
         Triggers a reload of the application data from its connected data
         sources.
@@ -494,7 +494,7 @@ paths:
   /app/{id}/replace:
     put:
       operationId: replaceApp
-      summary: Replace application content
+      summary: Qlik Sense Enterprise Replace application content
       description: >-
         Replaces the content of a published application with the content from
         another application, preserving the published app's identity and
@@ -525,7 +525,7 @@ paths:
   /app/{id}/migrate:
     put:
       operationId: migrateApp
-      summary: Migrate application
+      summary: Qlik Sense Enterprise Migrate application
       description: >-
         Migrates an application to the current Qlik Sense version format.
       tags:
@@ -543,7 +543,7 @@ paths:
   /app/hublist:
     get:
       operationId: getAppHubList
-      summary: Get hub app list
+      summary: Qlik Sense Enterprise Get hub app list
       description: >-
         Retrieves the list of applications available in the hub for the
         authenticated user, including published and personal apps.
@@ -565,7 +565,7 @@ paths:
   /app/upload:
     post:
       operationId: uploadApp
-      summary: Upload application
+      summary: Qlik Sense Enterprise Upload application
       description: >-
         Uploads a Qlik Sense application from a QVF binary file to the
         repository.
@@ -606,7 +606,7 @@ paths:
   /appobject/{id}/publish:
     put:
       operationId: publishAppObject
-      summary: Publish application object
+      summary: Qlik Sense Enterprise Publish application object
       description: >-
         Publishes an application object such as a sheet or story, making it
         available to all users who can access the application.
@@ -625,7 +625,7 @@ paths:
   /appobject/{id}/unpublish:
     put:
       operationId: unpublishAppObject
-      summary: Unpublish application object
+      summary: Qlik Sense Enterprise Unpublish application object
       description: >-
         Unpublishes an application object, reverting it to private status.
       tags:
@@ -643,7 +643,7 @@ paths:
   /stream:
     get:
       operationId: getStreams
-      summary: List streams
+      summary: Qlik Sense Enterprise List streams
       description: >-
         Retrieves a list of all streams in condensed format, optionally
         filtered by a query expression.
@@ -667,7 +667,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createStream
-      summary: Create stream
+      summary: Qlik Sense Enterprise Create stream
       description: >-
         Creates a new stream for organizing and distributing published
         applications.
@@ -695,7 +695,7 @@ paths:
   /stream/full:
     get:
       operationId: getStreamsFull
-      summary: List streams with full details
+      summary: Qlik Sense Enterprise List streams with full details
       description: >-
         Retrieves a list of all streams in full format including owner,
         custom properties, and tags.
@@ -720,7 +720,7 @@ paths:
   /stream/count:
     get:
       operationId: getStreamsCount
-      summary: Count streams
+      summary: Qlik Sense Enterprise Count streams
       description: Returns the number of streams matching an optional filter expression.
       tags:
         - Stream
@@ -739,7 +739,7 @@ paths:
   /stream/{id}:
     get:
       operationId: getStream
-      summary: Get stream by ID
+      summary: Qlik Sense Enterprise Get stream by ID
       description: Retrieves a single stream by its unique identifier in full format.
       tags:
         - Stream
@@ -760,7 +760,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateStream
-      summary: Update stream
+      summary: Qlik Sense Enterprise Update stream
       description: >-
         Updates an existing stream. The complete entity with unchanged
         modifiedDate must be provided.
@@ -790,7 +790,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteStream
-      summary: Delete stream
+      summary: Qlik Sense Enterprise Delete stream
       description: >-
         Permanently deletes a stream. Published apps in the stream are
         unpublished.
@@ -809,7 +809,7 @@ paths:
   /user:
     get:
       operationId: getUsers
-      summary: List users
+      summary: Qlik Sense Enterprise List users
       description: >-
         Retrieves a list of all users in condensed format, optionally filtered
         by a query expression.
@@ -834,7 +834,7 @@ paths:
   /user/full:
     get:
       operationId: getUsersFull
-      summary: List users with full details
+      summary: Qlik Sense Enterprise List users with full details
       description: >-
         Retrieves a list of all users in full format including roles,
         attributes, custom properties, and tags.
@@ -859,7 +859,7 @@ paths:
   /user/count:
     get:
       operationId: getUsersCount
-      summary: Count users
+      summary: Qlik Sense Enterprise Count users
       description: Returns the number of users matching an optional filter expression.
       tags:
         - User
@@ -878,7 +878,7 @@ paths:
   /user/{id}:
     get:
       operationId: getUser
-      summary: Get user by ID
+      summary: Qlik Sense Enterprise Get user by ID
       description: Retrieves a single user by its unique identifier in full format.
       tags:
         - User
@@ -899,7 +899,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateUser
-      summary: Update user
+      summary: Qlik Sense Enterprise Update user
       description: >-
         Updates an existing user. The complete entity with unchanged
         modifiedDate must be provided.
@@ -929,7 +929,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteUser
-      summary: Delete user
+      summary: Qlik Sense Enterprise Delete user
       description: Permanently deletes a user from the repository.
       tags:
         - User
@@ -946,7 +946,7 @@ paths:
   /contentlibrary:
     get:
       operationId: getContentLibraries
-      summary: List content libraries
+      summary: Qlik Sense Enterprise List content libraries
       description: >-
         Retrieves a list of all content libraries in condensed format.
       tags:
@@ -969,7 +969,7 @@ paths:
   /contentlibrary/{id}/uploadfile:
     post:
       operationId: uploadContentLibraryFile
-      summary: Upload file to content library
+      summary: Qlik Sense Enterprise Upload file to content library
       description: >-
         Uploads a file to a content library. The file is sent as the request
         body and the relative path within the library is specified as a query
@@ -1008,7 +1008,7 @@ paths:
   /contentlibrary/{id}/deletecontent:
     delete:
       operationId: deleteContentLibraryFile
-      summary: Delete file from content library
+      summary: Qlik Sense Enterprise Delete file from content library
       description: Deletes a file from a content library by its external path.
       tags:
         - Content Library
@@ -1031,7 +1031,7 @@ paths:
   /customproperty:
     get:
       operationId: getCustomProperties
-      summary: List custom properties
+      summary: Qlik Sense Enterprise List custom properties
       description: >-
         Retrieves a list of all custom properties in condensed format.
       tags:
@@ -1053,7 +1053,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createCustomProperty
-      summary: Create custom property
+      summary: Qlik Sense Enterprise Create custom property
       description: >-
         Creates a new custom property definition with a set of allowed values
         and applicable object types.
@@ -1081,7 +1081,7 @@ paths:
   /customproperty/{id}:
     get:
       operationId: getCustomProperty
-      summary: Get custom property by ID
+      summary: Qlik Sense Enterprise Get custom property by ID
       description: >-
         Retrieves a single custom property by its unique identifier.
       tags:
@@ -1102,7 +1102,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateCustomProperty
-      summary: Update custom property
+      summary: Qlik Sense Enterprise Update custom property
       description: Updates an existing custom property definition.
       tags:
         - Custom Property
@@ -1128,7 +1128,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteCustomProperty
-      summary: Delete custom property
+      summary: Qlik Sense Enterprise Delete custom property
       description: Permanently deletes a custom property definition.
       tags:
         - Custom Property
@@ -1145,7 +1145,7 @@ paths:
   /extension:
     get:
       operationId: getExtensions
-      summary: List extensions
+      summary: Qlik Sense Enterprise List extensions
       description: >-
         Retrieves a list of all installed visualization extensions.
       tags:
@@ -1168,7 +1168,7 @@ paths:
   /extension/upload:
     post:
       operationId: uploadExtension
-      summary: Upload extension
+      summary: Qlik Sense Enterprise Upload extension
       description: >-
         Uploads and installs a visualization extension from a ZIP file.
       tags:
@@ -1196,7 +1196,7 @@ paths:
   /extension/{id}:
     get:
       operationId: getExtension
-      summary: Get extension by ID
+      summary: Qlik Sense Enterprise Get extension by ID
       description: Retrieves a single extension by its unique identifier.
       tags:
         - Extension
@@ -1216,7 +1216,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteExtension
-      summary: Delete extension
+      summary: Qlik Sense Enterprise Delete extension
       description: Permanently removes a visualization extension.
       tags:
         - Extension
@@ -1233,7 +1233,7 @@ paths:
   /extension/schema:
     get:
       operationId: getExtensionSchemas
-      summary: Get extension schemas
+      summary: Qlik Sense Enterprise Get extension schemas
       description: >-
         Retrieves the JSON schemas used to validate extension definitions.
       tags:
@@ -1252,7 +1252,7 @@ paths:
   /notification:
     post:
       operationId: createNotificationSubscription
-      summary: Subscribe to change notifications
+      summary: Qlik Sense Enterprise Subscribe to change notifications
       description: >-
         Creates a subscription to receive notifications when changes occur to
         specified entity types or individual entities.
@@ -1279,7 +1279,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: removeNotificationSubscription
-      summary: Remove change notification subscription
+      summary: Qlik Sense Enterprise Remove change notification subscription
       description: >-
         Removes an existing notification subscription. The subscription handle
         is passed as a query parameter.
@@ -1301,7 +1301,7 @@ paths:
   /notification/changes:
     get:
       operationId: getNotificationChanges
-      summary: Get changes since last check
+      summary: Qlik Sense Enterprise Get changes since last check
       description: >-
         Retrieves a list of changes that have occurred since the last time
         this endpoint was called for the given subscription.
@@ -1329,7 +1329,7 @@ paths:
   /reloadtask:
     get:
       operationId: getReloadTasks
-      summary: List reload tasks
+      summary: Qlik Sense Enterprise List reload tasks
       description: >-
         Retrieves a list of all reload tasks in condensed format.
       tags:
@@ -1351,7 +1351,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createReloadTask
-      summary: Create reload task
+      summary: Qlik Sense Enterprise Create reload task
       description: Creates a new reload task for an application.
       tags:
         - Reload Task
@@ -1377,7 +1377,7 @@ paths:
   /reloadtask/{id}:
     get:
       operationId: getReloadTask
-      summary: Get reload task by ID
+      summary: Qlik Sense Enterprise Get reload task by ID
       description: >-
         Retrieves a single reload task by its unique identifier.
       tags:
@@ -1398,7 +1398,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateReloadTask
-      summary: Update reload task
+      summary: Qlik Sense Enterprise Update reload task
       description: Updates an existing reload task configuration.
       tags:
         - Reload Task
@@ -1424,7 +1424,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteReloadTask
-      summary: Delete reload task
+      summary: Qlik Sense Enterprise Delete reload task
       description: Permanently deletes a reload task.
       tags:
         - Reload Task
@@ -1441,7 +1441,7 @@ paths:
   /securityrule:
     get:
       operationId: getSecurityRules
-      summary: List security rules
+      summary: Qlik Sense Enterprise List security rules
       description: >-
         Retrieves a list of all security rules in condensed format.
       tags:
@@ -1463,7 +1463,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createSecurityRule
-      summary: Create security rule
+      summary: Qlik Sense Enterprise Create security rule
       description: >-
         Creates a new security rule that controls access to Qlik Sense
         resources based on conditions.
@@ -1491,7 +1491,7 @@ paths:
   /securityrule/full:
     get:
       operationId: getSecurityRulesFull
-      summary: List security rules with full details
+      summary: Qlik Sense Enterprise List security rules with full details
       description: >-
         Retrieves a list of all security rules in full format including the
         rule definition, actions, and resource filter.
@@ -1515,7 +1515,7 @@ paths:
   /securityrule/{id}:
     get:
       operationId: getSecurityRule
-      summary: Get security rule by ID
+      summary: Qlik Sense Enterprise Get security rule by ID
       description: Retrieves a single security rule by its unique identifier.
       tags:
         - Security Rule
@@ -1535,7 +1535,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateSecurityRule
-      summary: Update security rule
+      summary: Qlik Sense Enterprise Update security rule
       description: Updates an existing security rule definition.
       tags:
         - Security Rule
@@ -1561,7 +1561,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteSecurityRule
-      summary: Delete security rule
+      summary: Qlik Sense Enterprise Delete security rule
       description: Permanently deletes a security rule.
       tags:
         - Security Rule
@@ -1578,7 +1578,7 @@ paths:
   /tag:
     get:
       operationId: getTags
-      summary: List tags
+      summary: Qlik Sense Enterprise List tags
       description: Retrieves a list of all tags in condensed format.
       tags:
         - Tag
@@ -1599,7 +1599,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createTag
-      summary: Create tag
+      summary: Qlik Sense Enterprise Create tag
       description: Creates a new tag for categorizing entities.
       tags:
         - Tag
@@ -1625,7 +1625,7 @@ paths:
   /tag/{id}:
     get:
       operationId: getTag
-      summary: Get tag by ID
+      summary: Qlik Sense Enterprise Get tag by ID
       description: Retrieves a single tag by its unique identifier.
       tags:
         - Tag
@@ -1645,7 +1645,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateTag
-      summary: Update tag
+      summary: Qlik Sense Enterprise Update tag
       description: Updates an existing tag.
       tags:
         - Tag
@@ -1671,7 +1671,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteTag
-      summary: Delete tag
+      summary: Qlik Sense Enterprise Delete tag
       description: Permanently deletes a tag.
       tags:
         - Tag
@@ -1688,7 +1688,7 @@ paths:
   /task/{id}/start:
     post:
       operationId: startTask
-      summary: Start task
+      summary: Qlik Sense Enterprise Start task
       description: >-
         Starts the execution of a task by its ID. This is a synchronous
         operation that waits for the task to be triggered.
@@ -1707,7 +1707,7 @@ paths:
   /task/{id}/start/synchronous:
     post:
       operationId: startTaskSync
-      summary: Start task synchronously
+      summary: Qlik Sense Enterprise Start task synchronously
       description: >-
         Starts the execution of a task synchronously, waiting for the task
         to reach an end state before returning.
@@ -1726,7 +1726,7 @@ paths:
   /task/start/many:
     post:
       operationId: startManyTasks
-      summary: Start multiple tasks
+      summary: Qlik Sense Enterprise Start multiple tasks
       description: >-
         Starts the execution of multiple tasks by their IDs.
       tags:
@@ -1751,7 +1751,7 @@ paths:
   /task/{id}/stop:
     post:
       operationId: stopTask
-      summary: Stop task
+      summary: Qlik Sense Enterprise Stop task
       description: Stops the execution of a running task.
       tags:
         - Task
@@ -1768,7 +1768,7 @@ paths:
   /servernodeconfiguration:
     get:
       operationId: getServerNodeConfigurations
-      summary: List server node configurations
+      summary: Qlik Sense Enterprise List server node configurations
       description: >-
         Retrieves a list of all server node configurations in condensed format.
       tags:
@@ -1791,7 +1791,7 @@ paths:
   /servernodeconfiguration/{id}:
     get:
       operationId: getServerNodeConfiguration
-      summary: Get server node configuration by ID
+      summary: Qlik Sense Enterprise Get server node configuration by ID
       description: >-
         Retrieves a single server node configuration by its unique identifier.
       tags:
@@ -1813,7 +1813,7 @@ paths:
   /servernodeconfiguration/local:
     get:
       operationId: getLocalServerNodeConfiguration
-      summary: Get local server node configuration
+      summary: Qlik Sense Enterprise Get local server node configuration
       description: >-
         Retrieves the server node configuration for the local node.
       tags:
@@ -1832,7 +1832,7 @@ paths:
   /userdirectory:
     get:
       operationId: getUserDirectories
-      summary: List user directories
+      summary: Qlik Sense Enterprise List user directories
       description: >-
         Retrieves a list of all configured user directory connectors.
       tags:
@@ -1855,7 +1855,7 @@ paths:
   /userdirectory/{id}:
     get:
       operationId: getUserDirectory
-      summary: Get user directory by ID
+      summary: Qlik Sense Enterprise Get user directory by ID
       description: >-
         Retrieves a single user directory connector by its unique identifier.
       tags:
@@ -1876,7 +1876,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteUserDirectory
-      summary: Delete user directory and users
+      summary: Qlik Sense Enterprise Delete user directory and users
       description: >-
         Deletes a user directory connector and optionally all users imported
         from it.
@@ -1895,7 +1895,7 @@ paths:
   /userdirectory/syncuserdirectories:
     post:
       operationId: syncUserDirectories
-      summary: Synchronize user directories
+      summary: Qlik Sense Enterprise Synchronize user directories
       description: >-
         Triggers a synchronization of all or specified user directories,
         importing updated user and group information.
@@ -1921,7 +1921,7 @@ paths:
   /virtualproxyconfig:
     get:
       operationId: getVirtualProxyConfigs
-      summary: List virtual proxy configurations
+      summary: Qlik Sense Enterprise List virtual proxy configurations
       description: >-
         Retrieves a list of all virtual proxy configurations.
       tags:
@@ -1943,7 +1943,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createVirtualProxyConfig
-      summary: Create virtual proxy configuration
+      summary: Qlik Sense Enterprise Create virtual proxy configuration
       description: >-
         Creates a new virtual proxy configuration with authentication and
         session handling settings.
@@ -1971,7 +1971,7 @@ paths:
   /virtualproxyconfig/{id}:
     get:
       operationId: getVirtualProxyConfig
-      summary: Get virtual proxy configuration by ID
+      summary: Qlik Sense Enterprise Get virtual proxy configuration by ID
       description: >-
         Retrieves a single virtual proxy configuration by its unique identifier.
       tags:
@@ -1992,7 +1992,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateVirtualProxyConfig
-      summary: Update virtual proxy configuration
+      summary: Qlik Sense Enterprise Update virtual proxy configuration
       description: Updates an existing virtual proxy configuration.
       tags:
         - Virtual Proxy
@@ -2019,7 +2019,7 @@ paths:
   /cache:
     delete:
       operationId: invalidateCache
-      summary: Invalidate cache
+      summary: Qlik Sense Enterprise Invalidate cache
       description: >-
         Invalidates the QRS cache, forcing fresh data retrieval on subsequent
         requests. Use with caution as this impacts performance.

@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Qlik Sense ODAG Service API
+  title: Qlik Sense Enterprise Qlik Sense ODAG Service API
   description: >-
     REST API for on-demand app generation (ODAG), enabling the creation of
     Qlik Sense apps dynamically by linking selection apps to template apps
@@ -40,7 +40,7 @@ paths:
   /about:
     get:
       operationId: getOdagAbout
-      summary: Get ODAG service information
+      summary: Qlik Sense Enterprise Get ODAG service information
       description: >-
         Retrieves basic information about the ODAG service including its
         version and stability index.
@@ -60,7 +60,7 @@ paths:
   /links:
     get:
       operationId: getOdagLinks
-      summary: List navigation links
+      summary: Qlik Sense Enterprise List navigation links
       description: >-
         Retrieves a list of ODAG navigation links and their properties. Each
         link connects a selection app to a template app for on-demand app
@@ -82,7 +82,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createOdagLink
-      summary: Create navigation link
+      summary: Qlik Sense Enterprise Create navigation link
       description: >-
         Creates a new navigation link that enables ODAG navigation from a
         designated selection app to a template app. Links created via the API
@@ -111,7 +111,7 @@ paths:
   /links/{linkId}:
     get:
       operationId: getOdagLink
-      summary: Get navigation link by ID
+      summary: Qlik Sense Enterprise Get navigation link by ID
       description: >-
         Retrieves a single ODAG navigation link by its unique identifier.
       tags:
@@ -132,7 +132,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateOdagLink
-      summary: Update navigation link
+      summary: Qlik Sense Enterprise Update navigation link
       description: >-
         Updates an existing ODAG navigation link configuration.
       tags:
@@ -159,7 +159,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     delete:
       operationId: deleteOdagLink
-      summary: Delete navigation link
+      summary: Qlik Sense Enterprise Delete navigation link
       description: >-
         Deletes an ODAG navigation link. Generated apps associated with the
         link are not affected.
@@ -178,7 +178,7 @@ paths:
   /links/{linkId}/requests:
     get:
       operationId: getOdagLinkRequests
-      summary: List requests for a navigation link
+      summary: Qlik Sense Enterprise List requests for a navigation link
       description: >-
         Returns a list of ODAG requests for a specific link, optionally
         matching a set of conditions defined by additional parameters.
@@ -202,7 +202,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: submitOdagRequest
-      summary: Submit app generation request
+      summary: Qlik Sense Enterprise Submit app generation request
       description: >-
         Submits a new app generation request to the ODAG service. The request
         is queued after validating the user selection state against the
@@ -243,7 +243,7 @@ paths:
   /requests:
     get:
       operationId: getOdagRequests
-      summary: List all ODAG requests
+      summary: Qlik Sense Enterprise List all ODAG requests
       description: >-
         Returns a list of ODAG request objects matching the combination of
         search criteria provided as query parameters.
@@ -265,7 +265,7 @@ paths:
   /requests/{requestId}:
     get:
       operationId: getOdagRequest
-      summary: Get ODAG request by ID
+      summary: Qlik Sense Enterprise Get ODAG request by ID
       description: >-
         Retrieves a single ODAG request by its unique identifier, including
         the current status and generated app information.
@@ -287,7 +287,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     put:
       operationId: updateOdagRequest
-      summary: Update ODAG request
+      summary: Qlik Sense Enterprise Update ODAG request
       description: >-
         Updates an existing ODAG request, such as changing its status or
         metadata.
@@ -316,7 +316,7 @@ paths:
   /requests/{requestId}/app:
     delete:
       operationId: deleteOdagRequestApp
-      summary: Remove generated app from request
+      summary: Qlik Sense Enterprise Remove generated app from request
       description: >-
         Removes the generated app associated with an ODAG request. The app
         is deleted from the repository.
@@ -335,7 +335,7 @@ paths:
   /requests/{requestId}/reloadApp:
     post:
       operationId: reloadOdagRequestApp
-      summary: Reload generated app
+      summary: Qlik Sense Enterprise Reload generated app
       description: >-
         Triggers a reload of the generated app associated with an ODAG request,
         refreshing its data from the template and selection state.
@@ -358,7 +358,7 @@ paths:
   /requests/{requestId}/renameApp:
     post:
       operationId: renameOdagRequestApp
-      summary: Rename generated app
+      summary: Qlik Sense Enterprise Rename generated app
       description: >-
         Renames the generated app associated with an ODAG request.
       tags:
