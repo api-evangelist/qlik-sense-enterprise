@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,178 +9,56 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Qlik Sense Enterprise
 providerId: qlik-sense-enterprise
-publisherName: Qlik Sense Enterprise
-serviceCategory: API
+publisherName: Qlik
+serviceCategory: Analytics
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Analytics
   - Business Intelligence
-  - Data Visualization
-  - Enterprise
-  - REST API
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Qlik Sense Enterprise API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+notes: Qlik Sense Enterprise is a license-based on-premises analytics platform; Qlik does not publish
+  per-API meter pricing or usage telemetry on its public site. FinOps mapping is left at the platform
+  license level until the customer contract terms are reconciled.
+description: FOCUS-aligned FinOps for Qlik Sense Enterprise is bound to the platform license rather
+  than per-API metering; usage data is collected inside the customer's Qlik deployment.
+sources:
+  - https://www.qlik.com/us/pricing
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Enterprise License
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Qlik Sense Enterprise
-  ServiceCategory: Developer Tools / API
-  ProviderName: Qlik Sense Enterprise
-  PublisherName: Qlik Sense Enterprise
-  InvoiceIssuerName: Qlik Sense Enterprise
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: Analytics
+  ProviderName: Qlik
+  PublisherName: Qlik
+  InvoiceIssuerName: Qlik
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: platform_license
+    description: Qlik Sense Enterprise platform license; billed per the customer's negotiated contract.
+    unit: varies
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Qlik Sense Repository Service
-    baseURL: ''
-    tags:
-      - Management
-      - Repository
-      - Security
-    serviceName: Qlik Sense Repository Service
-    serviceCategory: API
-  - name: Qlik Sense Engine JSON API
-    baseURL: ''
-    tags:
-      - Engine
-      - JSON-RPC
-      - WebSocket
-    serviceName: Qlik Sense Engine JSON API
-    serviceCategory: API
-  - name: Qlik Sense Proxy Service
-    baseURL: ''
-    tags:
-      - Proxy
-      - Authentication
-      - Sessions
-    serviceName: Qlik Sense Proxy Service
-    serviceCategory: API
-  - name: Qlik Sense About Service
-    baseURL: ''
-    tags:
-      - Metadata
-      - Service
-    serviceName: Qlik Sense About Service
-    serviceCategory: API
-  - name: Qlik Sense Data Connection
-    baseURL: ''
-    tags:
-      - Data Connections
-      - Integration
-    serviceName: Qlik Sense Data Connection
-    serviceCategory: API
-  - name: Qlik Sense Licenses
-    baseURL: ''
-    tags:
-      - Licensing
-      - Allocation
-    serviceName: Qlik Sense Licenses
-    serviceCategory: API
-  - name: Qlik Sense ODAG
-    baseURL: ''
-    tags:
-      - ODAG
-      - On-Demand
-      - Apps
-    serviceName: Qlik Sense ODAG
-    serviceCategory: API
-  - name: Qlik Sense Capabilities
-    baseURL: ''
-    tags:
-      - Visualization
-      - Mashup
-      - Embedding
-    serviceName: Qlik Sense Capabilities
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - contract
+principles:
+  - name: Visibility
+    description: Qlik Sense Enterprise emits internal usage telemetry through the Qlik Management Console
+      and the QMC logs; consumers must collect this data inside their own deployment.
+  - name: Allocation
+    description: Allocate platform license cost against the analytics teams and business units consuming
+      Qlik dashboards; sub-allocation within the platform requires custom tagging on apps and streams.
+  - name: Optimization
+    description: Right-size the Qlik deployment (engine memory, proxy capacity) and consolidate streams
+      and apps to keep license consumption inside the contracted capacity.
+  - name: Accountability
+    description: License renewal and capacity expansion are owned by the analytics platform team; engage
+      Qlik sales for true-up or downgrade conversations.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
