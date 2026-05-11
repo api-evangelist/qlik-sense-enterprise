@@ -158,6 +158,48 @@ common:
     url: https://qlikid.qlik.com/
   - type: SignUp
     url: https://register.myqlik.qlik.com/
+  - type: Integrations
+    url: https://www.qlik.com/us/partners
+integrations:
+  - name: Qlik
+  - name: Company
+  - name: 'Why Qlik?'
+  - name: Agentic AI
+  - name: Integrations & Connectors
+  - name: AWS
+  - name: Google
+  - name: Microsoft
+  - name: Snowflake
+  - name: SAP
+  - name: Databricks
+  - name: Cloudera
+  - name: ISV
+  - name: Financial Services
+  - name: Manufacturing
+  - name: Healthcare
+  - name: Consumer Products
+  - name: Public Sector
+  - name: Energy Utilities
+  - name: US Government
+  - name: High Tech
+  - name: Retail
+  - name: Life Sciences
+  - name: Communications
+  - name: Sales
+  - name: Product Intelligence
+  - name: Marketing
+  - name: HR & People
+  - name: Finance
+  - name: IT
+  - name: Operations
+  - name: Global System Integrators
+  - name: Data Integration and Quality Pricing
+  - name: Analytics Pricing
+  - name: AI/ML Pricing
+  - name: video
+  - name: Twitter
+  - name: LinkedIn
+  - name: Facebook
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
