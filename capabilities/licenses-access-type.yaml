@@ -1,0 +1,484 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Licenses API — Access Type
+  description: 'Qlik Sense Enterprise Qlik Sense Licenses API — Access Type. 14 operations. Lead operation: Qlik Sense Enterprise
+    Get access type information. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - Access Type
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-access-type
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Licenses API — Access Type business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: license-accesstypeinfo
+      path: /license/accesstypeinfo
+      operations:
+      - name: getaccesstypeinfo
+        method: GET
+        description: Qlik Sense Enterprise Get access type information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: license-accesstypeoverview
+      path: /license/accesstypeoverview
+      operations:
+      - name: getaccesstypeoverview
+        method: GET
+        description: Qlik Sense Enterprise Get access type overview
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: license-analyzeraccesstype
+      path: /license/analyzeraccesstype
+      operations:
+      - name: getanalyzeraccesstypes
+        method: GET
+        description: Qlik Sense Enterprise List analyzer access allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createanalyzeraccesstype
+        method: POST
+        description: Qlik Sense Enterprise Allocate analyzer access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: license-analyzeraccesstype-id
+      path: /license/analyzeraccesstype/{id}
+      operations:
+      - name: getanalyzeraccesstype
+        method: GET
+        description: Qlik Sense Enterprise Get analyzer access allocation by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteanalyzeraccesstype
+        method: DELETE
+        description: Qlik Sense Enterprise Deallocate analyzer access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: license-loginaccesstype
+      path: /license/loginaccesstype
+      operations:
+      - name: getloginaccesstypes
+        method: GET
+        description: Qlik Sense Enterprise List login access allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: license-professionalaccesstype
+      path: /license/professionalaccesstype
+      operations:
+      - name: getprofessionalaccesstypes
+        method: GET
+        description: Qlik Sense Enterprise List professional access allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createprofessionalaccesstype
+        method: POST
+        description: Qlik Sense Enterprise Allocate professional access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: license-professionalaccesstype-id
+      path: /license/professionalaccesstype/{id}
+      operations:
+      - name: getprofessionalaccesstype
+        method: GET
+        description: Qlik Sense Enterprise Get professional access allocation by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteprofessionalaccesstype
+        method: DELETE
+        description: Qlik Sense Enterprise Deallocate professional access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: license-useraccesstype
+      path: /license/useraccesstype
+      operations:
+      - name: getuseraccesstypes
+        method: GET
+        description: Qlik Sense Enterprise List user access allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createuseraccesstype
+        method: POST
+        description: Qlik Sense Enterprise Allocate user access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: license-useraccesstype-id
+      path: /license/useraccesstype/{id}
+      operations:
+      - name: deleteuseraccesstype
+        method: DELETE
+        description: Qlik Sense Enterprise Deallocate user access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: licenses-access-type-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Licenses API — Access Type. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/license/accesstypeinfo
+      name: license-accesstypeinfo
+      description: REST surface for license-accesstypeinfo.
+      operations:
+      - method: GET
+        name: getaccesstypeinfo
+        description: Qlik Sense Enterprise Get access type information
+        call: licenses-access-type.getaccesstypeinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/accesstypeoverview
+      name: license-accesstypeoverview
+      description: REST surface for license-accesstypeoverview.
+      operations:
+      - method: GET
+        name: getaccesstypeoverview
+        description: Qlik Sense Enterprise Get access type overview
+        call: licenses-access-type.getaccesstypeoverview
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/analyzeraccesstype
+      name: license-analyzeraccesstype
+      description: REST surface for license-analyzeraccesstype.
+      operations:
+      - method: GET
+        name: getanalyzeraccesstypes
+        description: Qlik Sense Enterprise List analyzer access allocations
+        call: licenses-access-type.getanalyzeraccesstypes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createanalyzeraccesstype
+        description: Qlik Sense Enterprise Allocate analyzer access
+        call: licenses-access-type.createanalyzeraccesstype
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/analyzeraccesstype/{id}
+      name: license-analyzeraccesstype-id
+      description: REST surface for license-analyzeraccesstype-id.
+      operations:
+      - method: GET
+        name: getanalyzeraccesstype
+        description: Qlik Sense Enterprise Get analyzer access allocation by ID
+        call: licenses-access-type.getanalyzeraccesstype
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteanalyzeraccesstype
+        description: Qlik Sense Enterprise Deallocate analyzer access
+        call: licenses-access-type.deleteanalyzeraccesstype
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/loginaccesstype
+      name: license-loginaccesstype
+      description: REST surface for license-loginaccesstype.
+      operations:
+      - method: GET
+        name: getloginaccesstypes
+        description: Qlik Sense Enterprise List login access allocations
+        call: licenses-access-type.getloginaccesstypes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/professionalaccesstype
+      name: license-professionalaccesstype
+      description: REST surface for license-professionalaccesstype.
+      operations:
+      - method: GET
+        name: getprofessionalaccesstypes
+        description: Qlik Sense Enterprise List professional access allocations
+        call: licenses-access-type.getprofessionalaccesstypes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprofessionalaccesstype
+        description: Qlik Sense Enterprise Allocate professional access
+        call: licenses-access-type.createprofessionalaccesstype
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/professionalaccesstype/{id}
+      name: license-professionalaccesstype-id
+      description: REST surface for license-professionalaccesstype-id.
+      operations:
+      - method: GET
+        name: getprofessionalaccesstype
+        description: Qlik Sense Enterprise Get professional access allocation by ID
+        call: licenses-access-type.getprofessionalaccesstype
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprofessionalaccesstype
+        description: Qlik Sense Enterprise Deallocate professional access
+        call: licenses-access-type.deleteprofessionalaccesstype
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/useraccesstype
+      name: license-useraccesstype
+      description: REST surface for license-useraccesstype.
+      operations:
+      - method: GET
+        name: getuseraccesstypes
+        description: Qlik Sense Enterprise List user access allocations
+        call: licenses-access-type.getuseraccesstypes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuseraccesstype
+        description: Qlik Sense Enterprise Allocate user access
+        call: licenses-access-type.createuseraccesstype
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/useraccesstype/{id}
+      name: license-useraccesstype-id
+      description: REST surface for license-useraccesstype-id.
+      operations:
+      - method: DELETE
+        name: deleteuseraccesstype
+        description: Qlik Sense Enterprise Deallocate user access
+        call: licenses-access-type.deleteuseraccesstype
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-access-type-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Licenses API — Access Type. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-get-access
+      description: Qlik Sense Enterprise Get access type information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getaccesstypeinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-access-2
+      description: Qlik Sense Enterprise Get access type overview
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getaccesstypeoverview
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-analyzer
+      description: Qlik Sense Enterprise List analyzer access allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getanalyzeraccesstypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-allocate-analyzer
+      description: Qlik Sense Enterprise Allocate analyzer access
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: licenses-access-type.createanalyzeraccesstype
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-analyzer
+      description: Qlik Sense Enterprise Get analyzer access allocation by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getanalyzeraccesstype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-deallocate-analyzer
+      description: Qlik Sense Enterprise Deallocate analyzer access
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: licenses-access-type.deleteanalyzeraccesstype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-login
+      description: Qlik Sense Enterprise List login access allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getloginaccesstypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-professional
+      description: Qlik Sense Enterprise List professional access allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getprofessionalaccesstypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-allocate-professional
+      description: Qlik Sense Enterprise Allocate professional access
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: licenses-access-type.createprofessionalaccesstype
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-professional
+      description: Qlik Sense Enterprise Get professional access allocation by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getprofessionalaccesstype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-deallocate-professional
+      description: Qlik Sense Enterprise Deallocate professional access
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: licenses-access-type.deleteprofessionalaccesstype
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-user
+      description: Qlik Sense Enterprise List user access allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-access-type.getuseraccesstypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-allocate-user
+      description: Qlik Sense Enterprise Allocate user access
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: licenses-access-type.createuseraccesstype
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-deallocate-user
+      description: Qlik Sense Enterprise Deallocate user access
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: licenses-access-type.deleteuseraccesstype
+      outputParameters:
+      - type: object
+        mapping: $.

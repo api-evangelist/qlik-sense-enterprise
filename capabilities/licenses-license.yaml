@@ -1,0 +1,139 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Licenses API — License
+  description: 'Qlik Sense Enterprise Qlik Sense Licenses API — License. 3 operations. Lead operation: Qlik Sense Enterprise
+    Get license information. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - License
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-license
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Licenses API — License business capability. Self-contained, no shared references.
+    resources:
+    - name: license
+      path: /license
+      operations:
+      - name: getlicense
+        method: GET
+        description: Qlik Sense Enterprise Get license information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setlicense
+        method: POST
+        description: Qlik Sense Enterprise Set license
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: license-download
+      path: /license/download
+      operations:
+      - name: downloadlef
+        method: GET
+        description: Qlik Sense Enterprise Download license enablement file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: licenses-license-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Licenses API — License. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/license
+      name: license
+      description: REST surface for license.
+      operations:
+      - method: GET
+        name: getlicense
+        description: Qlik Sense Enterprise Get license information
+        call: licenses-license.getlicense
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setlicense
+        description: Qlik Sense Enterprise Set license
+        call: licenses-license.setlicense
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/license/download
+      name: license-download
+      description: REST surface for license-download.
+      operations:
+      - method: GET
+        name: downloadlef
+        description: Qlik Sense Enterprise Download license enablement file
+        call: licenses-license.downloadlef
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-license-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Licenses API — License. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-get-license
+      description: Qlik Sense Enterprise Get license information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-license.getlicense
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-set-license
+      description: Qlik Sense Enterprise Set license
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: licenses-license.setlicense
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-download-license
+      description: Qlik Sense Enterprise Download license enablement file
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-license.downloadlef
+      outputParameters:
+      - type: object
+        mapping: $.

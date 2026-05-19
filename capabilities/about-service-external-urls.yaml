@@ -1,0 +1,73 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense About Service API — External URLs
+  description: 'Qlik Sense Enterprise Qlik Sense About Service API — External URLs. 1 operations. Lead operation: Qlik Sense
+    Enterprise Get external URLs. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - External URLs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: about-service-external-urls
+    baseUri: https://{server}/api/about/v1
+    description: Qlik Sense Enterprise Qlik Sense About Service API — External URLs business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: externalurls
+      path: /externalurls
+      operations:
+      - name: getexternalurls
+        method: GET
+        description: Qlik Sense Enterprise Get external URLs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: about-service-external-urls-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense About Service API — External URLs. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/externalurls
+      name: externalurls
+      description: REST surface for externalurls.
+      operations:
+      - method: GET
+        name: getexternalurls
+        description: Qlik Sense Enterprise Get external URLs
+        call: about-service-external-urls.getexternalurls
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: about-service-external-urls-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense About Service API — External URLs. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-get-external
+      description: Qlik Sense Enterprise Get external URLs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: about-service-external-urls.getexternalurls
+      outputParameters:
+      - type: object
+        mapping: $.

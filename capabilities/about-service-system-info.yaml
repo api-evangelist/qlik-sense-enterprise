@@ -1,0 +1,73 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense About Service API — System Info
+  description: 'Qlik Sense Enterprise Qlik Sense About Service API — System Info. 1 operations. Lead operation: Qlik Sense
+    Enterprise Get system information. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - System Info
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: about-service-system-info
+    baseUri: https://{server}/api/about/v1
+    description: Qlik Sense Enterprise Qlik Sense About Service API — System Info business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: systeminfo
+      path: /systeminfo
+      operations:
+      - name: getsysteminfo
+        method: GET
+        description: Qlik Sense Enterprise Get system information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: about-service-system-info-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense About Service API — System Info. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/systeminfo
+      name: systeminfo
+      description: REST surface for systeminfo.
+      operations:
+      - method: GET
+        name: getsysteminfo
+        description: Qlik Sense Enterprise Get system information
+        call: about-service-system-info.getsysteminfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: about-service-system-info-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense About Service API — System Info. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-get-system
+      description: Qlik Sense Enterprise Get system information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: about-service-system-info.getsysteminfo
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,176 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Repository Service API — Virtual Proxy
+  description: 'Qlik Sense Enterprise Qlik Sense Repository Service API — Virtual Proxy. 4 operations. Lead operation: Qlik
+    Sense Enterprise List virtual proxy configurations. Self-contained Naftiko capability covering one Qlik Sense Enterprise
+    business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - Virtual Proxy
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: repository-service-virtual-proxy
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Repository Service API — Virtual Proxy business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: virtualproxyconfig
+      path: /virtualproxyconfig
+      operations:
+      - name: getvirtualproxyconfigs
+        method: GET
+        description: Qlik Sense Enterprise List virtual proxy configurations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createvirtualproxyconfig
+        method: POST
+        description: Qlik Sense Enterprise Create virtual proxy configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: virtualproxyconfig-id
+      path: /virtualproxyconfig/{id}
+      operations:
+      - name: getvirtualproxyconfig
+        method: GET
+        description: Qlik Sense Enterprise Get virtual proxy configuration by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatevirtualproxyconfig
+        method: PUT
+        description: Qlik Sense Enterprise Update virtual proxy configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: repository-service-virtual-proxy-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Virtual Proxy. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/virtualproxyconfig
+      name: virtualproxyconfig
+      description: REST surface for virtualproxyconfig.
+      operations:
+      - method: GET
+        name: getvirtualproxyconfigs
+        description: Qlik Sense Enterprise List virtual proxy configurations
+        call: repository-service-virtual-proxy.getvirtualproxyconfigs
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createvirtualproxyconfig
+        description: Qlik Sense Enterprise Create virtual proxy configuration
+        call: repository-service-virtual-proxy.createvirtualproxyconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/virtualproxyconfig/{id}
+      name: virtualproxyconfig-id
+      description: REST surface for virtualproxyconfig-id.
+      operations:
+      - method: GET
+        name: getvirtualproxyconfig
+        description: Qlik Sense Enterprise Get virtual proxy configuration by ID
+        call: repository-service-virtual-proxy.getvirtualproxyconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatevirtualproxyconfig
+        description: Qlik Sense Enterprise Update virtual proxy configuration
+        call: repository-service-virtual-proxy.updatevirtualproxyconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: repository-service-virtual-proxy-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Virtual Proxy. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-virtual
+      description: Qlik Sense Enterprise List virtual proxy configurations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-virtual-proxy.getvirtualproxyconfigs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-create-virtual
+      description: Qlik Sense Enterprise Create virtual proxy configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-virtual-proxy.createvirtualproxyconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-virtual
+      description: Qlik Sense Enterprise Get virtual proxy configuration by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-virtual-proxy.getvirtualproxyconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-update-virtual
+      description: Qlik Sense Enterprise Update virtual proxy configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-virtual-proxy.updatevirtualproxyconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

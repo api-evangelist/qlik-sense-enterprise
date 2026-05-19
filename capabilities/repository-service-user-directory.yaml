@@ -1,0 +1,173 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Repository Service API — User Directory
+  description: 'Qlik Sense Enterprise Qlik Sense Repository Service API — User Directory. 4 operations. Lead operation: Qlik
+    Sense Enterprise List user directories. Self-contained Naftiko capability covering one Qlik Sense Enterprise business
+    surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - User Directory
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: repository-service-user-directory
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Repository Service API — User Directory business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: userdirectory
+      path: /userdirectory
+      operations:
+      - name: getuserdirectories
+        method: GET
+        description: Qlik Sense Enterprise List user directories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: userdirectory-syncuserdirectories
+      path: /userdirectory/syncuserdirectories
+      operations:
+      - name: syncuserdirectories
+        method: POST
+        description: Qlik Sense Enterprise Synchronize user directories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: userdirectory-id
+      path: /userdirectory/{id}
+      operations:
+      - name: getuserdirectory
+        method: GET
+        description: Qlik Sense Enterprise Get user directory by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteuserdirectory
+        method: DELETE
+        description: Qlik Sense Enterprise Delete user directory and users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: repository-service-user-directory-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — User Directory. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/userdirectory
+      name: userdirectory
+      description: REST surface for userdirectory.
+      operations:
+      - method: GET
+        name: getuserdirectories
+        description: Qlik Sense Enterprise List user directories
+        call: repository-service-user-directory.getuserdirectories
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/userdirectory/syncuserdirectories
+      name: userdirectory-syncuserdirectories
+      description: REST surface for userdirectory-syncuserdirectories.
+      operations:
+      - method: POST
+        name: syncuserdirectories
+        description: Qlik Sense Enterprise Synchronize user directories
+        call: repository-service-user-directory.syncuserdirectories
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/userdirectory/{id}
+      name: userdirectory-id
+      description: REST surface for userdirectory-id.
+      operations:
+      - method: GET
+        name: getuserdirectory
+        description: Qlik Sense Enterprise Get user directory by ID
+        call: repository-service-user-directory.getuserdirectory
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuserdirectory
+        description: Qlik Sense Enterprise Delete user directory and users
+        call: repository-service-user-directory.deleteuserdirectory
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: repository-service-user-directory-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — User Directory. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-user
+      description: Qlik Sense Enterprise List user directories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-user-directory.getuserdirectories
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-synchronize-user
+      description: Qlik Sense Enterprise Synchronize user directories
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-user-directory.syncuserdirectories
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-user
+      description: Qlik Sense Enterprise Get user directory by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-user-directory.getuserdirectory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-delete-user
+      description: Qlik Sense Enterprise Delete user directory and users
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: repository-service-user-directory.deleteuserdirectory
+      outputParameters:
+      - type: object
+        mapping: $.

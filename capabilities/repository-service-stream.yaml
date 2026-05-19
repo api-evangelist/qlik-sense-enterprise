@@ -1,0 +1,264 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Repository Service API — Stream
+  description: 'Qlik Sense Enterprise Qlik Sense Repository Service API — Stream. 7 operations. Lead operation: Qlik Sense
+    Enterprise List streams. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - Stream
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: repository-service-stream
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Repository Service API — Stream business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: stream
+      path: /stream
+      operations:
+      - name: getstreams
+        method: GET
+        description: Qlik Sense Enterprise List streams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createstream
+        method: POST
+        description: Qlik Sense Enterprise Create stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: stream-count
+      path: /stream/count
+      operations:
+      - name: getstreamscount
+        method: GET
+        description: Qlik Sense Enterprise Count streams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: stream-full
+      path: /stream/full
+      operations:
+      - name: getstreamsfull
+        method: GET
+        description: Qlik Sense Enterprise List streams with full details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: stream-id
+      path: /stream/{id}
+      operations:
+      - name: getstream
+        method: GET
+        description: Qlik Sense Enterprise Get stream by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatestream
+        method: PUT
+        description: Qlik Sense Enterprise Update stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletestream
+        method: DELETE
+        description: Qlik Sense Enterprise Delete stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: repository-service-stream-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Stream. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/stream
+      name: stream
+      description: REST surface for stream.
+      operations:
+      - method: GET
+        name: getstreams
+        description: Qlik Sense Enterprise List streams
+        call: repository-service-stream.getstreams
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createstream
+        description: Qlik Sense Enterprise Create stream
+        call: repository-service-stream.createstream
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stream/count
+      name: stream-count
+      description: REST surface for stream-count.
+      operations:
+      - method: GET
+        name: getstreamscount
+        description: Qlik Sense Enterprise Count streams
+        call: repository-service-stream.getstreamscount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stream/full
+      name: stream-full
+      description: REST surface for stream-full.
+      operations:
+      - method: GET
+        name: getstreamsfull
+        description: Qlik Sense Enterprise List streams with full details
+        call: repository-service-stream.getstreamsfull
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stream/{id}
+      name: stream-id
+      description: REST surface for stream-id.
+      operations:
+      - method: GET
+        name: getstream
+        description: Qlik Sense Enterprise Get stream by ID
+        call: repository-service-stream.getstream
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatestream
+        description: Qlik Sense Enterprise Update stream
+        call: repository-service-stream.updatestream
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletestream
+        description: Qlik Sense Enterprise Delete stream
+        call: repository-service-stream.deletestream
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: repository-service-stream-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Stream. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-streams
+      description: Qlik Sense Enterprise List streams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-stream.getstreams
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-create-stream
+      description: Qlik Sense Enterprise Create stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-stream.createstream
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-count-streams
+      description: Qlik Sense Enterprise Count streams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-stream.getstreamscount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-streams-2
+      description: Qlik Sense Enterprise List streams with full details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-stream.getstreamsfull
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-stream
+      description: Qlik Sense Enterprise Get stream by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-stream.getstream
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-update-stream
+      description: Qlik Sense Enterprise Update stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-stream.updatestream
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-delete-stream
+      description: Qlik Sense Enterprise Delete stream
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: repository-service-stream.deletestream
+      outputParameters:
+      - type: object
+        mapping: $.

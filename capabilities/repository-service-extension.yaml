@@ -1,0 +1,204 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Repository Service API — Extension
+  description: 'Qlik Sense Enterprise Qlik Sense Repository Service API — Extension. 5 operations. Lead operation: Qlik Sense
+    Enterprise List extensions. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - Extension
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: repository-service-extension
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Repository Service API — Extension business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: extension
+      path: /extension
+      operations:
+      - name: getextensions
+        method: GET
+        description: Qlik Sense Enterprise List extensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extension-schema
+      path: /extension/schema
+      operations:
+      - name: getextensionschemas
+        method: GET
+        description: Qlik Sense Enterprise Get extension schemas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extension-upload
+      path: /extension/upload
+      operations:
+      - name: uploadextension
+        method: POST
+        description: Qlik Sense Enterprise Upload extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: extension-id
+      path: /extension/{id}
+      operations:
+      - name: getextension
+        method: GET
+        description: Qlik Sense Enterprise Get extension by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteextension
+        method: DELETE
+        description: Qlik Sense Enterprise Delete extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: repository-service-extension-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Extension. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/extension
+      name: extension
+      description: REST surface for extension.
+      operations:
+      - method: GET
+        name: getextensions
+        description: Qlik Sense Enterprise List extensions
+        call: repository-service-extension.getextensions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extension/schema
+      name: extension-schema
+      description: REST surface for extension-schema.
+      operations:
+      - method: GET
+        name: getextensionschemas
+        description: Qlik Sense Enterprise Get extension schemas
+        call: repository-service-extension.getextensionschemas
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extension/upload
+      name: extension-upload
+      description: REST surface for extension-upload.
+      operations:
+      - method: POST
+        name: uploadextension
+        description: Qlik Sense Enterprise Upload extension
+        call: repository-service-extension.uploadextension
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extension/{id}
+      name: extension-id
+      description: REST surface for extension-id.
+      operations:
+      - method: GET
+        name: getextension
+        description: Qlik Sense Enterprise Get extension by ID
+        call: repository-service-extension.getextension
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteextension
+        description: Qlik Sense Enterprise Delete extension
+        call: repository-service-extension.deleteextension
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: repository-service-extension-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Extension. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-extensions
+      description: Qlik Sense Enterprise List extensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-extension.getextensions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-extension
+      description: Qlik Sense Enterprise Get extension schemas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-extension.getextensionschemas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-upload-extension
+      description: Qlik Sense Enterprise Upload extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-extension.uploadextension
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-extension-2
+      description: Qlik Sense Enterprise Get extension by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-extension.getextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-delete-extension
+      description: Qlik Sense Enterprise Delete extension
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: repository-service-extension.deleteextension
+      outputParameters:
+      - type: object
+        mapping: $.

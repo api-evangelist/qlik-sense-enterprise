@@ -1,0 +1,313 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense ODAG Service API — Requests
+  description: 'Qlik Sense Enterprise Qlik Sense ODAG Service API — Requests. 8 operations. Lead operation: Qlik Sense Enterprise
+    List requests for a navigation link. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - Requests
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: odag-service-requests
+    baseUri: https://{server}/api/odag/v1
+    description: Qlik Sense Enterprise Qlik Sense ODAG Service API — Requests business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: links-linkId-requests
+      path: /links/{linkId}/requests
+      operations:
+      - name: getodaglinkrequests
+        method: GET
+        description: Qlik Sense Enterprise List requests for a navigation link
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: submitodagrequest
+        method: POST
+        description: Qlik Sense Enterprise Submit app generation request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: requests
+      path: /requests
+      operations:
+      - name: getodagrequests
+        method: GET
+        description: Qlik Sense Enterprise List all ODAG requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: requests-requestId
+      path: /requests/{requestId}
+      operations:
+      - name: getodagrequest
+        method: GET
+        description: Qlik Sense Enterprise Get ODAG request by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateodagrequest
+        method: PUT
+        description: Qlik Sense Enterprise Update ODAG request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: requests-requestId-app
+      path: /requests/{requestId}/app
+      operations:
+      - name: deleteodagrequestapp
+        method: DELETE
+        description: Qlik Sense Enterprise Remove generated app from request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: requests-requestId-reloadApp
+      path: /requests/{requestId}/reloadApp
+      operations:
+      - name: reloadodagrequestapp
+        method: POST
+        description: Qlik Sense Enterprise Reload generated app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: requests-requestId-renameApp
+      path: /requests/{requestId}/renameApp
+      operations:
+      - name: renameodagrequestapp
+        method: POST
+        description: Qlik Sense Enterprise Rename generated app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: odag-service-requests-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense ODAG Service API — Requests. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/links/{linkid}/requests
+      name: links-linkid-requests
+      description: REST surface for links-linkId-requests.
+      operations:
+      - method: GET
+        name: getodaglinkrequests
+        description: Qlik Sense Enterprise List requests for a navigation link
+        call: odag-service-requests.getodaglinkrequests
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: submitodagrequest
+        description: Qlik Sense Enterprise Submit app generation request
+        call: odag-service-requests.submitodagrequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/requests
+      name: requests
+      description: REST surface for requests.
+      operations:
+      - method: GET
+        name: getodagrequests
+        description: Qlik Sense Enterprise List all ODAG requests
+        call: odag-service-requests.getodagrequests
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/requests/{requestid}
+      name: requests-requestid
+      description: REST surface for requests-requestId.
+      operations:
+      - method: GET
+        name: getodagrequest
+        description: Qlik Sense Enterprise Get ODAG request by ID
+        call: odag-service-requests.getodagrequest
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateodagrequest
+        description: Qlik Sense Enterprise Update ODAG request
+        call: odag-service-requests.updateodagrequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/requests/{requestid}/app
+      name: requests-requestid-app
+      description: REST surface for requests-requestId-app.
+      operations:
+      - method: DELETE
+        name: deleteodagrequestapp
+        description: Qlik Sense Enterprise Remove generated app from request
+        call: odag-service-requests.deleteodagrequestapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/requests/{requestid}/reloadapp
+      name: requests-requestid-reloadapp
+      description: REST surface for requests-requestId-reloadApp.
+      operations:
+      - method: POST
+        name: reloadodagrequestapp
+        description: Qlik Sense Enterprise Reload generated app
+        call: odag-service-requests.reloadodagrequestapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/requests/{requestid}/renameapp
+      name: requests-requestid-renameapp
+      description: REST surface for requests-requestId-renameApp.
+      operations:
+      - method: POST
+        name: renameodagrequestapp
+        description: Qlik Sense Enterprise Rename generated app
+        call: odag-service-requests.renameodagrequestapp
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: odag-service-requests-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense ODAG Service API — Requests. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-requests
+      description: Qlik Sense Enterprise List requests for a navigation link
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: odag-service-requests.getodaglinkrequests
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-submit-app
+      description: Qlik Sense Enterprise Submit app generation request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: odag-service-requests.submitodagrequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-all
+      description: Qlik Sense Enterprise List all ODAG requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: odag-service-requests.getodagrequests
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-odag
+      description: Qlik Sense Enterprise Get ODAG request by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: odag-service-requests.getodagrequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-update-odag
+      description: Qlik Sense Enterprise Update ODAG request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: odag-service-requests.updateodagrequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-remove-generated
+      description: Qlik Sense Enterprise Remove generated app from request
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: odag-service-requests.deleteodagrequestapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-reload-generated
+      description: Qlik Sense Enterprise Reload generated app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: odag-service-requests.reloadodagrequestapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-rename-generated
+      description: Qlik Sense Enterprise Rename generated app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: odag-service-requests.renameodagrequestapp
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

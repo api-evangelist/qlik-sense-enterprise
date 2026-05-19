@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Proxy Service API — About
+  description: 'Qlik Sense Enterprise Qlik Sense Proxy Service API — About. 2 operations. Lead operation: Qlik Sense Enterprise
+    Get QPS API information. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - About
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: proxy-service-about
+    baseUri: https://{server}:4243/qps
+    description: Qlik Sense Enterprise Qlik Sense Proxy Service API — About business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: about
+      path: /about
+      operations:
+      - name: getproxyabout
+        method: GET
+        description: Qlik Sense Enterprise Get QPS API information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: about-description
+      path: /about/description
+      operations:
+      - name: getproxyapidescription
+        method: GET
+        description: Qlik Sense Enterprise Get complete endpoint description
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: proxy-service-about-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Proxy Service API — About. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/about
+      name: about
+      description: REST surface for about.
+      operations:
+      - method: GET
+        name: getproxyabout
+        description: Qlik Sense Enterprise Get QPS API information
+        call: proxy-service-about.getproxyabout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/about/description
+      name: about-description
+      description: REST surface for about-description.
+      operations:
+      - method: GET
+        name: getproxyapidescription
+        description: Qlik Sense Enterprise Get complete endpoint description
+        call: proxy-service-about.getproxyapidescription
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: proxy-service-about-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Proxy Service API — About. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-get-qps
+      description: Qlik Sense Enterprise Get QPS API information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-service-about.getproxyabout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-complete
+      description: Qlik Sense Enterprise Get complete endpoint description
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-service-about.getproxyapidescription
+      outputParameters:
+      - type: object
+        mapping: $.

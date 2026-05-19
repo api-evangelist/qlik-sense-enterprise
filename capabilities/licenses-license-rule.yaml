@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Licenses API — License Rule
+  description: 'Qlik Sense Enterprise Qlik Sense Licenses API — License Rule. 3 operations. Lead operation: Qlik Sense Enterprise
+    List license rules. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - License Rule
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: licenses-license-rule
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Licenses API — License Rule business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: licenserule
+      path: /licenserule
+      operations:
+      - name: getlicenserules
+        method: GET
+        description: Qlik Sense Enterprise List license rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: licenserule-full
+      path: /licenserule/full
+      operations:
+      - name: getlicenserulesfull
+        method: GET
+        description: Qlik Sense Enterprise List license rules with full details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: licenserule-id
+      path: /licenserule/{id}
+      operations:
+      - name: getlicenserule
+        method: GET
+        description: Qlik Sense Enterprise Get license rule by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: licenses-license-rule-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Licenses API — License Rule. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/licenserule
+      name: licenserule
+      description: REST surface for licenserule.
+      operations:
+      - method: GET
+        name: getlicenserules
+        description: Qlik Sense Enterprise List license rules
+        call: licenses-license-rule.getlicenserules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/licenserule/full
+      name: licenserule-full
+      description: REST surface for licenserule-full.
+      operations:
+      - method: GET
+        name: getlicenserulesfull
+        description: Qlik Sense Enterprise List license rules with full details
+        call: licenses-license-rule.getlicenserulesfull
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/licenserule/{id}
+      name: licenserule-id
+      description: REST surface for licenserule-id.
+      operations:
+      - method: GET
+        name: getlicenserule
+        description: Qlik Sense Enterprise Get license rule by ID
+        call: licenses-license-rule.getlicenserule
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: licenses-license-rule-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Licenses API — License Rule. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-license
+      description: Qlik Sense Enterprise List license rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-license-rule.getlicenserules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-license-2
+      description: Qlik Sense Enterprise List license rules with full details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-license-rule.getlicenserulesfull
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-license
+      description: Qlik Sense Enterprise Get license rule by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: licenses-license-rule.getlicenserule
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,201 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Repository Service API — Custom Property
+  description: 'Qlik Sense Enterprise Qlik Sense Repository Service API — Custom Property. 5 operations. Lead operation: Qlik
+    Sense Enterprise List custom properties. Self-contained Naftiko capability covering one Qlik Sense Enterprise business
+    surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - Custom Property
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: repository-service-custom-property
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Repository Service API — Custom Property business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: customproperty
+      path: /customproperty
+      operations:
+      - name: getcustomproperties
+        method: GET
+        description: Qlik Sense Enterprise List custom properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcustomproperty
+        method: POST
+        description: Qlik Sense Enterprise Create custom property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: customproperty-id
+      path: /customproperty/{id}
+      operations:
+      - name: getcustomproperty
+        method: GET
+        description: Qlik Sense Enterprise Get custom property by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecustomproperty
+        method: PUT
+        description: Qlik Sense Enterprise Update custom property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecustomproperty
+        method: DELETE
+        description: Qlik Sense Enterprise Delete custom property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: repository-service-custom-property-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Custom Property. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/customproperty
+      name: customproperty
+      description: REST surface for customproperty.
+      operations:
+      - method: GET
+        name: getcustomproperties
+        description: Qlik Sense Enterprise List custom properties
+        call: repository-service-custom-property.getcustomproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcustomproperty
+        description: Qlik Sense Enterprise Create custom property
+        call: repository-service-custom-property.createcustomproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customproperty/{id}
+      name: customproperty-id
+      description: REST surface for customproperty-id.
+      operations:
+      - method: GET
+        name: getcustomproperty
+        description: Qlik Sense Enterprise Get custom property by ID
+        call: repository-service-custom-property.getcustomproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecustomproperty
+        description: Qlik Sense Enterprise Update custom property
+        call: repository-service-custom-property.updatecustomproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecustomproperty
+        description: Qlik Sense Enterprise Delete custom property
+        call: repository-service-custom-property.deletecustomproperty
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: repository-service-custom-property-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — Custom Property. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-custom
+      description: Qlik Sense Enterprise List custom properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-custom-property.getcustomproperties
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-create-custom
+      description: Qlik Sense Enterprise Create custom property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-custom-property.createcustomproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-custom
+      description: Qlik Sense Enterprise Get custom property by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-custom-property.getcustomproperty
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-update-custom
+      description: Qlik Sense Enterprise Update custom property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-custom-property.updatecustomproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-delete-custom
+      description: Qlik Sense Enterprise Delete custom property
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: repository-service-custom-property.deletecustomproperty
+      outputParameters:
+      - type: object
+        mapping: $.

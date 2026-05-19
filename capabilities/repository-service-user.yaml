@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Repository Service API — User
+  description: 'Qlik Sense Enterprise Qlik Sense Repository Service API — User. 6 operations. Lead operation: Qlik Sense Enterprise
+    List users. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - User
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: repository-service-user
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Repository Service API — User business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: user
+      path: /user
+      operations:
+      - name: getusers
+        method: GET
+        description: Qlik Sense Enterprise List users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-count
+      path: /user/count
+      operations:
+      - name: getuserscount
+        method: GET
+        description: Qlik Sense Enterprise Count users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-full
+      path: /user/full
+      operations:
+      - name: getusersfull
+        method: GET
+        description: Qlik Sense Enterprise List users with full details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-id
+      path: /user/{id}
+      operations:
+      - name: getuser
+        method: GET
+        description: Qlik Sense Enterprise Get user by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuser
+        method: PUT
+        description: Qlik Sense Enterprise Update user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteuser
+        method: DELETE
+        description: Qlik Sense Enterprise Delete user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: repository-service-user-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — User. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/user
+      name: user
+      description: REST surface for user.
+      operations:
+      - method: GET
+        name: getusers
+        description: Qlik Sense Enterprise List users
+        call: repository-service-user.getusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/count
+      name: user-count
+      description: REST surface for user-count.
+      operations:
+      - method: GET
+        name: getuserscount
+        description: Qlik Sense Enterprise Count users
+        call: repository-service-user.getuserscount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/full
+      name: user-full
+      description: REST surface for user-full.
+      operations:
+      - method: GET
+        name: getusersfull
+        description: Qlik Sense Enterprise List users with full details
+        call: repository-service-user.getusersfull
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/{id}
+      name: user-id
+      description: REST surface for user-id.
+      operations:
+      - method: GET
+        name: getuser
+        description: Qlik Sense Enterprise Get user by ID
+        call: repository-service-user.getuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuser
+        description: Qlik Sense Enterprise Update user
+        call: repository-service-user.updateuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuser
+        description: Qlik Sense Enterprise Delete user
+        call: repository-service-user.deleteuser
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: repository-service-user-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — User. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-users
+      description: Qlik Sense Enterprise List users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-user.getusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-count-users
+      description: Qlik Sense Enterprise Count users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-user.getuserscount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-users-2
+      description: Qlik Sense Enterprise List users with full details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-user.getusersfull
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-user
+      description: Qlik Sense Enterprise Get user by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-user.getuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-update-user
+      description: Qlik Sense Enterprise Update user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-user.updateuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-delete-user
+      description: Qlik Sense Enterprise Delete user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: repository-service-user.deleteuser
+      outputParameters:
+      - type: object
+        mapping: $.

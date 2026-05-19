@@ -1,0 +1,181 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Proxy Service API — User
+  description: 'Qlik Sense Enterprise Qlik Sense Proxy Service API — User. 3 operations. Lead operation: Qlik Sense Enterprise
+    Get sessions for a user. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - User
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: proxy-service-user
+    baseUri: https://{server}:4243/qps
+    description: Qlik Sense Enterprise Qlik Sense Proxy Service API — User business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: user-userDirectory-userId
+      path: /user/{userDirectory}/{userId}
+      operations:
+      - name: getusersessions
+        method: GET
+        description: Qlik Sense Enterprise Get sessions for a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userDirectory
+          in: path
+          type: string
+          description: Name of the user directory the user belongs to
+          required: true
+        - name: userId
+          in: path
+          type: string
+          description: User identifier within the user directory
+          required: true
+      - name: deleteusersessions
+        method: DELETE
+        description: Qlik Sense Enterprise Delete all sessions for a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userDirectory
+          in: path
+          type: string
+          description: Name of the user directory
+          required: true
+        - name: userId
+          in: path
+          type: string
+          description: User identifier within the user directory
+          required: true
+    - name: user-userDirectory-userId-session-count
+      path: /user/{userDirectory}/{userId}/session-count
+      operations:
+      - name: getusersessioncount
+        method: GET
+        description: Qlik Sense Enterprise Get session count for a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userDirectory
+          in: path
+          type: string
+          description: Name of the user directory
+          required: true
+        - name: userId
+          in: path
+          type: string
+          description: User identifier within the user directory
+          required: true
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: proxy-service-user-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Proxy Service API — User. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/user/{userdirectory}/{userid}
+      name: user-userdirectory-userid
+      description: REST surface for user-userDirectory-userId.
+      operations:
+      - method: GET
+        name: getusersessions
+        description: Qlik Sense Enterprise Get sessions for a user
+        call: proxy-service-user.getusersessions
+        with:
+          userDirectory: rest.userDirectory
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteusersessions
+        description: Qlik Sense Enterprise Delete all sessions for a user
+        call: proxy-service-user.deleteusersessions
+        with:
+          userDirectory: rest.userDirectory
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/{userdirectory}/{userid}/session-count
+      name: user-userdirectory-userid-session-count
+      description: REST surface for user-userDirectory-userId-session-count.
+      operations:
+      - method: GET
+        name: getusersessioncount
+        description: Qlik Sense Enterprise Get session count for a user
+        call: proxy-service-user.getusersessioncount
+        with:
+          userDirectory: rest.userDirectory
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: proxy-service-user-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Proxy Service API — User. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-get-sessions
+      description: Qlik Sense Enterprise Get sessions for a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-service-user.getusersessions
+      with:
+        userDirectory: tools.userDirectory
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-delete-all
+      description: Qlik Sense Enterprise Delete all sessions for a user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: proxy-service-user.deleteusersessions
+      with:
+        userDirectory: tools.userDirectory
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-session
+      description: Qlik Sense Enterprise Get session count for a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-service-user.getusersessioncount
+      with:
+        userDirectory: tools.userDirectory
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.

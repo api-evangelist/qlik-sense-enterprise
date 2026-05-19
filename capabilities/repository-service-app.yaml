@@ -1,0 +1,619 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Sense Enterprise Qlik Sense Repository Service API — App
+  description: 'Qlik Sense Enterprise Qlik Sense Repository Service API — App. 15 operations. Lead operation: Qlik Sense Enterprise
+    List applications. Self-contained Naftiko capability covering one Qlik Sense Enterprise business surface.'
+  tags:
+  - Qlik Sense Enterprise
+  - App
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_ENTERPRISE_API_KEY: QLIK_SENSE_ENTERPRISE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: repository-service-app
+    baseUri: https://{server}:4242/qrs
+    description: Qlik Sense Enterprise Qlik Sense Repository Service API — App business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: app
+      path: /app
+      operations:
+      - name: getapps
+        method: GET
+        description: Qlik Sense Enterprise List applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: app-count
+      path: /app/count
+      operations:
+      - name: getappscount
+        method: GET
+        description: Qlik Sense Enterprise Count applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: app-full
+      path: /app/full
+      operations:
+      - name: getappsfull
+        method: GET
+        description: Qlik Sense Enterprise List applications with full details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: app-hublist
+      path: /app/hublist
+      operations:
+      - name: getapphublist
+        method: GET
+        description: Qlik Sense Enterprise Get hub app list
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: app-import
+      path: /app/import
+      operations:
+      - name: importapp
+        method: POST
+        description: Qlik Sense Enterprise Import application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name for the imported application
+          required: true
+        - name: keepdata
+          in: query
+          type: boolean
+          description: Whether to keep the data in the imported app
+        - name: excludeconnections
+          in: query
+          type: boolean
+          description: Whether to exclude data connections from the imported app
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: app-upload
+      path: /app/upload
+      operations:
+      - name: uploadapp
+        method: POST
+        description: Qlik Sense Enterprise Upload application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name for the uploaded application
+          required: true
+        - name: keepdata
+          in: query
+          type: boolean
+          description: Whether to keep the data in the uploaded app
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: app-id
+      path: /app/{id}
+      operations:
+      - name: getapp
+        method: GET
+        description: Qlik Sense Enterprise Get application by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateapp
+        method: PUT
+        description: Qlik Sense Enterprise Update application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapp
+        method: DELETE
+        description: Qlik Sense Enterprise Delete application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: app-id-copy
+      path: /app/{id}/copy
+      operations:
+      - name: copyapp
+        method: POST
+        description: Qlik Sense Enterprise Copy application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name for the copied application
+        - name: includecustomproperties
+          in: query
+          type: boolean
+          description: Whether to include custom properties in the copy
+    - name: app-id-export
+      path: /app/{id}/export
+      operations:
+      - name: exportapp
+        method: GET
+        description: Qlik Sense Enterprise Export application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: skipdata
+          in: query
+          type: boolean
+          description: Whether to exclude data from the exported file
+    - name: app-id-migrate
+      path: /app/{id}/migrate
+      operations:
+      - name: migrateapp
+        method: PUT
+        description: Qlik Sense Enterprise Migrate application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: app-id-publish
+      path: /app/{id}/publish
+      operations:
+      - name: publishapp
+        method: PUT
+        description: Qlik Sense Enterprise Publish application to a stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: stream
+          in: query
+          type: string
+          description: ID of the stream to publish the application to
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Optional new name for the published application
+    - name: app-id-reload
+      path: /app/{id}/reload
+      operations:
+      - name: reloadapp
+        method: POST
+        description: Qlik Sense Enterprise Reload application data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: app-id-replace
+      path: /app/{id}/replace
+      operations:
+      - name: replaceapp
+        method: PUT
+        description: Qlik Sense Enterprise Replace application content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: app
+          in: query
+          type: string
+          description: ID of the source application whose content replaces the target
+          required: true
+    authentication:
+      type: apikey
+      key: X-Qlik-Xrfkey
+      value: '{{env.QLIK_SENSE_ENTERPRISE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: repository-service-app-rest
+    port: 8080
+    description: REST adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — App. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/app
+      name: app
+      description: REST surface for app.
+      operations:
+      - method: GET
+        name: getapps
+        description: Qlik Sense Enterprise List applications
+        call: repository-service-app.getapps
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/count
+      name: app-count
+      description: REST surface for app-count.
+      operations:
+      - method: GET
+        name: getappscount
+        description: Qlik Sense Enterprise Count applications
+        call: repository-service-app.getappscount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/full
+      name: app-full
+      description: REST surface for app-full.
+      operations:
+      - method: GET
+        name: getappsfull
+        description: Qlik Sense Enterprise List applications with full details
+        call: repository-service-app.getappsfull
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/hublist
+      name: app-hublist
+      description: REST surface for app-hublist.
+      operations:
+      - method: GET
+        name: getapphublist
+        description: Qlik Sense Enterprise Get hub app list
+        call: repository-service-app.getapphublist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/import
+      name: app-import
+      description: REST surface for app-import.
+      operations:
+      - method: POST
+        name: importapp
+        description: Qlik Sense Enterprise Import application
+        call: repository-service-app.importapp
+        with:
+          name: rest.name
+          keepdata: rest.keepdata
+          excludeconnections: rest.excludeconnections
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/upload
+      name: app-upload
+      description: REST surface for app-upload.
+      operations:
+      - method: POST
+        name: uploadapp
+        description: Qlik Sense Enterprise Upload application
+        call: repository-service-app.uploadapp
+        with:
+          name: rest.name
+          keepdata: rest.keepdata
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/{id}
+      name: app-id
+      description: REST surface for app-id.
+      operations:
+      - method: GET
+        name: getapp
+        description: Qlik Sense Enterprise Get application by ID
+        call: repository-service-app.getapp
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateapp
+        description: Qlik Sense Enterprise Update application
+        call: repository-service-app.updateapp
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapp
+        description: Qlik Sense Enterprise Delete application
+        call: repository-service-app.deleteapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/{id}/copy
+      name: app-id-copy
+      description: REST surface for app-id-copy.
+      operations:
+      - method: POST
+        name: copyapp
+        description: Qlik Sense Enterprise Copy application
+        call: repository-service-app.copyapp
+        with:
+          name: rest.name
+          includecustomproperties: rest.includecustomproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/{id}/export
+      name: app-id-export
+      description: REST surface for app-id-export.
+      operations:
+      - method: GET
+        name: exportapp
+        description: Qlik Sense Enterprise Export application
+        call: repository-service-app.exportapp
+        with:
+          skipdata: rest.skipdata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/{id}/migrate
+      name: app-id-migrate
+      description: REST surface for app-id-migrate.
+      operations:
+      - method: PUT
+        name: migrateapp
+        description: Qlik Sense Enterprise Migrate application
+        call: repository-service-app.migrateapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/{id}/publish
+      name: app-id-publish
+      description: REST surface for app-id-publish.
+      operations:
+      - method: PUT
+        name: publishapp
+        description: Qlik Sense Enterprise Publish application to a stream
+        call: repository-service-app.publishapp
+        with:
+          stream: rest.stream
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/{id}/reload
+      name: app-id-reload
+      description: REST surface for app-id-reload.
+      operations:
+      - method: POST
+        name: reloadapp
+        description: Qlik Sense Enterprise Reload application data
+        call: repository-service-app.reloadapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/app/{id}/replace
+      name: app-id-replace
+      description: REST surface for app-id-replace.
+      operations:
+      - method: PUT
+        name: replaceapp
+        description: Qlik Sense Enterprise Replace application content
+        call: repository-service-app.replaceapp
+        with:
+          app: rest.app
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: repository-service-app-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Sense Enterprise Qlik Sense Repository Service API — App. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: qlik-sense-enterprise-list-applications
+      description: Qlik Sense Enterprise List applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-app.getapps
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-count-applications
+      description: Qlik Sense Enterprise Count applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-app.getappscount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-list-applications-2
+      description: Qlik Sense Enterprise List applications with full details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-app.getappsfull
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-hub
+      description: Qlik Sense Enterprise Get hub app list
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-app.getapphublist
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-import-application
+      description: Qlik Sense Enterprise Import application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-app.importapp
+      with:
+        name: tools.name
+        keepdata: tools.keepdata
+        excludeconnections: tools.excludeconnections
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-upload-application
+      description: Qlik Sense Enterprise Upload application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-app.uploadapp
+      with:
+        name: tools.name
+        keepdata: tools.keepdata
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-get-application
+      description: Qlik Sense Enterprise Get application by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-app.getapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-update-application
+      description: Qlik Sense Enterprise Update application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-app.updateapp
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-delete-application
+      description: Qlik Sense Enterprise Delete application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: repository-service-app.deleteapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-copy-application
+      description: Qlik Sense Enterprise Copy application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-app.copyapp
+      with:
+        name: tools.name
+        includecustomproperties: tools.includecustomproperties
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-export-application
+      description: Qlik Sense Enterprise Export application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: repository-service-app.exportapp
+      with:
+        skipdata: tools.skipdata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-migrate-application
+      description: Qlik Sense Enterprise Migrate application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-app.migrateapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-publish-application
+      description: Qlik Sense Enterprise Publish application to a stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-app.publishapp
+      with:
+        stream: tools.stream
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-reload-application
+      description: Qlik Sense Enterprise Reload application data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: repository-service-app.reloadapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: qlik-sense-enterprise-replace-application
+      description: Qlik Sense Enterprise Replace application content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: repository-service-app.replaceapp
+      with:
+        app: tools.app
+      outputParameters:
+      - type: object
+        mapping: $.
