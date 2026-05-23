@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OdagLinkCreate",
+  "title": "OdagLinkCreate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Navigation link name"
+    },
+    "selectionAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the selection app"
+    },
+    "templateAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the template app"
+    },
+    "properties": {
+      "$ref": "#/components/schemas/OdagLinkProperties"
+    }
+  },
+  "required": [
+    "name",
+    "selectionAppId",
+    "templateAppId"
+  ]
+}

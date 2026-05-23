@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Extension",
+  "title": "Extension",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Extension name"
+    },
+    "owner": {
+      "$ref": "#/components/schemas/UserCondensed"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TagCondensed"
+      }
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomPropertyValue"
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

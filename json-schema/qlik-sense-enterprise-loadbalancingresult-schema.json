@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LoadBalancingResult",
+  "title": "LoadBalancingResult",
+  "type": "object",
+  "properties": {
+    "engineServices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EngineServicePriority"
+      },
+      "description": "Prioritized list of engine services"
+    }
+  }
+}

@@ -1,0 +1,946 @@
+{
+  "provider": "Qlik Sense Enterprise",
+  "providerId": "qlik-sense-enterprise",
+  "kind": "json-structure",
+  "description": "Structural overview of the Qlik Sense Enterprise API surface; extracted from openapi/.",
+  "schemaCount": 31,
+  "operationCount": 82,
+  "schemas": [
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "EntityCount",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "AboutInfo",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "EndpointDescription",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "App",
+      "type": "object",
+      "propertyCount": 21,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "AppCondensed",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "ExportResult",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Stream",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "StreamCondensed",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "User",
+      "type": "object",
+      "propertyCount": 16,
+      "required": [
+        "userId",
+        "userDirectory"
+      ]
+    },
+    {
+      "name": "UserCondensed",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Tag",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "TagCondensed",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "CustomProperty",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "CustomPropertyCondensed",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CustomPropertyValue",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ContentLibraryCondensed",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SecurityRule",
+      "type": "object",
+      "propertyCount": 16,
+      "required": [
+        "name",
+        "rule",
+        "resourceFilter",
+        "actions"
+      ]
+    },
+    {
+      "name": "SecurityRuleCondensed",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Extension",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ExtensionCondensed",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ReloadTask",
+      "type": "object",
+      "propertyCount": 16,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ReloadTaskCondensed",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "NotificationSubscription",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ChangeNotification",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ServerNodeConfiguration",
+      "type": "object",
+      "propertyCount": 17,
+      "required": []
+    },
+    {
+      "name": "ServerNodeConfigurationCondensed",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "UserDirectory",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "UserDirectoryCondensed",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "VirtualProxyConfig",
+      "type": "object",
+      "propertyCount": 26,
+      "required": []
+    },
+    {
+      "name": "VirtualProxyConfigCondensed",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/about",
+      "operationId": "getAbout",
+      "summary": "Qlik Sense Enterprise Get QRS API information",
+      "tags": [
+        "About"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/about/api/description",
+      "operationId": "getApiDescription",
+      "summary": "Qlik Sense Enterprise Get API endpoint descriptions",
+      "tags": [
+        "About"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/about/api/default",
+      "operationId": "getApiDefaults",
+      "summary": "Qlik Sense Enterprise Get default values for all entity types",
+      "tags": [
+        "About"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/about/api/enums",
+      "operationId": "getApiEnums",
+      "summary": "Qlik Sense Enterprise Get enumeration types",
+      "tags": [
+        "About"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/app",
+      "operationId": "getApps",
+      "summary": "Qlik Sense Enterprise List applications",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/app/full",
+      "operationId": "getAppsFull",
+      "summary": "Qlik Sense Enterprise List applications with full details",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/app/count",
+      "operationId": "getAppsCount",
+      "summary": "Qlik Sense Enterprise Count applications",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/app/{id}",
+      "operationId": "getApp",
+      "summary": "Qlik Sense Enterprise Get application by ID",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/app/{id}",
+      "operationId": "updateApp",
+      "summary": "Qlik Sense Enterprise Update application",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/app/{id}",
+      "operationId": "deleteApp",
+      "summary": "Qlik Sense Enterprise Delete application",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/app/import",
+      "operationId": "importApp",
+      "summary": "Qlik Sense Enterprise Import application",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/app/{id}/copy",
+      "operationId": "copyApp",
+      "summary": "Qlik Sense Enterprise Copy application",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/app/{id}/export",
+      "operationId": "exportApp",
+      "summary": "Qlik Sense Enterprise Export application",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/app/{id}/publish",
+      "operationId": "publishApp",
+      "summary": "Qlik Sense Enterprise Publish application to a stream",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/app/{id}/reload",
+      "operationId": "reloadApp",
+      "summary": "Qlik Sense Enterprise Reload application data",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/app/{id}/replace",
+      "operationId": "replaceApp",
+      "summary": "Qlik Sense Enterprise Replace application content",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/app/{id}/migrate",
+      "operationId": "migrateApp",
+      "summary": "Qlik Sense Enterprise Migrate application",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/app/hublist",
+      "operationId": "getAppHubList",
+      "summary": "Qlik Sense Enterprise Get hub app list",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/app/upload",
+      "operationId": "uploadApp",
+      "summary": "Qlik Sense Enterprise Upload application",
+      "tags": [
+        "App"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/appobject/{id}/publish",
+      "operationId": "publishAppObject",
+      "summary": "Qlik Sense Enterprise Publish application object",
+      "tags": [
+        "App Object"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/appobject/{id}/unpublish",
+      "operationId": "unpublishAppObject",
+      "summary": "Qlik Sense Enterprise Unpublish application object",
+      "tags": [
+        "App Object"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/stream",
+      "operationId": "getStreams",
+      "summary": "Qlik Sense Enterprise List streams",
+      "tags": [
+        "Stream"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/stream",
+      "operationId": "createStream",
+      "summary": "Qlik Sense Enterprise Create stream",
+      "tags": [
+        "Stream"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/stream/full",
+      "operationId": "getStreamsFull",
+      "summary": "Qlik Sense Enterprise List streams with full details",
+      "tags": [
+        "Stream"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/stream/count",
+      "operationId": "getStreamsCount",
+      "summary": "Qlik Sense Enterprise Count streams",
+      "tags": [
+        "Stream"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/stream/{id}",
+      "operationId": "getStream",
+      "summary": "Qlik Sense Enterprise Get stream by ID",
+      "tags": [
+        "Stream"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/stream/{id}",
+      "operationId": "updateStream",
+      "summary": "Qlik Sense Enterprise Update stream",
+      "tags": [
+        "Stream"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/stream/{id}",
+      "operationId": "deleteStream",
+      "summary": "Qlik Sense Enterprise Delete stream",
+      "tags": [
+        "Stream"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/user",
+      "operationId": "getUsers",
+      "summary": "Qlik Sense Enterprise List users",
+      "tags": [
+        "User"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/user/full",
+      "operationId": "getUsersFull",
+      "summary": "Qlik Sense Enterprise List users with full details",
+      "tags": [
+        "User"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/user/count",
+      "operationId": "getUsersCount",
+      "summary": "Qlik Sense Enterprise Count users",
+      "tags": [
+        "User"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/user/{id}",
+      "operationId": "getUser",
+      "summary": "Qlik Sense Enterprise Get user by ID",
+      "tags": [
+        "User"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/user/{id}",
+      "operationId": "updateUser",
+      "summary": "Qlik Sense Enterprise Update user",
+      "tags": [
+        "User"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/user/{id}",
+      "operationId": "deleteUser",
+      "summary": "Qlik Sense Enterprise Delete user",
+      "tags": [
+        "User"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/contentlibrary",
+      "operationId": "getContentLibraries",
+      "summary": "Qlik Sense Enterprise List content libraries",
+      "tags": [
+        "Content Library"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/contentlibrary/{id}/uploadfile",
+      "operationId": "uploadContentLibraryFile",
+      "summary": "Qlik Sense Enterprise Upload file to content library",
+      "tags": [
+        "Content Library"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/contentlibrary/{id}/deletecontent",
+      "operationId": "deleteContentLibraryFile",
+      "summary": "Qlik Sense Enterprise Delete file from content library",
+      "tags": [
+        "Content Library"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/customproperty",
+      "operationId": "getCustomProperties",
+      "summary": "Qlik Sense Enterprise List custom properties",
+      "tags": [
+        "Custom Property"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/customproperty",
+      "operationId": "createCustomProperty",
+      "summary": "Qlik Sense Enterprise Create custom property",
+      "tags": [
+        "Custom Property"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/customproperty/{id}",
+      "operationId": "getCustomProperty",
+      "summary": "Qlik Sense Enterprise Get custom property by ID",
+      "tags": [
+        "Custom Property"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/customproperty/{id}",
+      "operationId": "updateCustomProperty",
+      "summary": "Qlik Sense Enterprise Update custom property",
+      "tags": [
+        "Custom Property"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/customproperty/{id}",
+      "operationId": "deleteCustomProperty",
+      "summary": "Qlik Sense Enterprise Delete custom property",
+      "tags": [
+        "Custom Property"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/extension",
+      "operationId": "getExtensions",
+      "summary": "Qlik Sense Enterprise List extensions",
+      "tags": [
+        "Extension"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/extension/upload",
+      "operationId": "uploadExtension",
+      "summary": "Qlik Sense Enterprise Upload extension",
+      "tags": [
+        "Extension"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/extension/{id}",
+      "operationId": "getExtension",
+      "summary": "Qlik Sense Enterprise Get extension by ID",
+      "tags": [
+        "Extension"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/extension/{id}",
+      "operationId": "deleteExtension",
+      "summary": "Qlik Sense Enterprise Delete extension",
+      "tags": [
+        "Extension"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/extension/schema",
+      "operationId": "getExtensionSchemas",
+      "summary": "Qlik Sense Enterprise Get extension schemas",
+      "tags": [
+        "Extension"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/notification",
+      "operationId": "createNotificationSubscription",
+      "summary": "Qlik Sense Enterprise Subscribe to change notifications",
+      "tags": [
+        "Notification"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/notification",
+      "operationId": "removeNotificationSubscription",
+      "summary": "Qlik Sense Enterprise Remove change notification subscription",
+      "tags": [
+        "Notification"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/notification/changes",
+      "operationId": "getNotificationChanges",
+      "summary": "Qlik Sense Enterprise Get changes since last check",
+      "tags": [
+        "Notification"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reloadtask",
+      "operationId": "getReloadTasks",
+      "summary": "Qlik Sense Enterprise List reload tasks",
+      "tags": [
+        "Reload Task"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reloadtask",
+      "operationId": "createReloadTask",
+      "summary": "Qlik Sense Enterprise Create reload task",
+      "tags": [
+        "Reload Task"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reloadtask/{id}",
+      "operationId": "getReloadTask",
+      "summary": "Qlik Sense Enterprise Get reload task by ID",
+      "tags": [
+        "Reload Task"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/reloadtask/{id}",
+      "operationId": "updateReloadTask",
+      "summary": "Qlik Sense Enterprise Update reload task",
+      "tags": [
+        "Reload Task"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/reloadtask/{id}",
+      "operationId": "deleteReloadTask",
+      "summary": "Qlik Sense Enterprise Delete reload task",
+      "tags": [
+        "Reload Task"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/securityrule",
+      "operationId": "getSecurityRules",
+      "summary": "Qlik Sense Enterprise List security rules",
+      "tags": [
+        "Security Rule"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/securityrule",
+      "operationId": "createSecurityRule",
+      "summary": "Qlik Sense Enterprise Create security rule",
+      "tags": [
+        "Security Rule"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/securityrule/full",
+      "operationId": "getSecurityRulesFull",
+      "summary": "Qlik Sense Enterprise List security rules with full details",
+      "tags": [
+        "Security Rule"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/securityrule/{id}",
+      "operationId": "getSecurityRule",
+      "summary": "Qlik Sense Enterprise Get security rule by ID",
+      "tags": [
+        "Security Rule"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/securityrule/{id}",
+      "operationId": "updateSecurityRule",
+      "summary": "Qlik Sense Enterprise Update security rule",
+      "tags": [
+        "Security Rule"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/securityrule/{id}",
+      "operationId": "deleteSecurityRule",
+      "summary": "Qlik Sense Enterprise Delete security rule",
+      "tags": [
+        "Security Rule"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/tag",
+      "operationId": "getTags",
+      "summary": "Qlik Sense Enterprise List tags",
+      "tags": []
+    },
+    {
+      "method": "POST",
+      "path": "/tag",
+      "operationId": "createTag",
+      "summary": "Qlik Sense Enterprise Create tag",
+      "tags": []
+    },
+    {
+      "method": "GET",
+      "path": "/tag/{id}",
+      "operationId": "getTag",
+      "summary": "Qlik Sense Enterprise Get tag by ID",
+      "tags": []
+    },
+    {
+      "method": "PUT",
+      "path": "/tag/{id}",
+      "operationId": "updateTag",
+      "summary": "Qlik Sense Enterprise Update tag",
+      "tags": []
+    },
+    {
+      "method": "DELETE",
+      "path": "/tag/{id}",
+      "operationId": "deleteTag",
+      "summary": "Qlik Sense Enterprise Delete tag",
+      "tags": []
+    },
+    {
+      "method": "POST",
+      "path": "/task/{id}/start",
+      "operationId": "startTask",
+      "summary": "Qlik Sense Enterprise Start task",
+      "tags": [
+        "Task"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/task/{id}/start/synchronous",
+      "operationId": "startTaskSync",
+      "summary": "Qlik Sense Enterprise Start task synchronously",
+      "tags": [
+        "Task"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/task/start/many",
+      "operationId": "startManyTasks",
+      "summary": "Qlik Sense Enterprise Start multiple tasks",
+      "tags": [
+        "Task"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/task/{id}/stop",
+      "operationId": "stopTask",
+      "summary": "Qlik Sense Enterprise Stop task",
+      "tags": [
+        "Task"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servernodeconfiguration",
+      "operationId": "getServerNodeConfigurations",
+      "summary": "Qlik Sense Enterprise List server node configurations",
+      "tags": [
+        "Server Node"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servernodeconfiguration/{id}",
+      "operationId": "getServerNodeConfiguration",
+      "summary": "Qlik Sense Enterprise Get server node configuration by ID",
+      "tags": [
+        "Server Node"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/servernodeconfiguration/local",
+      "operationId": "getLocalServerNodeConfiguration",
+      "summary": "Qlik Sense Enterprise Get local server node configuration",
+      "tags": [
+        "Server Node"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/userdirectory",
+      "operationId": "getUserDirectories",
+      "summary": "Qlik Sense Enterprise List user directories",
+      "tags": [
+        "User Directory"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/userdirectory/{id}",
+      "operationId": "getUserDirectory",
+      "summary": "Qlik Sense Enterprise Get user directory by ID",
+      "tags": [
+        "User Directory"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/userdirectory/{id}",
+      "operationId": "deleteUserDirectory",
+      "summary": "Qlik Sense Enterprise Delete user directory and users",
+      "tags": [
+        "User Directory"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/userdirectory/syncuserdirectories",
+      "operationId": "syncUserDirectories",
+      "summary": "Qlik Sense Enterprise Synchronize user directories",
+      "tags": [
+        "User Directory"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/virtualproxyconfig",
+      "operationId": "getVirtualProxyConfigs",
+      "summary": "Qlik Sense Enterprise List virtual proxy configurations",
+      "tags": [
+        "Virtual Proxy"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/virtualproxyconfig",
+      "operationId": "createVirtualProxyConfig",
+      "summary": "Qlik Sense Enterprise Create virtual proxy configuration",
+      "tags": [
+        "Virtual Proxy"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/virtualproxyconfig/{id}",
+      "operationId": "getVirtualProxyConfig",
+      "summary": "Qlik Sense Enterprise Get virtual proxy configuration by ID",
+      "tags": [
+        "Virtual Proxy"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/virtualproxyconfig/{id}",
+      "operationId": "updateVirtualProxyConfig",
+      "summary": "Qlik Sense Enterprise Update virtual proxy configuration",
+      "tags": [
+        "Virtual Proxy"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/cache",
+      "operationId": "invalidateCache",
+      "summary": "Qlik Sense Enterprise Invalidate cache",
+      "tags": [
+        "About"
+      ]
+    }
+  ]
+}

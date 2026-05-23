@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OdagLink",
+  "title": "OdagLink",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique link identifier"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the link was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the link was last modified"
+    },
+    "name": {
+      "type": "string",
+      "description": "Navigation link name"
+    },
+    "selectionAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the selection app"
+    },
+    "templateAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the template app"
+    },
+    "properties": {
+      "$ref": "#/components/schemas/OdagLinkProperties"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner user identifier"
+    },
+    "status": {
+      "type": "string",
+      "description": "Link status"
+    }
+  }
+}

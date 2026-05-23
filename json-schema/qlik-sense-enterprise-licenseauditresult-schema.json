@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LicenseAuditResult",
+  "title": "LicenseAuditResult",
+  "type": "object",
+  "properties": {
+    "matrix": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Audit result matrix showing rule evaluations"
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  }
+}

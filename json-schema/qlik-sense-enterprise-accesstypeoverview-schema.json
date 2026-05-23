@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessTypeOverview",
+  "title": "AccessTypeOverview",
+  "type": "object",
+  "properties": {
+    "professional": {
+      "$ref": "#/components/schemas/AccessTypeSummary"
+    },
+    "analyzer": {
+      "$ref": "#/components/schemas/AccessTypeSummary"
+    },
+    "userAccess": {
+      "$ref": "#/components/schemas/AccessTypeSummary"
+    },
+    "loginAccess": {
+      "$ref": "#/components/schemas/AccessTypeSummary"
+    }
+  }
+}

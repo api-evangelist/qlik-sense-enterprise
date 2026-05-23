@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserDirectoryCondensed",
+  "title": "UserDirectoryCondensed",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "configured": {
+      "type": "boolean"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

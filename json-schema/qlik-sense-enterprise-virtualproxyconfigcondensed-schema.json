@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VirtualProxyConfigCondensed",
+  "title": "VirtualProxyConfigCondensed",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "prefix": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OdagRequest",
+  "title": "OdagRequest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique request identifier"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the request was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the request was last modified"
+    },
+    "linkId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the navigation link"
+    },
+    "selectionAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the selection app"
+    },
+    "templateAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the template app"
+    },
+    "generatedAppId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the generated app (available after generation completes)"
+    },
+    "generatedAppName": {
+      "type": "string",
+      "description": "Name of the generated app"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner user identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "loading",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "description": "Current status of the ODAG request"
+    },
+    "statusMessage": {
+      "type": "string",
+      "description": "Detailed status message"
+    },
+    "selectionState": {
+      "type": "object",
+      "description": "Captured selection state from the selection app"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomPropertyCondensed",
+  "title": "CustomPropertyCondensed",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "valueType": {
+      "type": "string"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

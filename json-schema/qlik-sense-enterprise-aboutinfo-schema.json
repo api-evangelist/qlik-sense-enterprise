@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AboutInfo",
+  "title": "AboutInfo",
+  "type": "object",
+  "properties": {
+    "buildVersion": {
+      "type": "string",
+      "description": "QRS API build version"
+    },
+    "buildDate": {
+      "type": "string",
+      "description": "QRS API build date"
+    },
+    "databaseProvider": {
+      "type": "string",
+      "description": "Database provider used by the repository"
+    },
+    "nodeType": {
+      "type": "integer",
+      "description": "Type of the node (0=Central, 1=Non-central)"
+    },
+    "sharedPersistence": {
+      "type": "boolean",
+      "description": "Whether shared persistence is configured"
+    },
+    "requiresBootstrap": {
+      "type": "boolean",
+      "description": "Whether the node requires bootstrapping"
+    }
+  }
+}

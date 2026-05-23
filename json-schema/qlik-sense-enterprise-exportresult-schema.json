@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExportResult",
+  "title": "ExportResult",
+  "type": "object",
+  "properties": {
+    "exportToken": {
+      "type": "string",
+      "description": "Token to use for downloading the exported file"
+    },
+    "downloadPath": {
+      "type": "string",
+      "description": "Relative path to download the exported application file"
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  }
+}

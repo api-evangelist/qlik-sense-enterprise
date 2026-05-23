@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserDirectory",
+  "title": "UserDirectory",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "User directory name"
+    },
+    "type": {
+      "type": "string",
+      "description": "User directory connector type (e.g., Active Directory, LDAP)"
+    },
+    "configured": {
+      "type": "boolean",
+      "description": "Whether the user directory is fully configured"
+    },
+    "operational": {
+      "type": "object",
+      "properties": {
+        "lastSync": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "syncStatus": {
+          "type": "integer"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TagCondensed"
+      }
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomPropertyValue"
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  }
+}

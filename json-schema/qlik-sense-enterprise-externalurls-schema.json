@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExternalUrls",
+  "title": "ExternalUrls",
+  "type": "object",
+  "properties": {
+    "hubUri": {
+      "type": "string",
+      "format": "uri",
+      "description": "External URL to access the Qlik Sense Hub"
+    },
+    "qmcUri": {
+      "type": "string",
+      "format": "uri",
+      "description": "External URL to access the Qlik Management Console"
+    },
+    "apiUri": {
+      "type": "string",
+      "format": "uri",
+      "description": "External URL for API access"
+    },
+    "resultUri": {
+      "type": "string",
+      "format": "uri",
+      "description": "External URL for result access"
+    }
+  }
+}

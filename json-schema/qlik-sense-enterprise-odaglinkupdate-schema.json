@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OdagLinkUpdate",
+  "title": "OdagLinkUpdate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Updated navigation link name"
+    },
+    "properties": {
+      "$ref": "#/components/schemas/OdagLinkProperties"
+    }
+  }
+}

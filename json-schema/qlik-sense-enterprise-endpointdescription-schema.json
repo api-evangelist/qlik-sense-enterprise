@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EndpointDescription",
+  "title": "EndpointDescription",
+  "type": "object",
+  "properties": {
+    "method": {
+      "type": "string",
+      "description": "HTTP method"
+    },
+    "path": {
+      "type": "string",
+      "description": "Endpoint path"
+    },
+    "description": {
+      "type": "string",
+      "description": "Endpoint description"
+    }
+  }
+}

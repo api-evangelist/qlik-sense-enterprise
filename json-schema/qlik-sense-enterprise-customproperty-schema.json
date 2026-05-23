@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomProperty",
+  "title": "CustomProperty",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Custom property name"
+    },
+    "valueType": {
+      "type": "string",
+      "description": "Value type for the custom property"
+    },
+    "choiceValues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Allowed values for this custom property"
+    },
+    "objectTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Entity types this custom property can be applied to (e.g., App, Stream, User)"
+    },
+    "description": {
+      "type": "string"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

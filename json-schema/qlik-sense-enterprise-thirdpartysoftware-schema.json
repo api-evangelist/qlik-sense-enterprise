@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ThirdPartySoftware",
+  "title": "ThirdPartySoftware",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the third-party software"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the third-party software"
+    },
+    "license": {
+      "type": "string",
+      "description": "License type or identifier"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for the third-party software project or license"
+    }
+  }
+}

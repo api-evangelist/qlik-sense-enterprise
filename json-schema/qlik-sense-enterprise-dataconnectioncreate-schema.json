@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataConnectionCreate",
+  "title": "DataConnectionCreate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Data connection name"
+    },
+    "connectionstring": {
+      "type": "string",
+      "description": "Connection string for the data source"
+    },
+    "type": {
+      "type": "string",
+      "description": "Connection provider type"
+    },
+    "logOn": {
+      "type": "integer",
+      "description": "Logon mode"
+    },
+    "architecture": {
+      "type": "integer",
+      "description": "Connection architecture"
+    },
+    "username": {
+      "type": "string",
+      "description": "Username for connection authentication"
+    },
+    "password": {
+      "type": "string",
+      "description": "Password for connection authentication"
+    }
+  },
+  "required": [
+    "name",
+    "connectionstring",
+    "type"
+  ]
+}

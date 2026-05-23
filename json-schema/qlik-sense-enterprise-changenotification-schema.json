@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChangeNotification",
+  "title": "ChangeNotification",
+  "type": "object",
+  "properties": {
+    "objectType": {
+      "type": "string",
+      "description": "Type of entity that changed"
+    },
+    "objectID": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the entity that changed"
+    },
+    "changedProperties": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of properties that were modified"
+    },
+    "engineID": {
+      "type": "string"
+    },
+    "changeType": {
+      "type": "string",
+      "description": "Type of change (Add, Update, Delete)"
+    }
+  }
+}

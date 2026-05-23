@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VirtualProxyConfig",
+  "title": "VirtualProxyConfig",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Virtual proxy prefix used in URLs"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the virtual proxy"
+    },
+    "authenticationModuleRedirectUri": {
+      "type": "string",
+      "format": "uri",
+      "description": "URI to redirect to for authentication"
+    },
+    "sessionModuleBaseUri": {
+      "type": "string",
+      "format": "uri",
+      "description": "Base URI of the session module"
+    },
+    "loadBalancingModuleBaseUri": {
+      "type": "string",
+      "format": "uri",
+      "description": "Base URI of the load balancing module"
+    },
+    "authenticationMethod": {
+      "type": "integer",
+      "description": "Authentication method (0=Ticket, 1=HeaderStaticUserDirectory, 2=HeaderDynamicUserDirectory, 3=SAML, 4=JWT)"
+    },
+    "headerAuthenticationMode": {
+      "type": "integer",
+      "description": "Header authentication mode"
+    },
+    "headerAuthenticationHeaderName": {
+      "type": "string",
+      "description": "Name of the header used for header-based authentication"
+    },
+    "headerAuthenticationStaticUserDirectory": {
+      "type": "string"
+    },
+    "headerAuthenticationDynamicUserDirectory": {
+      "type": "string"
+    },
+    "anonymousAccessMode": {
+      "type": "integer",
+      "description": "Anonymous access mode (0=None, 1=AnonymousAllowed)"
+    },
+    "windowsAuthenticationEnabledDevicePattern": {
+      "type": "string"
+    },
+    "sessionCookieHeaderName": {
+      "type": "string",
+      "description": "Name of the session cookie header"
+    },
+    "sessionCookieDomain": {
+      "type": "string"
+    },
+    "additionalResponseHeaders": {
+      "type": "string"
+    },
+    "sessionInactivityTimeout": {
+      "type": "integer",
+      "description": "Session inactivity timeout in minutes"
+    },
+    "extendedSecurityEnvironment": {
+      "type": "boolean"
+    },
+    "websocketCrossOriginWhiteList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "defaultVirtualProxy": {
+      "type": "boolean",
+      "description": "Whether this is the default virtual proxy"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TagCondensed"
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  }
+}

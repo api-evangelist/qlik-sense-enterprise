@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LicenseAuditRequest",
+  "title": "LicenseAuditRequest",
+  "type": "object",
+  "properties": {
+    "resourceType": {
+      "type": "string",
+      "description": "Type of resource to audit"
+    },
+    "resourceFilter": {
+      "type": "string",
+      "description": "Filter for resources"
+    },
+    "userFilter": {
+      "type": "string",
+      "description": "Filter for users"
+    }
+  }
+}

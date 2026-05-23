@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SystemInfo",
+  "title": "SystemInfo",
+  "type": "object",
+  "properties": {
+    "productName": {
+      "type": "string",
+      "description": "Name of the Qlik Sense product"
+    },
+    "version": {
+      "type": "string",
+      "description": "Full product version string"
+    },
+    "releaseLabel": {
+      "type": "string",
+      "description": "Release label (e.g., November 2025)"
+    },
+    "deploymentType": {
+      "type": "string",
+      "description": "Type of deployment"
+    },
+    "nodeType": {
+      "type": "string",
+      "description": "Type of the node providing this information (Central or Non-central)"
+    },
+    "isMultiNode": {
+      "type": "boolean",
+      "description": "Whether this is a multi-node deployment"
+    },
+    "isCentral": {
+      "type": "boolean",
+      "description": "Whether this node is the central node"
+    },
+    "siteIdentifier": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier of the Qlik Sense site"
+    }
+  }
+}

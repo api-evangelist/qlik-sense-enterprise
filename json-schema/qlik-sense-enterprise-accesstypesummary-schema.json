@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessTypeSummary",
+  "title": "AccessTypeSummary",
+  "type": "object",
+  "properties": {
+    "total": {
+      "type": "integer",
+      "description": "Total licenses of this type"
+    },
+    "allocated": {
+      "type": "integer",
+      "description": "Currently allocated licenses"
+    },
+    "available": {
+      "type": "integer",
+      "description": "Currently available licenses"
+    },
+    "quarantined": {
+      "type": "integer",
+      "description": "Licenses in quarantine period"
+    },
+    "excess": {
+      "type": "integer",
+      "description": "Excess allocations beyond total"
+    }
+  }
+}

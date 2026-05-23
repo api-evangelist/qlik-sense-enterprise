@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SessionAttribute",
+  "title": "SessionAttribute",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Attribute name"
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Attribute values"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EngineServicePriority",
+  "title": "EngineServicePriority",
+  "type": "object",
+  "properties": {
+    "engineId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Engine service identifier"
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Hostname of the engine node"
+    },
+    "port": {
+      "type": "integer",
+      "description": "Port of the engine service"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Priority ranking (lower is higher priority)"
+    },
+    "isAppOpen": {
+      "type": "boolean",
+      "description": "Whether the app is already open on this engine"
+    }
+  }
+}

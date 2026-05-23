@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataConnection",
+  "title": "DataConnection",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the connection was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the connection was last modified"
+    },
+    "modifiedByUserName": {
+      "type": "string",
+      "description": "Username of the last modifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Data connection name"
+    },
+    "connectionstring": {
+      "type": "string",
+      "description": "Connection string for the data source including provider-specific parameters"
+    },
+    "type": {
+      "type": "string",
+      "description": "Connection provider type (e.g., QvOdbcConnectorPackage.exe, QvOleDbConnectorPackage.exe, folder, web)"
+    },
+    "logOn": {
+      "type": "integer",
+      "description": "Logon mode (0=ServiceUser, 1=CurrentUser)"
+    },
+    "architecture": {
+      "type": "integer",
+      "description": "Connection architecture (0=Undefined, 1=x86, 2=x64)"
+    },
+    "engineObjectId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Engine object identifier for the connection"
+    },
+    "username": {
+      "type": "string",
+      "description": "Username for connection authentication"
+    },
+    "password": {
+      "type": "string",
+      "description": "Password for connection authentication (write-only, not returned in responses)",
+      "writeOnly": true
+    },
+    "owner": {
+      "$ref": "#/components/schemas/UserCondensed"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TagCondensed"
+      }
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomPropertyValue"
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string",
+      "description": "Schema path for this entity type"
+    }
+  },
+  "required": [
+    "name",
+    "connectionstring",
+    "type"
+  ]
+}

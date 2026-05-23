@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppCondensed",
+  "title": "AppCondensed",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "appId": {
+      "type": "string"
+    },
+    "publishTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published": {
+      "type": "boolean"
+    },
+    "stream": {
+      "$ref": "#/components/schemas/StreamCondensed"
+    },
+    "savedInProductVersion": {
+      "type": "string"
+    },
+    "migrationHash": {
+      "type": "string"
+    },
+    "availabilityStatus": {
+      "type": "integer"
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

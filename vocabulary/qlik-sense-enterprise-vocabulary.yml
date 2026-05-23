@@ -1,0 +1,35 @@
+name: Qlik Sense Enterprise Domain Vocabulary
+provider: Qlik Sense Enterprise
+providerId: qlik-sense-enterprise
+description: Tag-derived vocabulary for the Qlik Sense Enterprise API surface; sourced from openapi/ tags.
+terms:
+- term: About
+  description: Retrieve API metadata, version, and schema information
+- term: App
+  description: Manage Qlik Sense applications including import, export, copy, publish, and reload
+- term: App Object
+  description: Manage application objects such as sheets, stories, and bookmarks
+- term: Content Library
+  description: Manage shared and app-specific content libraries
+- term: Custom Property
+  description: Manage custom properties for tagging and categorizing entities
+- term: Extension
+  description: Manage visualization extensions
+- term: Notification
+  description: Subscribe to and manage change notifications
+- term: Reload Task
+  description: Manage and execute reload tasks
+- term: Security Rule
+  description: Manage security rules and access control
+- term: Server Node
+  description: Manage server nodes in a multi-node deployment
+- term: Stream
+  description: Manage streams for organizing and distributing apps
+- term: Task
+  description: Start and stop tasks including reload and external program tasks
+- term: User
+  description: Manage users and user directory synchronization
+- term: User Directory
+  description: Manage user directory connectors and synchronization settings
+- term: Virtual Proxy
+  description: Manage virtual proxy configurations

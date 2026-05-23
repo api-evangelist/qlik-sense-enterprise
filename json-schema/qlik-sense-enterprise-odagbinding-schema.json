@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OdagBinding",
+  "title": "OdagBinding",
+  "type": "object",
+  "properties": {
+    "selectionField": {
+      "type": "string",
+      "description": "Field name in the selection app"
+    },
+    "templateField": {
+      "type": "string",
+      "description": "Field name in the template app"
+    },
+    "selectionType": {
+      "type": "string",
+      "description": "Type of selection binding"
+    }
+  }
+}

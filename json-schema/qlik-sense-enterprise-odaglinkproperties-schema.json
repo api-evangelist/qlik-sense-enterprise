@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OdagLinkProperties",
+  "title": "OdagLinkProperties",
+  "type": "object",
+  "properties": {
+    "rowEstExpr": {
+      "type": "string",
+      "description": "Expression for estimating the number of rows in the generated app"
+    },
+    "bindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/OdagBinding"
+      },
+      "description": "Field bindings between selection and template apps"
+    },
+    "genAppAccessible": {
+      "type": "boolean",
+      "description": "Whether generated apps are accessible to users"
+    },
+    "publishTo": {
+      "type": "string",
+      "description": "Stream ID to publish generated apps to"
+    },
+    "retention": {
+      "type": "object",
+      "properties": {
+        "maxAge": {
+          "type": "integer",
+          "description": "Maximum age in minutes before a generated app is removed"
+        },
+        "maxCount": {
+          "type": "integer",
+          "description": "Maximum number of generated apps to retain per user"
+        }
+      }
+    }
+  }
+}

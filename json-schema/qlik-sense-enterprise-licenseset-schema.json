@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LicenseSet",
+  "title": "LicenseSet",
+  "type": "object",
+  "properties": {
+    "serial": {
+      "type": "string",
+      "description": "License serial number"
+    },
+    "control": {
+      "type": "string",
+      "description": "License control number"
+    },
+    "name": {
+      "type": "string",
+      "description": "License holder name"
+    },
+    "organization": {
+      "type": "string",
+      "description": "License holder organization"
+    },
+    "lef": {
+      "type": "string",
+      "description": "License enablement file content"
+    }
+  },
+  "required": [
+    "serial",
+    "control"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/License",
+  "title": "License",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "License name"
+    },
+    "serial": {
+      "type": "string",
+      "description": "License serial number"
+    },
+    "key": {
+      "type": "string",
+      "description": "License key"
+    },
+    "lef": {
+      "type": "string",
+      "description": "License enablement file content"
+    },
+    "isExpired": {
+      "type": "boolean",
+      "description": "Whether the license has expired"
+    },
+    "expiredReason": {
+      "type": "string",
+      "description": "Reason for license expiration"
+    },
+    "isBlacklisted": {
+      "type": "boolean",
+      "description": "Whether the license serial is blacklisted"
+    },
+    "isInvalid": {
+      "type": "boolean",
+      "description": "Whether the license is invalid"
+    },
+    "productLevel": {
+      "type": "string",
+      "description": "Product level (e.g., Professional, Enterprise)"
+    },
+    "numberOfCores": {
+      "type": "integer",
+      "description": "Number of cores allowed by the license"
+    },
+    "timelimited": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time limit for the license"
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  }
+}

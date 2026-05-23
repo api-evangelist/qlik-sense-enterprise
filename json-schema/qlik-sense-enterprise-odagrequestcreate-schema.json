@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/OdagRequestCreate",
+  "title": "OdagRequestCreate",
+  "type": "object",
+  "properties": {
+    "selectionState": {
+      "type": "object",
+      "description": "Current selection state from the selection app to use for generating the on-demand app"
+    }
+  },
+  "required": [
+    "selectionState"
+  ]
+}

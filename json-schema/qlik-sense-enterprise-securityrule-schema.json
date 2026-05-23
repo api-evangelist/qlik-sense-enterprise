@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SecurityRule",
+  "title": "SecurityRule",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Security rule name"
+    },
+    "category": {
+      "type": "string",
+      "description": "Rule category (Security, Sync)"
+    },
+    "type": {
+      "type": "integer",
+      "description": "Rule type"
+    },
+    "rule": {
+      "type": "string",
+      "description": "Rule definition expression using Qlik Sense security rule syntax"
+    },
+    "resourceFilter": {
+      "type": "string",
+      "description": "Resource filter expression that defines which resources the rule applies to"
+    },
+    "actions": {
+      "type": "integer",
+      "description": "Bitwise combination of allowed actions (1=Create, 2=Read, 4=Update, 8=Delete, 16=Export, 32=Publish, 64=Change owner, 128=Change role)"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Rule description or comment"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether the rule is disabled"
+    },
+    "ruleContext": {
+      "type": "integer",
+      "description": "Context in which the rule applies (0=Both, 1=QMC only, 2=Hub only)"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TagCondensed"
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "rule",
+    "resourceFilter",
+    "actions"
+  ]
+}

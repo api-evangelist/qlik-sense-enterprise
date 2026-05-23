@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccessTypeInfo",
+  "title": "AccessTypeInfo",
+  "type": "object",
+  "properties": {
+    "totalTokens": {
+      "type": "integer",
+      "description": "Total number of tokens available"
+    },
+    "availableTokens": {
+      "type": "integer",
+      "description": "Number of tokens currently available"
+    },
+    "usedTokens": {
+      "type": "integer",
+      "description": "Number of tokens in use"
+    },
+    "totalProfessional": {
+      "type": "integer",
+      "description": "Total professional access licenses"
+    },
+    "usedProfessional": {
+      "type": "integer",
+      "description": "Professional licenses in use"
+    },
+    "totalAnalyzer": {
+      "type": "integer",
+      "description": "Total analyzer access licenses"
+    },
+    "usedAnalyzer": {
+      "type": "integer",
+      "description": "Analyzer licenses in use"
+    }
+  }
+}

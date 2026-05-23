@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReloadTask",
+  "title": "ReloadTask",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Reload task name"
+    },
+    "taskType": {
+      "type": "integer",
+      "description": "Task type identifier"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the task is enabled"
+    },
+    "taskSessionTimeout": {
+      "type": "integer",
+      "description": "Task session timeout in minutes"
+    },
+    "maxRetries": {
+      "type": "integer",
+      "description": "Maximum number of retry attempts on failure"
+    },
+    "app": {
+      "$ref": "#/components/schemas/AppCondensed"
+    },
+    "isManuallyTriggered": {
+      "type": "boolean",
+      "description": "Whether the task requires manual triggering"
+    },
+    "operational": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "lastExecutionResult": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "executingNodeName": {
+              "type": "string"
+            },
+            "status": {
+              "type": "integer",
+              "description": "Execution status (0=NeverStarted, 1=Triggered, 2=Started, 3=Queued, 4=AbortInitiated, 5=Aborting, 6=Aborted, 7=FinishedSuccess, 8=FinishedFail, 9=Skipped, 10=Retry, 11=Error, 12=Reset)"
+            },
+            "startTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "stopTime": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "duration": {
+              "type": "integer",
+              "description": "Execution duration in milliseconds"
+            }
+          }
+        },
+        "nextExecution": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TagCondensed"
+      }
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomPropertyValue"
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

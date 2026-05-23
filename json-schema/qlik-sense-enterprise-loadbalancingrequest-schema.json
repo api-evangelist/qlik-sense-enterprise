@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LoadBalancingRequest",
+  "title": "LoadBalancingRequest",
+  "type": "object",
+  "properties": {
+    "userDirectory": {
+      "type": "string",
+      "description": "User directory name"
+    },
+    "userId": {
+      "type": "string",
+      "description": "User identifier"
+    },
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Application ID to load balance for"
+    }
+  },
+  "required": [
+    "userDirectory",
+    "userId",
+    "appId"
+  ]
+}

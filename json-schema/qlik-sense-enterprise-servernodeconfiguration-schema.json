@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ServerNodeConfiguration",
+  "title": "ServerNodeConfiguration",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedByUserName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Node name"
+    },
+    "hostName": {
+      "type": "string",
+      "description": "Hostname of the server node"
+    },
+    "isCentral": {
+      "type": "boolean",
+      "description": "Whether this is the central node"
+    },
+    "nodePurpose": {
+      "type": "integer",
+      "description": "Purpose of the node (0=Production, 1=Development, 2=Both)"
+    },
+    "engineEnabled": {
+      "type": "boolean"
+    },
+    "proxyEnabled": {
+      "type": "boolean"
+    },
+    "schedulerEnabled": {
+      "type": "boolean"
+    },
+    "printingEnabled": {
+      "type": "boolean"
+    },
+    "failoverCandidate": {
+      "type": "boolean",
+      "description": "Whether this node can serve as a failover candidate"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TagCondensed"
+      }
+    },
+    "customProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CustomPropertyValue"
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaPath": {
+      "type": "string"
+    }
+  }
+}

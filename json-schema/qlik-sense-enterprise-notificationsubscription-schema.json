@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/NotificationSubscription",
+  "title": "NotificationSubscription",
+  "type": "object",
+  "properties": {
+    "handle": {
+      "type": "string",
+      "description": "Subscription handle for managing the subscription"
+    },
+    "type": {
+      "type": "string",
+      "description": "Entity type to subscribe to notifications for"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Optional specific entity ID to subscribe to"
+    },
+    "condition": {
+      "type": "string",
+      "description": "Optional filter condition for the subscription"
+    }
+  }
+}
