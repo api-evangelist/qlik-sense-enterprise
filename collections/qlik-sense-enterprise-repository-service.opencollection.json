@@ -1,0 +1,2408 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Repository Service API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "About",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get QRS API information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/about",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves basic information about the QRS API including the build version and the database identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get API endpoint descriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/about/api/description",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "extended",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return extended descriptions"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Filter endpoints by HTTP method"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieves a description of all available QRS API endpoints, optionally filtered by HTTP method and in an extended format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get default values for all entity types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/about/api/default",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "listentries",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include list entries in the defaults"
+              }
+            ]
+          },
+          "docs": "Retrieves the default values for all entity types in the QRS, optionally including list entries."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get enumeration types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/about/api/enums",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves all enumeration types used across the QRS API, including their allowed values."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Invalidate cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/cache",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Invalidates the QRS cache, forcing fresh data retrieval on subsequent requests. Use with caution as this impacts performance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/app",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Qlik Sense applications in condensed format, optionally filtered by a query expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List applications with full details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/app/full",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Qlik Sense applications in full format including all properties, owner, stream, tags, and custom properties."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Count applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/app/count",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              }
+            ]
+          },
+          "docs": "Returns the number of applications matching an optional filter expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get application by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/app/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a single Qlik Sense application by its unique identifier, returned in full format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/app/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Qlik Sense application. The complete entity including the unchanged modifiedDate must be provided in the request body."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/app/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a Qlik Sense application from the repository."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Import application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/app/import",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name for the imported application"
+              },
+              {
+                "name": "keepdata",
+                "value": "",
+                "type": "query",
+                "description": "Whether to keep the data in the imported app"
+              },
+              {
+                "name": "excludeconnections",
+                "value": "",
+                "type": "query",
+                "description": "Whether to exclude data connections from the imported app"
+              }
+            ]
+          },
+          "docs": "Imports a Qlik Sense application from a QVF file. The file is uploaded as the request body and the application name and other attributes are provided as query parameters."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Copy application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/app/:id/copy",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name for the copied application"
+              },
+              {
+                "name": "includecustomproperties",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include custom properties in the copy"
+              }
+            ]
+          },
+          "docs": "Creates a copy of an existing Qlik Sense application. Requires Read and Duplicate permissions on the source application."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Export application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/app/:id/export",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "skipdata",
+                "value": "",
+                "type": "query",
+                "description": "Whether to exclude data from the exported file"
+              }
+            ]
+          },
+          "docs": "Exports a Qlik Sense application as a QVF file. Returns a download path that can be used to retrieve the exported file."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Publish application to a stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/app/:id/publish",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "ID of the stream to publish the application to"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Optional new name for the published application"
+              }
+            ]
+          },
+          "docs": "Publishes a Qlik Sense application to a specified stream, making it available to users with access to that stream."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Reload application data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/app/:id/reload",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Triggers a reload of the application data from its connected data sources."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Replace application content",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/app/:id/replace",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "ID of the source application whose content replaces the target"
+              }
+            ]
+          },
+          "docs": "Replaces the content of a published application with the content from another application, preserving the published app's identity and stream membership."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Migrate application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/app/:id/migrate",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Migrates an application to the current Qlik Sense version format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get hub app list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/app/hublist",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of applications available in the hub for the authenticated user, including published and personal apps."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Upload application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/app/upload",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name for the uploaded application"
+              },
+              {
+                "name": "keepdata",
+                "value": "",
+                "type": "query",
+                "description": "Whether to keep the data in the uploaded app"
+              }
+            ]
+          },
+          "docs": "Uploads a Qlik Sense application from a QVF binary file to the repository."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App Object",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Publish application object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/appobject/:id/publish",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Publishes an application object such as a sheet or story, making it available to all users who can access the application."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Unpublish application object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/appobject/:id/unpublish",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Unpublishes an application object, reverting it to private status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Stream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/stream",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all streams in condensed format, optionally filtered by a query expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/stream",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new stream for organizing and distributing published applications."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List streams with full details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/stream/full",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all streams in full format including owner, custom properties, and tags."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Count streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/stream/count",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              }
+            ]
+          },
+          "docs": "Returns the number of streams matching an optional filter expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get stream by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/stream/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a single stream by its unique identifier in full format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/stream/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing stream. The complete entity with unchanged modifiedDate must be provided."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/stream/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a stream. Published apps in the stream are unpublished."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/user",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all users in condensed format, optionally filtered by a query expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List users with full details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/user/full",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all users in full format including roles, attributes, custom properties, and tags."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Count users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/user/count",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              }
+            ]
+          },
+          "docs": "Returns the number of users matching an optional filter expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get user by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/user/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a single user by its unique identifier in full format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/user/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing user. The complete entity with unchanged modifiedDate must be provided."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/user/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a user from the repository."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Content Library",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List content libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/contentlibrary",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all content libraries in condensed format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Upload file to content library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/contentlibrary/:id/uploadfile",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "externalpath",
+                "value": "",
+                "type": "query",
+                "description": "Relative path within the content library for the uploaded file"
+              },
+              {
+                "name": "overwrite",
+                "value": "",
+                "type": "query",
+                "description": "Whether to overwrite an existing file"
+              }
+            ]
+          },
+          "docs": "Uploads a file to a content library. The file is sent as the request body and the relative path within the library is specified as a query parameter."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete file from content library",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/contentlibrary/:id/deletecontent",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "externalpath",
+                "value": "",
+                "type": "query",
+                "description": "Relative path of the file to delete within the content library"
+              }
+            ]
+          },
+          "docs": "Deletes a file from a content library by its external path."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Property",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List custom properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/customproperty",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all custom properties in condensed format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create custom property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/customproperty",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom property definition with a set of allowed values and applicable object types."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get custom property by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/customproperty/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single custom property by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update custom property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/customproperty/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing custom property definition."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete custom property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/customproperty/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a custom property definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Extension",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List extensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/extension",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all installed visualization extensions."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Upload extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/extension/upload",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Uploads and installs a visualization extension from a ZIP file."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get extension by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/extension/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single extension by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/extension/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently removes a visualization extension."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get extension schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/extension/schema",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves the JSON schemas used to validate extension definitions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Subscribe to change notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/notification",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a subscription to receive notifications when changes occur to specified entity types or individual entities."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Remove change notification subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/notification",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "handle",
+                "value": "",
+                "type": "query",
+                "description": "Handle identifying the notification subscription to remove"
+              }
+            ]
+          },
+          "docs": "Removes an existing notification subscription. The subscription handle is passed as a query parameter."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get changes since last check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/notification/changes",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp to retrieve changes since"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of changes that have occurred since the last time this endpoint was called for the given subscription."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reload Task",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List reload tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/reloadtask",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all reload tasks in condensed format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create reload task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/reloadtask",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new reload task for an application."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get reload task by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/reloadtask/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single reload task by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update reload task",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/reloadtask/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing reload task configuration."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete reload task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/reloadtask/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a reload task."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Security Rule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List security rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/securityrule",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all security rules in condensed format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create security rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/securityrule",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new security rule that controls access to Qlik Sense resources based on conditions."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List security rules with full details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/securityrule/full",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all security rules in full format including the rule definition, actions, and resource filter."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get security rule by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/securityrule/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single security rule by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update security rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/securityrule/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing security rule definition."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete security rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/securityrule/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a security rule."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/tag",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all tags in condensed format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/tag",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new tag for categorizing entities."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get tag by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/tag/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single tag by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/tag/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing tag."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/tag/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a tag."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Task",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Start task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/task/:id/start",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Starts the execution of a task by its ID. This is a synchronous operation that waits for the task to be triggered."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Start task synchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/task/:id/start/synchronous",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Starts the execution of a task synchronously, waiting for the task to reach an end state before returning."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Start multiple tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/task/start/many",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts the execution of multiple tasks by their IDs."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Stop task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/task/:id/stop",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Stops the execution of a running task."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Server Node",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List server node configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/servernodeconfiguration",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all server node configurations in condensed format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get server node configuration by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/servernodeconfiguration/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single server node configuration by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get local server node configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/servernodeconfiguration/local",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves the server node configuration for the local node."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Directory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List user directories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/userdirectory",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all configured user directory connectors."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get user directory by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/userdirectory/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single user directory connector by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete user directory and users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/userdirectory/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Deletes a user directory connector and optionally all users imported from it."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Synchronize user directories",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/userdirectory/syncuserdirectories",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a synchronization of all or specified user directories, importing updated user and group information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Virtual Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List virtual proxy configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/virtualproxyconfig",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all virtual proxy configurations."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create virtual proxy configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/virtualproxyconfig",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new virtual proxy configuration with authentication and session handling settings."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get virtual proxy configuration by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/virtualproxyconfig/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single virtual proxy configuration by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update virtual proxy configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/virtualproxyconfig/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing virtual proxy configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

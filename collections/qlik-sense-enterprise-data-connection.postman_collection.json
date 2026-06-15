@@ -1,0 +1,1750 @@
+{
+  "item": [
+    {
+      "id": "27cae775-45b0-406c-b35a-ac3b5910e9f3",
+      "name": "Data Connection",
+      "description": {
+        "content": "Manage data connections used by Qlik Sense applications for loading data from external sources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d2304a48-100b-4af8-a7fb-bd86caaf2782",
+          "name": "Qlik Sense Enterprise List data connections",
+          "request": {
+            "name": "Qlik Sense Enterprise List data connections",
+            "description": {
+              "content": "Retrieves a list of all data connections in condensed format, optionally filtered by a query expression. Returns connections accessible to the authenticated user based on security rules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataconnection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter expression using syntax: property operator value (e.g., name eq 'MyConnection')"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderby",
+                  "value": "<string>",
+                  "description": "Property name to order results by"
+                },
+                {
+                  "disabled": false,
+                  "key": "privileges",
+                  "value": "false",
+                  "description": "Whether to append privilege information to returned entities"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9fbde8d-95f1-4366-88e1-8e581542ea75",
+              "name": "List of data connections returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"ed18aaee-ac83-a1c3-a712-a8921ed6a43c\",\n    \"name\": \"string\",\n    \"connectionstring\": \"string\",\n    \"type\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"be2be9fe-9fab-47fe-c92b-1cc3db353da7\",\n    \"name\": \"string\",\n    \"connectionstring\": \"string\",\n    \"type\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95b12388-e8f7-40e3-830f-fadfef31350e",
+              "name": "Authentication failed or Xrfkey missing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8d07db5-ec9c-4389-ad3f-0fc69236b0a3",
+          "name": "Qlik Sense Enterprise Create data connection",
+          "request": {
+            "name": "Qlik Sense Enterprise Create data connection",
+            "description": {
+              "content": "Creates a new data connection for use by Qlik Sense applications. The connection defines the provider type, connection string, and credentials for accessing an external data source.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataconnection"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82956246-ccc6-4ba3-b711-39fc1c70b506",
+              "name": "Data connection created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"connectionstring\": \"string\",\n  \"type\": \"string\",\n  \"id\": \"3f9791a5-3966-dbe2-73af-7acd57f0b4e4\",\n  \"createdDate\": \"1991-05-14T23:47:14.636Z\",\n  \"modifiedDate\": \"1979-03-13T21:13:56.277Z\",\n  \"modifiedByUserName\": \"string\",\n  \"logOn\": 6714,\n  \"architecture\": 2512,\n  \"engineObjectId\": \"54ad79e9-95c4-f021-58fb-25f1e0192dae\",\n  \"username\": \"string\",\n  \"owner\": {\n    \"id\": \"43be5b04-e9b5-6d04-9fb3-ce11bb5d5016\",\n    \"name\": \"string\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"343db625-da8b-0f39-788f-610b6eb6fbc8\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"d363d140-0713-9975-0244-990e7193e67e\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"f911e3ca-5218-7a1a-7506-78698ce66fe4\",\n      \"definition\": {\n        \"id\": \"81f5d5b6-57c9-c1d2-d0d7-9fea670c8036\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"1c71819b-e649-803a-7459-95434922866b\",\n      \"definition\": {\n        \"id\": \"7e837cf5-6e31-5a11-9408-da5be8b86069\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56c167b6-1049-4918-ae39-4f262022d014",
+              "name": "Invalid request parameters or body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1464d6ab-e04c-475a-8743-11d13cdaeb3b",
+              "name": "Authentication failed or Xrfkey missing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1739409-44c5-424b-b19a-2cd9e016a87f",
+          "name": "Qlik Sense Enterprise List data connections with full details",
+          "request": {
+            "name": "Qlik Sense Enterprise List data connections with full details",
+            "description": {
+              "content": "Retrieves a list of all data connections in full format including owner, tags, custom properties, and connection string details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataconnection",
+                "full"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter expression using syntax: property operator value (e.g., name eq 'MyConnection')"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderby",
+                  "value": "<string>",
+                  "description": "Property name to order results by"
+                },
+                {
+                  "disabled": false,
+                  "key": "privileges",
+                  "value": "false",
+                  "description": "Whether to append privilege information to returned entities"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df461b78-fae6-4bf7-afe6-7b62a7bdf5de",
+              "name": "Full list of data connections returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    "full"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"connectionstring\": \"string\",\n    \"type\": \"string\",\n    \"id\": \"7947b054-de3e-52f2-f4d8-06c5c8c817f7\",\n    \"createdDate\": \"2004-02-01T20:46:20.769Z\",\n    \"modifiedDate\": \"1985-05-03T06:19:43.498Z\",\n    \"modifiedByUserName\": \"string\",\n    \"logOn\": 1693,\n    \"architecture\": 3536,\n    \"engineObjectId\": \"07ba73c2-0818-89fc-a704-353c63c39065\",\n    \"username\": \"string\",\n    \"owner\": {\n      \"id\": \"dee6c0fc-5aee-8d9b-e3ac-c9355f8db2ed\",\n      \"name\": \"string\",\n      \"userDirectory\": \"string\",\n      \"userId\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"tags\": [\n      {\n        \"id\": \"6cb9da78-1367-075c-ce88-c1180d29260f\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"id\": \"27843071-82d4-7457-8cf3-3311632117c0\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"customProperties\": [\n      {\n        \"id\": \"279fd5a9-eb70-fc4d-35a4-7cc0d53f96d2\",\n        \"definition\": {\n          \"id\": \"06a2cecc-a035-22c0-eb09-173d91bfb71f\",\n          \"name\": \"string\"\n        },\n        \"value\": \"string\"\n      },\n      {\n        \"id\": \"640cdaa1-ba39-817b-8a07-7b64b2d44d57\",\n        \"definition\": {\n          \"id\": \"b4a8d0bc-2f95-3989-1d25-4719f1175b19\",\n          \"name\": \"string\"\n        },\n        \"value\": \"string\"\n      }\n    ],\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"schemaPath\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"connectionstring\": \"string\",\n    \"type\": \"string\",\n    \"id\": \"b08d028d-d271-329d-0f87-bfa982487bfd\",\n    \"createdDate\": \"1969-03-03T08:24:20.436Z\",\n    \"modifiedDate\": \"2017-02-08T00:52:23.712Z\",\n    \"modifiedByUserName\": \"string\",\n    \"logOn\": 7440,\n    \"architecture\": 7997,\n    \"engineObjectId\": \"7470cb59-781f-9399-bace-0584e63b2f8d\",\n    \"username\": \"string\",\n    \"owner\": {\n      \"id\": \"b65c157a-64c3-6900-2909-d3c3cb00cd5d\",\n      \"name\": \"string\",\n      \"userDirectory\": \"string\",\n      \"userId\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"tags\": [\n      {\n        \"id\": \"83da1693-c75e-826b-1276-7c353bc770e3\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"id\": \"d27833ec-b82f-c6f3-7e88-56f49801c008\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"customProperties\": [\n      {\n        \"id\": \"3dabe34b-ac2a-f38d-fa4c-e7ddec54f47b\",\n        \"definition\": {\n          \"id\": \"78613d72-92b9-b6a9-7e3a-61f7f769a03d\",\n          \"name\": \"string\"\n        },\n        \"value\": \"string\"\n      },\n      {\n        \"id\": \"732e6893-76f8-1c43-137e-5d8ebf07812f\",\n        \"definition\": {\n          \"id\": \"4d8b626a-f88f-d668-a0ae-74e39611002f\",\n          \"name\": \"string\"\n        },\n        \"value\": \"string\"\n      }\n    ],\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"schemaPath\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e395d2d8-2f71-46ec-91c7-d50367d792c1",
+              "name": "Authentication failed or Xrfkey missing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    "full"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a0f9a96-b313-4547-b29a-08d67f219d82",
+          "name": "Qlik Sense Enterprise Count data connections",
+          "request": {
+            "name": "Qlik Sense Enterprise Count data connections",
+            "description": {
+              "content": "Returns the number of data connections matching an optional filter expression.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataconnection",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter expression using syntax: property operator value (e.g., name eq 'MyConnection')"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06c6eb3e-1ee4-4100-a35e-05016e413703",
+              "name": "Data connection count returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": 2697\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96f5b419-6ab5-491a-bdfb-de85f7f0a92e",
+              "name": "Authentication failed or Xrfkey missing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25515970-12b2-4df6-9327-d907328a5f2a",
+          "name": "Qlik Sense Enterprise Get data connection by ID",
+          "request": {
+            "name": "Qlik Sense Enterprise Get data connection by ID",
+            "description": {
+              "content": "Retrieves a single data connection by its unique identifier in full format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataconnection",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                },
+                {
+                  "disabled": false,
+                  "key": "privileges",
+                  "value": "false",
+                  "description": "Whether to append privilege information to returned entities"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier (GUID) of the data connection"
+                },
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c54eff2-4a65-4d21-abc5-4f7fccabf1ab",
+              "name": "Data connection returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"connectionstring\": \"string\",\n  \"type\": \"string\",\n  \"id\": \"3f9791a5-3966-dbe2-73af-7acd57f0b4e4\",\n  \"createdDate\": \"1991-05-14T23:47:14.636Z\",\n  \"modifiedDate\": \"1979-03-13T21:13:56.277Z\",\n  \"modifiedByUserName\": \"string\",\n  \"logOn\": 6714,\n  \"architecture\": 2512,\n  \"engineObjectId\": \"54ad79e9-95c4-f021-58fb-25f1e0192dae\",\n  \"username\": \"string\",\n  \"owner\": {\n    \"id\": \"43be5b04-e9b5-6d04-9fb3-ce11bb5d5016\",\n    \"name\": \"string\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"343db625-da8b-0f39-788f-610b6eb6fbc8\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"d363d140-0713-9975-0244-990e7193e67e\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"f911e3ca-5218-7a1a-7506-78698ce66fe4\",\n      \"definition\": {\n        \"id\": \"81f5d5b6-57c9-c1d2-d0d7-9fea670c8036\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"1c71819b-e649-803a-7459-95434922866b\",\n      \"definition\": {\n        \"id\": \"7e837cf5-6e31-5a11-9408-da5be8b86069\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa1c5597-48b4-479e-91b9-1a8e6b93659e",
+              "name": "Authentication failed or Xrfkey missing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "086a6b71-7e2a-4f54-aa92-277e6335022b",
+              "name": "The requested data connection was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "384f26e2-9528-4994-8a36-a43de7f1bf97",
+          "name": "Qlik Sense Enterprise Update data connection",
+          "request": {
+            "name": "Qlik Sense Enterprise Update data connection",
+            "description": {
+              "content": "Updates an existing data connection. The complete entity including the unchanged modifiedDate must be provided in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataconnection",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier (GUID) of the data connection"
+                },
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"engineObjectId\": \"<uuid>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"userDirectory\": \"<string>\",\n    \"userId\": \"<string>\",\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"<uuid>\",\n      \"definition\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\"\n      },\n      \"value\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"definition\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\"\n      },\n      \"value\": \"<string>\"\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d3bd51a-210c-4591-a657-faba8cecec13",
+              "name": "Data connection updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"engineObjectId\": \"<uuid>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"owner\": {\n    \"id\": \"bde809a6-ab9b-74bc-2b9d-2c3322c4d692\",\n    \"name\": \"string\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"ad037c06-f0c2-2476-3739-4159ba49e08b\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"143aa1aa-e1e0-5c15-b91d-09b6e58906c8\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"72fa461c-fdbc-43d9-3cc1-b3904b750544\",\n      \"definition\": {\n        \"id\": \"87fb697a-b6e2-bd1f-81dd-4c325c3bcdc9\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"c20e995b-f7e8-5c5a-5e16-920ed4d73646\",\n      \"definition\": {\n        \"id\": \"de4b5229-e795-bf78-ca24-d4d82ebe0e76\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"connectionstring\": \"string\",\n  \"type\": \"string\",\n  \"id\": \"3f9791a5-3966-dbe2-73af-7acd57f0b4e4\",\n  \"createdDate\": \"1991-05-14T23:47:14.636Z\",\n  \"modifiedDate\": \"1979-03-13T21:13:56.277Z\",\n  \"modifiedByUserName\": \"string\",\n  \"logOn\": 6714,\n  \"architecture\": 2512,\n  \"engineObjectId\": \"54ad79e9-95c4-f021-58fb-25f1e0192dae\",\n  \"username\": \"string\",\n  \"owner\": {\n    \"id\": \"43be5b04-e9b5-6d04-9fb3-ce11bb5d5016\",\n    \"name\": \"string\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"343db625-da8b-0f39-788f-610b6eb6fbc8\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"d363d140-0713-9975-0244-990e7193e67e\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"f911e3ca-5218-7a1a-7506-78698ce66fe4\",\n      \"definition\": {\n        \"id\": \"81f5d5b6-57c9-c1d2-d0d7-9fea670c8036\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"1c71819b-e649-803a-7459-95434922866b\",\n      \"definition\": {\n        \"id\": \"7e837cf5-6e31-5a11-9408-da5be8b86069\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28a82126-ac80-44a0-ac99-e46b908e0bfb",
+              "name": "Authentication failed or Xrfkey missing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"engineObjectId\": \"<uuid>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"owner\": {\n    \"id\": \"bde809a6-ab9b-74bc-2b9d-2c3322c4d692\",\n    \"name\": \"string\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"ad037c06-f0c2-2476-3739-4159ba49e08b\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"143aa1aa-e1e0-5c15-b91d-09b6e58906c8\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"72fa461c-fdbc-43d9-3cc1-b3904b750544\",\n      \"definition\": {\n        \"id\": \"87fb697a-b6e2-bd1f-81dd-4c325c3bcdc9\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"c20e995b-f7e8-5c5a-5e16-920ed4d73646\",\n      \"definition\": {\n        \"id\": \"de4b5229-e795-bf78-ca24-d4d82ebe0e76\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "314fd55a-d8cf-4249-b643-388f361db060",
+              "name": "The requested data connection was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"engineObjectId\": \"<uuid>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"owner\": {\n    \"id\": \"bde809a6-ab9b-74bc-2b9d-2c3322c4d692\",\n    \"name\": \"string\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"ad037c06-f0c2-2476-3739-4159ba49e08b\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"143aa1aa-e1e0-5c15-b91d-09b6e58906c8\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"72fa461c-fdbc-43d9-3cc1-b3904b750544\",\n      \"definition\": {\n        \"id\": \"87fb697a-b6e2-bd1f-81dd-4c325c3bcdc9\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"c20e995b-f7e8-5c5a-5e16-920ed4d73646\",\n      \"definition\": {\n        \"id\": \"de4b5229-e795-bf78-ca24-d4d82ebe0e76\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f8c807a-70d1-41da-8fd1-a591307ea03f",
+              "name": "Update conflict due to concurrent modification.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"connectionstring\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"logOn\": \"<integer>\",\n  \"architecture\": \"<integer>\",\n  \"engineObjectId\": \"<uuid>\",\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"owner\": {\n    \"id\": \"bde809a6-ab9b-74bc-2b9d-2c3322c4d692\",\n    \"name\": \"string\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"id\": \"ad037c06-f0c2-2476-3739-4159ba49e08b\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"143aa1aa-e1e0-5c15-b91d-09b6e58906c8\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"customProperties\": [\n    {\n      \"id\": \"72fa461c-fdbc-43d9-3cc1-b3904b750544\",\n      \"definition\": {\n        \"id\": \"87fb697a-b6e2-bd1f-81dd-4c325c3bcdc9\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"c20e995b-f7e8-5c5a-5e16-920ed4d73646\",\n      \"definition\": {\n        \"id\": \"de4b5229-e795-bf78-ca24-d4d82ebe0e76\",\n        \"name\": \"string\"\n      },\n      \"value\": \"string\"\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46a1f373-9630-42dc-8292-a0cfb6929c03",
+          "name": "Qlik Sense Enterprise Delete data connection",
+          "request": {
+            "name": "Qlik Sense Enterprise Delete data connection",
+            "description": {
+              "content": "Permanently deletes a data connection from the repository. Applications referencing this connection will no longer be able to load data from it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataconnection",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier (GUID) of the data connection"
+                },
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d2b2d25-ce65-4d68-b450-d85be79339d3",
+              "name": "Data connection deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9b5592b-b2b8-48ac-856f-3d860ad09736",
+              "name": "Authentication failed or Xrfkey missing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca446a85-0fc0-47f9-91f5-13eb98e2fc99",
+              "name": "The requested data connection was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataconnection",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the data connection"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Qlik Sense server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{server}}:4242/qrs",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Qlik-Xrfkey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "404f3263-5f46-44f9-b0b9-1914922417b2",
+    "name": "Qlik Sense Enterprise Qlik Sense Data Connection API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API endpoints within the Qlik Sense Repository Service for managing data connections and data sources used by Qlik Sense applications. Data connections define how Qlik Sense connects to external databases, files, and web services for data loading and real-time queries.\n\nContact Support:\n Name: Qlik Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense ODAG Service API",
+    "version": "3.4.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "About",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get ODAG service information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/odag/v1/about",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves basic information about the ODAG service including its version and stability index."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List navigation links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/odag/v1/links",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of ODAG navigation links and their properties. Each link connects a selection app to a template app for on-demand app generation."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create navigation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/odag/v1/links",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new navigation link that enables ODAG navigation from a designated selection app to a template app. Links created via the API do not appear in the list of available navigation links in the UI."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get navigation link by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/odag/v1/links/:linkId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ]
+          },
+          "docs": "Retrieves a single ODAG navigation link by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update navigation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}/api/odag/v1/links/:linkId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing ODAG navigation link configuration."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete navigation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}/api/odag/v1/links/:linkId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ]
+          },
+          "docs": "Deletes an ODAG navigation link. Generated apps associated with the link are not affected."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List requests for a navigation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/odag/v1/links/:linkId/requests",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ]
+          },
+          "docs": "Returns a list of ODAG requests for a specific link, optionally matching a set of conditions defined by additional parameters."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Submit app generation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/odag/v1/links/:linkId/requests",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new app generation request to the ODAG service. The request is queued after validating the user selection state against the navigation link property settings and rules."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List all ODAG requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/odag/v1/requests",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Returns a list of ODAG request objects matching the combination of search criteria provided as query parameters."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get ODAG request by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/odag/v1/requests/:requestId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ODAG request"
+              }
+            ]
+          },
+          "docs": "Retrieves a single ODAG request by its unique identifier, including the current status and generated app information."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update ODAG request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}/api/odag/v1/requests/:requestId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ODAG request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing ODAG request, such as changing its status or metadata."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Remove generated app from request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}/api/odag/v1/requests/:requestId/app",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ODAG request"
+              }
+            ]
+          },
+          "docs": "Removes the generated app associated with an ODAG request. The app is deleted from the repository."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Reload generated app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/odag/v1/requests/:requestId/reloadApp",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ODAG request"
+              }
+            ]
+          },
+          "docs": "Triggers a reload of the generated app associated with an ODAG request, refreshing its data from the template and selection state."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Rename generated app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/odag/v1/requests/:requestId/renameApp",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the ODAG request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames the generated app associated with an ODAG request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

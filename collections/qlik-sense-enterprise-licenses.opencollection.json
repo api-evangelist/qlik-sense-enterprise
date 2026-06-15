@@ -1,0 +1,541 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Licenses API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "License",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get license information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves the current license information for the Qlik Sense site, including the license key, serial number, product level, and expiration details."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Set license",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/license",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets or updates the license for the Qlik Sense site using a license key and control number."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Download license enablement file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/download",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Downloads the license enablement file (LEF) for the current Qlik Sense license. The LEF contains the license key and configuration details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Type",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get access type information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/accesstypeinfo",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves information about available access types and their current allocation status, including the total number of tokens or user allocations available and in use."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get access type overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/accesstypeoverview",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves an overview of all access types showing total, allocated, available, quarantined, and excess counts for each type."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List professional access allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/professionalaccesstype",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all professional access type allocations, showing which users have been assigned professional access licenses."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Allocate professional access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/license/professionalaccesstype",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocates a professional access license to a specified user."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get professional access allocation by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/professionalaccesstype/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single professional access type allocation by its ID."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Deallocate professional access",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/license/professionalaccesstype/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Removes a professional access license allocation from a user. The user enters a quarantine period before the license becomes available for reassignment."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List analyzer access allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/analyzeraccesstype",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all analyzer access type allocations, showing which users have been assigned analyzer access licenses."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Allocate analyzer access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/license/analyzeraccesstype",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocates an analyzer access license to a specified user."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get analyzer access allocation by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/analyzeraccesstype/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single analyzer access type allocation by its ID."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Deallocate analyzer access",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/license/analyzeraccesstype/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Removes an analyzer access license allocation from a user."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List login access allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/loginaccesstype",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all login (token-based) access type allocations."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List user access allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/license/useraccesstype",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all named user access type allocations."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Allocate user access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/license/useraccesstype",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocates a named user access license to a specified user."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Deallocate user access",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/license/useraccesstype/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Removes a named user access license allocation from a user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "License Rule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List license rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/licenserule",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all license rules that control automatic license assignment based on user properties and conditions."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List license rules with full details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/licenserule/full",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all license rules in full format including rule definitions and actions."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get license rule by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/licenserule/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Retrieves a single license rule by its unique identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "License Audit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Audit license rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/licenserule/audit",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates license rules to determine which access types would be assigned to users based on the current rule configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,292 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Proxy Service API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "About",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get QPS API information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4243/qps/about",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves basic information about the Qlik Sense Proxy Service API, including the build version."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get complete endpoint description",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4243/qps/about/description",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves a complete list of all endpoints available in the QPS API. This serves as the API discovery mechanism."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List all sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4243/qps/session",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all active user sessions managed by the proxy service. Each session represents an authenticated user connection."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get session by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4243/qps/session/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique session identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific user session by its unique session identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4243/qps/session/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique session identifier to delete"
+              }
+            ]
+          },
+          "docs": "Performs a teardown of all connections for a session. The Session module is notified, and the logout module is also notified if there are no more sessions for the user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get sessions for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4243/qps/user/:userDirectory/:userId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "userDirectory",
+                "value": "",
+                "type": "path",
+                "description": "Name of the user directory the user belongs to"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User identifier within the user directory"
+              }
+            ]
+          },
+          "docs": "Retrieves all active sessions for a specific user identified by their user directory and user ID."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete all sessions for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4243/qps/user/:userDirectory/:userId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "userDirectory",
+                "value": "",
+                "type": "path",
+                "description": "Name of the user directory"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User identifier within the user directory"
+              }
+            ]
+          },
+          "docs": "Deletes all active sessions for a specific user, effectively logging the user out of all Qlik Sense connections."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get session count for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4243/qps/user/:userDirectory/:userId/session-count",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "userDirectory",
+                "value": "",
+                "type": "path",
+                "description": "Name of the user directory"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User identifier within the user directory"
+              }
+            ]
+          },
+          "docs": "Returns the number of active sessions for a specific user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Load Balancing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Prioritize engine services for load balancing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4243/qps/loadbalancing/prioritize",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Prioritizes Qlik Sense Engine Services (QES) for a user and an app. The Load Balancing module makes load balancing decisions for engine sessions to distribute load across available engine services."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Check proxy service health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4243/qps/health"
+          },
+          "docs": "Returns the health status of the Qlik Sense Proxy Service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense About Service API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get system information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/systeminfo",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves system information about the Qlik Sense site including the product name, version, release label, and deployment details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Components",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get installed components",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/components",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all components installed in the Qlik Sense system, including their names, versions, and status information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "External URLs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get external URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/externalurls",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves the external URL configuration for the Qlik Sense site, including the hub URI, QMC URI, and API endpoint URIs that are accessible from outside the deployment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Third Party",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get third-party software information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/thirdparty",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves information about third-party software components included in the Qlik Sense installation, including their names, versions, and license information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

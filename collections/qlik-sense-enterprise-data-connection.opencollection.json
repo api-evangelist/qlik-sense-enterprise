@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Data Connection API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Connection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List data connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/dataconnection",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using syntax: property operator value (e.g., name eq 'MyConnection')"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to returned entities"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all data connections in condensed format, optionally filtered by a query expression. Returns connections accessible to the authenticated user based on security rules."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create data connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:4242/qrs/dataconnection",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data connection for use by Qlik Sense applications. The connection defines the provider type, connection string, and credentials for accessing an external data source."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List data connections with full details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/dataconnection/full",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using syntax: property operator value (e.g., name eq 'MyConnection')"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to returned entities"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all data connections in full format including owner, tags, custom properties, and connection string details."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Count data connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/dataconnection/count",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using syntax: property operator value (e.g., name eq 'MyConnection')"
+              }
+            ]
+          },
+          "docs": "Returns the number of data connections matching an optional filter expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get data connection by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:4242/qrs/dataconnection/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the data connection"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to returned entities"
+              }
+            ]
+          },
+          "docs": "Retrieves a single data connection by its unique identifier in full format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update data connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:4242/qrs/dataconnection/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the data connection"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing data connection. The complete entity including the unchanged modifiedDate must be provided in the request body."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete data connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:4242/qrs/dataconnection/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the data connection"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a data connection from the repository. Applications referencing this connection will no longer be able to load data from it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
