@@ -159,7 +159,7 @@ common:
     url: https://www.qlik.com/
   - type: Login
     url: https://qlikid.qlik.com/
-  - type: SignUp
+  - type: Signup
     url: https://register.myqlik.qlik.com/
   - type: Integrations
     url: https://www.qlik.com/us/partners

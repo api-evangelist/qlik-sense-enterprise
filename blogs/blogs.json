@@ -3,19 +3,12 @@
   "feeds": [
     {
       "source": "https://www.qlik.com/blog",
-      "feed_url": "https://www.qlik.com/blog",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://qlik.dev/toolkits/qlik-api/authentication/",
-      "feed_url": "https://qlik.dev/toolkits/qlik-api/authentication/",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
-  "post_count": 0
+  "fetched": "2026-06-27T13:03:48Z",
+  "post_count": 0,
+  "agent_pulled": "2026-06-27"
 }
