@@ -1,0 +1,41 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/qlik-sense-enterprise-about-service-openapi.yml, openapi/qlik-sense-enterprise-data-connection-openapi.yml,
+  openapi/qlik-sense-enterprise-licenses-openapi.yml, openapi/qlik-sense-enterprise-odag-service-openapi.yml,
+  openapi/qlik-sense-enterprise-proxy-service-openapi.yml, openapi/qlik-sense-enterprise-repository-service-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - mutualTLS
+  api_key_in:
+  - header
+schemes:
+- name: xrfkey
+  type: apiKey
+  in: header
+  parameter: X-Qlik-Xrfkey
+  description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and
+    must match the Xrfkey query parameter.
+  sources:
+  - openapi/qlik-sense-enterprise-about-service-openapi.yml
+  - openapi/qlik-sense-enterprise-data-connection-openapi.yml
+  - openapi/qlik-sense-enterprise-licenses-openapi.yml
+  - openapi/qlik-sense-enterprise-odag-service-openapi.yml
+  - openapi/qlik-sense-enterprise-proxy-service-openapi.yml
+  - openapi/qlik-sense-enterprise-repository-service-openapi.yml
+- name: certificate
+  type: mutualTLS
+  description: Client certificate authentication for direct QRS access on port 4242.
+  sources:
+  - openapi/qlik-sense-enterprise-data-connection-openapi.yml
+  - openapi/qlik-sense-enterprise-licenses-openapi.yml
+  - openapi/qlik-sense-enterprise-proxy-service-openapi.yml
+  - openapi/qlik-sense-enterprise-repository-service-openapi.yml
+- name: windowsAuth
+  type: http
+  scheme: negotiate
+  description: Windows Integrated Authentication (NTLM/Kerberos) used when connecting via the
+    Qlik Sense Proxy Service.
+  sources:
+  - openapi/qlik-sense-enterprise-repository-service-openapi.yml

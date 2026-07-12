@@ -133,6 +133,10 @@ apis:
       - type: Documentation
         url: https://help.qlik.com/en-US/sense-developer/APIs/CapabilityAPIs/index.html
 common:
+  - type: DomainSecurity
+    url: security/qlik-sense-enterprise-domain-security.yml
+  - type: Authentication
+    url: authentication/qlik-sense-enterprise-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/qlik
   - type: Portal
