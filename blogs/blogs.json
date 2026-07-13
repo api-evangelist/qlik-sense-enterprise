@@ -2,13 +2,14 @@
   "repo": "qlik-sense-enterprise",
   "feeds": [
     {
-      "source": "https://www.qlik.com/blog",
-      "feed_url": "",
+      "source": "https://qlik.dev/toolkits/qlik-api/authentication/",
+      "feed_url": "https://qlik.dev/toolkits/qlik-api/authentication/",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
-  "fetched": "2026-06-27T13:03:48Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0,
-  "agent_pulled": "2026-06-27"
+  "agent_pulled": "2026-07-04"
 }
