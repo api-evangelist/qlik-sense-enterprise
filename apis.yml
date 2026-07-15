@@ -133,6 +133,8 @@ apis:
       - type: Documentation
         url: https://help.qlik.com/en-US/sense-developer/APIs/CapabilityAPIs/index.html
 common:
+  - type: AgenticAccess
+    url: agentic-access/qlik-sense-enterprise-agentic-access.yml
   - type: DomainSecurity
     url: security/qlik-sense-enterprise-domain-security.yml
   - type: Authentication
