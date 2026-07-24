@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Task API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Task
+  description: Start and stop tasks including reload and external program tasks
+paths:
+  /task/{id}/start:
+    post:
+      operationId: startTask
+      summary: Qlik Sense Enterprise Start task
+      description: Starts the execution of a task by its ID. This is a synchronous operation that waits for the task to be triggered.
+      tags:
+      - Task
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Task started successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /task/{id}/start/synchronous:
+    post:
+      operationId: startTaskSync
+      summary: Qlik Sense Enterprise Start task synchronously
+      description: Starts the execution of a task synchronously, waiting for the task to reach an end state before returning.
+      tags:
+      - Task
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Task completed successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /task/start/many:
+    post:
+      operationId: startManyTasks
+      summary: Qlik Sense Enterprise Start multiple tasks
+      description: Starts the execution of multiple tasks by their IDs.
+      tags:
+      - Task
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+              description: Array of task IDs to start
+      responses:
+        '204':
+          description: Tasks started successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /task/{id}/stop:
+    post:
+      operationId: stopTask
+      summary: Qlik Sense Enterprise Stop task
+      description: Stops the execution of a running task.
+      tags:
+      - Task
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Task stopped successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

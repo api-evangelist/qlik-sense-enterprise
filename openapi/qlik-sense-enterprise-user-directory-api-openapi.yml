@@ -1,0 +1,276 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About User Directory API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: User Directory
+  description: Manage user directory connectors and synchronization settings
+paths:
+  /userdirectory:
+    get:
+      operationId: getUserDirectories
+      summary: Qlik Sense Enterprise List user directories
+      description: Retrieves a list of all configured user directory connectors.
+      tags:
+      - User Directory
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: User directories returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDirectoryCondensed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /userdirectory/{id}:
+    get:
+      operationId: getUserDirectory
+      summary: Qlik Sense Enterprise Get user directory by ID
+      description: Retrieves a single user directory connector by its unique identifier.
+      tags:
+      - User Directory
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: User directory returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDirectory'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteUserDirectory
+      summary: Qlik Sense Enterprise Delete user directory and users
+      description: Deletes a user directory connector and optionally all users imported from it.
+      tags:
+      - User Directory
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: User directory deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /userdirectory/syncuserdirectories:
+    post:
+      operationId: syncUserDirectories
+      summary: Qlik Sense Enterprise Synchronize user directories
+      description: Triggers a synchronization of all or specified user directories, importing updated user and group information.
+      tags:
+      - User Directory
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+              description: Array of user directory IDs to synchronize
+      responses:
+        '204':
+          description: Synchronization started successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    UserDirectory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: User directory name
+        type:
+          type: string
+          description: User directory connector type (e.g., Active Directory, LDAP)
+        configured:
+          type: boolean
+          description: Whether the user directory is fully configured
+        operational:
+          type: object
+          properties:
+            lastSync:
+              type: string
+              format: date-time
+            syncStatus:
+              type: integer
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagCondensed'
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomPropertyValue'
+        privileges:
+          type: array
+          items:
+            type: string
+        schemaPath:
+          type: string
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    UserDirectoryCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+        configured:
+          type: boolean
+        privileges:
+          type: array
+          items:
+            type: string
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

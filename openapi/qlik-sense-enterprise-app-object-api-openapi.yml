@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About App Object API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: App Object
+  description: Manage application objects such as sheets, stories, and bookmarks
+paths:
+  /appobject/{id}/publish:
+    put:
+      operationId: publishAppObject
+      summary: Qlik Sense Enterprise Publish application object
+      description: Publishes an application object such as a sheet or story, making it available to all users who can access the application.
+      tags:
+      - App Object
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Application object published successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /appobject/{id}/unpublish:
+    put:
+      operationId: unpublishAppObject
+      summary: Qlik Sense Enterprise Unpublish application object
+      description: Unpublishes an application object, reverting it to private status.
+      tags:
+      - App Object
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Application object unpublished successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

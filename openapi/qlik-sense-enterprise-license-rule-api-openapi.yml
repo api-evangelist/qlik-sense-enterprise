@@ -1,0 +1,181 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About License Rule API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: License Rule
+  description: Manage license rules that control automatic license assignment
+paths:
+  /licenserule:
+    get:
+      operationId: getLicenseRules
+      summary: Qlik Sense Enterprise List license rules
+      description: Retrieves a list of all license rules that control automatic license assignment based on user properties and conditions.
+      tags:
+      - License Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: License rules returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LicenseRule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /licenserule/full:
+    get:
+      operationId: getLicenseRulesFull
+      summary: Qlik Sense Enterprise List license rules with full details
+      description: Retrieves a list of all license rules in full format including rule definitions and actions.
+      tags:
+      - License Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Full license rules returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LicenseRule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /licenserule/{id}:
+    get:
+      operationId: getLicenseRule
+      summary: Qlik Sense Enterprise Get license rule by ID
+      description: Retrieves a single license rule by its unique identifier.
+      tags:
+      - License Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: License rule returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseRule'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: Filter expression
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    LicenseRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: License rule name
+        category:
+          type: string
+          description: Rule category
+        type:
+          type: integer
+          description: Rule type
+        rule:
+          type: string
+          description: Rule definition expression
+        resourceFilter:
+          type: string
+          description: Resource filter expression
+        actions:
+          type: integer
+          description: Allowed actions (bitwise)
+        comment:
+          type: string
+          description: Rule description
+        disabled:
+          type: boolean
+          description: Whether the rule is disabled
+        schemaPath:
+          type: string
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

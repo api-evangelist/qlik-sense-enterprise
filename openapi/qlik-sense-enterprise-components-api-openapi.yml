@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Components API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Components
+  description: Retrieve information about installed components
+paths:
+  /components:
+    get:
+      operationId: getComponents
+      summary: Qlik Sense Enterprise Get installed components
+      description: Retrieves a list of all components installed in the Qlik Sense system, including their names, versions, and status information.
+      tags:
+      - Components
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Component list returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Component'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  schemas:
+    Component:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Component name
+        version:
+          type: string
+          description: Component version
+        status:
+          type: string
+          description: Component status
+        hostName:
+          type: string
+          description: Hostname where the component is installed
+        serviceType:
+          type: string
+          description: Type of service (e.g., Engine, Proxy, Repository, Scheduler)
+        serviceState:
+          type: integer
+          description: Numeric state of the service (0=Initializing, 1=CertificatesNotInstalled, 2=Running, 3=Disabled, 4=Error)
+        uri:
+          type: string
+          format: uri
+          description: URI of the component service
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

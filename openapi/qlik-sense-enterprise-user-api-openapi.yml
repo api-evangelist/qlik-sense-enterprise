@@ -1,0 +1,502 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About User API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: User
+  description: Manage proxy sessions by user identity
+paths:
+  /user/{userDirectory}/{userId}:
+    get:
+      operationId: getUserSessions
+      summary: Qlik Sense Enterprise Get sessions for a user
+      description: Retrieves all active sessions for a specific user identified by their user directory and user ID.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: userDirectory
+        in: path
+        required: true
+        description: Name of the user directory the user belongs to
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        description: User identifier within the user directory
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User sessions returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteUserSessions
+      summary: Qlik Sense Enterprise Delete all sessions for a user
+      description: Deletes all active sessions for a specific user, effectively logging the user out of all Qlik Sense connections.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: userDirectory
+        in: path
+        required: true
+        description: Name of the user directory
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        description: User identifier within the user directory
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User sessions deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user/{userDirectory}/{userId}/session-count:
+    get:
+      operationId: getUserSessionCount
+      summary: Qlik Sense Enterprise Get session count for a user
+      description: Returns the number of active sessions for a specific user.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: userDirectory
+        in: path
+        required: true
+        description: Name of the user directory
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        description: User identifier within the user directory
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Session count returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: integer
+                    description: Number of active sessions
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /user:
+    get:
+      operationId: getUsers
+      summary: Qlik Sense Enterprise List users
+      description: Retrieves a list of all users in condensed format, optionally filtered by a query expression.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/OrderByParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: List of users returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCondensed'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /user/full:
+    get:
+      operationId: getUsersFull
+      summary: Qlik Sense Enterprise List users with full details
+      description: Retrieves a list of all users in full format including roles, attributes, custom properties, and tags.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/OrderByParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: Full list of users returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /user/count:
+    get:
+      operationId: getUsersCount
+      summary: Qlik Sense Enterprise Count users
+      description: Returns the number of users matching an optional filter expression.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: User count returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityCount'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /user/{id}:
+    get:
+      operationId: getUser
+      summary: Qlik Sense Enterprise Get user by ID
+      description: Retrieves a single user by its unique identifier in full format.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: User returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+    put:
+      operationId: updateUser
+      summary: Qlik Sense Enterprise Update user
+      description: Updates an existing user. The complete entity with unchanged modifiedDate must be provided.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound_2'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+    delete:
+      operationId: deleteUser
+      summary: Qlik Sense Enterprise Delete user
+      description: Permanently deletes a user from the repository.
+      tags:
+      - User
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+components:
+  responses:
+    Unauthorized_2:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound_2:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    UserCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        userDirectory:
+          type: string
+        userId:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    SessionAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Attribute name
+        values:
+          type: array
+          items:
+            type: string
+          description: Attribute values
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: Display name of the user
+        userDirectory:
+          type: string
+          description: Name of the user directory the user belongs to
+        userId:
+          type: string
+          description: Unique user ID within the user directory
+        roles:
+          type: array
+          items:
+            type: string
+          description: Roles assigned to the user
+        inactive:
+          type: boolean
+          description: Whether the user account is inactive
+        removedExternally:
+          type: boolean
+          description: Whether the user was removed from the external directory
+        blacklisted:
+          type: boolean
+          description: Whether the user is blacklisted
+        deleteProhibited:
+          type: boolean
+          description: Whether deletion of the user is prohibited
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagCondensed'
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomPropertyValue'
+        privileges:
+          type: array
+          items:
+            type: string
+        schemaPath:
+          type: string
+      required:
+      - userId
+      - userDirectory
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    Session:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+          description: Unique session identifier
+        userDirectory:
+          type: string
+          description: User directory name
+        userId:
+          type: string
+          description: User identifier within the user directory
+        userName:
+          type: string
+          description: Display name of the user
+        sessionStart:
+          type: string
+          format: date-time
+          description: Timestamp when the session was created
+        lastActive:
+          type: string
+          format: date-time
+          description: Timestamp of last activity on this session
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionAttribute'
+          description: Session attributes including roles and groups
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

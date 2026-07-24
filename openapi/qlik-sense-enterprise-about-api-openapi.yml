@@ -1,0 +1,261 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: About
+  description: ODAG service metadata
+paths:
+  /about:
+    get:
+      operationId: getOdagAbout
+      summary: Qlik Sense Enterprise Get ODAG service information
+      description: Retrieves basic information about the ODAG service including its version and stability index.
+      tags:
+      - About
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: ODAG service information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagAbout'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /about/description:
+    get:
+      operationId: getProxyApiDescription
+      summary: Qlik Sense Enterprise Get complete endpoint description
+      description: Retrieves a complete list of all endpoints available in the QPS API. This serves as the API discovery mechanism.
+      tags:
+      - About
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam_2'
+      responses:
+        '200':
+          description: API endpoint descriptions returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EndpointDescription'
+        '401':
+          $ref: '#/components/responses/Unauthorized_2'
+  /about/api/description:
+    get:
+      operationId: getApiDescription
+      summary: Qlik Sense Enterprise Get API endpoint descriptions
+      description: Retrieves a description of all available QRS API endpoints, optionally filtered by HTTP method and in an extended format.
+      tags:
+      - About
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam_3'
+      - name: extended
+        in: query
+        description: Whether to return extended descriptions
+        schema:
+          type: boolean
+          default: false
+      - name: method
+        in: query
+        description: Filter endpoints by HTTP method
+        schema:
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+      - name: format
+        in: query
+        description: Response format
+        schema:
+          type: string
+          enum:
+          - JSON
+      responses:
+        '200':
+          description: API description returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EndpointDescription_2'
+        '401':
+          $ref: '#/components/responses/Unauthorized_3'
+  /about/api/default:
+    get:
+      operationId: getApiDefaults
+      summary: Qlik Sense Enterprise Get default values for all entity types
+      description: Retrieves the default values for all entity types in the QRS, optionally including list entries.
+      tags:
+      - About
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam_3'
+      - name: listentries
+        in: query
+        description: Whether to include list entries in the defaults
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Default entity values returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized_3'
+  /about/api/enums:
+    get:
+      operationId: getApiEnums
+      summary: Qlik Sense Enterprise Get enumeration types
+      description: Retrieves all enumeration types used across the QRS API, including their allowed values.
+      tags:
+      - About
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam_3'
+      responses:
+        '200':
+          description: Enumeration types returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized_3'
+  /cache:
+    delete:
+      operationId: invalidateCache
+      summary: Qlik Sense Enterprise Invalidate cache
+      description: Invalidates the QRS cache, forcing fresh data retrieval on subsequent requests. Use with caution as this impacts performance.
+      tags:
+      - About
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam_3'
+      responses:
+        '204':
+          description: Cache invalidated successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized_3'
+components:
+  schemas:
+    EndpointDescription_2:
+      type: object
+      properties:
+        method:
+          type: string
+          description: HTTP method
+        path:
+          type: string
+          description: Endpoint path
+        description:
+          type: string
+          description: Endpoint description
+        parameters:
+          type: array
+          items:
+            type: object
+    EndpointDescription:
+      type: object
+      properties:
+        method:
+          type: string
+          description: HTTP method
+        path:
+          type: string
+          description: Endpoint path
+        description:
+          type: string
+          description: Endpoint description
+    OdagAbout:
+      type: object
+      properties:
+        version:
+          type: string
+          description: ODAG service version
+        stabilityIndex:
+          type: string
+          description: API stability level (e.g., stable)
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  responses:
+    Unauthorized_2:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_3:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    XrfKeyParam_3:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    XrfKeyParam_2:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

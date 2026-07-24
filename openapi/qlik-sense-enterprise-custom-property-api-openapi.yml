@@ -1,0 +1,256 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Custom Property API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Custom Property
+  description: Manage custom properties for tagging and categorizing entities
+paths:
+  /customproperty:
+    get:
+      operationId: getCustomProperties
+      summary: Qlik Sense Enterprise List custom properties
+      description: Retrieves a list of all custom properties in condensed format.
+      tags:
+      - Custom Property
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: List of custom properties returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomPropertyCondensed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createCustomProperty
+      summary: Qlik Sense Enterprise Create custom property
+      description: Creates a new custom property definition with a set of allowed values and applicable object types.
+      tags:
+      - Custom Property
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomProperty'
+      responses:
+        '201':
+          description: Custom property created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomProperty'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customproperty/{id}:
+    get:
+      operationId: getCustomProperty
+      summary: Qlik Sense Enterprise Get custom property by ID
+      description: Retrieves a single custom property by its unique identifier.
+      tags:
+      - Custom Property
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Custom property returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomProperty'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateCustomProperty
+      summary: Qlik Sense Enterprise Update custom property
+      description: Updates an existing custom property definition.
+      tags:
+      - Custom Property
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomProperty'
+      responses:
+        '200':
+          description: Custom property updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomProperty'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteCustomProperty
+      summary: Qlik Sense Enterprise Delete custom property
+      description: Permanently deletes a custom property definition.
+      tags:
+      - Custom Property
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Custom property deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    CustomProperty:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: Custom property name
+        valueType:
+          type: string
+          description: Value type for the custom property
+        choiceValues:
+          type: array
+          items:
+            type: string
+          description: Allowed values for this custom property
+        objectTypes:
+          type: array
+          items:
+            type: string
+          description: Entity types this custom property can be applied to (e.g., App, Stream, User)
+        description:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+        schemaPath:
+          type: string
+      required:
+      - name
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

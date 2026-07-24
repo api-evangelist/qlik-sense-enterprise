@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Notification API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Notification
+  description: Subscribe to and manage change notifications
+paths:
+  /notification:
+    post:
+      operationId: createNotificationSubscription
+      summary: Qlik Sense Enterprise Subscribe to change notifications
+      description: Creates a subscription to receive notifications when changes occur to specified entity types or individual entities.
+      tags:
+      - Notification
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationSubscription'
+      responses:
+        '201':
+          description: Notification subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationSubscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: removeNotificationSubscription
+      summary: Qlik Sense Enterprise Remove change notification subscription
+      description: Removes an existing notification subscription. The subscription handle is passed as a query parameter.
+      tags:
+      - Notification
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: handle
+        in: query
+        required: true
+        description: Handle identifying the notification subscription to remove
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Subscription removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /notification/changes:
+    get:
+      operationId: getNotificationChanges
+      summary: Qlik Sense Enterprise Get changes since last check
+      description: Retrieves a list of changes that have occurred since the last time this endpoint was called for the given subscription.
+      tags:
+      - Notification
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: since
+        in: query
+        description: Timestamp to retrieve changes since
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Change notifications returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChangeNotification'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ChangeNotification:
+      type: object
+      properties:
+        objectType:
+          type: string
+          description: Type of entity that changed
+        objectID:
+          type: string
+          format: uuid
+          description: ID of the entity that changed
+        changedProperties:
+          type: array
+          items:
+            type: string
+          description: List of properties that were modified
+        engineID:
+          type: string
+        changeType:
+          type: string
+          description: Type of change (Add, Update, Delete)
+    NotificationSubscription:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Subscription handle for managing the subscription
+        type:
+          type: string
+          description: Entity type to subscribe to notifications for
+        id:
+          type: string
+          format: uuid
+          description: Optional specific entity ID to subscribe to
+        condition:
+          type: string
+          description: Optional filter condition for the subscription
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

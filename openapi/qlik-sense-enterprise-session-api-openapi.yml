@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Session API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Session
+  description: Manage user sessions including listing, retrieving, and deleting sessions
+paths:
+  /session:
+    get:
+      operationId: getSessions
+      summary: Qlik Sense Enterprise List all sessions
+      description: Retrieves a list of all active user sessions managed by the proxy service. Each session represents an authenticated user connection.
+      tags:
+      - Session
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: List of active sessions returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Session'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /session/{id}:
+    get:
+      operationId: getSession
+      summary: Qlik Sense Enterprise Get session by ID
+      description: Retrieves a specific user session by its unique session identifier.
+      tags:
+      - Session
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: id
+        in: path
+        required: true
+        description: Unique session identifier
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Session returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteSession
+      summary: Qlik Sense Enterprise Delete session
+      description: Performs a teardown of all connections for a session. The Session module is notified, and the logout module is also notified if there are no more sessions for the user.
+      tags:
+      - Session
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: id
+        in: path
+        required: true
+        description: Unique session identifier to delete
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Session deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    SessionAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Attribute name
+        values:
+          type: array
+          items:
+            type: string
+          description: Attribute values
+    Session:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+          description: Unique session identifier
+        userDirectory:
+          type: string
+          description: User directory name
+        userId:
+          type: string
+          description: User identifier within the user directory
+        userName:
+          type: string
+          description: Display name of the user
+        sessionStart:
+          type: string
+          format: date-time
+          description: Timestamp when the session was created
+        lastActive:
+          type: string
+          format: date-time
+          description: Timestamp of last activity on this session
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionAttribute'
+          description: Session attributes including roles and groups
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

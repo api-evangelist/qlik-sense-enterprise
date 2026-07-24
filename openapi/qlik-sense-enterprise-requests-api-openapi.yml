@@ -1,0 +1,342 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Requests API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Requests
+  description: Manage on-demand app generation requests including submission, status tracking, and app lifecycle operations
+paths:
+  /links/{linkId}/requests:
+    get:
+      operationId: getOdagLinkRequests
+      summary: Qlik Sense Enterprise List requests for a navigation link
+      description: Returns a list of ODAG requests for a specific link, optionally matching a set of conditions defined by additional parameters.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/LinkIdParam'
+      responses:
+        '200':
+          description: Request list returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: submitOdagRequest
+      summary: Qlik Sense Enterprise Submit app generation request
+      description: Submits a new app generation request to the ODAG service. The request is queued after validating the user selection state against the navigation link property settings and rules.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/LinkIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OdagRequestCreate'
+      responses:
+        '201':
+          description: Request successfully queued for app generation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '400':
+          description: Selection app is in an invalid state or request payload is invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Invalid link ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests:
+    get:
+      operationId: getOdagRequests
+      summary: Qlik Sense Enterprise List all ODAG requests
+      description: Returns a list of ODAG request objects matching the combination of search criteria provided as query parameters.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Request list returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OdagRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}:
+    get:
+      operationId: getOdagRequest
+      summary: Qlik Sense Enterprise Get ODAG request by ID
+      description: Retrieves a single ODAG request by its unique identifier, including the current status and generated app information.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/RequestIdParam'
+      responses:
+        '200':
+          description: Request returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateOdagRequest
+      summary: Qlik Sense Enterprise Update ODAG request
+      description: Updates an existing ODAG request, such as changing its status or metadata.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/RequestIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OdagRequestUpdate'
+      responses:
+        '200':
+          description: Request updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}/app:
+    delete:
+      operationId: deleteOdagRequestApp
+      summary: Qlik Sense Enterprise Remove generated app from request
+      description: Removes the generated app associated with an ODAG request. The app is deleted from the repository.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/RequestIdParam'
+      responses:
+        '204':
+          description: Generated app removed successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}/reloadApp:
+    post:
+      operationId: reloadOdagRequestApp
+      summary: Qlik Sense Enterprise Reload generated app
+      description: Triggers a reload of the generated app associated with an ODAG request, refreshing its data from the template and selection state.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/RequestIdParam'
+      responses:
+        '200':
+          description: App reload triggered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /requests/{requestId}/renameApp:
+    post:
+      operationId: renameOdagRequestApp
+      summary: Qlik Sense Enterprise Rename generated app
+      description: Renames the generated app associated with an ODAG request.
+      tags:
+      - Requests
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/RequestIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New name for the generated app
+              required:
+              - name
+      responses:
+        '200':
+          description: App renamed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OdagRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    LinkIdParam:
+      name: linkId
+      in: path
+      required: true
+      description: Unique identifier of the navigation link
+      schema:
+        type: string
+        format: uuid
+    RequestIdParam:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier of the ODAG request
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    OdagRequestUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Updated status for the request
+    OdagRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique request identifier
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the request was created
+        modifiedDate:
+          type: string
+          format: date-time
+          description: Date the request was last modified
+        linkId:
+          type: string
+          format: uuid
+          description: ID of the navigation link
+        selectionAppId:
+          type: string
+          format: uuid
+          description: ID of the selection app
+        templateAppId:
+          type: string
+          format: uuid
+          description: ID of the template app
+        generatedAppId:
+          type: string
+          format: uuid
+          description: ID of the generated app (available after generation completes)
+        generatedAppName:
+          type: string
+          description: Name of the generated app
+        owner:
+          type: string
+          description: Owner user identifier
+        status:
+          type: string
+          enum:
+          - queued
+          - loading
+          - completed
+          - failed
+          - cancelled
+          description: Current status of the ODAG request
+        statusMessage:
+          type: string
+          description: Detailed status message
+        selectionState:
+          type: object
+          description: Captured selection state from the selection app
+    OdagRequestCreate:
+      type: object
+      properties:
+        selectionState:
+          type: object
+          description: Current selection state from the selection app to use for generating the on-demand app
+      required:
+      - selectionState
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

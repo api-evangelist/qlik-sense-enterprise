@@ -1,0 +1,196 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About License API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: License
+  description: Manage Qlik Sense license information including LEF download and license status
+paths:
+  /license:
+    get:
+      operationId: getLicense
+      summary: Qlik Sense Enterprise Get license information
+      description: Retrieves the current license information for the Qlik Sense site, including the license key, serial number, product level, and expiration details.
+      tags:
+      - License
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: License information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: setLicense
+      summary: Qlik Sense Enterprise Set license
+      description: Sets or updates the license for the Qlik Sense site using a license key and control number.
+      tags:
+      - License
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseSet'
+      responses:
+        '200':
+          description: License set successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/License'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /license/download:
+    get:
+      operationId: downloadLef
+      summary: Qlik Sense Enterprise Download license enablement file
+      description: Downloads the license enablement file (LEF) for the current Qlik Sense license. The LEF contains the license key and configuration details.
+      tags:
+      - License
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: License enablement file content returned
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: LEF file content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    LicenseSet:
+      type: object
+      properties:
+        serial:
+          type: string
+          description: License serial number
+        control:
+          type: string
+          description: License control number
+        name:
+          type: string
+          description: License holder name
+        organization:
+          type: string
+          description: License holder organization
+        lef:
+          type: string
+          description: License enablement file content
+      required:
+      - serial
+      - control
+    License:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: License name
+        serial:
+          type: string
+          description: License serial number
+        key:
+          type: string
+          description: License key
+        lef:
+          type: string
+          description: License enablement file content
+        isExpired:
+          type: boolean
+          description: Whether the license has expired
+        expiredReason:
+          type: string
+          description: Reason for license expiration
+        isBlacklisted:
+          type: boolean
+          description: Whether the license serial is blacklisted
+        isInvalid:
+          type: boolean
+          description: Whether the license is invalid
+        productLevel:
+          type: string
+          description: Product level (e.g., Professional, Enterprise)
+        numberOfCores:
+          type: integer
+          description: Number of cores allowed by the license
+        timelimited:
+          type: string
+          format: date-time
+          description: Time limit for the license
+        schemaPath:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

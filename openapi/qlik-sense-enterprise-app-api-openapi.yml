@@ -1,0 +1,688 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About App API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: App
+  description: Manage Qlik Sense applications including import, export, copy, publish, and reload
+paths:
+  /app:
+    get:
+      operationId: getApps
+      summary: Qlik Sense Enterprise List applications
+      description: Retrieves a list of Qlik Sense applications in condensed format, optionally filtered by a query expression.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/OrderByParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: List of applications returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppCondensed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/full:
+    get:
+      operationId: getAppsFull
+      summary: Qlik Sense Enterprise List applications with full details
+      description: Retrieves a list of Qlik Sense applications in full format including all properties, owner, stream, tags, and custom properties.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/OrderByParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: Full list of applications returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/App'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/count:
+    get:
+      operationId: getAppsCount
+      summary: Qlik Sense Enterprise Count applications
+      description: Returns the number of applications matching an optional filter expression.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Application count returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityCount'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/{id}:
+    get:
+      operationId: getApp
+      summary: Qlik Sense Enterprise Get application by ID
+      description: Retrieves a single Qlik Sense application by its unique identifier, returned in full format.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: Application returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateApp
+      summary: Qlik Sense Enterprise Update application
+      description: Updates an existing Qlik Sense application. The complete entity including the unchanged modifiedDate must be provided in the request body.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/App'
+      responses:
+        '200':
+          description: Application updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteApp
+      summary: Qlik Sense Enterprise Delete application
+      description: Permanently deletes a Qlik Sense application from the repository.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Application deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/import:
+    post:
+      operationId: importApp
+      summary: Qlik Sense Enterprise Import application
+      description: Imports a Qlik Sense application from a QVF file. The file is uploaded as the request body and the application name and other attributes are provided as query parameters.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: name
+        in: query
+        required: true
+        description: Name for the imported application
+        schema:
+          type: string
+      - name: keepdata
+        in: query
+        description: Whether to keep the data in the imported app
+        schema:
+          type: boolean
+          default: false
+      - name: excludeconnections
+        in: query
+        description: Whether to exclude data connections from the imported app
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        required: true
+        content:
+          application/vnd.qlik.sense.app:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Application imported successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/{id}/copy:
+    post:
+      operationId: copyApp
+      summary: Qlik Sense Enterprise Copy application
+      description: Creates a copy of an existing Qlik Sense application. Requires Read and Duplicate permissions on the source application.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      - name: name
+        in: query
+        description: Name for the copied application
+        schema:
+          type: string
+      - name: includecustomproperties
+        in: query
+        description: Whether to include custom properties in the copy
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '201':
+          description: Application copied successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/{id}/export:
+    get:
+      operationId: exportApp
+      summary: Qlik Sense Enterprise Export application
+      description: Exports a Qlik Sense application as a QVF file. Returns a download path that can be used to retrieve the exported file.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      - name: skipdata
+        in: query
+        description: Whether to exclude data from the exported file
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Export download path returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportResult'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/{id}/publish:
+    put:
+      operationId: publishApp
+      summary: Qlik Sense Enterprise Publish application to a stream
+      description: Publishes a Qlik Sense application to a specified stream, making it available to users with access to that stream.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      - name: stream
+        in: query
+        required: true
+        description: ID of the stream to publish the application to
+        schema:
+          type: string
+          format: uuid
+      - name: name
+        in: query
+        description: Optional new name for the published application
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Application published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/{id}/reload:
+    post:
+      operationId: reloadApp
+      summary: Qlik Sense Enterprise Reload application data
+      description: Triggers a reload of the application data from its connected data sources.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Application reload triggered successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/{id}/replace:
+    put:
+      operationId: replaceApp
+      summary: Qlik Sense Enterprise Replace application content
+      description: Replaces the content of a published application with the content from another application, preserving the published app's identity and stream membership.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      - name: app
+        in: query
+        required: true
+        description: ID of the source application whose content replaces the target
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Application content replaced successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/{id}/migrate:
+    put:
+      operationId: migrateApp
+      summary: Qlik Sense Enterprise Migrate application
+      description: Migrates an application to the current Qlik Sense version format.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Application migrated successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/hublist:
+    get:
+      operationId: getAppHubList
+      summary: Qlik Sense Enterprise Get hub app list
+      description: Retrieves the list of applications available in the hub for the authenticated user, including published and personal apps.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Hub application list returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/App'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /app/upload:
+    post:
+      operationId: uploadApp
+      summary: Qlik Sense Enterprise Upload application
+      description: Uploads a Qlik Sense application from a QVF binary file to the repository.
+      tags:
+      - App
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - name: name
+        in: query
+        required: true
+        description: Name for the uploaded application
+        schema:
+          type: string
+      - name: keepdata
+        in: query
+        description: Whether to keep the data in the uploaded app
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        required: true
+        content:
+          application/vnd.qlik.sense.app:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Application uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    AppCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        appId:
+          type: string
+        publishTime:
+          type: string
+          format: date-time
+        published:
+          type: boolean
+        stream:
+          $ref: '#/components/schemas/StreamCondensed'
+        savedInProductVersion:
+          type: string
+        migrationHash:
+          type: string
+        availabilityStatus:
+          type: integer
+        privileges:
+          type: array
+          items:
+            type: string
+    UserCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        userDirectory:
+          type: string
+        userId:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    StreamCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    ExportResult:
+      type: object
+      properties:
+        exportToken:
+          type: string
+          description: Token to use for downloading the exported file
+        downloadPath:
+          type: string
+          description: Relative path to download the exported application file
+        schemaPath:
+          type: string
+    App:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier
+        createdDate:
+          type: string
+          format: date-time
+          description: Date the app was created
+        modifiedDate:
+          type: string
+          format: date-time
+          description: Date the app was last modified
+        modifiedByUserName:
+          type: string
+          description: Username of the last modifier
+        name:
+          type: string
+          description: Application name
+        appId:
+          type: string
+          description: Internal application identifier
+        description:
+          type: string
+          description: Application description
+        publishTime:
+          type: string
+          format: date-time
+          description: Date the app was published
+        published:
+          type: boolean
+          description: Whether the app is published
+        stream:
+          $ref: '#/components/schemas/StreamCondensed'
+        fileSize:
+          type: integer
+          format: int64
+          description: Size of the application file in bytes
+        lastReloadTime:
+          type: string
+          format: date-time
+          description: Date of the last successful reload
+        thumbnail:
+          type: string
+          description: Path to the app thumbnail
+        savedInProductVersion:
+          type: string
+          description: Product version the app was last saved in
+        migrationHash:
+          type: string
+          description: Hash indicating the migration state
+        availabilityStatus:
+          type: integer
+          description: Availability status (0=Normal, 1=Archived)
+        owner:
+          $ref: '#/components/schemas/UserCondensed'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagCondensed'
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomPropertyValue'
+        privileges:
+          type: array
+          items:
+            type: string
+        schemaPath:
+          type: string
+          description: Schema path for this entity type
+      required:
+      - name
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+  responses:
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

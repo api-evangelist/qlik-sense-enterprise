@@ -1,0 +1,260 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Server Node API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Server Node
+  description: Manage server nodes in a multi-node deployment
+paths:
+  /servernodeconfiguration:
+    get:
+      operationId: getServerNodeConfigurations
+      summary: Qlik Sense Enterprise List server node configurations
+      description: Retrieves a list of all server node configurations in condensed format.
+      tags:
+      - Server Node
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: Server node configurations returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServerNodeConfigurationCondensed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /servernodeconfiguration/{id}:
+    get:
+      operationId: getServerNodeConfiguration
+      summary: Qlik Sense Enterprise Get server node configuration by ID
+      description: Retrieves a single server node configuration by its unique identifier.
+      tags:
+      - Server Node
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Server node configuration returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerNodeConfiguration'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /servernodeconfiguration/local:
+    get:
+      operationId: getLocalServerNodeConfiguration
+      summary: Qlik Sense Enterprise Get local server node configuration
+      description: Retrieves the server node configuration for the local node.
+      tags:
+      - Server Node
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      responses:
+        '200':
+          description: Local server node configuration returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerNodeConfiguration'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    ServerNodeConfigurationCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        hostName:
+          type: string
+        isCentral:
+          type: boolean
+        privileges:
+          type: array
+          items:
+            type: string
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+    ServerNodeConfiguration:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: Node name
+        hostName:
+          type: string
+          description: Hostname of the server node
+        isCentral:
+          type: boolean
+          description: Whether this is the central node
+        nodePurpose:
+          type: integer
+          description: Purpose of the node (0=Production, 1=Development, 2=Both)
+        engineEnabled:
+          type: boolean
+        proxyEnabled:
+          type: boolean
+        schedulerEnabled:
+          type: boolean
+        printingEnabled:
+          type: boolean
+        failoverCandidate:
+          type: boolean
+          description: Whether this node can serve as a failover candidate
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagCondensed'
+        customProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomPropertyValue'
+        privileges:
+          type: array
+          items:
+            type: string
+        schemaPath:
+          type: string
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

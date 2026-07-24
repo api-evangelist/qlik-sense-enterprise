@@ -1,0 +1,304 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Security Rule API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Security Rule
+  description: Manage security rules and access control
+paths:
+  /securityrule:
+    get:
+      operationId: getSecurityRules
+      summary: Qlik Sense Enterprise List security rules
+      description: Retrieves a list of all security rules in condensed format.
+      tags:
+      - Security Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: List of security rules returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SecurityRuleCondensed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSecurityRule
+      summary: Qlik Sense Enterprise Create security rule
+      description: Creates a new security rule that controls access to Qlik Sense resources based on conditions.
+      tags:
+      - Security Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityRule'
+      responses:
+        '201':
+          description: Security rule created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityRule'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /securityrule/full:
+    get:
+      operationId: getSecurityRulesFull
+      summary: Qlik Sense Enterprise List security rules with full details
+      description: Retrieves a list of all security rules in full format including the rule definition, actions, and resource filter.
+      tags:
+      - Security Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/PrivilegesParam'
+      responses:
+        '200':
+          description: Full list of security rules returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SecurityRule'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /securityrule/{id}:
+    get:
+      operationId: getSecurityRule
+      summary: Qlik Sense Enterprise Get security rule by ID
+      description: Retrieves a single security rule by its unique identifier.
+      tags:
+      - Security Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Security rule returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityRule'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateSecurityRule
+      summary: Qlik Sense Enterprise Update security rule
+      description: Updates an existing security rule definition.
+      tags:
+      - Security Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityRule'
+      responses:
+        '200':
+          description: Security rule updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityRule'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteSecurityRule
+      summary: Qlik Sense Enterprise Delete security rule
+      description: Permanently deletes a security rule.
+      tags:
+      - Security Rule
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '204':
+          description: Security rule deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    SecurityRuleCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    SecurityRule:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        name:
+          type: string
+          description: Security rule name
+        category:
+          type: string
+          description: Rule category (Security, Sync)
+        type:
+          type: integer
+          description: Rule type
+        rule:
+          type: string
+          description: Rule definition expression using Qlik Sense security rule syntax
+        resourceFilter:
+          type: string
+          description: Resource filter expression that defines which resources the rule applies to
+        actions:
+          type: integer
+          description: Bitwise combination of allowed actions (1=Create, 2=Read, 4=Update, 8=Delete, 16=Export, 32=Publish, 64=Change owner, 128=Change role)
+        comment:
+          type: string
+          description: Rule description or comment
+        disabled:
+          type: boolean
+          description: Whether the rule is disabled
+        ruleContext:
+          type: integer
+          description: Context in which the rule applies (0=Both, 1=QMC only, 2=Hub only)
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagCondensed'
+        privileges:
+          type: array
+          items:
+            type: string
+        schemaPath:
+          type: string
+      required:
+      - name
+      - rule
+      - resourceFilter
+      - actions
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.

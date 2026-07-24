@@ -1,0 +1,133 @@
+openapi: 3.1.0
+info:
+  title: Qlik Sense Enterprise Qlik Sense Service About Load Balancing API
+  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  version: 2025.11.0
+  contact:
+    name: Qlik Support
+    url: https://community.qlik.com/
+  license:
+    name: Proprietary
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-providerName: Qlik
+  x-serviceName: qlik-sense-about-service
+servers:
+- url: https://{server}/api/about/v1
+  description: About Service API via HTTPS
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+security:
+- xrfkey: []
+tags:
+- name: Load Balancing
+  description: Engine load balancing decisions for distributing app sessions across Qlik Sense Engine Services
+paths:
+  /loadbalancing/prioritize:
+    post:
+      operationId: prioritizeLoadBalancing
+      summary: Qlik Sense Enterprise Prioritize engine services for load balancing
+      description: Prioritizes Qlik Sense Engine Services (QES) for a user and an app. The Load Balancing module makes load balancing decisions for engine sessions to distribute load across available engine services.
+      tags:
+      - Load Balancing
+      parameters:
+      - $ref: '#/components/parameters/XrfKeyParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadBalancingRequest'
+      responses:
+        '200':
+          description: Engine service prioritization returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadBalancingResult'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    LoadBalancingResult:
+      type: object
+      properties:
+        engineServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngineServicePriority'
+          description: Prioritized list of engine services
+    EngineServicePriority:
+      type: object
+      properties:
+        engineId:
+          type: string
+          format: uuid
+          description: Engine service identifier
+        hostName:
+          type: string
+          description: Hostname of the engine node
+        port:
+          type: integer
+          description: Port of the engine service
+        priority:
+          type: integer
+          description: Priority ranking (lower is higher priority)
+        isAppOpen:
+          type: boolean
+          description: Whether the app is already open on this engine
+    LoadBalancingRequest:
+      type: object
+      properties:
+        userDirectory:
+          type: string
+          description: User directory name
+        userId:
+          type: string
+          description: User identifier
+        appId:
+          type: string
+          format: uuid
+          description: Application ID to load balance for
+      required:
+      - userDirectory
+      - userId
+      - appId
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  securitySchemes:
+    xrfkey:
+      type: apiKey
+      in: header
+      name: X-Qlik-Xrfkey
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
