@@ -4,7 +4,20 @@ description: >-
   Collection of APIs for Qlik Sense Enterprise, a modern analytics platform for business intelligence and data
   visualization.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/qlik-sense-enterprise.png
 tags:
   - Analytics
   - Business Intelligence
@@ -16,122 +29,906 @@ created: '2024-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: qlik-sense-enterprise:qlik-sense-repository-service
-    name: Qlik Sense Repository Service
-    description: >-
-      Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all
-      configuration available through the Qlik Management Console.
-    humanURL: >-
+- aid: qlik-sense-enterprise:qlik-sense-engine-json-api
+  name: Qlik Sense Engine JSON API
+  description: WebSocket protocol API using JSON-RPC for interacting with the Qlik Associative Engine.
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
+  tags:
+  - Engine
+  - JSON-RPC
+  - WebSocket
+  properties:
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
+- aid: qlik-sense-enterprise:qlik-sense-capabilities
+  name: Qlik Sense Capabilities
+  description: >-
+    High-level JavaScript API for embedding and extending Qlik Sense visualizations and mashups.
+  humanURL: https://help.qlik.com/en-US/sense-developer/APIs/CapabilityAPIs/index.html
+  tags:
+  - Visualization
+  - Mashup
+  - Embedding
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/CapabilityAPIs/index.html
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-about-api
+  name: Qlik Sense Enterprise About API
+  description: ODAG service metadata
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - About
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-about-api-openapi.yml
+  - type: Documentation
+    url: >-
       https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-    tags:
-      - Management
-      - Repository
-      - Security
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/qlik-sense-enterprise/refs/heads/main/openapi/qlik-sense-enterprise-repository-service-openapi.yml
-      - type: Authentication
-        url: >-
-          https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
-  - aid: qlik-sense-enterprise:qlik-sense-engine-json-api
-    name: Qlik Sense Engine JSON API
-    description: WebSocket protocol API using JSON-RPC for interacting with the Qlik Associative Engine.
-    humanURL: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
-    tags:
-      - Engine
-      - JSON-RPC
-      - WebSocket
-    properties:
-      - type: Documentation
-        url: https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/EngineJSONAPI/Content/introduction.htm
-  - aid: qlik-sense-enterprise:qlik-sense-proxy-service
-    name: Qlik Sense Proxy Service
-    description: REST API for managing sessions, virtual proxies, and authentication in Qlik Sense Enterprise deployments.
-    humanURL: >-
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
       https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
-    tags:
-      - Proxy
-      - Authentication
-      - Sessions
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/qlik-sense-enterprise/refs/heads/main/openapi/qlik-sense-enterprise-proxy-service-openapi.yml
-  - aid: qlik-sense-enterprise:qlik-sense-about-service
-    name: Qlik Sense About Service
-    description: >-
-      Service that exposes metadata about the running Qlik Sense Enterprise deployment including versions and supported
-      APIs.
-    humanURL: >-
+  - type: Documentation
+    url: >-
       https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
-    tags:
-      - Metadata
-      - Service
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/qlik-sense-enterprise/refs/heads/main/openapi/qlik-sense-enterprise-about-service-openapi.yml
-  - aid: qlik-sense-enterprise:qlik-sense-data-connection
-    name: Qlik Sense Data Connection
-    description: API for managing data connections and data sources.
-    humanURL: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
-    tags:
-      - Data Connections
-      - Integration
-    properties:
-      - type: Documentation
-        url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/qlik-sense-enterprise/refs/heads/main/openapi/qlik-sense-enterprise-data-connection-openapi.yml
-  - aid: qlik-sense-enterprise:qlik-sense-licenses
-    name: Qlik Sense Licenses
-    description: API for managing licenses, license allocations, and user access in Qlik Sense Enterprise.
-    humanURL: https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
-    tags:
-      - Licensing
-      - Allocation
-    properties:
-      - type: Documentation
-        url: https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/qlik-sense-enterprise/refs/heads/main/openapi/qlik-sense-enterprise-licenses-openapi.yml
-  - aid: qlik-sense-enterprise:qlik-sense-odag
-    name: Qlik Sense ODAG
-    description: On-Demand App Generation service API for orchestrating dynamic app generation against large data sources.
-    humanURL: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
-    tags:
-      - ODAG
-      - On-Demand
-      - Apps
-    properties:
-      - type: Documentation
-        url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/qlik-sense-enterprise/refs/heads/main/openapi/qlik-sense-enterprise-odag-service-openapi.yml
-  - aid: qlik-sense-enterprise:qlik-sense-capabilities
-    name: Qlik Sense Capabilities
-    description: High-level JavaScript API for embedding and extending Qlik Sense visualizations and mashups.
-    humanURL: https://help.qlik.com/en-US/sense-developer/APIs/CapabilityAPIs/index.html
-    tags:
-      - Visualization
-      - Mashup
-      - Embedding
-    properties:
-      - type: Documentation
-        url: https://help.qlik.com/en-US/sense-developer/APIs/CapabilityAPIs/index.html
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-access-type-api
+  name: Qlik Sense Enterprise Access Type API
+  description: Manage user access types and license allocations
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Access Type
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-access-type-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-app-api
+  name: Qlik Sense Enterprise App API
+  description: Manage Qlik Sense applications including import, export, copy, publish, and reload
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - App
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-app-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-app-object-api
+  name: Qlik Sense Enterprise App Object API
+  description: Manage application objects such as sheets, stories, and bookmarks
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - App Object
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-app-object-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-components-api
+  name: Qlik Sense Enterprise Components API
+  description: Retrieve information about installed components
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Components
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-components-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-content-library-api
+  name: Qlik Sense Enterprise Content Library API
+  description: Manage shared and app-specific content libraries
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Content Library
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-content-library-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-custom-property-api
+  name: Qlik Sense Enterprise Custom Property API
+  description: Manage custom properties for tagging and categorizing entities
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Custom Property
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-custom-property-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-data-connection-api
+  name: Qlik Sense Enterprise Data Connection API
+  description: >-
+    Manage data connections used by Qlik Sense applications for loading data from external sources
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Data Connection
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-data-connection-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-extension-api
+  name: Qlik Sense Enterprise Extension API
+  description: Manage visualization extensions
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Extension
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-extension-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-external-urls-api
+  name: Qlik Sense Enterprise External URLs API
+  description: Retrieve configured external URL information
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - External URLs
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-external-urls-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-health-api
+  name: Qlik Sense Enterprise Health API
+  description: Health check and service status endpoints
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-health-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-license-api
+  name: Qlik Sense Enterprise License API
+  description: Manage Qlik Sense license information including LEF download and license status
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - License
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-license-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-license-audit-api
+  name: Qlik Sense Enterprise License Audit API
+  description: Audit license rule evaluations and access type assignments
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - License Audit
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-license-audit-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-license-rule-api
+  name: Qlik Sense Enterprise License Rule API
+  description: Manage license rules that control automatic license assignment
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - License Rule
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-license-rule-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-links-api
+  name: Qlik Sense Enterprise Links API
+  description: >-
+    Manage navigation links that connect selection apps to template apps for on-demand app generation
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Links
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-links-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-load-balancing-api
+  name: Qlik Sense Enterprise Load Balancing API
+  description: >-
+    Engine load balancing decisions for distributing app sessions across Qlik Sense Engine Services
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Load Balancing
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-load-balancing-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-notification-api
+  name: Qlik Sense Enterprise Notification API
+  description: Subscribe to and manage change notifications
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Notification
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-notification-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-reload-task-api
+  name: Qlik Sense Enterprise Reload Task API
+  description: Manage and execute reload tasks
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Reload Task
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-reload-task-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-requests-api
+  name: Qlik Sense Enterprise Requests API
+  description: >-
+    Manage on-demand app generation requests including submission, status tracking, and app lifecycle
+    operations
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-requests-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-security-rule-api
+  name: Qlik Sense Enterprise Security Rule API
+  description: Manage security rules and access control
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Security Rule
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-security-rule-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-server-node-api
+  name: Qlik Sense Enterprise Server Node API
+  description: Manage server nodes in a multi-node deployment
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Server Node
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-server-node-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-session-api
+  name: Qlik Sense Enterprise Session API
+  description: Manage user sessions including listing, retrieving, and deleting sessions
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-session-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-stream-api
+  name: Qlik Sense Enterprise Stream API
+  description: Manage streams for organizing and distributing apps
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-stream-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-system-info-api
+  name: Qlik Sense Enterprise System Info API
+  description: Retrieve system-level information about the Qlik Sense site
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - System Info
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-system-info-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-tag-api
+  name: Qlik Sense Enterprise Tag API
+  description: The Tag API from Qlik Sense Enterprise — 2 operation(s) for tag.
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Tag
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-tag-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-task-api
+  name: Qlik Sense Enterprise Task API
+  description: Start and stop tasks including reload and external program tasks
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Task
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-task-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-third-party-api
+  name: Qlik Sense Enterprise Third Party API
+  description: Retrieve third-party software information
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Third Party
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-third-party-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-user-api
+  name: Qlik Sense Enterprise User API
+  description: Manage proxy sessions by user identity
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-user-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-user-directory-api
+  name: Qlik Sense Enterprise User Directory API
+  description: Manage user directory connectors and synchronization settings
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - User Directory
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-user-directory-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
+- aid: qlik-sense-enterprise:qlik-sense-enterprise-virtual-proxy-api
+  name: Qlik Sense Enterprise Virtual Proxy API
+  description: Manage virtual proxy configurations
+  humanURL: >-
+    https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  tags:
+  - Virtual Proxy
+  properties:
+  - type: OpenAPI
+    url: openapi/qlik-sense-enterprise-virtual-proxy-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
+  - type: Authentication
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Connect-API-Authenticate.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/ProxyServiceAPI/Content/Sense_ProxyServiceAPI/ProxyServiceAPI-Introduction.htm
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-developer/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/About-API/About-API-Introduction.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: Documentation
+    url: >-
+      https://help.qlik.com/en-US/sense-admin/Content/Sense_AdministerQSE/Licensing/Licensing.htm
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
 common:
   - type: AgenticAccess
     url: agentic-access/qlik-sense-enterprise-agentic-access.yml
