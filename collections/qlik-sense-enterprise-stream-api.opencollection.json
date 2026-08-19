@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Service About Stream API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/stream",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all streams in condensed format, optionally filtered by a query expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/about/v1/stream",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new stream for organizing and distributing published applications."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List streams with full details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/stream/full",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name to order results by, optionally followed by asc or desc."
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all streams in full format including owner, custom properties, and tags."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Count streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/stream/count",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              }
+            ]
+          },
+          "docs": "Returns the number of streams matching an optional filter expression."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get stream by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/stream/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a single stream by its unique identifier in full format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}/api/about/v1/stream/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing stream. The complete entity with unchanged modifiedDate must be provided."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}/api/about/v1/stream/:id",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a stream. Published apps in the stream are unpublished."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

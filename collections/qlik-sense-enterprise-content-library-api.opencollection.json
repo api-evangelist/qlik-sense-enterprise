@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Service About Content Library API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content Library",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List content libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/contentlibrary",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+              },
+              {
+                "name": "privileges",
+                "value": "",
+                "type": "query",
+                "description": "Whether to append privilege information to the returned entities."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all content libraries in condensed format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Upload file to content library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/about/v1/contentlibrary/:id/uploadfile",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "externalpath",
+                "value": "",
+                "type": "query",
+                "description": "Relative path within the content library for the uploaded file"
+              },
+              {
+                "name": "overwrite",
+                "value": "",
+                "type": "query",
+                "description": "Whether to overwrite an existing file"
+              }
+            ]
+          },
+          "docs": "Uploads a file to a content library. The file is sent as the request body and the relative path within the library is specified as a query parameter."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete file from content library",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}/api/about/v1/contentlibrary/:id/deletecontent",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier (GUID) of the entity"
+              },
+              {
+                "name": "externalpath",
+                "value": "",
+                "type": "query",
+                "description": "Relative path of the file to delete within the content library"
+              }
+            ]
+          },
+          "docs": "Deletes a file from a content library by its external path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

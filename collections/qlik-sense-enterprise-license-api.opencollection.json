@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Service About License API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "License",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get license information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/license",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves the current license information for the Qlik Sense site, including the license key, serial number, product level, and expiration details."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Set license",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/about/v1/license",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets or updates the license for the Qlik Sense site using a license key and control number."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Download license enablement file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/license/download",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Downloads the license enablement file (LEF) for the current Qlik Sense license. The LEF contains the license key and configuration details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

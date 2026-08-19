@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Service About API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "About",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get ODAG service information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/about",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves basic information about the ODAG service including its version and stability index."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get complete endpoint description",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/about/description",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves a complete list of all endpoints available in the QPS API. This serves as the API discovery mechanism."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get API endpoint descriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/about/api/description",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "extended",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return extended descriptions"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Filter endpoints by HTTP method"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieves a description of all available QRS API endpoints, optionally filtered by HTTP method and in an extended format."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get default values for all entity types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/about/api/default",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              },
+              {
+                "name": "listentries",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include list entries in the defaults"
+              }
+            ]
+          },
+          "docs": "Retrieves the default values for all entity types in the QRS, optionally including list entries."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get enumeration types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/about/api/enums",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Retrieves all enumeration types used across the QRS API, including their allowed values."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Invalidate cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}/api/about/v1/cache",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+              }
+            ]
+          },
+          "docs": "Invalidates the QRS cache, forcing fresh data retrieval on subsequent requests. Use with caution as this impacts performance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

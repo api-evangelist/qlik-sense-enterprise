@@ -1,0 +1,1025 @@
+{
+  "item": [
+    {
+      "id": "d1d4bfa4-1b4d-478c-94fc-a02eea221cfe",
+      "name": "Virtual Proxy",
+      "description": {
+        "content": "Manage virtual proxy configurations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "351bfaf6-a8a7-4e90-90bd-75113d9e9b98",
+          "name": "Qlik Sense Enterprise List virtual proxy configurations",
+          "request": {
+            "name": "Qlik Sense Enterprise List virtual proxy configurations",
+            "description": {
+              "content": "Retrieves a list of all virtual proxy configurations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "virtualproxyconfig"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+                },
+                {
+                  "disabled": false,
+                  "key": "privileges",
+                  "value": "false",
+                  "description": "Whether to append privilege information to the returned entities."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "682e5d66-ab35-4e59-966c-e0f13b5d59e2",
+              "name": "Virtual proxy configurations returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"9e4a364c-1f79-1fcc-a018-0be46012d762\",\n    \"prefix\": \"string\",\n    \"description\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"02b81776-3602-817b-416e-aa9b24ee1510\",\n    \"prefix\": \"string\",\n    \"description\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59be5cce-5c86-4fc0-b5b8-1dcdb8a298cb",
+              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8104287b-9095-4877-88d9-490dcbb0de16",
+          "name": "Qlik Sense Enterprise Create virtual proxy configuration",
+          "request": {
+            "name": "Qlik Sense Enterprise Create virtual proxy configuration",
+            "description": {
+              "content": "Creates a new virtual proxy configuration with authentication and session handling settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "virtualproxyconfig"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e9b47b9-b755-4538-9d40-41e3bd29763c",
+              "name": "Virtual proxy configuration created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"a6226626-f12a-5846-5a63-b5324182e500\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"38122010-35fc-2306-fd40-6d1eaa9b4ff9\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"475c761c-2428-642c-38ff-92c1e255e194\",\n  \"createdDate\": \"1963-07-15T00:36:29.292Z\",\n  \"modifiedDate\": \"1999-07-16T05:39:41.794Z\",\n  \"modifiedByUserName\": \"string\",\n  \"prefix\": \"string\",\n  \"description\": \"string\",\n  \"authenticationModuleRedirectUri\": \"http://EXPOdwNsANaBkKlmCr.ioAN\",\n  \"sessionModuleBaseUri\": \"https://xf.fllAwPLSqN.pTC.,cjaCRT6pbZg,KX8z+q8X6oREzgR9vM9nhHYWPODkURfP\",\n  \"loadBalancingModuleBaseUri\": \"http://bIYGjS.ndazjjP8Tw7mYBKEx7LV,Ht,f9pLbcb-nOH-\",\n  \"authenticationMethod\": 5181,\n  \"headerAuthenticationMode\": 3785,\n  \"headerAuthenticationHeaderName\": \"string\",\n  \"headerAuthenticationStaticUserDirectory\": \"string\",\n  \"headerAuthenticationDynamicUserDirectory\": \"string\",\n  \"anonymousAccessMode\": 9932,\n  \"windowsAuthenticationEnabledDevicePattern\": \"string\",\n  \"sessionCookieHeaderName\": \"string\",\n  \"sessionCookieDomain\": \"string\",\n  \"additionalResponseHeaders\": \"string\",\n  \"sessionInactivityTimeout\": 1919,\n  \"extendedSecurityEnvironment\": true,\n  \"websocketCrossOriginWhiteList\": [\n    \"string\",\n    \"string\"\n  ],\n  \"defaultVirtualProxy\": true,\n  \"tags\": [\n    {\n      \"id\": \"f27738a1-40db-fba5-f789-8a60a1d3c10b\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"3ec7441b-a25d-592a-48af-dfc2004f1656\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0920ab6-e4fe-4eb1-b7b1-10f84da2bc21",
+              "name": "Invalid request. The request body or parameters are malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"a6226626-f12a-5846-5a63-b5324182e500\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"38122010-35fc-2306-fd40-6d1eaa9b4ff9\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03352500-1b0d-4278-a6ed-f848911785ac",
+              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"a6226626-f12a-5846-5a63-b5324182e500\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"38122010-35fc-2306-fd40-6d1eaa9b4ff9\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5fffdba-fd27-4168-850c-2fa70a49ee4c",
+          "name": "Qlik Sense Enterprise Get virtual proxy configuration by ID",
+          "request": {
+            "name": "Qlik Sense Enterprise Get virtual proxy configuration by ID",
+            "description": {
+              "content": "Retrieves a single virtual proxy configuration by its unique identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "virtualproxyconfig",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier (GUID) of the entity"
+                },
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "13adca58-b408-4481-b9d2-d3c810dd38f7",
+              "name": "Virtual proxy configuration returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"475c761c-2428-642c-38ff-92c1e255e194\",\n  \"createdDate\": \"1963-07-15T00:36:29.292Z\",\n  \"modifiedDate\": \"1999-07-16T05:39:41.794Z\",\n  \"modifiedByUserName\": \"string\",\n  \"prefix\": \"string\",\n  \"description\": \"string\",\n  \"authenticationModuleRedirectUri\": \"http://EXPOdwNsANaBkKlmCr.ioAN\",\n  \"sessionModuleBaseUri\": \"https://xf.fllAwPLSqN.pTC.,cjaCRT6pbZg,KX8z+q8X6oREzgR9vM9nhHYWPODkURfP\",\n  \"loadBalancingModuleBaseUri\": \"http://bIYGjS.ndazjjP8Tw7mYBKEx7LV,Ht,f9pLbcb-nOH-\",\n  \"authenticationMethod\": 5181,\n  \"headerAuthenticationMode\": 3785,\n  \"headerAuthenticationHeaderName\": \"string\",\n  \"headerAuthenticationStaticUserDirectory\": \"string\",\n  \"headerAuthenticationDynamicUserDirectory\": \"string\",\n  \"anonymousAccessMode\": 9932,\n  \"windowsAuthenticationEnabledDevicePattern\": \"string\",\n  \"sessionCookieHeaderName\": \"string\",\n  \"sessionCookieDomain\": \"string\",\n  \"additionalResponseHeaders\": \"string\",\n  \"sessionInactivityTimeout\": 1919,\n  \"extendedSecurityEnvironment\": true,\n  \"websocketCrossOriginWhiteList\": [\n    \"string\",\n    \"string\"\n  ],\n  \"defaultVirtualProxy\": true,\n  \"tags\": [\n    {\n      \"id\": \"f27738a1-40db-fba5-f789-8a60a1d3c10b\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"3ec7441b-a25d-592a-48af-dfc2004f1656\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5298eecf-4acc-4f59-8d66-79dc11ae9e65",
+              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dbf439e-d13d-4229-880e-cf4a44a38428",
+              "name": "The requested entity was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7702c20f-3c5f-4647-9bf1-04376a3003c1",
+          "name": "Qlik Sense Enterprise Update virtual proxy configuration",
+          "request": {
+            "name": "Qlik Sense Enterprise Update virtual proxy configuration",
+            "description": {
+              "content": "Updates an existing virtual proxy configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "virtualproxyconfig",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier (GUID) of the entity"
+                },
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f067b167-a6ca-4430-96f1-c6bb10e1b71e",
+              "name": "Virtual proxy configuration updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"a6226626-f12a-5846-5a63-b5324182e500\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"38122010-35fc-2306-fd40-6d1eaa9b4ff9\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"475c761c-2428-642c-38ff-92c1e255e194\",\n  \"createdDate\": \"1963-07-15T00:36:29.292Z\",\n  \"modifiedDate\": \"1999-07-16T05:39:41.794Z\",\n  \"modifiedByUserName\": \"string\",\n  \"prefix\": \"string\",\n  \"description\": \"string\",\n  \"authenticationModuleRedirectUri\": \"http://EXPOdwNsANaBkKlmCr.ioAN\",\n  \"sessionModuleBaseUri\": \"https://xf.fllAwPLSqN.pTC.,cjaCRT6pbZg,KX8z+q8X6oREzgR9vM9nhHYWPODkURfP\",\n  \"loadBalancingModuleBaseUri\": \"http://bIYGjS.ndazjjP8Tw7mYBKEx7LV,Ht,f9pLbcb-nOH-\",\n  \"authenticationMethod\": 5181,\n  \"headerAuthenticationMode\": 3785,\n  \"headerAuthenticationHeaderName\": \"string\",\n  \"headerAuthenticationStaticUserDirectory\": \"string\",\n  \"headerAuthenticationDynamicUserDirectory\": \"string\",\n  \"anonymousAccessMode\": 9932,\n  \"windowsAuthenticationEnabledDevicePattern\": \"string\",\n  \"sessionCookieHeaderName\": \"string\",\n  \"sessionCookieDomain\": \"string\",\n  \"additionalResponseHeaders\": \"string\",\n  \"sessionInactivityTimeout\": 1919,\n  \"extendedSecurityEnvironment\": true,\n  \"websocketCrossOriginWhiteList\": [\n    \"string\",\n    \"string\"\n  ],\n  \"defaultVirtualProxy\": true,\n  \"tags\": [\n    {\n      \"id\": \"f27738a1-40db-fba5-f789-8a60a1d3c10b\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"3ec7441b-a25d-592a-48af-dfc2004f1656\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95b883b0-ade7-4faa-9db6-33204f23c10c",
+              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"a6226626-f12a-5846-5a63-b5324182e500\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"38122010-35fc-2306-fd40-6d1eaa9b4ff9\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef3dc828-4a92-4f1e-a193-f189303e1861",
+              "name": "The requested entity was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "virtualproxyconfig",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    },
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"prefix\": \"<string>\",\n  \"description\": \"<string>\",\n  \"authenticationModuleRedirectUri\": \"<uri>\",\n  \"sessionModuleBaseUri\": \"<uri>\",\n  \"loadBalancingModuleBaseUri\": \"<uri>\",\n  \"authenticationMethod\": \"<integer>\",\n  \"headerAuthenticationMode\": \"<integer>\",\n  \"headerAuthenticationHeaderName\": \"<string>\",\n  \"headerAuthenticationStaticUserDirectory\": \"<string>\",\n  \"headerAuthenticationDynamicUserDirectory\": \"<string>\",\n  \"anonymousAccessMode\": \"<integer>\",\n  \"windowsAuthenticationEnabledDevicePattern\": \"<string>\",\n  \"sessionCookieHeaderName\": \"<string>\",\n  \"sessionCookieDomain\": \"<string>\",\n  \"additionalResponseHeaders\": \"<string>\",\n  \"sessionInactivityTimeout\": \"<integer>\",\n  \"extendedSecurityEnvironment\": \"<boolean>\",\n  \"websocketCrossOriginWhiteList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultVirtualProxy\": \"<boolean>\",\n  \"tags\": [\n    {\n      \"id\": \"a6226626-f12a-5846-5a63-b5324182e500\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"38122010-35fc-2306-fd40-6d1eaa9b4ff9\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Qlik Sense server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{server}}/api/about/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Qlik-Xrfkey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2e634bd3-7ae1-4125-a16d-641fd0006342",
+    "name": "Qlik Sense Enterprise Qlik Sense Service About Virtual Proxy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
+      "type": "text/plain"
+    }
+  }
+}

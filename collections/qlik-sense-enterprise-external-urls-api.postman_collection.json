@@ -1,0 +1,217 @@
+{
+  "item": [
+    {
+      "id": "12ec3f11-7ac6-49a3-b56c-ac6c95fcfd78",
+      "name": "External URLs",
+      "description": {
+        "content": "Retrieve configured external URL information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c614b167-5731-471c-9ead-627e3e06139f",
+          "name": "Qlik Sense Enterprise Get external URLs",
+          "request": {
+            "name": "Qlik Sense Enterprise Get external URLs",
+            "description": {
+              "content": "Retrieves the external URL configuration for the Qlik Sense site, including the hub URI, QMC URI, and API endpoint URIs that are accessible from outside the deployment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "externalurls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Xrfkey",
+                  "value": "<string>",
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Qlik Sense server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ac2d3dc-d7a2-43ea-a015-892efb0b74e2",
+              "name": "External URLs returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"hubUri\": \"http://ofpQzAEMbTpxqLkccRgVLRITysN.refVJXYRJGQuBki\",\n  \"qmcUri\": \"http://aicEsPvGHyuDdFNiSNMrayfvzlZiAj.liacWkCLT3hpTpFavD-QOKrIQR+Jg3JmDtIbZm-,aoF9nj8iOemt9fuQwlHQUzl6JMzur\",\n  \"apiUri\": \"http://YPahwABTanshdBZUhNNvPEf.dlfjU28v5qIlfIgRR7.28+sFoEBUBX2jSLC3EA+.En\",\n  \"resultUri\": \"https://rcrhQEQjKNUlOUCMm.iaqfF5j+MwPoHNZbflxnLJvPzc93+CHzOOQjLwWgec1jX8bcT\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35fa2768-f5d6-4f74-a164-b1fc33925af5",
+              "name": "Authentication failed or Xrfkey missing/mismatched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "externalurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Qlik Sense server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Qlik Sense server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{server}}/api/about/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Qlik-Xrfkey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "58b3529d-2536-40c6-bff0-042765954fd2",
+    "name": "Qlik Sense Enterprise Qlik Sense Service About External URLs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
+      "type": "text/plain"
+    }
+  }
+}

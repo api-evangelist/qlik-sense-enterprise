@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Sense Enterprise Qlik Sense Service About Links API",
+    "version": "2025.11.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qlik-Xrfkey",
+      "value": "{{X-Qlik-Xrfkey}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise List navigation links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/links",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of ODAG navigation links and their properties. Each link connects a selection app to a template app for on-demand app generation."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Create navigation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}/api/about/v1/links",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new navigation link that enables ODAG navigation from a designated selection app to a template app. Links created via the API do not appear in the list of available navigation links in the UI."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Get navigation link by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}/api/about/v1/links/:linkId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ]
+          },
+          "docs": "Retrieves a single ODAG navigation link by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Update navigation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}/api/about/v1/links/:linkId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing ODAG navigation link configuration."
+        },
+        {
+          "info": {
+            "name": "Qlik Sense Enterprise Delete navigation link",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}/api/about/v1/links/:linkId",
+            "params": [
+              {
+                "name": "Xrfkey",
+                "value": "",
+                "type": "query",
+                "description": "Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+              },
+              {
+                "name": "linkId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the navigation link"
+              }
+            ]
+          },
+          "docs": "Deletes an ODAG navigation link. Generated apps associated with the link are not affected."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
