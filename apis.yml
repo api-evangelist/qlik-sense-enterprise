@@ -819,6 +819,8 @@ apis:
   humanURL: >-
     https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
   tags:
+  - Third-Party
+  tags_raw:
   - Third Party
   properties:
   - type: OpenAPI
