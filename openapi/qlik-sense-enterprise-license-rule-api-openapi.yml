@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Sense Enterprise Qlik Sense Service About License Rule API
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
@@ -102,6 +102,15 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
     FilterParam:
       name: filter
       in: query
@@ -117,22 +126,7 @@ components:
       schema:
         type: string
         format: uuid
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
     LicenseRule:
       type: object
       properties:
@@ -173,6 +167,12 @@ components:
           description: Whether the rule is disabled
         schemaPath:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     xrfkey:
       type: apiKey

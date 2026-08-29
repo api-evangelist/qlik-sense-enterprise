@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Sense Enterprise Qlik Sense Service About Requests API
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
@@ -222,32 +222,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    LinkIdParam:
-      name: linkId
-      in: path
-      required: true
-      description: Unique identifier of the navigation link
-      schema:
-        type: string
-        format: uuid
-    RequestIdParam:
-      name: requestId
-      in: path
-      required: true
-      description: Unique identifier of the ODAG request
-      schema:
-        type: string
-        format: uuid
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   responses:
     Unauthorized:
       description: Authentication failed.
@@ -262,12 +236,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    OdagRequestUpdate:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Updated status for the request
     OdagRequest:
       type: object
       properties:
@@ -320,6 +288,12 @@ components:
         selectionState:
           type: object
           description: Captured selection state from the selection app
+    OdagRequestUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Updated status for the request
     OdagRequestCreate:
       type: object
       properties:
@@ -334,6 +308,32 @@ components:
         message:
           type: string
           description: Human-readable error message
+  parameters:
+    LinkIdParam:
+      name: linkId
+      in: path
+      required: true
+      description: Unique identifier of the navigation link
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    RequestIdParam:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier of the ODAG request
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     xrfkey:
       type: apiKey

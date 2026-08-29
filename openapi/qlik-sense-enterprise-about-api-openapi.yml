@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Sense Enterprise Qlik Sense Service About API
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
@@ -162,23 +162,26 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized_3'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_2:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_3:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    EndpointDescription_2:
-      type: object
-      properties:
-        method:
-          type: string
-          description: HTTP method
-        path:
-          type: string
-          description: Endpoint path
-        description:
-          type: string
-          description: Endpoint description
-        parameters:
-          type: array
-          items:
-            type: object
     EndpointDescription:
       type: object
       properties:
@@ -200,31 +203,28 @@ components:
         stabilityIndex:
           type: string
           description: API stability level (e.g., stable)
+    EndpointDescription_2:
+      type: object
+      properties:
+        method:
+          type: string
+          description: HTTP method
+        path:
+          type: string
+          description: Endpoint path
+        description:
+          type: string
+          description: Endpoint description
+        parameters:
+          type: array
+          items:
+            type: object
     Error:
       type: object
       properties:
         message:
           type: string
           description: Human-readable error message
-  responses:
-    Unauthorized_2:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized_3:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     XrfKeyParam_3:
       name: Xrfkey

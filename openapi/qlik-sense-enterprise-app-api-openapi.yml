@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Sense Enterprise Qlik Sense Service About App API
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
@@ -415,34 +415,43 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    AppCondensed:
+    ExportResult:
       type: object
       properties:
-        id:
+        exportToken:
           type: string
-          format: uuid
-        name:
+          description: Token to use for downloading the exported file
+        downloadPath:
           type: string
-        appId:
+          description: Relative path to download the exported application file
+        schemaPath:
           type: string
-        publishTime:
-          type: string
-          format: date-time
-        published:
-          type: boolean
-        stream:
-          $ref: '#/components/schemas/StreamCondensed'
-        savedInProductVersion:
-          type: string
-        migrationHash:
-          type: string
-        availabilityStatus:
-          type: integer
-        privileges:
-          type: array
-          items:
-            type: string
     UserCondensed:
       type: object
       properties:
@@ -454,18 +463,6 @@ components:
         userDirectory:
           type: string
         userId:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    TagCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
           type: string
         privileges:
           type: array
@@ -483,43 +480,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-    EntityCount:
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Number of entities matching the filter
-    CustomPropertyCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        valueType:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    ExportResult:
-      type: object
-      properties:
-        exportToken:
-          type: string
-          description: Token to use for downloading the exported file
-        downloadPath:
-          type: string
-          description: Relative path to download the exported application file
-        schemaPath:
-          type: string
     App:
       type: object
       properties:
@@ -595,6 +555,20 @@ components:
           description: Schema path for this entity type
       required:
       - name
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
     CustomPropertyValue:
       type: object
       properties:
@@ -615,7 +589,75 @@ components:
           type: string
         schemaPath:
           type: string
+    AppCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        appId:
+          type: string
+        publishTime:
+          type: string
+          format: date-time
+        published:
+          type: boolean
+        stream:
+          $ref: '#/components/schemas/StreamCondensed'
+        savedInProductVersion:
+          type: string
+        migrationHash:
+          type: string
+        availabilityStatus:
+          type: integer
+        privileges:
+          type: array
+          items:
+            type: string
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
   parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
     FilterParam:
       name: filter
       in: query
@@ -638,48 +680,6 @@ components:
       description: Property name to order results by, optionally followed by asc or desc.
       schema:
         type: string
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to the returned entities.
-      schema:
-        type: boolean
-        default: false
-  responses:
-    NotFound:
-      description: The requested entity was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Conflict:
-      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request. The request body or parameters are malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

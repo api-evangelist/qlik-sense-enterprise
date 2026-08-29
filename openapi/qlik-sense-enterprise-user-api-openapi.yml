@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Sense Enterprise Qlik Sense Service About User API
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
@@ -252,14 +252,14 @@ paths:
           $ref: '#/components/responses/Unauthorized_2'
 components:
   responses:
-    Unauthorized_2:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized_2:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
       content:
         application/json:
           schema:
@@ -270,18 +270,58 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound_2:
       description: The requested entity was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
   schemas:
     UserCondensed:
       type: object
@@ -299,6 +339,49 @@ components:
           type: array
           items:
             type: string
+    Session:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+          description: Unique session identifier
+        userDirectory:
+          type: string
+          description: User directory name
+        userId:
+          type: string
+          description: User identifier within the user directory
+        userName:
+          type: string
+          description: Display name of the user
+        sessionStart:
+          type: string
+          format: date-time
+          description: Timestamp when the session was created
+        lastActive:
+          type: string
+          format: date-time
+          description: Timestamp of last activity on this session
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionAttribute'
+          description: Session attributes including roles and groups
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
     SessionAttribute:
       type: object
       properties:
@@ -310,6 +393,44 @@ components:
           items:
             type: string
           description: Attribute values
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
     User:
       type: object
       properties:
@@ -367,133 +488,12 @@ components:
       required:
       - userId
       - userDirectory
-    TagCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    Session:
-      type: object
-      properties:
-        sessionId:
-          type: string
-          format: uuid
-          description: Unique session identifier
-        userDirectory:
-          type: string
-          description: User directory name
-        userId:
-          type: string
-          description: User identifier within the user directory
-        userName:
-          type: string
-          description: Display name of the user
-        sessionStart:
-          type: string
-          format: date-time
-          description: Timestamp when the session was created
-        lastActive:
-          type: string
-          format: date-time
-          description: Timestamp of last activity on this session
-        attributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/SessionAttribute'
-          description: Session attributes including roles and groups
     Error:
       type: object
       properties:
         message:
           type: string
           description: Human-readable error message
-    EntityCount:
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Number of entities matching the filter
-    CustomPropertyCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        valueType:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    CustomPropertyValue:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        modifiedByUserName:
-          type: string
-        definition:
-          $ref: '#/components/schemas/CustomPropertyCondensed'
-        value:
-          type: string
-        schemaPath:
-          type: string
-  parameters:
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
-      schema:
-        type: string
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by, optionally followed by asc or desc.
-      schema:
-        type: string
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to the returned entities.
-      schema:
-        type: boolean
-        default: false
   securitySchemes:
     xrfkey:
       type: apiKey

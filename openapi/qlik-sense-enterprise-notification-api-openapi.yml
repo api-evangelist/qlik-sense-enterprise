@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Sense Enterprise Qlik Sense Service About Notification API
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
@@ -109,7 +109,33 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   schemas:
+    NotificationSubscription:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Subscription handle for managing the subscription
+        type:
+          type: string
+          description: Entity type to subscribe to notifications for
+        id:
+          type: string
+          format: uuid
+          description: Optional specific entity ID to subscribe to
+        condition:
+          type: string
+          description: Optional filter condition for the subscription
     ChangeNotification:
       type: object
       properties:
@@ -130,38 +156,12 @@ components:
         changeType:
           type: string
           description: Type of change (Add, Update, Delete)
-    NotificationSubscription:
-      type: object
-      properties:
-        handle:
-          type: string
-          description: Subscription handle for managing the subscription
-        type:
-          type: string
-          description: Entity type to subscribe to notifications for
-        id:
-          type: string
-          format: uuid
-          description: Optional specific entity ID to subscribe to
-        condition:
-          type: string
-          description: Optional filter condition for the subscription
     Error:
       type: object
       properties:
         message:
           type: string
           description: Human-readable error message
-  parameters:
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   securitySchemes:
     xrfkey:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Sense Enterprise Qlik Sense Service About Load Balancing API
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
@@ -51,15 +51,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    LoadBalancingResult:
-      type: object
-      properties:
-        engineServices:
-          type: array
-          items:
-            $ref: '#/components/schemas/EngineServicePriority'
-          description: Prioritized list of engine services
     EngineServicePriority:
       type: object
       properties:
@@ -79,6 +84,14 @@ components:
         isAppOpen:
           type: boolean
           description: Whether the app is already open on this engine
+    LoadBalancingResult:
+      type: object
+      properties:
+        engineServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngineServicePriority'
+          description: Prioritized list of engine services
     LoadBalancingRequest:
       type: object
       properties:
@@ -102,19 +115,6 @@ components:
         message:
           type: string
           description: Human-readable error message
-  responses:
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     XrfKeyParam:
       name: Xrfkey
