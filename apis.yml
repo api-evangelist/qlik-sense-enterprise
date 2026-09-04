@@ -944,6 +944,9 @@ apis:
   - type: Documentation
     url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
 common:
+  - type: CapabilityMap
+    url: capabilities/qlik-sense-enterprise-capability-edges.yml
+    name: Qlik Sense Enterprise Business Capability Map
   - type: AgenticAccess
     url: agentic-access/qlik-sense-enterprise-agentic-access.yml
   - type: DomainSecurity
