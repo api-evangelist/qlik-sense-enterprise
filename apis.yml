@@ -62,6 +62,10 @@ apis:
   tags:
   - Visualization
   - Mashup
+  - Embeddings
+  tags_raw:
+  - Visualization
+  - Mashup
   - Embedding
   properties:
   - type: Documentation
@@ -686,6 +690,8 @@ apis:
   humanURL: >-
     https://help.qlik.com/en-US/sense-developer/November2025/Subsystems/RepositoryServiceAPI/Content/Sense_RepositoryServiceAPI/RepositoryServiceAPI-Introduction.htm
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
