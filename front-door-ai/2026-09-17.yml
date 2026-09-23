@@ -1,0 +1,33 @@
+# Front Door AI Index — qlik-sense-enterprise — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: qlik-sense-enterprise
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.qlik.com
+  final_host: www.qlik.com
+  ownership: unresolved
+  owner: null
+  shares_host_with:
+  - qlik-cloud
+  - qlik-mashups
+  - qlik-sense
+  - qliksense
+  - qlikview
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 32
+  density: null
+  words: 1156
+  tiers:
+    agentic: 8
+    core: 23
+    model: 1
+  ambiguous: 1
+  top_terms:
+    AI: 23
+    agentic: 8
+    Bedrock: 1
+    intelligence: 1

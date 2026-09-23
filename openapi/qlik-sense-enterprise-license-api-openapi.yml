@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About License API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  title: Qlik Sense Enterprise Qlik Sense Licenses License API
+  description: REST API endpoints within the Qlik Sense Repository Service for managing licenses, license allocations, and user access types in Qlik Sense Enterprise. This API enables programmatic management of license enablement files (LEF), access type rules, and user license assignments including Professional, Analyzer, and Token access types.
   version: 2025.11.0
   contact:
     name: Qlik Support
@@ -10,16 +10,23 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-serviceName: qlik-sense-licenses
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}:4242/qrs
+  description: Direct QRS connection via certificate authentication
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+- url: https://{server}/qrs
+  description: QRS connection via Qlik Sense Proxy Service
   variables:
     server:
       default: localhost
       description: Qlik Sense server hostname
 security:
 - xrfkey: []
+- certificate: []
 tags:
 - name: License
   description: Manage Qlik Sense license information including LEF download and license status
@@ -87,41 +94,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    LicenseSet:
-      type: object
-      properties:
-        serial:
-          type: string
-          description: License serial number
-        control:
-          type: string
-          description: License control number
-        name:
-          type: string
-          description: License holder name
-        organization:
-          type: string
-          description: License holder organization
-        lef:
-          type: string
-          description: License enablement file content
-      required:
-      - serial
-      - control
     License:
       type: object
       properties:
@@ -172,6 +145,27 @@ components:
           description: Time limit for the license
         schemaPath:
           type: string
+    LicenseSet:
+      type: object
+      properties:
+        serial:
+          type: string
+          description: License serial number
+        control:
+          type: string
+          description: License control number
+        name:
+          type: string
+          description: License holder name
+        organization:
+          type: string
+          description: License holder organization
+        lef:
+          type: string
+          description: License enablement file content
+      required:
+      - serial
+      - control
     Error:
       type: object
       properties:
@@ -188,9 +182,25 @@ components:
         type: string
         minLength: 16
         maxLength: 16
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey
       in: header
       name: X-Qlik-Xrfkey
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters.
+    certificate:
+      type: mutualTLS
+      description: Client certificate authentication for direct QRS access on port 4242.

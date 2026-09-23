@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About Third Party API
+  title: Qlik Sense Enterprise Qlik Sense About Service Third Party…
   description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
   version: 2025.11.0
   contact:
@@ -45,13 +45,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     ThirdPartySoftware:
       type: object
@@ -85,6 +78,13 @@ components:
         type: string
         minLength: 16
         maxLength: 16
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

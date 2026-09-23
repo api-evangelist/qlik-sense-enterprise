@@ -1,8 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
-  version: 2025.11.0
+  title: Qlik Sense Enterprise About API
   contact:
     name: Qlik Support
     url: https://community.qlik.com/
@@ -10,16 +8,45 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-refined-note:
+  - x-serviceName differs across the merged source definitions and was not carried
+  - x-stabilityIndex differs across the merged source definitions and was not carried
+  version: '1.0'
+  description: 'Operations tagged About across 3 of this provider''s published API definitions: qlik-sense-enterprise-odag-service-openapi.yml, qlik-sense-enterprise-proxy-service-openapi.yml, qlik-sense-enterprise-repository-service-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}/api/odag/v1
+  description: ODAG Service API endpoint
   variables:
     server:
       default: localhost
       description: Qlik Sense server hostname
-security:
-- xrfkey: []
+- url: https://{server}:4243/qps
+  description: Backend QPS API for services to query and modify proxy state (port 4243)
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+- url: https://{server}/{virtualProxy}/qps
+  description: Frontend QPS API accessed via a virtual proxy access point (port 443)
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+    virtualProxy:
+      default: ''
+      description: Virtual proxy prefix
+- url: https://{server}:4242/qrs
+  description: Direct QRS connection via certificate authentication
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+- url: https://{server}/qrs
+  description: QRS connection via Qlik Sense Proxy Service (QPS)
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
 tags:
 - name: About
   description: ODAG service metadata
@@ -42,6 +69,15 @@ paths:
                 $ref: '#/components/schemas/OdagAbout'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - xrfkey: []
+    servers:
+    - url: https://{server}/api/odag/v1
+      description: ODAG Service API endpoint
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
   /about/description:
     get:
       operationId: getProxyApiDescription
@@ -62,6 +98,25 @@ paths:
                   $ref: '#/components/schemas/EndpointDescription'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - xrfkey: []
+      - certificate: []
+    servers:
+    - url: https://{server}:4243/qps
+      description: Backend QPS API for services to query and modify proxy state (port 4243)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/{virtualProxy}/qps
+      description: Frontend QPS API accessed via a virtual proxy access point (port 443)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+        virtualProxy:
+          default: ''
+          description: Virtual proxy prefix
   /about/api/description:
     get:
       operationId: getApiDescription
@@ -105,6 +160,23 @@ paths:
                   $ref: '#/components/schemas/EndpointDescription_2'
         '401':
           $ref: '#/components/responses/Unauthorized_3'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
   /about/api/default:
     get:
       operationId: getApiDefaults
@@ -129,6 +201,23 @@ paths:
                 type: object
         '401':
           $ref: '#/components/responses/Unauthorized_3'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
   /about/api/enums:
     get:
       operationId: getApiEnums
@@ -147,6 +236,23 @@ paths:
                 type: object
         '401':
           $ref: '#/components/responses/Unauthorized_3'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
   /cache:
     delete:
       operationId: invalidateCache
@@ -161,7 +267,126 @@ paths:
           description: Cache invalidated successfully
         '401':
           $ref: '#/components/responses/Unauthorized_3'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    OdagAbout:
+      type: object
+      properties:
+        version:
+          type: string
+          description: ODAG service version
+        stabilityIndex:
+          type: string
+          description: API stability level (e.g., stable)
+    EndpointDescription:
+      type: object
+      properties:
+        method:
+          type: string
+          description: HTTP method
+        path:
+          type: string
+          description: Endpoint path
+        description:
+          type: string
+          description: Endpoint description
+    ProxyAbout:
+      type: object
+      properties:
+        buildVersion:
+          type: string
+          description: QPS build version
+        buildDate:
+          type: string
+          description: QPS build date
+    AboutInfo:
+      type: object
+      properties:
+        buildVersion:
+          type: string
+          description: QRS API build version
+        buildDate:
+          type: string
+          description: QRS API build date
+        databaseProvider:
+          type: string
+          description: Database provider used by the repository
+        nodeType:
+          type: integer
+          description: Type of the node (0=Central, 1=Non-central)
+        sharedPersistence:
+          type: boolean
+          description: Whether shared persistence is configured
+        requiresBootstrap:
+          type: boolean
+          description: Whether the node requires bootstrapping
+    EndpointDescription_2:
+      type: object
+      properties:
+        method:
+          type: string
+          description: HTTP method
+        path:
+          type: string
+          description: Endpoint path
+        description:
+          type: string
+          description: Endpoint description
+        parameters:
+          type: array
+          items:
+            type: object
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    XrfKeyParam_2:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    XrfKeyParam_3:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   responses:
     Unauthorized:
       description: Authentication failed.
@@ -181,81 +406,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    EndpointDescription:
-      type: object
-      properties:
-        method:
-          type: string
-          description: HTTP method
-        path:
-          type: string
-          description: Endpoint path
-        description:
-          type: string
-          description: Endpoint description
-    OdagAbout:
-      type: object
-      properties:
-        version:
-          type: string
-          description: ODAG service version
-        stabilityIndex:
-          type: string
-          description: API stability level (e.g., stable)
-    EndpointDescription_2:
-      type: object
-      properties:
-        method:
-          type: string
-          description: HTTP method
-        path:
-          type: string
-          description: Endpoint path
-        description:
-          type: string
-          description: Endpoint description
-        parameters:
-          type: array
-          items:
-            type: object
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-  parameters:
-    XrfKeyParam_3:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    XrfKeyParam_2:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   securitySchemes:
     xrfkey:
       type: apiKey
       in: header
       name: X-Qlik-Xrfkey
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters.
+    certificate:
+      type: mutualTLS
+      description: Client certificate authentication using certificates exported from Qlik Sense.
+    windowsAuth:
+      type: http
+      scheme: negotiate
+      description: Windows Integrated Authentication (NTLM/Kerberos) used when connecting via the Qlik Sense Proxy Service.
+x-refined-from:
+- qlik-sense-enterprise-odag-service-openapi.yml
+- qlik-sense-enterprise-proxy-service-openapi.yml
+- qlik-sense-enterprise-repository-service-openapi.yml

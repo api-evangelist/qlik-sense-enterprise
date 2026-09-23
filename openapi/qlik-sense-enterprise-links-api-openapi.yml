@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About Links API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
-  version: 2025.11.0
+  title: Qlik Sense Enterprise Qlik Sense ODAG Service Links API
+  description: REST API for on-demand app generation (ODAG), enabling the creation of Qlik Sense apps dynamically by linking selection apps to template apps through navigation links. The ODAG service validates user selections, queues app generation requests, and manages the lifecycle of generated apps.
+  version: 3.4.1
   contact:
     name: Qlik Support
     url: https://community.qlik.com/
@@ -10,10 +10,11 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-serviceName: qlik-sense-odag-service
+  x-stabilityIndex: stable
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}/api/odag/v1
+  description: ODAG Service API endpoint
   variables:
     server:
       default: localhost
@@ -134,14 +135,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed.
       content:
         application/json:
           schema:
@@ -152,15 +153,37 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    LinkIdParam:
+      name: linkId
+      in: path
+      required: true
+      description: Unique identifier of the navigation link
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   schemas:
-    OdagLinkUpdate:
+    OdagBinding:
       type: object
       properties:
-        name:
+        selectionField:
           type: string
-          description: Updated navigation link name
-        properties:
-          $ref: '#/components/schemas/OdagLinkProperties'
+          description: Field name in the selection app
+        templateField:
+          type: string
+          description: Field name in the template app
+        selectionType:
+          type: string
+          description: Type of selection binding
     OdagLinkCreate:
       type: object
       properties:
@@ -181,6 +204,40 @@ components:
       - name
       - selectionAppId
       - templateAppId
+    OdagLinkUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated navigation link name
+        properties:
+          $ref: '#/components/schemas/OdagLinkProperties'
+    OdagLinkProperties:
+      type: object
+      properties:
+        rowEstExpr:
+          type: string
+          description: Expression for estimating the number of rows in the generated app
+        bindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/OdagBinding'
+          description: Field bindings between selection and template apps
+        genAppAccessible:
+          type: boolean
+          description: Whether generated apps are accessible to users
+        publishTo:
+          type: string
+          description: Stream ID to publish generated apps to
+        retention:
+          type: object
+          properties:
+            maxAge:
+              type: integer
+              description: Maximum age in minutes before a generated app is removed
+            maxCount:
+              type: integer
+              description: Maximum number of generated apps to retain per user
     OdagLink:
       type: object
       properties:
@@ -215,71 +272,15 @@ components:
         status:
           type: string
           description: Link status
-    OdagBinding:
-      type: object
-      properties:
-        selectionField:
-          type: string
-          description: Field name in the selection app
-        templateField:
-          type: string
-          description: Field name in the template app
-        selectionType:
-          type: string
-          description: Type of selection binding
-    OdagLinkProperties:
-      type: object
-      properties:
-        rowEstExpr:
-          type: string
-          description: Expression for estimating the number of rows in the generated app
-        bindings:
-          type: array
-          items:
-            $ref: '#/components/schemas/OdagBinding'
-          description: Field bindings between selection and template apps
-        genAppAccessible:
-          type: boolean
-          description: Whether generated apps are accessible to users
-        publishTo:
-          type: string
-          description: Stream ID to publish generated apps to
-        retention:
-          type: object
-          properties:
-            maxAge:
-              type: integer
-              description: Maximum age in minutes before a generated app is removed
-            maxCount:
-              type: integer
-              description: Maximum number of generated apps to retain per user
     Error:
       type: object
       properties:
         message:
           type: string
           description: Human-readable error message
-  parameters:
-    LinkIdParam:
-      name: linkId
-      in: path
-      required: true
-      description: Unique identifier of the navigation link
-      schema:
-        type: string
-        format: uuid
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   securitySchemes:
     xrfkey:
       type: apiKey
       in: header
       name: X-Qlik-Xrfkey
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters.

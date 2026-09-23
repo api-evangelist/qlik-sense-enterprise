@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About Access Type API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  title: Qlik Sense Enterprise Qlik Sense Licenses Access Type API
+  description: REST API endpoints within the Qlik Sense Repository Service for managing licenses, license allocations, and user access types in Qlik Sense Enterprise. This API enables programmatic management of license enablement files (LEF), access type rules, and user license assignments including Professional, Analyzer, and Token access types.
   version: 2025.11.0
   contact:
     name: Qlik Support
@@ -10,16 +10,23 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-serviceName: qlik-sense-licenses
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}:4242/qrs
+  description: Direct QRS connection via certificate authentication
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+- url: https://{server}/qrs
+  description: QRS connection via Qlik Sense Proxy Service
   variables:
     server:
       default: localhost
       description: Qlik Sense server hostname
 security:
 - xrfkey: []
+- certificate: []
 tags:
 - name: Access Type
   description: Manage user access types and license allocations
@@ -312,14 +319,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed.
       content:
         application/json:
           schema:
@@ -331,6 +338,35 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    LoginAccessAllocation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            userDirectory:
+              type: string
+            userId:
+              type: string
+        tokensUsed:
+          type: integer
+          description: Number of tokens consumed by this login access
+        schemaPath:
+          type: string
     AccessTypeAllocation:
       type: object
       properties:
@@ -366,35 +402,6 @@ components:
           description: When the quarantine period ends
         schemaPath:
           type: string
-    LoginAccessAllocation:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        user:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-            name:
-              type: string
-            userDirectory:
-              type: string
-            userId:
-              type: string
-        tokensUsed:
-          type: integer
-          description: Number of tokens consumed by this login access
-        schemaPath:
-          type: string
     AccessTypeInfo:
       type: object
       properties:
@@ -419,17 +426,20 @@ components:
         usedAnalyzer:
           type: integer
           description: Analyzer licenses in use
-    AccessTypeOverview:
+    AccessTypeAllocationCreate:
       type: object
       properties:
-        professional:
-          $ref: '#/components/schemas/AccessTypeSummary'
-        analyzer:
-          $ref: '#/components/schemas/AccessTypeSummary'
-        userAccess:
-          $ref: '#/components/schemas/AccessTypeSummary'
-        loginAccess:
-          $ref: '#/components/schemas/AccessTypeSummary'
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: User ID to allocate access to
+          required:
+          - id
+      required:
+      - user
     AccessTypeSummary:
       type: object
       properties:
@@ -448,20 +458,17 @@ components:
         excess:
           type: integer
           description: Excess allocations beyond total
-    AccessTypeAllocationCreate:
+    AccessTypeOverview:
       type: object
       properties:
-        user:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: User ID to allocate access to
-          required:
-          - id
-      required:
-      - user
+        professional:
+          $ref: '#/components/schemas/AccessTypeSummary'
+        analyzer:
+          $ref: '#/components/schemas/AccessTypeSummary'
+        userAccess:
+          $ref: '#/components/schemas/AccessTypeSummary'
+        loginAccess:
+          $ref: '#/components/schemas/AccessTypeSummary'
     Error:
       type: object
       properties:
@@ -469,6 +476,14 @@ components:
           type: string
           description: Human-readable error message
   parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
     XrfKeyParam:
       name: Xrfkey
       in: query
@@ -485,17 +500,12 @@ components:
       description: Filter expression
       schema:
         type: string
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     xrfkey:
       type: apiKey
       in: header
       name: X-Qlik-Xrfkey
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters.
+    certificate:
+      type: mutualTLS
+      description: Client certificate authentication for direct QRS access on port 4242.

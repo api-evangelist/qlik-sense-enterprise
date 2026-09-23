@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About License Rule API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  title: Qlik Sense Enterprise Qlik Sense Licenses License Rule API
+  description: REST API endpoints within the Qlik Sense Repository Service for managing licenses, license allocations, and user access types in Qlik Sense Enterprise. This API enables programmatic management of license enablement files (LEF), access type rules, and user license assignments including Professional, Analyzer, and Token access types.
   version: 2025.11.0
   contact:
     name: Qlik Support
@@ -10,16 +10,23 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-serviceName: qlik-sense-licenses
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}:4242/qrs
+  description: Direct QRS connection via certificate authentication
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+- url: https://{server}/qrs
+  description: QRS connection via Qlik Sense Proxy Service
   variables:
     server:
       default: localhost
       description: Qlik Sense server hostname
 security:
 - xrfkey: []
+- certificate: []
 tags:
 - name: License Rule
   description: Manage license rules that control automatic license assignment
@@ -89,43 +96,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: Filter expression
-      schema:
-        type: string
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     LicenseRule:
       type: object
@@ -173,9 +155,37 @@ components:
         message:
           type: string
           description: Human-readable error message
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: Filter expression
+      schema:
+        type: string
   securitySchemes:
     xrfkey:
       type: apiKey
       in: header
       name: X-Qlik-Xrfkey
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters.
+    certificate:
+      type: mutualTLS
+      description: Client certificate authentication for direct QRS access on port 4242.

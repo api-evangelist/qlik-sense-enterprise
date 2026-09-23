@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About Requests API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
-  version: 2025.11.0
+  title: Qlik Sense Enterprise Qlik Sense ODAG Service Requests API
+  description: REST API for on-demand app generation (ODAG), enabling the creation of Qlik Sense apps dynamically by linking selection apps to template apps through navigation links. The ODAG service validates user selections, queues app generation requests, and manages the lifecycle of generated apps.
+  version: 3.4.1
   contact:
     name: Qlik Support
     url: https://community.qlik.com/
@@ -10,10 +10,11 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-serviceName: qlik-sense-odag-service
+  x-stabilityIndex: stable
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}/api/odag/v1
+  description: ODAG Service API endpoint
   variables:
     server:
       default: localhost
@@ -223,18 +224,44 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    LinkIdParam:
+      name: linkId
+      in: path
+      required: true
+      description: Unique identifier of the navigation link
+      schema:
+        type: string
+        format: uuid
+    RequestIdParam:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier of the ODAG request
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   schemas:
     OdagRequest:
       type: object
@@ -288,12 +315,6 @@ components:
         selectionState:
           type: object
           description: Captured selection state from the selection app
-    OdagRequestUpdate:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Updated status for the request
     OdagRequestCreate:
       type: object
       properties:
@@ -308,35 +329,15 @@ components:
         message:
           type: string
           description: Human-readable error message
-  parameters:
-    LinkIdParam:
-      name: linkId
-      in: path
-      required: true
-      description: Unique identifier of the navigation link
-      schema:
-        type: string
-        format: uuid
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    RequestIdParam:
-      name: requestId
-      in: path
-      required: true
-      description: Unique identifier of the ODAG request
-      schema:
-        type: string
-        format: uuid
+    OdagRequestUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Updated status for the request
   securitySchemes:
     xrfkey:
       type: apiKey
       in: header
       name: X-Qlik-Xrfkey
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters.

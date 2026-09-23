@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About Health API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  title: Qlik Sense Enterprise Qlik Sense Proxy Service Health API
+  description: REST API for managing user sessions, virtual proxies, load balancing, and authentication within the Qlik Sense Proxy Service (QPS). The QPS manages site authentication, session handling, and load balancing across Qlik Sense Engine Services. The API exposes endpoints for the Session module, Load Balancing module, and Proxy operations.
   version: 2025.11.0
   contact:
     name: Qlik Support
@@ -10,16 +10,26 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-serviceName: qlik-sense-proxy-service
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}:4243/qps
+  description: Backend QPS API for services to query and modify proxy state (port 4243)
   variables:
     server:
       default: localhost
       description: Qlik Sense server hostname
+- url: https://{server}/{virtualProxy}/qps
+  description: Frontend QPS API accessed via a virtual proxy access point (port 443)
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+    virtualProxy:
+      default: ''
+      description: Virtual proxy prefix
 security:
 - xrfkey: []
+- certificate: []
 tags:
 - name: Health
   description: Health check and service status endpoints
@@ -43,3 +53,6 @@ components:
       in: header
       name: X-Qlik-Xrfkey
       description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+    certificate:
+      type: mutualTLS
+      description: Client certificate authentication using certificates exported from Qlik Sense.

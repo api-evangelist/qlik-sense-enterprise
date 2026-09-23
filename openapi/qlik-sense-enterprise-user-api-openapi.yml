@@ -1,7 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About User API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  title: Qlik Sense Enterprise User API
   version: 2025.11.0
   contact:
     name: Qlik Support
@@ -10,16 +9,37 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-refined-note:
+  - x-serviceName differs across the merged source definitions and was not carried
+  description: 'Operations tagged User across 2 of this provider''s published API definitions: qlik-sense-enterprise-proxy-service-openapi.yml, qlik-sense-enterprise-repository-service-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}:4243/qps
+  description: Backend QPS API for services to query and modify proxy state (port 4243)
   variables:
     server:
       default: localhost
       description: Qlik Sense server hostname
-security:
-- xrfkey: []
+- url: https://{server}/{virtualProxy}/qps
+  description: Frontend QPS API accessed via a virtual proxy access point (port 443)
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+    virtualProxy:
+      default: ''
+      description: Virtual proxy prefix
+- url: https://{server}:4242/qrs
+  description: Direct QRS connection via certificate authentication
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+- url: https://{server}/qrs
+  description: QRS connection via Qlik Sense Proxy Service (QPS)
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
 tags:
 - name: User
   description: Manage proxy sessions by user identity
@@ -58,6 +78,9 @@ paths:
           $ref: '#/components/responses/NotFound'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - xrfkey: []
+      - certificate: []
     delete:
       operationId: deleteUserSessions
       summary: Qlik Sense Enterprise Delete all sessions for a user
@@ -85,6 +108,25 @@ paths:
           $ref: '#/components/responses/NotFound'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - xrfkey: []
+      - certificate: []
+    servers:
+    - url: https://{server}:4243/qps
+      description: Backend QPS API for services to query and modify proxy state (port 4243)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/{virtualProxy}/qps
+      description: Frontend QPS API accessed via a virtual proxy access point (port 443)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+        virtualProxy:
+          default: ''
+          description: Virtual proxy prefix
   /user/{userDirectory}/{userId}/session-count:
     get:
       operationId: getUserSessionCount
@@ -119,6 +161,25 @@ paths:
                     description: Number of active sessions
         '401':
           $ref: '#/components/responses/Unauthorized'
+      security:
+      - xrfkey: []
+      - certificate: []
+    servers:
+    - url: https://{server}:4243/qps
+      description: Backend QPS API for services to query and modify proxy state (port 4243)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/{virtualProxy}/qps
+      description: Frontend QPS API accessed via a virtual proxy access point (port 443)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+        virtualProxy:
+          default: ''
+          description: Virtual proxy prefix
   /user:
     get:
       operationId: getUsers
@@ -142,6 +203,23 @@ paths:
                   $ref: '#/components/schemas/UserCondensed'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
   /user/full:
     get:
       operationId: getUsersFull
@@ -165,6 +243,23 @@ paths:
                   $ref: '#/components/schemas/User'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
   /user/count:
     get:
       operationId: getUsersCount
@@ -184,6 +279,23 @@ paths:
                 $ref: '#/components/schemas/EntityCount'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
   /user/{id}:
     get:
       operationId: getUser
@@ -206,6 +318,10 @@ paths:
           $ref: '#/components/responses/NotFound_2'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
     put:
       operationId: updateUser
       summary: Qlik Sense Enterprise Update user
@@ -234,6 +350,10 @@ paths:
           $ref: '#/components/responses/Conflict'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
     delete:
       operationId: deleteUser
       summary: Qlik Sense Enterprise Delete user
@@ -250,10 +370,39 @@ paths:
           $ref: '#/components/responses/NotFound_2'
         '401':
           $ref: '#/components/responses/Unauthorized_2'
+      security:
+      - xrfkey: []
+      - certificate: []
+      - windowsAuth: []
+    servers:
+    - url: https://{server}:4242/qrs
+      description: Direct QRS connection via certificate authentication
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
+    - url: https://{server}/qrs
+      description: QRS connection via Qlik Sense Proxy Service (QPS)
+      variables:
+        server:
+          default: localhost
+          description: Qlik Sense server hostname
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound_2:
+      description: The requested entity was not found.
       content:
         application/json:
           schema:
@@ -270,75 +419,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound_2:
-      description: The requested entity was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to the returned entities.
-      schema:
-        type: boolean
-        default: false
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
-      schema:
-        type: string
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by, optionally followed by asc or desc.
-      schema:
-        type: string
   schemas:
-    UserCondensed:
+    SessionAttribute:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
         name:
           type: string
-        userDirectory:
-          type: string
-        userId:
-          type: string
-        privileges:
+          description: Attribute name
+        values:
           type: array
           items:
             type: string
+          description: Attribute values
     Session:
       type: object
       properties:
@@ -368,57 +460,12 @@ components:
           items:
             $ref: '#/components/schemas/SessionAttribute'
           description: Session attributes including roles and groups
-    CustomPropertyCondensed:
+    Error:
       type: object
       properties:
-        id:
+        message:
           type: string
-          format: uuid
-        name:
-          type: string
-        valueType:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    SessionAttribute:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Attribute name
-        values:
-          type: array
-          items:
-            type: string
-          description: Attribute values
-    CustomPropertyValue:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        modifiedByUserName:
-          type: string
-        definition:
-          $ref: '#/components/schemas/CustomPropertyCondensed'
-        value:
-          type: string
-        schemaPath:
-          type: string
-    EntityCount:
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Number of entities matching the filter
+          description: Human-readable error message
     TagCondensed:
       type: object
       properties:
@@ -488,15 +535,115 @@ components:
       required:
       - userId
       - userDirectory
-    Error:
+    UserCondensed:
       type: object
       properties:
-        message:
+        id:
           type: string
-          description: Human-readable error message
+          format: uuid
+        name:
+          type: string
+        userDirectory:
+          type: string
+        userId:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
   securitySchemes:
     xrfkey:
       type: apiKey
       in: header
       name: X-Qlik-Xrfkey
       description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+    certificate:
+      type: mutualTLS
+      description: Client certificate authentication using certificates exported from Qlik Sense.
+    windowsAuth:
+      type: http
+      scheme: negotiate
+      description: Windows Integrated Authentication (NTLM/Kerberos) used when connecting via the Qlik Sense Proxy Service.
+x-refined-from:
+- qlik-sense-enterprise-proxy-service-openapi.yml
+- qlik-sense-enterprise-repository-service-openapi.yml

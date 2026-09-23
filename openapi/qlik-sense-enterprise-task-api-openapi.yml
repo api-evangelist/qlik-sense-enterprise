@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Qlik Sense Enterprise Qlik Sense Service About Task API
-  description: REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.
+  title: Qlik Sense Enterprise Qlik Sense Repository Service Task API
+  description: Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console (QMC). The QRS API provides CRUD operations for all entity types in the Qlik Sense repository, enabling programmatic administration of a Qlik Sense Enterprise deployment.
   version: 2025.11.0
   contact:
     name: Qlik Support
@@ -10,16 +10,24 @@ info:
     name: Proprietary
     url: https://www.qlik.com/us/legal/terms-of-use
   x-providerName: Qlik
-  x-serviceName: qlik-sense-about-service
+  x-serviceName: qlik-sense-repository-service
 servers:
-- url: https://{server}/api/about/v1
-  description: About Service API via HTTPS
+- url: https://{server}:4242/qrs
+  description: Direct QRS connection via certificate authentication
+  variables:
+    server:
+      default: localhost
+      description: Qlik Sense server hostname
+- url: https://{server}/qrs
+  description: QRS connection via Qlik Sense Proxy Service (QPS)
   variables:
     server:
       default: localhost
       description: Qlik Sense server hostname
 security:
 - xrfkey: []
+- certificate: []
+- windowsAuth: []
 tags:
 - name: Task
   description: Start and stop tasks including reload and external program tasks
@@ -101,19 +109,27 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested entity was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
     XrfKeyParam:
       name: Xrfkey
       in: query
@@ -123,14 +139,6 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
   schemas:
     Error:
       type: object
@@ -144,3 +152,10 @@ components:
       in: header
       name: X-Qlik-Xrfkey
       description: Cross-site request forgery prevention key. Must be 16 arbitrary characters and must match the Xrfkey query parameter.
+    certificate:
+      type: mutualTLS
+      description: Client certificate authentication using certificates exported from Qlik Sense. Used when connecting directly to QRS on port 4242.
+    windowsAuth:
+      type: http
+      scheme: negotiate
+      description: Windows Integrated Authentication (NTLM/Kerberos) used when connecting via the Qlik Sense Proxy Service.
