@@ -318,25 +318,31 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: Filter expression
+      schema:
+        type: string
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   schemas:
     LoginAccessAllocation:
       type: object
@@ -367,6 +373,20 @@ components:
           description: Number of tokens consumed by this login access
         schemaPath:
           type: string
+    AccessTypeAllocationCreate:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: User ID to allocate access to
+          required:
+          - id
+      required:
+      - user
     AccessTypeAllocation:
       type: object
       properties:
@@ -402,6 +422,12 @@ components:
           description: When the quarantine period ends
         schemaPath:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     AccessTypeInfo:
       type: object
       properties:
@@ -426,20 +452,6 @@ components:
         usedAnalyzer:
           type: integer
           description: Analyzer licenses in use
-    AccessTypeAllocationCreate:
-      type: object
-      properties:
-        user:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: User ID to allocate access to
-          required:
-          - id
-      required:
-      - user
     AccessTypeSummary:
       type: object
       properties:
@@ -469,37 +481,25 @@ components:
           $ref: '#/components/schemas/AccessTypeSummary'
         loginAccess:
           $ref: '#/components/schemas/AccessTypeSummary'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-  parameters:
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: Filter expression
-      schema:
-        type: string
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

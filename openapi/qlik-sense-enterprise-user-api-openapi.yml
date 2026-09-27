@@ -389,20 +389,14 @@ paths:
           description: Qlik Sense server hostname
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed or Xrfkey missing/mismatched.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound_2:
-      description: The requested entity was not found.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -415,6 +409,12 @@ components:
             $ref: '#/components/schemas/Error'
     Conflict:
       description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound_2:
+      description: The requested entity was not found.
       content:
         application/json:
           schema:
@@ -466,18 +466,6 @@ components:
         message:
           type: string
           description: Human-readable error message
-    TagCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
     User:
       type: object
       properties:
@@ -535,6 +523,38 @@ components:
       required:
       - userId
       - userDirectory
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
     UserCondensed:
       type: object
       properties:
@@ -551,12 +571,6 @@ components:
           type: array
           items:
             type: string
-    EntityCount:
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Number of entities matching the filter
     CustomPropertyValue:
       type: object
       properties:
@@ -577,20 +591,6 @@ components:
           type: string
         schemaPath:
           type: string
-    CustomPropertyCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        valueType:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
   parameters:
     XrfKeyParam:
       name: Xrfkey
@@ -609,6 +609,20 @@ components:
       schema:
         type: string
         format: uuid
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
     PrivilegesParam:
       name: privileges
       in: query
@@ -617,20 +631,6 @@ components:
       schema:
         type: boolean
         default: false
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by, optionally followed by asc or desc.
-      schema:
-        type: string
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
-      schema:
-        type: string
   securitySchemes:
     xrfkey:
       type: apiKey

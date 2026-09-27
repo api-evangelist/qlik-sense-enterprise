@@ -105,14 +105,14 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

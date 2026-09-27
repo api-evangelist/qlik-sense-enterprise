@@ -188,7 +188,119 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the data connection
+      schema:
+        type: string
+        format: uuid
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using syntax: property operator value (e.g., name eq ''MyConnection'')'
+      schema:
+        type: string
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by
+      schema:
+        type: string
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to returned entities
+      schema:
+        type: boolean
+        default: false
   schemas:
+    DataConnectionCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Data connection name
+        connectionstring:
+          type: string
+          description: Connection string for the data source
+        type:
+          type: string
+          description: Connection provider type
+        logOn:
+          type: integer
+          description: Logon mode
+        architecture:
+          type: integer
+          description: Connection architecture
+        username:
+          type: string
+          description: Username for connection authentication
+        password:
+          type: string
+          description: Password for connection authentication
+      required:
+      - name
+      - connectionstring
+      - type
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    DataConnectionCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectionstring:
+          type: string
+        type:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    UserCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        userDirectory:
+          type: string
+        userId:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
     TagCondensed:
       type: object
       properties:
@@ -266,56 +378,6 @@ components:
       - name
       - connectionstring
       - type
-    DataConnectionCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Data connection name
-        connectionstring:
-          type: string
-          description: Connection string for the data source
-        type:
-          type: string
-          description: Connection provider type
-        logOn:
-          type: integer
-          description: Logon mode
-        architecture:
-          type: integer
-          description: Connection architecture
-        username:
-          type: string
-          description: Username for connection authentication
-        password:
-          type: string
-          description: Password for connection authentication
-      required:
-      - name
-      - connectionstring
-      - type
-    UserCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        userDirectory:
-          type: string
-        userId:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    EntityCount:
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Number of entities matching the filter
     CustomPropertyValue:
       type: object
       properties:
@@ -332,35 +394,7 @@ components:
               type: string
         value:
           type: string
-    DataConnectionCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        connectionstring:
-          type: string
-        type:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
   responses:
-    NotFound:
-      description: The requested data connection was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed or Xrfkey missing.
       content:
@@ -373,52 +407,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested data connection was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request parameters or body.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the data connection
-      schema:
-        type: string
-        format: uuid
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to returned entities
-      schema:
-        type: boolean
-        default: false
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by
-      schema:
-        type: string
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using syntax: property operator value (e.g., name eq ''MyConnection'')'
-      schema:
-        type: string
   securitySchemes:
     xrfkey:
       type: apiKey

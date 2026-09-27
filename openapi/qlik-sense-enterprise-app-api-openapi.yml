@@ -424,6 +424,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
     IdParam:
       name: id
       in: path
@@ -448,13 +455,6 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by, optionally followed by asc or desc.
-      schema:
-        type: string
     PrivilegesParam:
       name: privileges
       in: query
@@ -463,104 +463,32 @@ components:
       schema:
         type: boolean
         default: false
+  responses:
+    Conflict:
+      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    UserCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        userDirectory:
-          type: string
-        userId:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    EntityCount:
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Number of entities matching the filter
-    StreamCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    ExportResult:
-      type: object
-      properties:
-        exportToken:
-          type: string
-          description: Token to use for downloading the exported file
-        downloadPath:
-          type: string
-          description: Relative path to download the exported application file
-        schemaPath:
-          type: string
-    CustomPropertyValue:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        modifiedByUserName:
-          type: string
-        definition:
-          $ref: '#/components/schemas/CustomPropertyCondensed'
-        value:
-          type: string
-        schemaPath:
-          type: string
-    CustomPropertyCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        valueType:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-    TagCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
     App:
       type: object
       properties:
@@ -663,31 +591,103 @@ components:
           type: array
           items:
             type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request. The request body or parameters are malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested entity was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Conflict:
-      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    StreamCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    ExportResult:
+      type: object
+      properties:
+        exportToken:
+          type: string
+          description: Token to use for downloading the exported file
+        downloadPath:
+          type: string
+          description: Relative path to download the exported application file
+        schemaPath:
+          type: string
+    UserCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        userDirectory:
+          type: string
+        userId:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    CustomPropertyCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        valueType:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    TagCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
   securitySchemes:
     xrfkey:
       type: apiKey

@@ -56,6 +56,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     LicenseAuditRequest:
       type: object
@@ -69,6 +76,12 @@ components:
         userFilter:
           type: string
           description: Filter for users
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     LicenseAuditResult:
       type: object
       properties:
@@ -79,12 +92,6 @@ components:
           description: Audit result matrix showing rule evaluations
         schemaPath:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
   parameters:
     XrfKeyParam:
       name: Xrfkey
@@ -95,13 +102,6 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-  responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

@@ -143,25 +143,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested entity was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request. The request body or parameters are malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     IdParam:
       name: id
@@ -171,14 +152,13 @@ components:
       schema:
         type: string
         format: uuid
-    PrivilegesParam:
-      name: privileges
+    FilterParam:
+      name: filter
       in: query
       required: false
-      description: Whether to append privilege information to the returned entities.
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
       schema:
-        type: boolean
-        default: false
+        type: string
     XrfKeyParam:
       name: Xrfkey
       in: query
@@ -188,13 +168,14 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-    FilterParam:
-      name: filter
+    PrivilegesParam:
+      name: privileges
       in: query
       required: false
-      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      description: Whether to append privilege information to the returned entities.
       schema:
-        type: string
+        type: boolean
+        default: false
   schemas:
     CustomProperty:
       type: object
@@ -256,6 +237,25 @@ components:
         message:
           type: string
           description: Human-readable error message
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

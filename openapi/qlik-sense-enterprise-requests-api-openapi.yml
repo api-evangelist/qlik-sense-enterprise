@@ -223,33 +223,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    LinkIdParam:
-      name: linkId
-      in: path
-      required: true
-      description: Unique identifier of the navigation link
-      schema:
-        type: string
-        format: uuid
     RequestIdParam:
       name: requestId
       in: path
       required: true
       description: Unique identifier of the ODAG request
+      schema:
+        type: string
+        format: uuid
+    LinkIdParam:
+      name: linkId
+      in: path
+      required: true
+      description: Unique identifier of the navigation link
       schema:
         type: string
         format: uuid
@@ -262,6 +249,19 @@ components:
         type: string
         minLength: 16
         maxLength: 16
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     OdagRequest:
       type: object
@@ -315,14 +315,6 @@ components:
         selectionState:
           type: object
           description: Captured selection state from the selection app
-    OdagRequestCreate:
-      type: object
-      properties:
-        selectionState:
-          type: object
-          description: Current selection state from the selection app to use for generating the on-demand app
-      required:
-      - selectionState
     Error:
       type: object
       properties:
@@ -335,6 +327,14 @@ components:
         status:
           type: string
           description: Updated status for the request
+    OdagRequestCreate:
+      type: object
+      properties:
+        selectionState:
+          type: object
+          description: Current selection state from the selection app to use for generating the on-demand app
+      required:
+      - selectionState
   securitySchemes:
     xrfkey:
       type: apiKey

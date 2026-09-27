@@ -145,6 +145,12 @@ components:
           description: Time limit for the license
         schemaPath:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     LicenseSet:
       type: object
       properties:
@@ -166,22 +172,6 @@ components:
       required:
       - serial
       - control
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-  parameters:
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   responses:
     Unauthorized:
       description: Authentication failed.
@@ -195,6 +185,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   securitySchemes:
     xrfkey:
       type: apiKey

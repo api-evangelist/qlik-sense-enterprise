@@ -61,7 +61,28 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    LoadBalancingResult:
+      type: object
+      properties:
+        engineServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngineServicePriority'
+          description: Prioritized list of engine services
     EngineServicePriority:
       type: object
       properties:
@@ -81,14 +102,12 @@ components:
         isAppOpen:
           type: boolean
           description: Whether the app is already open on this engine
-    LoadBalancingResult:
+    Error:
       type: object
       properties:
-        engineServices:
-          type: array
-          items:
-            $ref: '#/components/schemas/EngineServicePriority'
-          description: Prioritized list of engine services
+        message:
+          type: string
+          description: Human-readable error message
     LoadBalancingRequest:
       type: object
       properties:
@@ -106,25 +125,6 @@ components:
       - userDirectory
       - userId
       - appId
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-  responses:
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     XrfKeyParam:
       name: Xrfkey

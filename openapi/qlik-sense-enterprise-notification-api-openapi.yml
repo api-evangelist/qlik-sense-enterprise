@@ -104,23 +104,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    NotificationSubscription:
-      type: object
-      properties:
-        handle:
-          type: string
-          description: Subscription handle for managing the subscription
-        type:
-          type: string
-          description: Entity type to subscribe to notifications for
-        id:
-          type: string
-          format: uuid
-          description: Optional specific entity ID to subscribe to
-        condition:
-          type: string
-          description: Optional filter condition for the subscription
     Error:
       type: object
       properties:
@@ -147,6 +144,22 @@ components:
         changeType:
           type: string
           description: Type of change (Add, Update, Delete)
+    NotificationSubscription:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Subscription handle for managing the subscription
+        type:
+          type: string
+          description: Entity type to subscribe to notifications for
+        id:
+          type: string
+          format: uuid
+          description: Optional specific entity ID to subscribe to
+        condition:
+          type: string
+          description: Optional filter condition for the subscription
   parameters:
     XrfKeyParam:
       name: Xrfkey
@@ -157,19 +170,6 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-  responses:
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request. The request body or parameters are malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

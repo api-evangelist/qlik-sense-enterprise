@@ -55,13 +55,14 @@ components:
         type: string
         minLength: 16
         maxLength: 16
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
     Component:
       type: object
       properties:
@@ -87,13 +88,12 @@ components:
           type: string
           format: uri
           description: URI of the component service
-  responses:
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     xrfkey:
       type: apiKey
