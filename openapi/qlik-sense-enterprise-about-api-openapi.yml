@@ -285,6 +285,25 @@ paths:
           default: localhost
           description: Qlik Sense server hostname
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_2:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized_3:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     XrfKeyParam:
       name: Xrfkey
@@ -313,32 +332,7 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-  responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized_2:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized_3:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
     OdagAbout:
       type: object
       properties:
@@ -348,6 +342,12 @@ components:
         stabilityIndex:
           type: string
           description: API stability level (e.g., stable)
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     ProxyAbout:
       type: object
       properties:
@@ -369,22 +369,6 @@ components:
         description:
           type: string
           description: Endpoint description
-    EndpointDescription_2:
-      type: object
-      properties:
-        method:
-          type: string
-          description: HTTP method
-        path:
-          type: string
-          description: Endpoint path
-        description:
-          type: string
-          description: Endpoint description
-        parameters:
-          type: array
-          items:
-            type: object
     AboutInfo:
       type: object
       properties:
@@ -406,6 +390,22 @@ components:
         requiresBootstrap:
           type: boolean
           description: Whether the node requires bootstrapping
+    EndpointDescription_2:
+      type: object
+      properties:
+        method:
+          type: string
+          description: HTTP method
+        path:
+          type: string
+          description: Endpoint path
+        description:
+          type: string
+          description: Endpoint description
+        parameters:
+          type: array
+          items:
+            type: object
   securitySchemes:
     xrfkey:
       type: apiKey

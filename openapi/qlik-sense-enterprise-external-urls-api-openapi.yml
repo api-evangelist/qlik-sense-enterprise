@@ -43,6 +43,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     XrfKeyParam:
       name: Xrfkey
@@ -53,20 +60,7 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-  responses:
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
     ExternalUrls:
       type: object
       properties:
@@ -86,6 +80,12 @@ components:
           type: string
           format: uri
           description: External URL for result access
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     xrfkey:
       type: apiKey

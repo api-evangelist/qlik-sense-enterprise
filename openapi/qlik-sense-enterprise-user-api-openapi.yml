@@ -388,6 +388,46 @@ paths:
           default: localhost
           description: Qlik Sense server hostname
 components:
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Authentication failed or Xrfkey missing/mismatched.
@@ -420,6 +460,12 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     SessionAttribute:
       type: object
       properties:
@@ -460,12 +506,12 @@ components:
           items:
             $ref: '#/components/schemas/SessionAttribute'
           description: Session attributes including roles and groups
-    Error:
+    EntityCount:
       type: object
       properties:
-        message:
-          type: string
-          description: Human-readable error message
+        value:
+          type: integer
+          description: Number of entities matching the filter
     User:
       type: object
       properties:
@@ -523,12 +569,26 @@ components:
       required:
       - userId
       - userDirectory
-    EntityCount:
+    CustomPropertyValue:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
         value:
-          type: integer
-          description: Number of entities matching the filter
+          type: string
+        schemaPath:
+          type: string
     CustomPropertyCondensed:
       type: object
       properties:
@@ -571,66 +631,6 @@ components:
           type: array
           items:
             type: string
-    CustomPropertyValue:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        modifiedByUserName:
-          type: string
-        definition:
-          $ref: '#/components/schemas/CustomPropertyCondensed'
-        value:
-          type: string
-        schemaPath:
-          type: string
-  parameters:
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
-      schema:
-        type: string
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by, optionally followed by asc or desc.
-      schema:
-        type: string
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to the returned entities.
-      schema:
-        type: boolean
-        default: false
   securitySchemes:
     xrfkey:
       type: apiKey

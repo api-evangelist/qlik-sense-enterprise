@@ -134,72 +134,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    OdagBinding:
-      type: object
-      properties:
-        selectionField:
-          type: string
-          description: Field name in the selection app
-        templateField:
-          type: string
-          description: Field name in the template app
-        selectionType:
-          type: string
-          description: Type of selection binding
-    OdagLinkCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Navigation link name
-        selectionAppId:
-          type: string
-          format: uuid
-          description: ID of the selection app
-        templateAppId:
-          type: string
-          format: uuid
-          description: ID of the template app
-        properties:
-          $ref: '#/components/schemas/OdagLinkProperties'
-      required:
-      - name
-      - selectionAppId
-      - templateAppId
-    OdagLinkUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated navigation link name
-        properties:
-          $ref: '#/components/schemas/OdagLinkProperties'
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
     OdagLink:
       type: object
       properties:
@@ -234,6 +169,32 @@ components:
         status:
           type: string
           description: Link status
+    OdagBinding:
+      type: object
+      properties:
+        selectionField:
+          type: string
+          description: Field name in the selection app
+        templateField:
+          type: string
+          description: Field name in the template app
+        selectionType:
+          type: string
+          description: Type of selection binding
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    OdagLinkUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated navigation link name
+        properties:
+          $ref: '#/components/schemas/OdagLinkProperties'
     OdagLinkProperties:
       type: object
       properties:
@@ -260,6 +221,45 @@ components:
             maxCount:
               type: integer
               description: Maximum number of generated apps to retain per user
+    OdagLinkCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Navigation link name
+        selectionAppId:
+          type: string
+          format: uuid
+          description: ID of the selection app
+        templateAppId:
+          type: string
+          format: uuid
+          description: ID of the template app
+        properties:
+          $ref: '#/components/schemas/OdagLinkProperties'
+      required:
+      - name
+      - selectionAppId
+      - templateAppId
+  responses:
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     LinkIdParam:
       name: linkId

@@ -138,14 +138,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
     FilterParam:
       name: filter
       in: query
@@ -153,6 +145,14 @@ components:
       description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
       schema:
         type: string
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
     XrfKeyParam:
       name: Xrfkey
       in: query
@@ -162,42 +162,35 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to the returned entities.
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
       schema:
-        type: boolean
-        default: false
+        type: string
+        format: uuid
+  responses:
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     ExtensionCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    CustomPropertyCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        valueType:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    TagCondensed:
       type: object
       properties:
         id:
@@ -215,7 +208,27 @@ components:
         message:
           type: string
           description: Human-readable error message
-    UserCondensed:
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        modifiedByUserName:
+          type: string
+        definition:
+          $ref: '#/components/schemas/CustomPropertyCondensed'
+        value:
+          type: string
+        schemaPath:
+          type: string
+    CustomPropertyCondensed:
       type: object
       properties:
         id:
@@ -223,9 +236,7 @@ components:
           format: uuid
         name:
           type: string
-        userDirectory:
-          type: string
-        userId:
+        valueType:
           type: string
         privileges:
           type: array
@@ -266,45 +277,34 @@ components:
           type: string
       required:
       - name
-    CustomPropertyValue:
+    TagCondensed:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        createdDate:
+        name:
           type: string
-          format: date-time
-        modifiedDate:
+        privileges:
+          type: array
+          items:
+            type: string
+    UserCondensed:
+      type: object
+      properties:
+        id:
           type: string
-          format: date-time
-        modifiedByUserName:
+          format: uuid
+        name:
           type: string
-        definition:
-          $ref: '#/components/schemas/CustomPropertyCondensed'
-        value:
+        userDirectory:
           type: string
-        schemaPath:
+        userId:
           type: string
-  responses:
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested entity was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request. The request body or parameters are malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        privileges:
+          type: array
+          items:
+            type: string
   securitySchemes:
     xrfkey:
       type: apiKey

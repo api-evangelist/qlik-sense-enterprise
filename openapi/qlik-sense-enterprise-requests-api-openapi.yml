@@ -223,32 +223,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    RequestIdParam:
-      name: requestId
-      in: path
-      required: true
-      description: Unique identifier of the ODAG request
-      schema:
-        type: string
-        format: uuid
-    LinkIdParam:
-      name: linkId
-      in: path
-      required: true
-      description: Unique identifier of the navigation link
-      schema:
-        type: string
-        format: uuid
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   responses:
     Unauthorized:
       description: Authentication failed.
@@ -263,6 +237,12 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     OdagRequest:
       type: object
       properties:
@@ -315,18 +295,6 @@ components:
         selectionState:
           type: object
           description: Captured selection state from the selection app
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-    OdagRequestUpdate:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Updated status for the request
     OdagRequestCreate:
       type: object
       properties:
@@ -335,6 +303,38 @@ components:
           description: Current selection state from the selection app to use for generating the on-demand app
       required:
       - selectionState
+    OdagRequestUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Updated status for the request
+  parameters:
+    LinkIdParam:
+      name: linkId
+      in: path
+      required: true
+      description: Unique identifier of the navigation link
+      schema:
+        type: string
+        format: uuid
+    RequestIdParam:
+      name: requestId
+      in: path
+      required: true
+      description: Unique identifier of the ODAG request
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   securitySchemes:
     xrfkey:
       type: apiKey

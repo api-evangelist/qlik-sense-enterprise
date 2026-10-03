@@ -115,14 +115,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
     FilterParam:
       name: filter
       in: query
@@ -130,6 +122,14 @@ components:
       description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
       schema:
         type: string
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
     XrfKeyParam:
       name: Xrfkey
       in: query
@@ -139,14 +139,14 @@ components:
         type: string
         minLength: 16
         maxLength: 16
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to the returned entities.
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
       schema:
-        type: boolean
-        default: false
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
@@ -161,6 +161,12 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     ContentLibraryCondensed:
       type: object
       properties:
@@ -173,12 +179,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
   securitySchemes:
     xrfkey:
       type: apiKey
