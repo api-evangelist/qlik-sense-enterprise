@@ -423,72 +423,45 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
-      schema:
-        type: string
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to the returned entities.
-      schema:
-        type: boolean
-        default: false
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by, optionally followed by asc or desc.
-      schema:
-        type: string
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-  responses:
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Conflict:
-      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested entity was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request. The request body or parameters are malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    ExportResult:
+      type: object
+      properties:
+        exportToken:
+          type: string
+          description: Token to use for downloading the exported file
+        downloadPath:
+          type: string
+          description: Relative path to download the exported application file
+        schemaPath:
+          type: string
+    AppCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        appId:
+          type: string
+        publishTime:
+          type: string
+          format: date-time
+        published:
+          type: boolean
+        stream:
+          $ref: '#/components/schemas/StreamCondensed'
+        savedInProductVersion:
+          type: string
+        migrationHash:
+          type: string
+        availabilityStatus:
+          type: integer
+        privileges:
+          type: array
+          items:
+            type: string
     CustomPropertyCondensed:
       type: object
       properties:
@@ -503,45 +476,6 @@ components:
           type: array
           items:
             type: string
-    ExportResult:
-      type: object
-      properties:
-        exportToken:
-          type: string
-          description: Token to use for downloading the exported file
-        downloadPath:
-          type: string
-          description: Relative path to download the exported application file
-        schemaPath:
-          type: string
-    UserCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        userDirectory:
-          type: string
-        userId:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    EntityCount:
-      type: object
-      properties:
-        value:
-          type: integer
-          description: Number of entities matching the filter
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
     App:
       type: object
       properties:
@@ -617,6 +551,30 @@ components:
           description: Schema path for this entity type
       required:
       - name
+    StreamCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
+    EntityCount:
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Number of entities matching the filter
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
     CustomPropertyValue:
       type: object
       properties:
@@ -637,6 +595,22 @@ components:
           type: string
         schemaPath:
           type: string
+    UserCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        userDirectory:
+          type: string
+        userId:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
     TagCondensed:
       type: object
       properties:
@@ -649,45 +623,71 @@ components:
           type: array
           items:
             type: string
-    StreamCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    AppCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        appId:
-          type: string
-        publishTime:
-          type: string
-          format: date-time
-        published:
-          type: boolean
-        stream:
-          $ref: '#/components/schemas/StreamCondensed'
-        savedInProductVersion:
-          type: string
-        migrationHash:
-          type: string
-        availabilityStatus:
-          type: integer
-        privileges:
-          type: array
-          items:
-            type: string
+  parameters:
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to the returned entities.
+      schema:
+        type: boolean
+        default: false
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by, optionally followed by asc or desc.
+      schema:
+        type: string
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  responses:
+    Conflict:
+      description: Update conflict. The entity has been modified since it was last retrieved. Fetch the latest version and retry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request. The request body or parameters are malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested entity was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

@@ -61,21 +61,37 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    LoadBalancingResult:
+    LoadBalancingRequest:
       type: object
       properties:
-        engineServices:
-          type: array
-          items:
-            $ref: '#/components/schemas/EngineServicePriority'
-          description: Prioritized list of engine services
-    Error:
-      type: object
-      properties:
-        message:
+        userDirectory:
           type: string
-          description: Human-readable error message
+          description: User directory name
+        userId:
+          type: string
+          description: User identifier
+        appId:
+          type: string
+          format: uuid
+          description: Application ID to load balance for
+      required:
+      - userDirectory
+      - userId
+      - appId
     EngineServicePriority:
       type: object
       properties:
@@ -95,36 +111,20 @@ components:
         isAppOpen:
           type: boolean
           description: Whether the app is already open on this engine
-    LoadBalancingRequest:
+    Error:
       type: object
       properties:
-        userDirectory:
+        message:
           type: string
-          description: User directory name
-        userId:
-          type: string
-          description: User identifier
-        appId:
-          type: string
-          format: uuid
-          description: Application ID to load balance for
-      required:
-      - userDirectory
-      - userId
-      - appId
-  responses:
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+          description: Human-readable error message
+    LoadBalancingResult:
+      type: object
+      properties:
+        engineServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngineServicePriority'
+          description: Prioritized list of engine services
   parameters:
     XrfKeyParam:
       name: Xrfkey

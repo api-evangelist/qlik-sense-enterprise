@@ -94,47 +94,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-    LicenseSet:
-      type: object
-      properties:
-        serial:
-          type: string
-          description: License serial number
-        control:
-          type: string
-          description: License control number
-        name:
-          type: string
-          description: License holder name
-        organization:
-          type: string
-          description: License holder organization
-        lef:
-          type: string
-          description: License enablement file content
-      required:
-      - serial
-      - control
     License:
       type: object
       properties:
@@ -185,6 +145,46 @@ components:
           description: Time limit for the license
         schemaPath:
           type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    LicenseSet:
+      type: object
+      properties:
+        serial:
+          type: string
+          description: License serial number
+        control:
+          type: string
+          description: License control number
+        name:
+          type: string
+          description: License holder name
+        organization:
+          type: string
+          description: License holder organization
+        lef:
+          type: string
+          description: License enablement file content
+      required:
+      - serial
+      - control
+  responses:
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     XrfKeyParam:
       name: Xrfkey

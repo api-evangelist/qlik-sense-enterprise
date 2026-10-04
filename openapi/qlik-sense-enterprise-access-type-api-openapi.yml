@@ -318,7 +318,61 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: Filter expression
+      schema:
+        type: string
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the entity
+      schema:
+        type: string
+        format: uuid
   schemas:
+    LoginAccessAllocation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        modifiedDate:
+          type: string
+          format: date-time
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+            userDirectory:
+              type: string
+            userId:
+              type: string
+        tokensUsed:
+          type: integer
+          description: Number of tokens consumed by this login access
+        schemaPath:
+          type: string
     AccessTypeAllocationCreate:
       type: object
       properties:
@@ -333,6 +387,30 @@ components:
           - id
       required:
       - user
+    AccessTypeInfo:
+      type: object
+      properties:
+        totalTokens:
+          type: integer
+          description: Total number of tokens available
+        availableTokens:
+          type: integer
+          description: Number of tokens currently available
+        usedTokens:
+          type: integer
+          description: Number of tokens in use
+        totalProfessional:
+          type: integer
+          description: Total professional access licenses
+        usedProfessional:
+          type: integer
+          description: Professional licenses in use
+        totalAnalyzer:
+          type: integer
+          description: Total analyzer access licenses
+        usedAnalyzer:
+          type: integer
+          description: Analyzer licenses in use
     AccessTypeOverview:
       type: object
       properties:
@@ -344,12 +422,24 @@ components:
           $ref: '#/components/schemas/AccessTypeSummary'
         loginAccess:
           $ref: '#/components/schemas/AccessTypeSummary'
-    Error:
+    AccessTypeSummary:
       type: object
       properties:
-        message:
-          type: string
-          description: Human-readable error message
+        total:
+          type: integer
+          description: Total licenses of this type
+        allocated:
+          type: integer
+          description: Currently allocated licenses
+        available:
+          type: integer
+          description: Currently available licenses
+        quarantined:
+          type: integer
+          description: Licenses in quarantine period
+        excess:
+          type: integer
+          description: Excess allocations beyond total
     AccessTypeAllocation:
       type: object
       properties:
@@ -385,109 +475,13 @@ components:
           description: When the quarantine period ends
         schemaPath:
           type: string
-    AccessTypeSummary:
+    Error:
       type: object
       properties:
-        total:
-          type: integer
-          description: Total licenses of this type
-        allocated:
-          type: integer
-          description: Currently allocated licenses
-        available:
-          type: integer
-          description: Currently available licenses
-        quarantined:
-          type: integer
-          description: Licenses in quarantine period
-        excess:
-          type: integer
-          description: Excess allocations beyond total
-    AccessTypeInfo:
-      type: object
-      properties:
-        totalTokens:
-          type: integer
-          description: Total number of tokens available
-        availableTokens:
-          type: integer
-          description: Number of tokens currently available
-        usedTokens:
-          type: integer
-          description: Number of tokens in use
-        totalProfessional:
-          type: integer
-          description: Total professional access licenses
-        usedProfessional:
-          type: integer
-          description: Professional licenses in use
-        totalAnalyzer:
-          type: integer
-          description: Total analyzer access licenses
-        usedAnalyzer:
-          type: integer
-          description: Analyzer licenses in use
-    LoginAccessAllocation:
-      type: object
-      properties:
-        id:
+        message:
           type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-        modifiedDate:
-          type: string
-          format: date-time
-        user:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-            name:
-              type: string
-            userDirectory:
-              type: string
-            userId:
-              type: string
-        tokensUsed:
-          type: integer
-          description: Number of tokens consumed by this login access
-        schemaPath:
-          type: string
-  parameters:
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: Filter expression
-      schema:
-        type: string
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the entity
-      schema:
-        type: string
-        format: uuid
+          description: Human-readable error message
   responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -496,6 +490,12 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed.
       content:
         application/json:
           schema:

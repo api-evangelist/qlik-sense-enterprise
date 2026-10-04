@@ -223,20 +223,21 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    OdagRequestCreate:
+      type: object
+      properties:
+        selectionState:
+          type: object
+          description: Current selection state from the selection app to use for generating the on-demand app
+      required:
+      - selectionState
+    OdagRequestUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Updated status for the request
     Error:
       type: object
       properties:
@@ -295,21 +296,29 @@ components:
         selectionState:
           type: object
           description: Captured selection state from the selection app
-    OdagRequestCreate:
-      type: object
-      properties:
-        selectionState:
-          type: object
-          description: Current selection state from the selection app to use for generating the on-demand app
-      required:
-      - selectionState
-    OdagRequestUpdate:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Updated status for the request
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
     LinkIdParam:
       name: linkId
       in: path
@@ -326,15 +335,6 @@ components:
       schema:
         type: string
         format: uuid
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   securitySchemes:
     xrfkey:
       type: apiKey

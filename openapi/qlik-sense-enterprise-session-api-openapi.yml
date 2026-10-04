@@ -104,47 +104,20 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
   responses:
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing/mismatched.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing/mismatched.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-    SessionAttribute:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Attribute name
-        values:
-          type: array
-          items:
-            type: string
-          description: Attribute values
     Session:
       type: object
       properties:
@@ -174,6 +147,33 @@ components:
           items:
             $ref: '#/components/schemas/SessionAttribute'
           description: Session attributes including roles and groups
+    SessionAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Attribute name
+        values:
+          type: array
+          items:
+            type: string
+          description: Attribute values
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+  parameters:
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
   securitySchemes:
     xrfkey:
       type: apiKey

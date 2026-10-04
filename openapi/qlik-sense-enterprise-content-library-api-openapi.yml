@@ -115,13 +115,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
-      schema:
-        type: string
     PrivilegesParam:
       name: privileges
       in: query
@@ -130,6 +123,13 @@ components:
       schema:
         type: boolean
         default: false
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq ''MyApp'''
+      schema:
+        type: string
     XrfKeyParam:
       name: Xrfkey
       in: query
@@ -148,14 +148,14 @@ components:
         type: string
         format: uuid
   responses:
-    Unauthorized:
-      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
+    NotFound:
+      description: The requested entity was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested entity was not found.
+    Unauthorized:
+      description: Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.
       content:
         application/json:
           schema:
