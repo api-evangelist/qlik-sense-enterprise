@@ -1,0 +1,55 @@
+slug: qlik-sense-enterprise
+provider: Qlik Sense Enterprise
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: App
+  spec_file: qlik-sense-enterprise-app-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.8
+  evidence: PUT /app/{id}/publish  publishApp  Qlik Sense Enterprise Publish application to a stream;
+    POST /app/{id}/reload  reloadApp  Reload application data
+  reason: Administration of Qlik Sense analytics applications — import, copy, export, publish to streams,
+    reload data — is lifecycle management of BI/analytics artefacts, i.e. Analytics & BI delivery.
+- tag: Security Rule
+  spec_file: qlik-sense-enterprise-security-rule-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /securityrule  createSecurityRule  Qlik Sense Enterprise Create security rule; schema
+    SecurityRule
+  reason: QMC security rules define who may access which repository resources, so CRUD over them is authorisation/access
+    policy administration within Identity & Access Management.
+- tag: User
+  spec_file: qlik-sense-enterprise-user-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /user/{userDirectory}/{userId}  getUserSessions  Get sessions for a user; DELETE /user/{id}  deleteUser  Delete
+    user
+  reason: Platform user records and their active sessions are managed here — account lifecycle and session
+    revocation — which is Identity & Access Management rather than any HR capability.
+- tag: User Directory
+  spec_file: qlik-sense-enterprise-user-directory-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /userdirectory/syncuserdirectories  syncUserDirectories  Qlik Sense Enterprise Synchronize
+    user directories
+  reason: Management and synchronisation of connected user directories is directory integration for authentication/authorisation,
+    squarely Identity & Access Management.
