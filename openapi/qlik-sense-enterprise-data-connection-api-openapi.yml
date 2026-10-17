@@ -188,72 +188,45 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Conflict:
-      description: Update conflict due to concurrent modification.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested data connection was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters or body.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or Xrfkey missing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    PrivilegesParam:
-      name: privileges
-      in: query
-      required: false
-      description: Whether to append privilege information to returned entities
-      schema:
-        type: boolean
-        default: false
-    FilterParam:
-      name: filter
-      in: query
-      required: false
-      description: 'Filter expression using syntax: property operator value (e.g., name eq ''MyConnection'')'
-      schema:
-        type: string
-    OrderByParam:
-      name: orderby
-      in: query
-      required: false
-      description: Property name to order results by
-      schema:
-        type: string
-    XrfKeyParam:
-      name: Xrfkey
-      in: query
-      required: true
-      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
-      schema:
-        type: string
-        minLength: 16
-        maxLength: 16
-    IdParam:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier (GUID) of the data connection
-      schema:
-        type: string
-        format: uuid
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    CustomPropertyValue:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        definition:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+        value:
+          type: string
+    DataConnectionCondensed:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        connectionstring:
+          type: string
+        type:
+          type: string
+        privileges:
+          type: array
+          items:
+            type: string
     EntityCount:
       type: object
       properties:
@@ -311,22 +284,6 @@ components:
           type: string
           format: uuid
         name:
-          type: string
-        privileges:
-          type: array
-          items:
-            type: string
-    DataConnectionCondensed:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        connectionstring:
-          type: string
-        type:
           type: string
         privileges:
           type: array
@@ -397,28 +354,71 @@ components:
       - name
       - connectionstring
       - type
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-    CustomPropertyValue:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        definition:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuid
-            name:
-              type: string
-        value:
-          type: string
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier (GUID) of the data connection
+      schema:
+        type: string
+        format: uuid
+    OrderByParam:
+      name: orderby
+      in: query
+      required: false
+      description: Property name to order results by
+      schema:
+        type: string
+    PrivilegesParam:
+      name: privileges
+      in: query
+      required: false
+      description: Whether to append privilege information to returned entities
+      schema:
+        type: boolean
+        default: false
+    FilterParam:
+      name: filter
+      in: query
+      required: false
+      description: 'Filter expression using syntax: property operator value (e.g., name eq ''MyConnection'')'
+      schema:
+        type: string
+    XrfKeyParam:
+      name: Xrfkey
+      in: query
+      required: true
+      description: Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 16
+  responses:
+    BadRequest:
+      description: Invalid request parameters or body.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or Xrfkey missing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: Update conflict due to concurrent modification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested data connection was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     xrfkey:
       type: apiKey

@@ -95,6 +95,33 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+    LicenseSet:
+      type: object
+      properties:
+        serial:
+          type: string
+          description: License serial number
+        control:
+          type: string
+          description: License control number
+        name:
+          type: string
+          description: License holder name
+        organization:
+          type: string
+          description: License holder organization
+        lef:
+          type: string
+          description: License enablement file content
+      required:
+      - serial
+      - control
     License:
       type: object
       properties:
@@ -145,33 +172,6 @@ components:
           description: Time limit for the license
         schemaPath:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Human-readable error message
-    LicenseSet:
-      type: object
-      properties:
-        serial:
-          type: string
-          description: License serial number
-        control:
-          type: string
-          description: License control number
-        name:
-          type: string
-          description: License holder name
-        organization:
-          type: string
-          description: License holder organization
-        lef:
-          type: string
-          description: License enablement file content
-      required:
-      - serial
-      - control
   responses:
     BadRequest:
       description: Invalid request parameters or body.
