@@ -950,6 +950,8 @@ apis:
   - type: Documentation
     url: https://help.qlik.com/en-US/sense/Content/Sense_Helpsites/On-demand-apps.htm
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/qlik-sense-enterprise/overview
   - type: Plans
     url: plans/qlik-sense-enterprise-plans-pricing.yml
   - type: RateLimits
