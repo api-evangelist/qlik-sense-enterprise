@@ -1,233 +1,1062 @@
 {
+  "info": {
+    "_postman_id": "2df498cc-d4c5-452b-a06b-87fc529bbd81",
+    "name": "Qlik Sense Enterprise Qlik Sense Repository Service\u2026",
+    "description": "Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console (QMC). The QRS API provides CRUD operations for all entity types in the Qlik Sense repository, enabling programmatic administration of a Qlik Sense Enterprise deployment.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:35:15.000Z",
+    "updatedAt": "2026-10-21T20:35:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2df498cc-d4c5-452b-a06b-87fc529bbd81"
+  },
   "item": [
     {
-      "id": "17665ef0-1f22-474d-b370-2c6a509a569e",
-      "name": "Security Rule",
-      "description": {
-        "content": "Manage security rules and access control",
-        "type": "text/plain"
-      },
+      "name": "securityrule",
       "item": [
         {
-          "id": "46dd4c4c-1920-464d-bb49-4e88597d6662",
+          "name": "full",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise List security rules with full details",
+              "id": "ee53f5f1-47e9-414a-8b5b-82ee97ed1526",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule/full?Xrfkey=<string>&filter=<string>&privileges=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule",
+                    "full"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether to append privilege information to the returned entities.",
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of all security rules in full format including the rule definition, actions, and resource filter."
+              },
+              "response": [
+                {
+                  "id": "b91538a4-1dc7-4110-92ac-c836561b7e2d",
+                  "name": "Full list of security rules returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/full?Xrfkey=<string>&filter=<string>&privileges=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        "full"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                          "key": "filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to append privilege information to the returned entities.",
+                          "key": "privileges",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"rule\": \"<string>\",\n    \"resourceFilter\": \"<string>\",\n    \"actions\": \"<integer>\",\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"modifiedByUserName\": \"<string>\",\n    \"category\": \"<string>\",\n    \"type\": \"<integer>\",\n    \"comment\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"ruleContext\": \"<integer>\",\n    \"tags\": [\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"privileges\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"privileges\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schemaPath\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"rule\": \"<string>\",\n    \"resourceFilter\": \"<string>\",\n    \"actions\": \"<integer>\",\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"modifiedByUserName\": \"<string>\",\n    \"category\": \"<string>\",\n    \"type\": \"<integer>\",\n    \"comment\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"ruleContext\": \"<integer>\",\n    \"tags\": [\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"privileges\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"privileges\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ],\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schemaPath\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-b91538a4-1dc7-4110-92ac-c836561b7e2d"
+                },
+                {
+                  "id": "3b6173f1-517b-4360-b4b5-2496f2da96b4",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/full?Xrfkey=<string>&filter=<string>&privileges=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        "full"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                          "key": "filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to append privilege information to the returned entities.",
+                          "key": "privileges",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-3b6173f1-517b-4360-b4b5-2496f2da96b4"
+                }
+              ],
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-ee53f5f1-47e9-414a-8b5b-82ee97ed1526"
+            }
+          ],
+          "id": "310c8462-ba1e-4e42-9256-bcd322a09e88",
+          "createdAt": "2026-10-21T20:35:15.000Z",
+          "updatedAt": "2026-10-21T20:35:15.000Z",
+          "uid": "35240-310c8462-ba1e-4e42-9256-bcd322a09e88"
+        },
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise Get security rule by ID",
+              "id": "17847256-30aa-4b6e-a562-319bf6e1e2ac",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "099539c8-647b-4a34-85a7-0f0c8760a639",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    }
+                  ]
+                },
+                "description": "Retrieves a single security rule by its unique identifier."
+              },
+              "response": [
+                {
+                  "id": "abf4b26e-8e1f-419f-8436-cfc05c0e9a79",
+                  "name": "Security rule returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-abf4b26e-8e1f-419f-8436-cfc05c0e9a79"
+                },
+                {
+                  "id": "cd920ae8-33ed-4879-b76e-2409f3dddb72",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-cd920ae8-33ed-4879-b76e-2409f3dddb72"
+                },
+                {
+                  "id": "cb073d9b-2340-4f50-98a3-56029dc1e70f",
+                  "name": "The requested entity was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-cb073d9b-2340-4f50-98a3-56029dc1e70f"
+                }
+              ],
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-17847256-30aa-4b6e-a562-319bf6e1e2ac"
+            },
+            {
+              "name": "Qlik Sense Enterprise Update security rule",
+              "id": "ff21530e-9f3f-4f31-9229-0af615379d33",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "bad5353f-a8b3-49e4-a928-771e15ea8d06",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    }
+                  ]
+                },
+                "description": "Updates an existing security rule definition."
+              },
+              "response": [
+                {
+                  "id": "279e450b-08a9-4d40-9abc-9e537f0bf803",
+                  "name": "Security rule updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-279e450b-08a9-4d40-9abc-9e537f0bf803"
+                },
+                {
+                  "id": "226fc699-aee0-4393-8586-8576eea1ec35",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-226fc699-aee0-4393-8586-8576eea1ec35"
+                },
+                {
+                  "id": "d0e50ac5-a5c5-42be-81bc-29adba509b0e",
+                  "name": "The requested entity was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-d0e50ac5-a5c5-42be-81bc-29adba509b0e"
+                }
+              ],
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-ff21530e-9f3f-4f31-9229-0af615379d33"
+            },
+            {
+              "name": "Qlik Sense Enterprise Delete security rule",
+              "id": "47613d7d-d2c4-4c6c-b6fc-8f97486f580e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "bc1f0de3-99e3-4c38-bb0a-4dd473398c2a",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes a security rule."
+              },
+              "response": [
+                {
+                  "id": "c0438686-a774-45d9-8bc6-18650c8aa162",
+                  "name": "Security rule deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-c0438686-a774-45d9-8bc6-18650c8aa162"
+                },
+                {
+                  "id": "e9dbeb6b-a9f7-4e34-8907-159863480d17",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-e9dbeb6b-a9f7-4e34-8907-159863480d17"
+                },
+                {
+                  "id": "cd2f13a4-0dab-474b-b86d-f7ae4610896c",
+                  "name": "The requested entity was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/securityrule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "securityrule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:16.000Z",
+                  "updatedAt": "2026-10-21T20:35:16.000Z",
+                  "uid": "35240-cd2f13a4-0dab-474b-b86d-f7ae4610896c"
+                }
+              ],
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-47613d7d-d2c4-4c6c-b6fc-8f97486f580e"
+            }
+          ],
+          "id": "7d15c127-04e2-48e7-bffb-a14a4a836b7b",
+          "createdAt": "2026-10-21T20:35:15.000Z",
+          "updatedAt": "2026-10-21T20:35:15.000Z",
+          "uid": "35240-7d15c127-04e2-48e7-bffb-a14a4a836b7b"
+        },
+        {
           "name": "Qlik Sense Enterprise List security rules",
+          "id": "487e369f-207f-49ff-9347-5e48843c7e22",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise List security rules",
-            "description": {
-              "content": "Retrieves a list of all security rules in condensed format.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "securityrule"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                },
-                {
-                  "disabled": false,
-                  "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
-                },
-                {
-                  "disabled": false,
-                  "key": "privileges",
-                  "value": "false",
-                  "description": "Whether to append privilege information to the returned entities."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "9448c8bd-fc14-4139-b113-6e5965d31a4d",
-              "name": "List of security rules returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "privileges",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"752f7560-ffce-8819-8379-4385b30f2f9a\",\n    \"name\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"d01535c0-a68f-3005-2247-a274030fa89a\",\n    \"name\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "43f69bad-831c-41ee-b1da-f0d32013cb4b",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "privileges",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "baf7d018-6b7c-4ee2-91bc-15d65a5ee37a",
-          "name": "Qlik Sense Enterprise Create security rule",
-          "request": {
-            "name": "Qlik Sense Enterprise Create security rule",
-            "description": {
-              "content": "Creates a new security rule that controls access to Qlik Sense resources based on conditions.",
-              "type": "text/plain"
-            },
             "url": {
-              "path": [
-                "securityrule"
-              ],
+              "raw": "{{baseUrl}}/securityrule?Xrfkey=<string>&filter=<string>&privileges=false",
               "host": [
                 "{{baseUrl}}"
               ],
+              "path": [
+                "securityrule"
+              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                   "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
+                  "value": "<string>"
+                },
                 {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
+                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Whether to append privilege information to the returned entities.",
+                  "key": "privileges",
+                  "value": "false"
                 }
               ]
             },
+            "description": "Retrieves a list of all security rules in condensed format."
+          },
+          "response": [
+            {
+              "id": "d27a8557-bef3-4315-92ff-64c234c954dd",
+              "name": "List of security rules returned successfully",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule?Xrfkey=<string>&filter=<string>&privileges=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether to append privilege information to the returned entities.",
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-d27a8557-bef3-4315-92ff-64c234c954dd"
+            },
+            {
+              "id": "9bc272c4-470a-4cc9-8049-7d1a5724f69c",
+              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule?Xrfkey=<string>&filter=<string>&privileges=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether to append privilege information to the returned entities.",
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-9bc272c4-470a-4cc9-8049-7d1a5724f69c"
+            }
+          ],
+          "createdAt": "2026-10-21T20:35:16.000Z",
+          "updatedAt": "2026-10-21T20:35:16.000Z",
+          "uid": "35240-487e369f-207f-49ff-9347-5e48843c7e22"
+        },
+        {
+          "name": "Qlik Sense Enterprise Create security rule",
+          "id": "bf54b586-c7e5-4b4f-86ae-fafdd26e15b5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -238,1194 +1067,234 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/securityrule?Xrfkey=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "securityrule"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                  "key": "Xrfkey",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a new security rule that controls access to Qlik Sense resources based on conditions."
           },
           "response": [
             {
-              "id": "ef17441b-045f-4087-9d62-f78d4e7bedcc",
+              "id": "f8abaa1d-cffd-4c13-9017-5c39524c2dbc",
               "name": "Security rule created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"2f96ce9b-db1c-4b7e-4697-69cb70b906c4\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"bc6b287a-9238-cae9-b94e-1f06920ae1c6\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"name\": \"string\",\n  \"rule\": \"string\",\n  \"resourceFilter\": \"string\",\n  \"actions\": 3844,\n  \"id\": \"a6333619-472b-22a5-3e7b-2128e5ae97cb\",\n  \"createdDate\": \"2024-04-03T03:17:28.696Z\",\n  \"modifiedDate\": \"2007-01-06T10:14:16.495Z\",\n  \"modifiedByUserName\": \"string\",\n  \"category\": \"string\",\n  \"type\": 1423,\n  \"comment\": \"string\",\n  \"disabled\": true,\n  \"ruleContext\": 1611,\n  \"tags\": [\n    {\n      \"id\": \"7cbd5eab-add1-2191-d48d-89d4986d2447\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"18b1f9a2-a7c5-6c00-8cbd-e6ff9c063761\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-f8abaa1d-cffd-4c13-9017-5c39524c2dbc"
             },
             {
-              "id": "79f7b4b8-3cdf-49bb-b10e-427eca0ed53c",
+              "id": "21703468-6e9e-437a-a630-576cba1b0c02",
               "name": "Invalid request. The request body or parameters are malformed.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"2f96ce9b-db1c-4b7e-4697-69cb70b906c4\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"bc6b287a-9238-cae9-b94e-1f06920ae1c6\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/securityrule?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "securityrule"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-21703468-6e9e-437a-a630-576cba1b0c02"
             },
             {
-              "id": "45cb9aef-03b1-44ba-9ec2-0cac4a5f21ac",
+              "id": "8aac88aa-f44e-4e9e-97f6-e10374773f35",
               "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/securityrule?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "securityrule"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"2f96ce9b-db1c-4b7e-4697-69cb70b906c4\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"bc6b287a-9238-cae9-b94e-1f06920ae1c6\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:35:16.000Z",
+              "updatedAt": "2026-10-21T20:35:16.000Z",
+              "uid": "35240-8aac88aa-f44e-4e9e-97f6-e10374773f35"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1063f0db-d57a-429b-b2ae-de23f7cd9777",
-          "name": "Qlik Sense Enterprise List security rules with full details",
-          "request": {
-            "name": "Qlik Sense Enterprise List security rules with full details",
-            "description": {
-              "content": "Retrieves a list of all security rules in full format including the rule definition, actions, and resource filter.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "securityrule",
-                "full"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                },
-                {
-                  "disabled": false,
-                  "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
-                },
-                {
-                  "disabled": false,
-                  "key": "privileges",
-                  "value": "false",
-                  "description": "Whether to append privilege information to the returned entities."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2a9dc52e-91f6-41bf-83fc-57257f033915",
-              "name": "Full list of security rules returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    "full"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "privileges",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"name\": \"string\",\n    \"rule\": \"string\",\n    \"resourceFilter\": \"string\",\n    \"actions\": 5208,\n    \"id\": \"8b66941b-b528-0cc3-d737-4d4b19edae4b\",\n    \"createdDate\": \"2024-11-20T16:59:17.353Z\",\n    \"modifiedDate\": \"1993-10-08T04:10:34.828Z\",\n    \"modifiedByUserName\": \"string\",\n    \"category\": \"string\",\n    \"type\": 4272,\n    \"comment\": \"string\",\n    \"disabled\": true,\n    \"ruleContext\": 4295,\n    \"tags\": [\n      {\n        \"id\": \"bca5f0aa-d471-0cbd-bf9a-da7cd6507103\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"id\": \"8ee61aac-4863-7e65-fde5-30eab3c46b58\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"schemaPath\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"rule\": \"string\",\n    \"resourceFilter\": \"string\",\n    \"actions\": 5923,\n    \"id\": \"2d417fca-9da9-51d5-2b0e-85dbf3858c7d\",\n    \"createdDate\": \"1999-10-04T10:38:34.674Z\",\n    \"modifiedDate\": \"1965-08-14T22:45:48.074Z\",\n    \"modifiedByUserName\": \"string\",\n    \"category\": \"string\",\n    \"type\": 4409,\n    \"comment\": \"string\",\n    \"disabled\": false,\n    \"ruleContext\": 8310,\n    \"tags\": [\n      {\n        \"id\": \"3ebeb916-cdfa-62c8-36e7-43aea9fd3986\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"id\": \"458643f8-ff28-23c6-b691-d8b405d86b5e\",\n        \"name\": \"string\",\n        \"privileges\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"schemaPath\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "12d1e597-7e0c-4e1a-a0bb-76ca68d15f01",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    "full"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "privileges",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ea11ccd0-ad6d-4d33-b8fb-129937de6ee7",
-          "name": "Qlik Sense Enterprise Get security rule by ID",
-          "request": {
-            "name": "Qlik Sense Enterprise Get security rule by ID",
-            "description": {
-              "content": "Retrieves a single security rule by its unique identifier.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "securityrule",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "79191dbc-f58e-4e24-b951-7ae052e6b45d",
-              "name": "Security rule returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"rule\": \"string\",\n  \"resourceFilter\": \"string\",\n  \"actions\": 3844,\n  \"id\": \"a6333619-472b-22a5-3e7b-2128e5ae97cb\",\n  \"createdDate\": \"2024-04-03T03:17:28.696Z\",\n  \"modifiedDate\": \"2007-01-06T10:14:16.495Z\",\n  \"modifiedByUserName\": \"string\",\n  \"category\": \"string\",\n  \"type\": 1423,\n  \"comment\": \"string\",\n  \"disabled\": true,\n  \"ruleContext\": 1611,\n  \"tags\": [\n    {\n      \"id\": \"7cbd5eab-add1-2191-d48d-89d4986d2447\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"18b1f9a2-a7c5-6c00-8cbd-e6ff9c063761\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a261f606-e0e2-488f-8f7a-314bef6f9deb",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "011c2207-3431-4abb-a487-1093aa3bc54f",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9f29fca5-3704-4aec-9fbf-535a7cf941bf",
-          "name": "Qlik Sense Enterprise Update security rule",
-          "request": {
-            "name": "Qlik Sense Enterprise Update security rule",
-            "description": {
-              "content": "Updates an existing security rule definition.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "securityrule",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"privileges\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "eff0798b-1478-4303-9295-d7c0b650d9bc",
-              "name": "Security rule updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"2f96ce9b-db1c-4b7e-4697-69cb70b906c4\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"bc6b287a-9238-cae9-b94e-1f06920ae1c6\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"rule\": \"string\",\n  \"resourceFilter\": \"string\",\n  \"actions\": 3844,\n  \"id\": \"a6333619-472b-22a5-3e7b-2128e5ae97cb\",\n  \"createdDate\": \"2024-04-03T03:17:28.696Z\",\n  \"modifiedDate\": \"2007-01-06T10:14:16.495Z\",\n  \"modifiedByUserName\": \"string\",\n  \"category\": \"string\",\n  \"type\": 1423,\n  \"comment\": \"string\",\n  \"disabled\": true,\n  \"ruleContext\": 1611,\n  \"tags\": [\n    {\n      \"id\": \"7cbd5eab-add1-2191-d48d-89d4986d2447\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"18b1f9a2-a7c5-6c00-8cbd-e6ff9c063761\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5b3079be-38e6-4769-9c16-074030b67fac",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"2f96ce9b-db1c-4b7e-4697-69cb70b906c4\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"bc6b287a-9238-cae9-b94e-1f06920ae1c6\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ced3a4f0-b740-4b9a-bd3d-74134451d111",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"ruleContext\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"2f96ce9b-db1c-4b7e-4697-69cb70b906c4\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"bc6b287a-9238-cae9-b94e-1f06920ae1c6\",\n      \"name\": \"string\",\n      \"privileges\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0d65e1b4-041a-46e3-a6a6-50b740a4e97c",
-          "name": "Qlik Sense Enterprise Delete security rule",
-          "request": {
-            "name": "Qlik Sense Enterprise Delete security rule",
-            "description": {
-              "content": "Permanently deletes a security rule.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "securityrule",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "5a7202a7-b3bb-45de-ad49-169dade9a055",
-              "name": "Security rule deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d31d2845-a19e-4ba6-ba03-b574f8920c07",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "00db34c4-3493-4346-b110-855b4438ec80",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "securityrule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:35:16.000Z",
+          "updatedAt": "2026-10-21T20:35:16.000Z",
+          "uid": "35240-bf54b586-c7e5-4b4f-86ae-fafdd26e15b5"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "f561cb92-1f35-43b7-b8da-dabaf566a105",
+      "createdAt": "2026-10-21T20:35:15.000Z",
+      "updatedAt": "2026-10-21T20:35:15.000Z",
+      "uid": "35240-f561cb92-1f35-43b7-b8da-dabaf566a105"
     }
   ],
   "auth": {
@@ -1433,25 +1302,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "3c148bce-9a18-46a1-944c-50332ae7df7e",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Security Rule API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4242/qrs"
     }
-  }
+  ]
 }

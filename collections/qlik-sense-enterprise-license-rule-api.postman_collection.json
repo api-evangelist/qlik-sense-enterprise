@@ -1,627 +1,558 @@
 {
+  "info": {
+    "_postman_id": "b81c82c3-bdc4-470c-86d0-75052649dd9f",
+    "name": "Qlik Sense Enterprise Qlik Sense Licenses License Rule API",
+    "description": "REST API endpoints within the Qlik Sense Repository Service for managing licenses, license allocations, and user access types in Qlik Sense Enterprise. This API enables programmatic management of license enablement files (LEF), access type rules, and user license assignments including Professional, Analyzer, and Token access types.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:34:29.000Z",
+    "updatedAt": "2026-10-21T20:34:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b81c82c3-bdc4-470c-86d0-75052649dd9f"
+  },
   "item": [
     {
-      "id": "63a1659c-a6a9-4260-8615-518204a25a3a",
-      "name": "License Rule",
-      "description": {
-        "content": "Manage license rules that control automatic license assignment",
-        "type": "text/plain"
-      },
+      "name": "licenserule",
       "item": [
         {
-          "id": "52120b0d-8514-4866-8aa7-d11946f4a55c",
+          "name": "full",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise List license rules with full details",
+              "id": "f88ba625-546f-4784-9323-9c06e317f83e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/licenserule/full?Xrfkey=<string>&filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "licenserule",
+                    "full"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter expression",
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of all license rules in full format including rule definitions and actions."
+              },
+              "response": [
+                {
+                  "id": "511dcbed-ba2c-4059-85aa-f4ddc18511f7",
+                  "name": "Full license rules returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/licenserule/full?Xrfkey=<string>&filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "licenserule",
+                        "full"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter expression",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"modifiedByUserName\": \"<string>\",\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"type\": \"<integer>\",\n    \"rule\": \"<string>\",\n    \"resourceFilter\": \"<string>\",\n    \"actions\": \"<integer>\",\n    \"comment\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"schemaPath\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"modifiedByUserName\": \"<string>\",\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"type\": \"<integer>\",\n    \"rule\": \"<string>\",\n    \"resourceFilter\": \"<string>\",\n    \"actions\": \"<integer>\",\n    \"comment\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"schemaPath\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-10-21T20:34:30.000Z",
+                  "updatedAt": "2026-10-21T20:34:30.000Z",
+                  "uid": "35240-511dcbed-ba2c-4059-85aa-f4ddc18511f7"
+                },
+                {
+                  "id": "41be8a7c-2238-4caf-a8cd-144f9afc6fb3",
+                  "name": "Authentication failed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/licenserule/full?Xrfkey=<string>&filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "licenserule",
+                        "full"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter expression",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:30.000Z",
+                  "updatedAt": "2026-10-21T20:34:30.000Z",
+                  "uid": "35240-41be8a7c-2238-4caf-a8cd-144f9afc6fb3"
+                }
+              ],
+              "createdAt": "2026-10-21T20:34:30.000Z",
+              "updatedAt": "2026-10-21T20:34:30.000Z",
+              "uid": "35240-f88ba625-546f-4784-9323-9c06e317f83e"
+            }
+          ],
+          "id": "035064f9-07cb-4fa6-a3f4-3872f0a49088",
+          "createdAt": "2026-10-21T20:34:30.000Z",
+          "updatedAt": "2026-10-21T20:34:30.000Z",
+          "uid": "35240-035064f9-07cb-4fa6-a3f4-3872f0a49088"
+        },
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise Get license rule by ID",
+              "id": "b9376a8c-af8d-4b2a-8fac-1edfbd01ae91",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/licenserule/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "licenserule",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "f98ff507-12fb-47fb-9a6c-6a692f0ee096",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    }
+                  ]
+                },
+                "description": "Retrieves a single license rule by its unique identifier."
+              },
+              "response": [
+                {
+                  "id": "7f01a31b-f19b-4ef3-8381-8f445e8f7f0a",
+                  "name": "License rule returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/licenserule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "licenserule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"name\": \"<string>\",\n  \"category\": \"<string>\",\n  \"type\": \"<integer>\",\n  \"rule\": \"<string>\",\n  \"resourceFilter\": \"<string>\",\n  \"actions\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"disabled\": \"<boolean>\",\n  \"schemaPath\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:30.000Z",
+                  "updatedAt": "2026-10-21T20:34:30.000Z",
+                  "uid": "35240-7f01a31b-f19b-4ef3-8381-8f445e8f7f0a"
+                },
+                {
+                  "id": "4745ab35-434f-4907-96aa-96cad7044362",
+                  "name": "Authentication failed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/licenserule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "licenserule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:30.000Z",
+                  "updatedAt": "2026-10-21T20:34:30.000Z",
+                  "uid": "35240-4745ab35-434f-4907-96aa-96cad7044362"
+                },
+                {
+                  "id": "112b2d70-6173-4c96-8362-c9ffa4a66473",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/licenserule/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "licenserule",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:30.000Z",
+                  "updatedAt": "2026-10-21T20:34:30.000Z",
+                  "uid": "35240-112b2d70-6173-4c96-8362-c9ffa4a66473"
+                }
+              ],
+              "createdAt": "2026-10-21T20:34:30.000Z",
+              "updatedAt": "2026-10-21T20:34:30.000Z",
+              "uid": "35240-b9376a8c-af8d-4b2a-8fac-1edfbd01ae91"
+            }
+          ],
+          "id": "152fec42-c2b4-4959-b0d3-cd4015883947",
+          "createdAt": "2026-10-21T20:34:30.000Z",
+          "updatedAt": "2026-10-21T20:34:30.000Z",
+          "uid": "35240-152fec42-c2b4-4959-b0d3-cd4015883947"
+        },
+        {
           "name": "Qlik Sense Enterprise List license rules",
+          "id": "588b4522-6d73-46d9-b47b-23870a0ec84c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise List license rules",
-            "description": {
-              "content": "Retrieves a list of all license rules that control automatic license assignment based on user properties and conditions.",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/licenserule?Xrfkey=<string>&filter=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "licenserule"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
                   "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Filter expression",
                   "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter expression"
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
+                  "value": "<string>"
                 }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Retrieves a list of all license rules that control automatic license assignment based on user properties and conditions."
           },
           "response": [
             {
-              "id": "f044edf9-f545-437f-aa57-d07c356f1bf2",
+              "id": "a0c4445a-67c6-4aad-a503-0019cef420f5",
               "name": "License rules returned successfully",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/licenserule?Xrfkey=<string>&filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "licenserule"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter expression",
                       "key": "filter",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"3e1a9353-4f7c-1c58-75f1-4a3b403895f3\",\n    \"createdDate\": \"1961-08-18T12:36:56.939Z\",\n    \"modifiedDate\": \"2002-10-18T03:13:07.341Z\",\n    \"modifiedByUserName\": \"string\",\n    \"name\": \"string\",\n    \"category\": \"string\",\n    \"type\": 474,\n    \"rule\": \"string\",\n    \"resourceFilter\": \"string\",\n    \"actions\": 3824,\n    \"comment\": \"string\",\n    \"disabled\": false,\n    \"schemaPath\": \"string\"\n  },\n  {\n    \"id\": \"42691506-933a-d4d7-130e-53e502c8428a\",\n    \"createdDate\": \"1989-01-23T20:24:41.470Z\",\n    \"modifiedDate\": \"1964-12-13T20:33:11.317Z\",\n    \"modifiedByUserName\": \"string\",\n    \"name\": \"string\",\n    \"category\": \"string\",\n    \"type\": 3456,\n    \"rule\": \"string\",\n    \"resourceFilter\": \"string\",\n    \"actions\": 7805,\n    \"comment\": \"string\",\n    \"disabled\": true,\n    \"schemaPath\": \"string\"\n  }\n]",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"modifiedByUserName\": \"<string>\",\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"type\": \"<integer>\",\n    \"rule\": \"<string>\",\n    \"resourceFilter\": \"<string>\",\n    \"actions\": \"<integer>\",\n    \"comment\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"schemaPath\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"modifiedByUserName\": \"<string>\",\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"type\": \"<integer>\",\n    \"rule\": \"<string>\",\n    \"resourceFilter\": \"<string>\",\n    \"actions\": \"<integer>\",\n    \"comment\": \"<string>\",\n    \"disabled\": \"<boolean>\",\n    \"schemaPath\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-10-21T20:34:30.000Z",
+              "updatedAt": "2026-10-21T20:34:30.000Z",
+              "uid": "35240-a0c4445a-67c6-4aad-a503-0019cef420f5"
             },
             {
-              "id": "33508cd2-754a-4ae0-8732-88aaa5d50b03",
+              "id": "4b42fd59-8a83-4e0d-acdd-452a87b703ae",
               "name": "Authentication failed.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/licenserule?Xrfkey=<string>&filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "licenserule"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter expression",
                       "key": "filter",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:30.000Z",
+              "updatedAt": "2026-10-21T20:34:30.000Z",
+              "uid": "35240-4b42fd59-8a83-4e0d-acdd-452a87b703ae"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "50923a6d-007f-4030-a92e-27ec88ead51c",
-          "name": "Qlik Sense Enterprise List license rules with full details",
-          "request": {
-            "name": "Qlik Sense Enterprise List license rules with full details",
-            "description": {
-              "content": "Retrieves a list of all license rules in full format including rule definitions and actions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "licenserule",
-                "full"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
-                },
-                {
-                  "disabled": false,
-                  "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter expression"
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "2f88e0ae-ab82-43dd-a2c5-99ebcd19981d",
-              "name": "Full license rules returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "licenserule",
-                    "full"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"3e1a9353-4f7c-1c58-75f1-4a3b403895f3\",\n    \"createdDate\": \"1961-08-18T12:36:56.939Z\",\n    \"modifiedDate\": \"2002-10-18T03:13:07.341Z\",\n    \"modifiedByUserName\": \"string\",\n    \"name\": \"string\",\n    \"category\": \"string\",\n    \"type\": 474,\n    \"rule\": \"string\",\n    \"resourceFilter\": \"string\",\n    \"actions\": 3824,\n    \"comment\": \"string\",\n    \"disabled\": false,\n    \"schemaPath\": \"string\"\n  },\n  {\n    \"id\": \"42691506-933a-d4d7-130e-53e502c8428a\",\n    \"createdDate\": \"1989-01-23T20:24:41.470Z\",\n    \"modifiedDate\": \"1964-12-13T20:33:11.317Z\",\n    \"modifiedByUserName\": \"string\",\n    \"name\": \"string\",\n    \"category\": \"string\",\n    \"type\": 3456,\n    \"rule\": \"string\",\n    \"resourceFilter\": \"string\",\n    \"actions\": 7805,\n    \"comment\": \"string\",\n    \"disabled\": true,\n    \"schemaPath\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "001ec458-9825-4469-b467-42d07974a207",
-              "name": "Authentication failed.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "licenserule",
-                    "full"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "dc6403e6-fa3a-4ebe-a2a7-46b1e68db1a6",
-          "name": "Qlik Sense Enterprise Get license rule by ID",
-          "request": {
-            "name": "Qlik Sense Enterprise Get license rule by ID",
-            "description": {
-              "content": "Retrieves a single license rule by its unique identifier.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "licenserule",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8066de01-6e31-41df-b995-9f110bdb70d6",
-              "name": "License rule returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "licenserule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"cea7cd92-a97c-ee7d-07e8-dd822c3b0b22\",\n  \"createdDate\": \"2011-03-15T01:53:54.093Z\",\n  \"modifiedDate\": \"1974-04-24T15:52:20.885Z\",\n  \"modifiedByUserName\": \"string\",\n  \"name\": \"string\",\n  \"category\": \"string\",\n  \"type\": 9094,\n  \"rule\": \"string\",\n  \"resourceFilter\": \"string\",\n  \"actions\": 1856,\n  \"comment\": \"string\",\n  \"disabled\": true,\n  \"schemaPath\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ac1b13ed-178c-4115-b418-961190f2b64c",
-              "name": "Authentication failed.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "licenserule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "eeca7bda-cfcc-4c7f-b289-d5e0229452e4",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "licenserule",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:34:30.000Z",
+          "updatedAt": "2026-10-21T20:34:30.000Z",
+          "uid": "35240-588b4522-6d73-46d9-b47b-23870a0ec84c"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "abbf43ba-a6d6-4129-bd6c-629e3c249dbb",
+      "createdAt": "2026-10-21T20:34:30.000Z",
+      "updatedAt": "2026-10-21T20:34:30.000Z",
+      "uid": "35240-abbf43ba-a6d6-4129-bd6c-629e3c249dbb"
     }
   ],
   "auth": {
@@ -629,25 +560,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d087bec3-ebc5-40ce-a386-411f4fa9ebb6",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About License Rule API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4242/qrs"
     }
-  }
+  ]
 }

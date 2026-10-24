@@ -1,160 +1,115 @@
 {
+  "info": {
+    "_postman_id": "36471e88-fda8-4197-8a00-a65dfd0e05bd",
+    "name": "Qlik Sense Enterprise Qlik Sense Proxy Service Health API",
+    "description": "REST API for managing user sessions, virtual proxies, load balancing, and authentication within the Qlik Sense Proxy Service (QPS). The QPS manages site authentication, session handling, and load balancing across Qlik Sense Engine Services. The API exposes endpoints for the Session module, Load Balancing module, and Proxy operations.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:34:10.000Z",
+    "updatedAt": "2026-10-21T20:34:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-36471e88-fda8-4197-8a00-a65dfd0e05bd"
+  },
   "item": [
     {
-      "id": "88e9ed76-1c95-4376-8dbc-8778c22c8200",
-      "name": "Health",
-      "description": {
-        "content": "Health check and service status endpoints",
-        "type": "text/plain"
-      },
+      "name": "health",
       "item": [
         {
-          "id": "5d23b963-975d-463e-82e6-fef74680eee4",
           "name": "Qlik Sense Enterprise Check proxy service health",
+          "id": "c8be3527-fe11-45be-81db-0948dffd8cd7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise Check proxy service health",
-            "description": {
-              "content": "Returns the health status of the Qlik Sense Proxy Service.",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [],
             "url": {
-              "path": [
-                "health"
-              ],
+              "raw": "{{baseUrl}}/health",
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
+              "path": [
+                "health"
               ]
             },
-            "method": "GET",
-            "auth": null
+            "description": "Returns the health status of the Qlik Sense Proxy Service."
           },
           "response": [
             {
-              "id": "83b0e937-116f-488f-a8ca-12ec8b513191",
+              "id": "6d234e9e-bbdd-46d0-893b-322066e9c79f",
               "name": "Proxy service is healthy",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "health"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
+                    "description": "Added as a part of security scheme: apikey",
                     "key": "X-Qlik-Xrfkey",
                     "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:34:10.000Z",
+              "updatedAt": "2026-10-21T20:34:10.000Z",
+              "uid": "35240-6d234e9e-bbdd-46d0-893b-322066e9c79f"
             },
             {
-              "id": "4efabf1b-2dc9-4740-8396-6a90b025e429",
+              "id": "8fa0d41c-b451-4699-a59e-89e5afccc3dd",
               "name": "Proxy service is unhealthy",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "health"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
+                    "description": "Added as a part of security scheme: apikey",
                     "key": "X-Qlik-Xrfkey",
                     "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/health",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "health"
+                  ]
+                }
               },
               "status": "Service Unavailable",
               "code": 503,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:34:10.000Z",
+              "updatedAt": "2026-10-21T20:34:10.000Z",
+              "uid": "35240-8fa0d41c-b451-4699-a59e-89e5afccc3dd"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:34:10.000Z",
+          "updatedAt": "2026-10-21T20:34:10.000Z",
+          "uid": "35240-c8be3527-fe11-45be-81db-0948dffd8cd7"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "c35e4393-86ce-4f8c-8577-5978343d9076",
+      "createdAt": "2026-10-21T20:34:10.000Z",
+      "updatedAt": "2026-10-21T20:34:10.000Z",
+      "uid": "35240-c35e4393-86ce-4f8c-8577-5978343d9076"
     }
   ],
   "auth": {
@@ -162,25 +117,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4b08e93d-fe6c-48dc-a4d6-02090f36d296",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Health API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4243/qps"
     }
-  }
+  ]
 }

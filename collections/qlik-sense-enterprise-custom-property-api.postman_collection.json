@@ -1,233 +1,884 @@
 {
+  "info": {
+    "_postman_id": "d546cc63-2c33-4e58-afda-6fd24829a145",
+    "name": "Qlik Sense Enterprise Qlik Sense Repository Service Custom\u2026",
+    "description": "Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console (QMC). The QRS API provides CRUD operations for all entity types in the Qlik Sense repository, enabling programmatic administration of a Qlik Sense Enterprise deployment.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:33:44.000Z",
+    "updatedAt": "2026-10-21T20:33:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d546cc63-2c33-4e58-afda-6fd24829a145"
+  },
   "item": [
     {
-      "id": "a8922bda-05d9-4822-b4eb-f56f8b009e58",
-      "name": "Custom Property",
-      "description": {
-        "content": "Manage custom properties for tagging and categorizing entities",
-        "type": "text/plain"
-      },
+      "name": "customproperty",
       "item": [
         {
-          "id": "7bf53b85-2ca9-4d13-8bd8-95779a1a6206",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise Get custom property by ID",
+              "id": "8f52ac83-be40-4b19-a9e5-9d66ebbaeff5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customproperty",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "1922fdcc-1969-4366-aa50-036144b05cf2",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    }
+                  ]
+                },
+                "description": "Retrieves a single custom property by its unique identifier."
+              },
+              "response": [
+                {
+                  "id": "f5ed53a3-0ebb-4120-9be6-e273a9096b23",
+                  "name": "Custom property returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-f5ed53a3-0ebb-4120-9be6-e273a9096b23"
+                },
+                {
+                  "id": "8acbd3b1-72a4-4c93-8d66-cae21ee6b2ed",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-8acbd3b1-72a4-4c93-8d66-cae21ee6b2ed"
+                },
+                {
+                  "id": "0504d56a-5847-4e52-a68f-79be8206afe8",
+                  "name": "The requested entity was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-0504d56a-5847-4e52-a68f-79be8206afe8"
+                }
+              ],
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-8f52ac83-be40-4b19-a9e5-9d66ebbaeff5"
+            },
+            {
+              "name": "Qlik Sense Enterprise Update custom property",
+              "id": "acc2febc-49e7-4159-907c-463c3e440f80",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customproperty",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "d0c3d385-570e-4a76-9cb9-c98afca837bb",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    }
+                  ]
+                },
+                "description": "Updates an existing custom property definition."
+              },
+              "response": [
+                {
+                  "id": "9bb78f96-2c76-4ff6-9c2f-aea046eef2d3",
+                  "name": "Custom property updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-9bb78f96-2c76-4ff6-9c2f-aea046eef2d3"
+                },
+                {
+                  "id": "91623f42-4a1e-49ea-a736-0edec732c3b6",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-91623f42-4a1e-49ea-a736-0edec732c3b6"
+                },
+                {
+                  "id": "b40ee9b9-5d60-449d-a224-5dd82d2c46e3",
+                  "name": "The requested entity was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-b40ee9b9-5d60-449d-a224-5dd82d2c46e3"
+                }
+              ],
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-acc2febc-49e7-4159-907c-463c3e440f80"
+            },
+            {
+              "name": "Qlik Sense Enterprise Delete custom property",
+              "id": "1ea1af92-78cd-4ca1-80e0-4645fbaf4e93",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customproperty",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "0030633a-fb8a-42eb-be1f-faa59b479b5e",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier (GUID) of the entity"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes a custom property definition."
+              },
+              "response": [
+                {
+                  "id": "5d931f2c-5c83-4fd7-a6b0-a2f2a5a18ccc",
+                  "name": "Custom property deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-5d931f2c-5c83-4fd7-a6b0-a2f2a5a18ccc"
+                },
+                {
+                  "id": "10e56b12-47b0-497d-91f6-607cd360251a",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-10e56b12-47b0-497d-91f6-607cd360251a"
+                },
+                {
+                  "id": "c97c837f-eb08-4ebe-949a-379da65adc51",
+                  "name": "The requested entity was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customproperty/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customproperty",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:33:44.000Z",
+                  "updatedAt": "2026-10-21T20:33:44.000Z",
+                  "uid": "35240-c97c837f-eb08-4ebe-949a-379da65adc51"
+                }
+              ],
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-1ea1af92-78cd-4ca1-80e0-4645fbaf4e93"
+            }
+          ],
+          "id": "6e71727b-678c-4464-9e7a-6da6428d7b54",
+          "createdAt": "2026-10-21T20:33:44.000Z",
+          "updatedAt": "2026-10-21T20:33:44.000Z",
+          "uid": "35240-6e71727b-678c-4464-9e7a-6da6428d7b54"
+        },
+        {
           "name": "Qlik Sense Enterprise List custom properties",
+          "id": "b5f0abf2-57a5-4af9-bbe5-91a04859987d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise List custom properties",
-            "description": {
-              "content": "Retrieves a list of all custom properties in condensed format.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customproperty"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                },
-                {
-                  "disabled": false,
-                  "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
-                },
-                {
-                  "disabled": false,
-                  "key": "privileges",
-                  "value": "false",
-                  "description": "Whether to append privilege information to the returned entities."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "85fb7b0d-b171-436c-8bc7-b90388d4d9f6",
-              "name": "List of custom properties returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "privileges",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"efdb9d04-1117-b42e-c70a-ee445714824c\",\n    \"name\": \"string\",\n    \"valueType\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"5d1d8c2a-99a1-6a69-45bd-9c2aac4e68ee\",\n    \"name\": \"string\",\n    \"valueType\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "93406266-2537-46d3-b457-b18b8cfd9c0c",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "privileges",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6096f8e5-6687-4044-90ce-a928c3bb242d",
-          "name": "Qlik Sense Enterprise Create custom property",
-          "request": {
-            "name": "Qlik Sense Enterprise Create custom property",
-            "description": {
-              "content": "Creates a new custom property definition with a set of allowed values and applicable object types.",
-              "type": "text/plain"
-            },
             "url": {
-              "path": [
-                "customproperty"
-              ],
+              "raw": "{{baseUrl}}/customproperty?Xrfkey=<string>&filter=<string>&privileges=false",
               "host": [
                 "{{baseUrl}}"
               ],
+              "path": [
+                "customproperty"
+              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                   "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
+                  "value": "<string>"
+                },
                 {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
+                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Whether to append privilege information to the returned entities.",
+                  "key": "privileges",
+                  "value": "false"
                 }
               ]
             },
+            "description": "Retrieves a list of all custom properties in condensed format."
+          },
+          "response": [
+            {
+              "id": "9e6b7418-8f57-437a-a351-4254edadb954",
+              "name": "List of custom properties returned successfully",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customproperty?Xrfkey=<string>&filter=<string>&privileges=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customproperty"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether to append privilege information to the returned entities.",
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"valueType\": \"<string>\",\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"valueType\": \"<string>\",\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-9e6b7418-8f57-437a-a351-4254edadb954"
+            },
+            {
+              "id": "c7e9d641-1e55-40cc-a5de-999d24216768",
+              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customproperty?Xrfkey=<string>&filter=<string>&privileges=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customproperty"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether to append privilege information to the returned entities.",
+                      "key": "privileges",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-c7e9d641-1e55-40cc-a5de-999d24216768"
+            }
+          ],
+          "createdAt": "2026-10-21T20:33:44.000Z",
+          "updatedAt": "2026-10-21T20:33:44.000Z",
+          "uid": "35240-b5f0abf2-57a5-4af9-bbe5-91a04859987d"
+        },
+        {
+          "name": "Qlik Sense Enterprise Create custom property",
+          "id": "25c71f9c-c3d6-4132-9875-39fe07d1c58d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -238,1004 +889,234 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customproperty?Xrfkey=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customproperty"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                  "key": "Xrfkey",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a new custom property definition with a set of allowed values and applicable object types."
           },
           "response": [
             {
-              "id": "770fa23a-ed77-4330-831d-8eee5b2bb33c",
+              "id": "d4665c83-e478-487b-9bb5-3a8945c67cdd",
               "name": "Custom property created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customproperty?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customproperty"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"name\": \"string\",\n  \"id\": \"60be93bc-909e-8575-74ad-847b2fdd34e1\",\n  \"createdDate\": \"2022-01-17T02:51:02.023Z\",\n  \"modifiedDate\": \"1983-01-21T06:15:51.051Z\",\n  \"modifiedByUserName\": \"string\",\n  \"valueType\": \"string\",\n  \"choiceValues\": [\n    \"string\",\n    \"string\"\n  ],\n  \"objectTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"description\": \"string\",\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-d4665c83-e478-487b-9bb5-3a8945c67cdd"
             },
             {
-              "id": "6c8ed6a7-065e-4fb2-870d-52be2c9333ed",
+              "id": "6e8ecf46-df5c-466c-871b-dc795165d07d",
               "name": "Invalid request. The request body or parameters are malformed.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/customproperty?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customproperty"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-6e8ecf46-df5c-466c-871b-dc795165d07d"
             },
             {
-              "id": "b6fec902-d70e-4406-b121-963df09cb222",
+              "id": "cded65ac-39cf-4018-a193-e377f89a7e5f",
               "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/customproperty?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "customproperty"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:33:44.000Z",
+              "updatedAt": "2026-10-21T20:33:44.000Z",
+              "uid": "35240-cded65ac-39cf-4018-a193-e377f89a7e5f"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "870132d9-1116-456b-a6bf-074e4ef1e4ed",
-          "name": "Qlik Sense Enterprise Get custom property by ID",
-          "request": {
-            "name": "Qlik Sense Enterprise Get custom property by ID",
-            "description": {
-              "content": "Retrieves a single custom property by its unique identifier.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customproperty",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fbc09518-2939-49c4-97c8-d028f3593f87",
-              "name": "Custom property returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"id\": \"60be93bc-909e-8575-74ad-847b2fdd34e1\",\n  \"createdDate\": \"2022-01-17T02:51:02.023Z\",\n  \"modifiedDate\": \"1983-01-21T06:15:51.051Z\",\n  \"modifiedByUserName\": \"string\",\n  \"valueType\": \"string\",\n  \"choiceValues\": [\n    \"string\",\n    \"string\"\n  ],\n  \"objectTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"description\": \"string\",\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "df51553a-5ef3-4b4a-9623-cf902246d352",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "067e3fdc-bab8-439b-9fde-70ef2013c5cc",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c92ee64d-a076-494e-8678-c9eb990680dc",
-          "name": "Qlik Sense Enterprise Update custom property",
-          "request": {
-            "name": "Qlik Sense Enterprise Update custom property",
-            "description": {
-              "content": "Updates an existing custom property definition.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customproperty",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "c8460ca2-973f-4d89-b076-6f85770ea12a",
-              "name": "Custom property updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"id\": \"60be93bc-909e-8575-74ad-847b2fdd34e1\",\n  \"createdDate\": \"2022-01-17T02:51:02.023Z\",\n  \"modifiedDate\": \"1983-01-21T06:15:51.051Z\",\n  \"modifiedByUserName\": \"string\",\n  \"valueType\": \"string\",\n  \"choiceValues\": [\n    \"string\",\n    \"string\"\n  ],\n  \"objectTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"description\": \"string\",\n  \"privileges\": [\n    \"string\",\n    \"string\"\n  ],\n  \"schemaPath\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ef9c4fd6-d662-4a7d-9b1c-bd9a5aada5c8",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d49ca915-01e1-430c-b765-58201773e403",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"modifiedByUserName\": \"<string>\",\n  \"valueType\": \"<string>\",\n  \"choiceValues\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"objectTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"privileges\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"schemaPath\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1602a5dc-6f58-4ca6-83a9-da393d0ceb38",
-          "name": "Qlik Sense Enterprise Delete custom property",
-          "request": {
-            "name": "Qlik Sense Enterprise Delete custom property",
-            "description": {
-              "content": "Permanently deletes a custom property definition.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customproperty",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "5ae67c7b-a8eb-4962-8af9-878885d95923",
-              "name": "Custom property deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "d8ff6f25-bfba-4d8a-a4ef-8c6633466c97",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d2f732ab-9452-40f2-a8b8-c6d788675c89",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customproperty",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:33:44.000Z",
+          "updatedAt": "2026-10-21T20:33:44.000Z",
+          "uid": "35240-25c71f9c-c3d6-4132-9875-39fe07d1c58d"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "ade31ff0-7a6d-4147-9957-3cbb43b8325b",
+      "createdAt": "2026-10-21T20:33:44.000Z",
+      "updatedAt": "2026-10-21T20:33:44.000Z",
+      "uid": "35240-ade31ff0-7a6d-4147-9957-3cbb43b8325b"
     }
   ],
   "auth": {
@@ -1243,25 +1124,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "64950e99-0783-422e-8755-c2dbd2588ea1",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Custom Property API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4242/qrs"
     }
-  }
+  ]
 }

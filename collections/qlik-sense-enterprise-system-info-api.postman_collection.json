@@ -1,191 +1,159 @@
 {
+  "info": {
+    "_postman_id": "19075847-0a1e-49f7-a84b-71934eb12249",
+    "name": "Qlik Sense Enterprise Qlik Sense About Service System Info\u2026",
+    "description": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:35:38.000Z",
+    "updatedAt": "2026-10-21T20:35:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-19075847-0a1e-49f7-a84b-71934eb12249"
+  },
   "item": [
     {
-      "id": "d373c68c-a650-4bf0-b61c-25c51846da5c",
-      "name": "System Info",
-      "description": {
-        "content": "Retrieve system-level information about the Qlik Sense site",
-        "type": "text/plain"
-      },
+      "name": "systeminfo",
       "item": [
         {
-          "id": "bf9cc384-eb01-4e6c-9582-394c678eb4fe",
           "name": "Qlik Sense Enterprise Get system information",
+          "id": "085c8554-1d2c-4f85-853b-96f8d649c8f0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise Get system information",
-            "description": {
-              "content": "Retrieves system information about the Qlik Sense site including the product name, version, release label, and deployment details.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "systeminfo"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/systeminfo?Xrfkey=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "systeminfo"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                  "key": "Xrfkey",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves system information about the Qlik Sense site including the product name, version, release label, and deployment details."
           },
           "response": [
             {
-              "id": "bfb9f996-c1bc-4604-bced-fa731738d2eb",
+              "id": "995d8ab1-a6ee-4228-a183-311df55707b1",
               "name": "System information returned successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "systeminfo"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/systeminfo?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "systeminfo"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"productName\": \"string\",\n  \"version\": \"string\",\n  \"releaseLabel\": \"string\",\n  \"deploymentType\": \"string\",\n  \"nodeType\": \"string\",\n  \"isMultiNode\": true,\n  \"isCentral\": true,\n  \"siteIdentifier\": \"a9a6b0b8-c961-7afb-bbdc-acbd8b01c3c4\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"productName\": \"<string>\",\n  \"version\": \"<string>\",\n  \"releaseLabel\": \"<string>\",\n  \"deploymentType\": \"<string>\",\n  \"nodeType\": \"<string>\",\n  \"isMultiNode\": \"<boolean>\",\n  \"isCentral\": \"<boolean>\",\n  \"siteIdentifier\": \"<uuid>\"\n}",
+              "createdAt": "2026-10-21T20:35:39.000Z",
+              "updatedAt": "2026-10-21T20:35:39.000Z",
+              "uid": "35240-995d8ab1-a6ee-4228-a183-311df55707b1"
             },
             {
-              "id": "76cbd504-925b-4fac-9e1a-0116657ecc93",
+              "id": "a2078750-2bae-4c96-951e-f005a51ee950",
               "name": "Authentication failed or Xrfkey missing/mismatched.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "systeminfo"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/systeminfo?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "systeminfo"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:35:39.000Z",
+              "updatedAt": "2026-10-21T20:35:39.000Z",
+              "uid": "35240-a2078750-2bae-4c96-951e-f005a51ee950"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:35:39.000Z",
+          "updatedAt": "2026-10-21T20:35:39.000Z",
+          "uid": "35240-085c8554-1d2c-4f85-853b-96f8d649c8f0"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "c2d08139-1d01-4717-b08d-29438a2ae183",
+      "createdAt": "2026-10-21T20:35:39.000Z",
+      "updatedAt": "2026-10-21T20:35:39.000Z",
+      "uid": "35240-c2d08139-1d01-4717-b08d-29438a2ae183"
     }
   ],
   "auth": {
@@ -193,25 +161,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "ff4b44b4-a662-4af2-b63c-3dfdd5a8f906",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About System Info API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}/api/about/v1"
     }
-  }
+  ]
 }

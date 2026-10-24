@@ -1,205 +1,854 @@
 {
+  "info": {
+    "_postman_id": "4dee515a-0ce8-41f4-805f-fd22640f69ce",
+    "name": "Qlik Sense Enterprise Qlik Sense ODAG Service Links API",
+    "description": "REST API for on-demand app generation (ODAG), enabling the creation of Qlik Sense apps dynamically by linking selection apps to template apps through navigation links. The ODAG service validates user selections, queues app generation requests, and manages the lifecycle of generated apps.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:34:37.000Z",
+    "updatedAt": "2026-10-21T20:34:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4dee515a-0ce8-41f4-805f-fd22640f69ce"
+  },
   "item": [
     {
-      "id": "6ece8a49-55f6-45e8-935a-967e09f9e4ce",
-      "name": "Links",
-      "description": {
-        "content": "Manage navigation links that connect selection apps to template apps for on-demand app generation",
-        "type": "text/plain"
-      },
+      "name": "links",
       "item": [
         {
-          "id": "8e08ea8b-1d65-4ad7-aee8-00f897e34460",
+          "name": "{linkId}",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise Get navigation link by ID",
+              "id": "f99d9818-cfe0-4252-8614-4e284c7affa0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links",
+                    ":linkId"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "558a46e6-a00e-4b07-8738-4d20e52b92e4",
+                      "key": "linkId",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier of the navigation link"
+                    }
+                  ]
+                },
+                "description": "Retrieves a single ODAG navigation link by its unique identifier."
+              },
+              "response": [
+                {
+                  "id": "e1c56c34-535f-47b0-99a8-97f68efd7f70",
+                  "name": "Navigation link returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  },\n  \"owner\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-e1c56c34-535f-47b0-99a8-97f68efd7f70"
+                },
+                {
+                  "id": "7c264797-58e6-4399-b2b8-59280aa21eb8",
+                  "name": "Authentication failed.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-7c264797-58e6-4399-b2b8-59280aa21eb8"
+                },
+                {
+                  "id": "ab9e743a-9b86-42b0-99f5-069b14c9d916",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-ab9e743a-9b86-42b0-99f5-069b14c9d916"
+                }
+              ],
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-f99d9818-cfe0-4252-8614-4e284c7affa0"
+            },
+            {
+              "name": "Qlik Sense Enterprise Update navigation link",
+              "id": "81e9eca2-bb8b-49c8-a0df-89f93e1001d5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links",
+                    ":linkId"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "01bead72-e509-4fd5-b7ea-e55183dd1ee0",
+                      "key": "linkId",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier of the navigation link"
+                    }
+                  ]
+                },
+                "description": "Updates an existing ODAG navigation link configuration."
+              },
+              "response": [
+                {
+                  "id": "68ab0877-2aaf-4004-bbef-df990f69a585",
+                  "name": "Navigation link updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  },\n  \"owner\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-68ab0877-2aaf-4004-bbef-df990f69a585"
+                },
+                {
+                  "id": "7687bb83-5c8f-4c3c-aecb-44915a2a5f75",
+                  "name": "Authentication failed.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-7687bb83-5c8f-4c3c-aecb-44915a2a5f75"
+                },
+                {
+                  "id": "f011fb8c-d15a-45b1-af87-2155265d6d6d",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-f011fb8c-d15a-45b1-af87-2155265d6d6d"
+                }
+              ],
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-81e9eca2-bb8b-49c8-a0df-89f93e1001d5"
+            },
+            {
+              "name": "Qlik Sense Enterprise Delete navigation link",
+              "id": "99bee250-409f-4faf-8374-23c90840020d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links",
+                    ":linkId"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "92a81f16-7955-4929-9595-94e040e67fd0",
+                      "key": "linkId",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique identifier of the navigation link"
+                    }
+                  ]
+                },
+                "description": "Deletes an ODAG navigation link. Generated apps associated with the link are not affected."
+              },
+              "response": [
+                {
+                  "id": "5c00fd3b-2e70-4897-b0eb-0b4634f590fc",
+                  "name": "Navigation link deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-5c00fd3b-2e70-4897-b0eb-0b4634f590fc"
+                },
+                {
+                  "id": "6ed9c66f-b3bd-4c2f-9374-9c49dbfcb0eb",
+                  "name": "Authentication failed.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-6ed9c66f-b3bd-4c2f-9374-9c49dbfcb0eb"
+                },
+                {
+                  "id": "81567e12-507f-4948-a3ea-c69322780826",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/links/:linkId?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "links",
+                        ":linkId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "linkId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:37.000Z",
+                  "updatedAt": "2026-10-21T20:34:37.000Z",
+                  "uid": "35240-81567e12-507f-4948-a3ea-c69322780826"
+                }
+              ],
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-99bee250-409f-4faf-8374-23c90840020d"
+            }
+          ],
+          "id": "4adafe59-3a20-4be7-bb14-c14073618c0a",
+          "createdAt": "2026-10-21T20:34:37.000Z",
+          "updatedAt": "2026-10-21T20:34:37.000Z",
+          "uid": "35240-4adafe59-3a20-4be7-bb14-c14073618c0a"
+        },
+        {
           "name": "Qlik Sense Enterprise List navigation links",
+          "id": "bc352ab5-5ec3-4b26-a9ea-6de8c18386e2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise List navigation links",
-            "description": {
-              "content": "Retrieves a list of ODAG navigation links and their properties. Each link connects a selection app to a template app for on-demand app generation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "links"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "52ef4fb3-40e4-4d9a-a6cf-6b6acbc509eb",
-              "name": "Navigation links returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"366ee3e9-a1cc-15f3-7fc5-5a17c9c313c8\",\n    \"createdDate\": \"2020-10-06T12:10:32.736Z\",\n    \"modifiedDate\": \"1959-08-13T08:33:54.401Z\",\n    \"name\": \"string\",\n    \"selectionAppId\": \"e32855e2-dadd-f0a9-e5aa-7347005c0d85\",\n    \"templateAppId\": \"5a96f6a2-6dc4-2668-6ebe-0c95b0a50972\",\n    \"properties\": {\n      \"rowEstExpr\": \"string\",\n      \"bindings\": [\n        {\n          \"selectionField\": \"string\",\n          \"templateField\": \"string\",\n          \"selectionType\": \"string\"\n        },\n        {\n          \"selectionField\": \"string\",\n          \"templateField\": \"string\",\n          \"selectionType\": \"string\"\n        }\n      ],\n      \"genAppAccessible\": false,\n      \"publishTo\": \"string\",\n      \"retention\": {\n        \"maxAge\": 2300,\n        \"maxCount\": 9082\n      }\n    },\n    \"owner\": \"string\",\n    \"status\": \"string\"\n  },\n  {\n    \"id\": \"1e64c934-e734-9188-f4b7-bb2b7e0c698f\",\n    \"createdDate\": \"1959-02-01T21:29:17.732Z\",\n    \"modifiedDate\": \"2006-05-30T13:36:43.496Z\",\n    \"name\": \"string\",\n    \"selectionAppId\": \"4b5a2190-fb3b-53a4-c32c-a0b190df4153\",\n    \"templateAppId\": \"7921bab9-a2b0-cba5-6e21-47a5f13df54b\",\n    \"properties\": {\n      \"rowEstExpr\": \"string\",\n      \"bindings\": [\n        {\n          \"selectionField\": \"string\",\n          \"templateField\": \"string\",\n          \"selectionType\": \"string\"\n        },\n        {\n          \"selectionField\": \"string\",\n          \"templateField\": \"string\",\n          \"selectionType\": \"string\"\n        }\n      ],\n      \"genAppAccessible\": true,\n      \"publishTo\": \"string\",\n      \"retention\": {\n        \"maxAge\": 5272,\n        \"maxCount\": 5124\n      }\n    },\n    \"owner\": \"string\",\n    \"status\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d0be762e-d106-4a69-96ce-c5a2c9105352",
-              "name": "Authentication failed.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "333d357b-1d98-46ac-b209-7d9191b87ac1",
-          "name": "Qlik Sense Enterprise Create navigation link",
-          "request": {
-            "name": "Qlik Sense Enterprise Create navigation link",
-            "description": {
-              "content": "Creates a new navigation link that enables ODAG navigation from a designated selection app to a template app. Links created via the API do not appear in the list of available navigation links in the UI.",
-              "type": "text/plain"
-            },
             "url": {
-              "path": [
-                "links"
-              ],
+              "raw": "{{baseUrl}}/links?Xrfkey=<string>",
               "host": [
                 "{{baseUrl}}"
               ],
+              "path": [
+                "links"
+              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
                   "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
+                  "value": "<string>"
                 }
               ]
             },
+            "description": "Retrieves a list of ODAG navigation links and their properties. Each link connects a selection app to a template app for on-demand app generation."
+          },
+          "response": [
+            {
+              "id": "e474aae8-6efa-4273-80e3-dba756e10705",
+              "name": "Navigation links returned successfully",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"selectionAppId\": \"<uuid>\",\n    \"templateAppId\": \"<uuid>\",\n    \"properties\": {\n      \"rowEstExpr\": \"<string>\",\n      \"bindings\": [\n        {\n          \"selectionField\": \"<string>\",\n          \"templateField\": \"<string>\",\n          \"selectionType\": \"<string>\"\n        },\n        {\n          \"selectionField\": \"<string>\",\n          \"templateField\": \"<string>\",\n          \"selectionType\": \"<string>\"\n        }\n      ],\n      \"genAppAccessible\": \"<boolean>\",\n      \"publishTo\": \"<string>\",\n      \"retention\": {\n        \"maxAge\": \"<integer>\",\n        \"maxCount\": \"<integer>\"\n      }\n    },\n    \"owner\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"createdDate\": \"<dateTime>\",\n    \"modifiedDate\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"selectionAppId\": \"<uuid>\",\n    \"templateAppId\": \"<uuid>\",\n    \"properties\": {\n      \"rowEstExpr\": \"<string>\",\n      \"bindings\": [\n        {\n          \"selectionField\": \"<string>\",\n          \"templateField\": \"<string>\",\n          \"selectionType\": \"<string>\"\n        },\n        {\n          \"selectionField\": \"<string>\",\n          \"templateField\": \"<string>\",\n          \"selectionType\": \"<string>\"\n        }\n      ],\n      \"genAppAccessible\": \"<boolean>\",\n      \"publishTo\": \"<string>\",\n      \"retention\": {\n        \"maxAge\": \"<integer>\",\n        \"maxCount\": \"<integer>\"\n      }\n    },\n    \"owner\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-e474aae8-6efa-4273-80e3-dba756e10705"
+            },
+            {
+              "id": "a7d95228-4ecf-4c78-95aa-224626d71057",
+              "name": "Authentication failed.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/links?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-a7d95228-4ecf-4c78-95aa-224626d71057"
+            }
+          ],
+          "createdAt": "2026-10-21T20:34:37.000Z",
+          "updatedAt": "2026-10-21T20:34:37.000Z",
+          "uid": "35240-bc352ab5-5ec3-4b26-a9ea-6de8c18386e2"
+        },
+        {
+          "name": "Qlik Sense Enterprise Create navigation link",
+          "id": "d0ebef8a-7c8e-4653-a2a2-6438e9c1d86c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -210,1004 +859,234 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/links?Xrfkey=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "links"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                  "key": "Xrfkey",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a new navigation link that enables ODAG navigation from a designated selection app to a template app. Links created via the API do not appear in the list of available navigation links in the UI."
           },
           "response": [
             {
-              "id": "3627169f-2514-47c3-8f51-2dabf031d652",
+              "id": "eb4573d0-a6f5-4f24-a7b5-3958d7d924f2",
               "name": "Navigation link created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "links"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": false,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 4158,\n      \"maxCount\": 5449\n    }\n  }\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/links?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"becc9563-3607-2f23-24b1-d9710eed6d82\",\n  \"createdDate\": \"1966-04-08T07:51:48.332Z\",\n  \"modifiedDate\": \"1986-03-25T18:23:03.646Z\",\n  \"name\": \"string\",\n  \"selectionAppId\": \"768a30d8-37bd-37ba-1624-71643f593a70\",\n  \"templateAppId\": \"493813fd-ee52-cd29-bbc0-1cbc5e268fe2\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": true,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 5336,\n      \"maxCount\": 7190\n    }\n  },\n  \"owner\": \"string\",\n  \"status\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"createdDate\": \"<dateTime>\",\n  \"modifiedDate\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  },\n  \"owner\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-eb4573d0-a6f5-4f24-a7b5-3958d7d924f2"
             },
             {
-              "id": "0973e062-2c1b-44dc-8968-b446f41d5e89",
+              "id": "7d7427d3-1e91-4a0d-89ae-e17589bf28a9",
               "name": "Invalid request parameters or body.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "links"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": false,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 4158,\n      \"maxCount\": 5449\n    }\n  }\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/links?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "links"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-7d7427d3-1e91-4a0d-89ae-e17589bf28a9"
             },
             {
-              "id": "86ce63b4-a6ed-47e0-9d4a-eec9af07017e",
+              "id": "2bac99aa-8726-4e72-ad5e-c186982cebff",
               "name": "Authentication failed.",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/links?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "links"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"selectionAppId\": \"<uuid>\",\n  \"templateAppId\": \"<uuid>\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": false,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 4158,\n      \"maxCount\": 5449\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:37.000Z",
+              "updatedAt": "2026-10-21T20:34:37.000Z",
+              "uid": "35240-2bac99aa-8726-4e72-ad5e-c186982cebff"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "33ac361c-a1b3-4d4a-b6d4-0d6f559a5ded",
-          "name": "Qlik Sense Enterprise Get navigation link by ID",
-          "request": {
-            "name": "Qlik Sense Enterprise Get navigation link by ID",
-            "description": {
-              "content": "Retrieves a single ODAG navigation link by its unique identifier.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "links",
-                ":linkId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "linkId",
-                  "description": "(Required) Unique identifier of the navigation link"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "3b72068f-7460-4b6f-ad8f-f44bfd32b870",
-              "name": "Navigation link returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"becc9563-3607-2f23-24b1-d9710eed6d82\",\n  \"createdDate\": \"1966-04-08T07:51:48.332Z\",\n  \"modifiedDate\": \"1986-03-25T18:23:03.646Z\",\n  \"name\": \"string\",\n  \"selectionAppId\": \"768a30d8-37bd-37ba-1624-71643f593a70\",\n  \"templateAppId\": \"493813fd-ee52-cd29-bbc0-1cbc5e268fe2\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": true,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 5336,\n      \"maxCount\": 7190\n    }\n  },\n  \"owner\": \"string\",\n  \"status\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2ff7dd16-c5d2-4291-8a91-301fe14301c5",
-              "name": "Authentication failed.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "91df9a98-a776-440b-a2b4-dc1b1dec492a",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a96773a1-f7a9-4b82-9eb2-c298057b8a59",
-          "name": "Qlik Sense Enterprise Update navigation link",
-          "request": {
-            "name": "Qlik Sense Enterprise Update navigation link",
-            "description": {
-              "content": "Updates an existing ODAG navigation link configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "links",
-                ":linkId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "linkId",
-                  "description": "(Required) Unique identifier of the navigation link"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"<string>\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      },\n      {\n        \"selectionField\": \"<string>\",\n        \"templateField\": \"<string>\",\n        \"selectionType\": \"<string>\"\n      }\n    ],\n    \"genAppAccessible\": \"<boolean>\",\n    \"publishTo\": \"<string>\",\n    \"retention\": {\n      \"maxAge\": \"<integer>\",\n      \"maxCount\": \"<integer>\"\n    }\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "6f0c1f22-0fb0-4645-8ec7-d4ff5282c777",
-              "name": "Navigation link updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": false,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 8196,\n      \"maxCount\": 3773\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"becc9563-3607-2f23-24b1-d9710eed6d82\",\n  \"createdDate\": \"1966-04-08T07:51:48.332Z\",\n  \"modifiedDate\": \"1986-03-25T18:23:03.646Z\",\n  \"name\": \"string\",\n  \"selectionAppId\": \"768a30d8-37bd-37ba-1624-71643f593a70\",\n  \"templateAppId\": \"493813fd-ee52-cd29-bbc0-1cbc5e268fe2\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": true,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 5336,\n      \"maxCount\": 7190\n    }\n  },\n  \"owner\": \"string\",\n  \"status\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e46f5751-32dd-450c-bee9-8fe56f727705",
-              "name": "Authentication failed.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": false,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 8196,\n      \"maxCount\": 3773\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "36069f2c-6e6a-4813-b9d8-d2abcd6b9a85",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"rowEstExpr\": \"string\",\n    \"bindings\": [\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      },\n      {\n        \"selectionField\": \"string\",\n        \"templateField\": \"string\",\n        \"selectionType\": \"string\"\n      }\n    ],\n    \"genAppAccessible\": false,\n    \"publishTo\": \"string\",\n    \"retention\": {\n      \"maxAge\": 8196,\n      \"maxCount\": 3773\n    }\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8c22cfdc-3fba-4849-9329-85061fb033bb",
-          "name": "Qlik Sense Enterprise Delete navigation link",
-          "request": {
-            "name": "Qlik Sense Enterprise Delete navigation link",
-            "description": {
-              "content": "Deletes an ODAG navigation link. Generated apps associated with the link are not affected.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "links",
-                ":linkId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key matching the X-Qlik-Xrfkey header."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "linkId",
-                  "description": "(Required) Unique identifier of the navigation link"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "c104d5d2-af06-442c-a154-8a59c8a07082",
-              "name": "Navigation link deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "dd27382f-512f-4417-a746-966db0560c30",
-              "name": "Authentication failed.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c04065fe-eca0-41b1-995f-32bdcc3bfd7c",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "links",
-                    ":linkId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "linkId",
-                      "description": "(Required) Unique identifier of the navigation link"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:34:37.000Z",
+          "updatedAt": "2026-10-21T20:34:37.000Z",
+          "uid": "35240-d0ebef8a-7c8e-4653-a2a2-6438e9c1d86c"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "5720ede2-15ce-4790-a58e-f4d5bd436e13",
+      "createdAt": "2026-10-21T20:34:37.000Z",
+      "updatedAt": "2026-10-21T20:34:37.000Z",
+      "uid": "35240-5720ede2-15ce-4790-a58e-f4d5bd436e13"
     }
   ],
   "auth": {
@@ -1215,25 +1094,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e648169d-8e30-4451-903d-0d68df41b1be",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Links API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}/api/odag/v1"
     }
-  }
+  ]
 }

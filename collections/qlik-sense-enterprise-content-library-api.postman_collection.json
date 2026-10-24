@@ -1,782 +1,722 @@
 {
+  "info": {
+    "_postman_id": "1aa5badb-978a-4a27-9f04-41beb65b2638",
+    "name": "Qlik Sense Enterprise Qlik Sense Repository Service Content\u2026",
+    "description": "Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console (QMC). The QRS API provides CRUD operations for all entity types in the Qlik Sense repository, enabling programmatic administration of a Qlik Sense Enterprise deployment.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:33:37.000Z",
+    "updatedAt": "2026-10-21T20:33:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1aa5badb-978a-4a27-9f04-41beb65b2638"
+  },
   "item": [
     {
-      "id": "51a27d9d-2e0f-4f72-bf7a-f39d17c6050a",
-      "name": "Content Library",
-      "description": {
-        "content": "Manage shared and app-specific content libraries",
-        "type": "text/plain"
-      },
+      "name": "contentlibrary",
       "item": [
         {
-          "id": "94f8967e-2a40-43a3-b86f-dff4295ab110",
-          "name": "Qlik Sense Enterprise List content libraries",
-          "request": {
-            "name": "Qlik Sense Enterprise List content libraries",
-            "description": {
-              "content": "Retrieves a list of all content libraries in condensed format.",
-              "type": "text/plain"
+          "name": "{id}",
+          "item": [
+            {
+              "name": "uploadfile",
+              "item": [
+                {
+                  "name": "Qlik Sense Enterprise Upload file to content library",
+                  "id": "5663553d-6523-4499-8ef5-9baaf668e7bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "file",
+                      "file": {}
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contentlibrary/:id/uploadfile?Xrfkey=<string>&externalpath=<string>&overwrite=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contentlibrary",
+                        ":id",
+                        "uploadfile"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Relative path within the content library for the uploaded file",
+                          "key": "externalpath",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to overwrite an existing file",
+                          "key": "overwrite",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "7f7ab844-be91-4c33-8669-199b575f48bc",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier (GUID) of the entity"
+                        }
+                      ]
+                    },
+                    "description": "Uploads a file to a content library. The file is sent as the request body and the relative path within the library is specified as a query parameter."
+                  },
+                  "response": [
+                    {
+                      "id": "3b6b9863-f67a-4f6f-b7f0-3f75073bc58c",
+                      "name": "File uploaded successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/contentlibrary/:id/uploadfile?Xrfkey=<string>&externalpath=<string>&overwrite=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contentlibrary",
+                            ":id",
+                            "uploadfile"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Relative path within the content library for the uploaded file",
+                              "key": "externalpath",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to overwrite an existing file",
+                              "key": "overwrite",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:33:38.000Z",
+                      "updatedAt": "2026-10-21T20:33:38.000Z",
+                      "uid": "35240-3b6b9863-f67a-4f6f-b7f0-3f75073bc58c"
+                    },
+                    {
+                      "id": "30dad23d-6711-48a5-9dcf-915461944a3e",
+                      "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/contentlibrary/:id/uploadfile?Xrfkey=<string>&externalpath=<string>&overwrite=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contentlibrary",
+                            ":id",
+                            "uploadfile"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Relative path within the content library for the uploaded file",
+                              "key": "externalpath",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to overwrite an existing file",
+                              "key": "overwrite",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:33:38.000Z",
+                      "updatedAt": "2026-10-21T20:33:38.000Z",
+                      "uid": "35240-30dad23d-6711-48a5-9dcf-915461944a3e"
+                    },
+                    {
+                      "id": "b7c2cda5-c7f5-40ab-977e-5a47db08fef1",
+                      "name": "The requested entity was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/contentlibrary/:id/uploadfile?Xrfkey=<string>&externalpath=<string>&overwrite=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contentlibrary",
+                            ":id",
+                            "uploadfile"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Relative path within the content library for the uploaded file",
+                              "key": "externalpath",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Whether to overwrite an existing file",
+                              "key": "overwrite",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:33:38.000Z",
+                      "updatedAt": "2026-10-21T20:33:38.000Z",
+                      "uid": "35240-b7c2cda5-c7f5-40ab-977e-5a47db08fef1"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:33:38.000Z",
+                  "updatedAt": "2026-10-21T20:33:38.000Z",
+                  "uid": "35240-5663553d-6523-4499-8ef5-9baaf668e7bc"
+                }
+              ],
+              "id": "615c7664-e199-4ed3-9ca7-7d47188964dd",
+              "createdAt": "2026-10-21T20:33:38.000Z",
+              "updatedAt": "2026-10-21T20:33:38.000Z",
+              "uid": "35240-615c7664-e199-4ed3-9ca7-7d47188964dd"
             },
+            {
+              "name": "deletecontent",
+              "item": [
+                {
+                  "name": "Qlik Sense Enterprise Delete file from content library",
+                  "id": "c77702f4-09bc-49b6-a83a-677ff34a60e5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/contentlibrary/:id/deletecontent?Xrfkey=<string>&externalpath=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contentlibrary",
+                        ":id",
+                        "deletecontent"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Relative path of the file to delete within the content library",
+                          "key": "externalpath",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9ed34d05-6549-44aa-b22b-5622cccfbf9f",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier (GUID) of the entity"
+                        }
+                      ]
+                    },
+                    "description": "Deletes a file from a content library by its external path."
+                  },
+                  "response": [
+                    {
+                      "id": "3ff6388e-6788-48e7-a03a-296483449502",
+                      "name": "File deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contentlibrary/:id/deletecontent?Xrfkey=<string>&externalpath=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contentlibrary",
+                            ":id",
+                            "deletecontent"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Relative path of the file to delete within the content library",
+                              "key": "externalpath",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:33:38.000Z",
+                      "updatedAt": "2026-10-21T20:33:38.000Z",
+                      "uid": "35240-3ff6388e-6788-48e7-a03a-296483449502"
+                    },
+                    {
+                      "id": "f3d2aa87-7575-4256-8757-503b462ceaa2",
+                      "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contentlibrary/:id/deletecontent?Xrfkey=<string>&externalpath=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contentlibrary",
+                            ":id",
+                            "deletecontent"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Relative path of the file to delete within the content library",
+                              "key": "externalpath",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:33:38.000Z",
+                      "updatedAt": "2026-10-21T20:33:38.000Z",
+                      "uid": "35240-f3d2aa87-7575-4256-8757-503b462ceaa2"
+                    },
+                    {
+                      "id": "80256a79-6836-4acd-8f8d-5f5f994745f7",
+                      "name": "The requested entity was not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/contentlibrary/:id/deletecontent?Xrfkey=<string>&externalpath=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "contentlibrary",
+                            ":id",
+                            "deletecontent"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Relative path of the file to delete within the content library",
+                              "key": "externalpath",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:33:38.000Z",
+                      "updatedAt": "2026-10-21T20:33:38.000Z",
+                      "uid": "35240-80256a79-6836-4acd-8f8d-5f5f994745f7"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:33:38.000Z",
+                  "updatedAt": "2026-10-21T20:33:38.000Z",
+                  "uid": "35240-c77702f4-09bc-49b6-a83a-677ff34a60e5"
+                }
+              ],
+              "id": "3a1fc863-5d83-4369-bbfe-00cd7e60fbe1",
+              "createdAt": "2026-10-21T20:33:38.000Z",
+              "updatedAt": "2026-10-21T20:33:38.000Z",
+              "uid": "35240-3a1fc863-5d83-4369-bbfe-00cd7e60fbe1"
+            }
+          ],
+          "id": "7b856cb2-21e0-437f-aba2-dea14d2478c5",
+          "createdAt": "2026-10-21T20:33:38.000Z",
+          "updatedAt": "2026-10-21T20:33:38.000Z",
+          "uid": "35240-7b856cb2-21e0-437f-aba2-dea14d2478c5"
+        },
+        {
+          "name": "Qlik Sense Enterprise List content libraries",
+          "id": "44777051-a05b-4e6b-8de1-f579b7e15220",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/contentlibrary?Xrfkey=<string>&filter=<string>&privileges=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "contentlibrary"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                   "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
                   "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Whether to append privilege information to the returned entities.",
                   "key": "privileges",
-                  "value": "false",
-                  "description": "Whether to append privilege information to the returned entities."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
+                  "value": "false"
                 }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Retrieves a list of all content libraries in condensed format."
           },
           "response": [
             {
-              "id": "776876af-b749-4303-87cd-f113d62cde9a",
+              "id": "60aaf08a-ed9b-4130-9e5e-05f8a153d5d6",
               "name": "List of content libraries returned successfully",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "contentlibrary"
-                  ],
+                  "raw": "{{baseUrl}}/contentlibrary?Xrfkey=<string>&filter=<string>&privileges=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "contentlibrary"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
                       "key": "filter",
                       "value": "<string>"
                     },
                     {
+                      "description": "Whether to append privilege information to the returned entities.",
                       "key": "privileges",
                       "value": "false"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"d93d46ba-8a4f-aa04-1a7c-5508a09ed72d\",\n    \"name\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"2089fdf6-04e5-dc23-1547-da863fb32ad2\",\n    \"name\": \"string\",\n    \"privileges\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"privileges\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+              "createdAt": "2026-10-21T20:33:38.000Z",
+              "updatedAt": "2026-10-21T20:33:38.000Z",
+              "uid": "35240-60aaf08a-ed9b-4130-9e5e-05f8a153d5d6"
             },
             {
-              "id": "fe3ab1b9-cdfa-475a-91fe-5ba0a377e426",
+              "id": "83fbcd94-6ec3-439d-bb59-d791b1d289d2",
               "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "contentlibrary"
-                  ],
+                  "raw": "{{baseUrl}}/contentlibrary?Xrfkey=<string>&filter=<string>&privileges=false",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "contentlibrary"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter expression using the syntax: property operator value. Supports operators like eq, ne, so, ew, sw. Example: name eq 'MyApp'",
                       "key": "filter",
                       "value": "<string>"
                     },
                     {
+                      "description": "Whether to append privilege information to the returned entities.",
                       "key": "privileges",
                       "value": "false"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "117dc7b7-bfa5-4fc5-a649-832c151086c1",
-          "name": "Qlik Sense Enterprise Upload file to content library",
-          "request": {
-            "name": "Qlik Sense Enterprise Upload file to content library",
-            "description": {
-              "content": "Uploads a file to a content library. The file is sent as the request body and the relative path within the library is specified as a query parameter.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "contentlibrary",
-                ":id",
-                "uploadfile"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                },
-                {
-                  "disabled": false,
-                  "key": "externalpath",
-                  "value": "<string>",
-                  "description": "(Required) Relative path within the content library for the uploaded file"
-                },
-                {
-                  "disabled": false,
-                  "key": "overwrite",
-                  "value": "false",
-                  "description": "Whether to overwrite an existing file"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/octet-stream"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "<binary>"
-            }
-          },
-          "response": [
-            {
-              "id": "cf1c4822-5e99-4902-a8be-6a2a3dafe208",
-              "name": "File uploaded successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contentlibrary",
-                    ":id",
-                    "uploadfile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "externalpath",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "overwrite",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<binary>"
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "4896e8b6-4129-4ad8-82ae-0bc950ec3f62",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contentlibrary",
-                    ":id",
-                    "uploadfile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "externalpath",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "overwrite",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<binary>"
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "64fc2e5a-79e3-4a85-bd46-bf5d47d98647",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contentlibrary",
-                    ":id",
-                    "uploadfile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "externalpath",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "overwrite",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "<binary>"
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:33:38.000Z",
+              "updatedAt": "2026-10-21T20:33:38.000Z",
+              "uid": "35240-83fbcd94-6ec3-439d-bb59-d791b1d289d2"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "49abe70d-8a84-49c9-910a-36b9a06f009e",
-          "name": "Qlik Sense Enterprise Delete file from content library",
-          "request": {
-            "name": "Qlik Sense Enterprise Delete file from content library",
-            "description": {
-              "content": "Deletes a file from a content library by its external path.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "contentlibrary",
-                ":id",
-                "deletecontent"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                },
-                {
-                  "disabled": false,
-                  "key": "externalpath",
-                  "value": "<string>",
-                  "description": "(Required) Relative path of the file to delete within the content library"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "f36a7901-aa20-48c4-802a-b2cf27d35a40",
-              "name": "File deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contentlibrary",
-                    ":id",
-                    "deletecontent"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "externalpath",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0bb853eb-fa5c-47fb-bc18-23dbd066b61c",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contentlibrary",
-                    ":id",
-                    "deletecontent"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "externalpath",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c19be9fb-94b3-4042-9d99-2ae7aac90169",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "contentlibrary",
-                    ":id",
-                    "deletecontent"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "externalpath",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:33:38.000Z",
+          "updatedAt": "2026-10-21T20:33:38.000Z",
+          "uid": "35240-44777051-a05b-4e6b-8de1-f579b7e15220"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "875c4306-a28e-47bd-b648-ac64e4ef5a41",
+      "createdAt": "2026-10-21T20:33:38.000Z",
+      "updatedAt": "2026-10-21T20:33:38.000Z",
+      "uid": "35240-875c4306-a28e-47bd-b648-ac64e4ef5a41"
     }
   ],
   "auth": {
@@ -784,25 +724,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "64629403-d4d7-437d-bfc2-af31eae53274",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Content Library API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4242/qrs"
     }
-  }
+  ]
 }

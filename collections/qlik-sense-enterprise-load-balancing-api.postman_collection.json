@@ -1,287 +1,277 @@
 {
+  "info": {
+    "_postman_id": "ee8d0d63-46e0-430d-b716-09c2c6037f67",
+    "name": "Qlik Sense Enterprise Qlik Sense Proxy Service Load\u2026",
+    "description": "REST API for managing user sessions, virtual proxies, load balancing, and authentication within the Qlik Sense Proxy Service (QPS). The QPS manages site authentication, session handling, and load balancing across Qlik Sense Engine Services. The API exposes endpoints for the Session module, Load Balancing module, and Proxy operations.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:34:43.000Z",
+    "updatedAt": "2026-10-21T20:34:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ee8d0d63-46e0-430d-b716-09c2c6037f67"
+  },
   "item": [
     {
-      "id": "aca68be8-1219-413f-bd5f-546f5c0d94f4",
-      "name": "Load Balancing",
-      "description": {
-        "content": "Engine load balancing decisions for distributing app sessions across Qlik Sense Engine Services",
-        "type": "text/plain"
-      },
+      "name": "loadbalancing",
       "item": [
         {
-          "id": "561d073b-4f28-421b-8b23-a2816089fc3f",
-          "name": "Qlik Sense Enterprise Prioritize engine services for load balancing",
-          "request": {
-            "name": "Qlik Sense Enterprise Prioritize engine services for load balancing",
-            "description": {
-              "content": "Prioritizes Qlik Sense Engine Services (QES) for a user and an app. The Load Balancing module makes load balancing decisions for engine sessions to distribute load across available engine services.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "loadbalancing",
-                "prioritize"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"appId\": \"<uuid>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "prioritize",
+          "item": [
             {
-              "id": "eeffa921-310b-42b9-8789-977dd38a9f8e",
-              "name": "Engine service prioritization returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "loadbalancing",
-                    "prioritize"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+              "name": "Qlik Sense Enterprise Prioritize engine services for load balancing",
+              "id": "cd84f8a1-0ce7-40c8-a584-62bacaa933f9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"appId\": \"<uuid>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"engineServices\": [\n    {\n      \"engineId\": \"0ccb7116-8975-ca7a-5e59-7550b6ec1886\",\n      \"hostName\": \"string\",\n      \"port\": 3215,\n      \"priority\": 5360,\n      \"isAppOpen\": false\n    },\n    {\n      \"engineId\": \"69d8387e-88e4-1c81-24db-51b6e1105491\",\n      \"hostName\": \"string\",\n      \"port\": 9167,\n      \"priority\": 2769,\n      \"isAppOpen\": false\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "14267a49-e9bc-41a3-bd82-e67cd0152b38",
-              "name": "Invalid request parameters or body.",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/loadbalancing/prioritize?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "loadbalancing",
                     "prioritize"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"appId\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Prioritizes Qlik Sense Engine Services (QES) for a user and an app. The Load Balancing module makes load balancing decisions for engine sessions to distribute load across available engine services."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a0687007-d641-4a25-a61e-8c595683ee58",
-              "name": "Authentication failed or Xrfkey missing/mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "loadbalancing",
-                    "prioritize"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "id": "3971848d-2438-4811-8fea-8e6ebf1e12bc",
+                  "name": "Engine service prioritization returned successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"appId\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/loadbalancing/prioritize?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "loadbalancing",
+                        "prioritize"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "Xrfkey",
-                      "value": "<string>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"engineServices\": [\n    {\n      \"engineId\": \"<uuid>\",\n      \"hostName\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"priority\": \"<integer>\",\n      \"isAppOpen\": \"<boolean>\"\n    },\n    {\n      \"engineId\": \"<uuid>\",\n      \"hostName\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"priority\": \"<integer>\",\n      \"isAppOpen\": \"<boolean>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:34:44.000Z",
+                  "updatedAt": "2026-10-21T20:34:44.000Z",
+                  "uid": "35240-3971848d-2438-4811-8fea-8e6ebf1e12bc"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"appId\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "95479edd-0487-4e20-929b-00719a59e0b1",
+                  "name": "Invalid request parameters or body.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"appId\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/loadbalancing/prioritize?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "loadbalancing",
+                        "prioritize"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:44.000Z",
+                  "updatedAt": "2026-10-21T20:34:44.000Z",
+                  "uid": "35240-95479edd-0487-4e20-929b-00719a59e0b1"
+                },
+                {
+                  "id": "1a62ff28-8497-45c6-af46-8da07464749a",
+                  "name": "Authentication failed or Xrfkey missing/mismatched.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"appId\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/loadbalancing/prioritize?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "loadbalancing",
+                        "prioritize"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:44.000Z",
+                  "updatedAt": "2026-10-21T20:34:44.000Z",
+                  "uid": "35240-1a62ff28-8497-45c6-af46-8da07464749a"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T20:34:44.000Z",
+              "updatedAt": "2026-10-21T20:34:44.000Z",
+              "uid": "35240-cd84f8a1-0ce7-40c8-a584-62bacaa933f9"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "28f4687d-ea79-45ae-b4b3-35a6bb6b7ccd",
+          "createdAt": "2026-10-21T20:34:44.000Z",
+          "updatedAt": "2026-10-21T20:34:44.000Z",
+          "uid": "35240-28f4687d-ea79-45ae-b4b3-35a6bb6b7ccd"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "079c789d-aa28-4072-8648-1e9d5a2528b0",
+      "createdAt": "2026-10-21T20:34:44.000Z",
+      "updatedAt": "2026-10-21T20:34:44.000Z",
+      "uid": "35240-079c789d-aa28-4072-8648-1e9d5a2528b0"
     }
   ],
   "auth": {
@@ -289,25 +279,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "ee9f496f-d281-4d89-b8dd-4c53a4261845",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Load Balancing API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4243/qps"
     }
-  }
+  ]
 }

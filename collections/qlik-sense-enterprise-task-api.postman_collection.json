@@ -1,964 +1,877 @@
 {
+  "info": {
+    "_postman_id": "bc13b67d-4b5d-4423-8d42-f358c52e6d60",
+    "name": "Qlik Sense Enterprise Qlik Sense Repository Service Task API",
+    "description": "Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console (QMC). The QRS API provides CRUD operations for all entity types in the Qlik Sense repository, enabling programmatic administration of a Qlik Sense Enterprise deployment.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:35:50.000Z",
+    "updatedAt": "2026-10-21T20:35:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bc13b67d-4b5d-4423-8d42-f358c52e6d60"
+  },
   "item": [
     {
-      "id": "c95465da-61dc-47bd-ad86-58d9e2495b7e",
-      "name": "Task",
-      "description": {
-        "content": "Start and stop tasks including reload and external program tasks",
-        "type": "text/plain"
-      },
+      "name": "task",
       "item": [
         {
-          "id": "e944d74c-d80a-4abb-b8aa-3c41eee62fc9",
-          "name": "Qlik Sense Enterprise Start task",
-          "request": {
-            "name": "Qlik Sense Enterprise Start task",
-            "description": {
-              "content": "Starts the execution of a task by its ID. This is a synchronous operation that waits for the task to be triggered.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "task",
-                ":id",
-                "start"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "{id}",
+          "item": [
             {
-              "id": "adc959f7-ad98-4063-9984-5254d3cb5b67",
-              "name": "Task started successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "start"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
+              "name": "start",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "5e243e5d-d863-4fb2-8e8a-8ef0f574e0e8",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "start"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "synchronous",
+                  "item": [
                     {
-                      "key": "Xrfkey",
-                      "value": "<string>"
+                      "name": "Qlik Sense Enterprise Start task synchronously",
+                      "id": "37b088f2-3b73-4d25-abb3-9d69b832f8fe",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/task/:id/start/synchronous?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            ":id",
+                            "start",
+                            "synchronous"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "222e920b-7d84-47f3-a1e8-38e7401b0dad",
+                              "key": "id",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier (GUID) of the entity"
+                            }
+                          ]
+                        },
+                        "description": "Starts the execution of a task synchronously, waiting for the task to reach an end state before returning."
+                      },
+                      "response": [
+                        {
+                          "id": "18e27bf8-07b2-4b6e-aeb0-e532ad7a2442",
+                          "name": "Task completed successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Qlik-Xrfkey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/task/:id/start/synchronous?Xrfkey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "task",
+                                ":id",
+                                "start",
+                                "synchronous"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                                  "key": "Xrfkey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-21T20:35:51.000Z",
+                          "updatedAt": "2026-10-21T20:35:51.000Z",
+                          "uid": "35240-18e27bf8-07b2-4b6e-aeb0-e532ad7a2442"
+                        },
+                        {
+                          "id": "105f7562-38ec-4a95-b831-d72d4d68839b",
+                          "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Qlik-Xrfkey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/task/:id/start/synchronous?Xrfkey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "task",
+                                ":id",
+                                "start",
+                                "synchronous"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                                  "key": "Xrfkey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:35:51.000Z",
+                          "updatedAt": "2026-10-21T20:35:51.000Z",
+                          "uid": "35240-105f7562-38ec-4a95-b831-d72d4d68839b"
+                        },
+                        {
+                          "id": "6eb417a0-d421-4eaf-9aed-b9bee668c74b",
+                          "name": "The requested entity was not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "X-Qlik-Xrfkey",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/task/:id/start/synchronous?Xrfkey=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "task",
+                                ":id",
+                                "start",
+                                "synchronous"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                                  "key": "Xrfkey",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:35:51.000Z",
+                          "updatedAt": "2026-10-21T20:35:51.000Z",
+                          "uid": "35240-6eb417a0-d421-4eaf-9aed-b9bee668c74b"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-37b088f2-3b73-4d25-abb3-9d69b832f8fe"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
+                  "id": "667cb169-7d4b-4c61-8a23-252948337570",
+                  "createdAt": "2026-10-21T20:35:51.000Z",
+                  "updatedAt": "2026-10-21T20:35:51.000Z",
+                  "uid": "35240-667cb169-7d4b-4c61-8a23-252948337570"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                {
+                  "name": "Qlik Sense Enterprise Start task",
+                  "id": "a04dee28-725d-4f14-82d4-c91274f9301f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/task/:id/start?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "task",
+                        ":id",
+                        "start"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "dd267388-a9d0-4b2e-8a6d-4e96e0301081",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier (GUID) of the entity"
+                        }
+                      ]
+                    },
+                    "description": "Starts the execution of a task by its ID. This is a synchronous operation that waits for the task to be triggered."
+                  },
+                  "response": [
+                    {
+                      "id": "01bacb8d-818a-46cd-8c35-606997108b25",
+                      "name": "Task started successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/task/:id/start?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            ":id",
+                            "start"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-01bacb8d-818a-46cd-8c35-606997108b25"
+                    },
+                    {
+                      "id": "0353ebe7-7958-441f-af44-9f2ac22c3c26",
+                      "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/task/:id/start?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            ":id",
+                            "start"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-0353ebe7-7958-441f-af44-9f2ac22c3c26"
+                    },
+                    {
+                      "id": "79260d55-cf20-443e-9a04-8f69ce3d24b6",
+                      "name": "The requested entity was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/task/:id/start?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            ":id",
+                            "start"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-79260d55-cf20-443e-9a04-8f69ce3d24b6"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:35:51.000Z",
+                  "updatedAt": "2026-10-21T20:35:51.000Z",
+                  "uid": "35240-a04dee28-725d-4f14-82d4-c91274f9301f"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "aad234e1-7e6c-480c-a9ef-b9b119b06b70",
+              "createdAt": "2026-10-21T20:35:51.000Z",
+              "updatedAt": "2026-10-21T20:35:51.000Z",
+              "uid": "35240-aad234e1-7e6c-480c-a9ef-b9b119b06b70"
             },
             {
-              "id": "f2e1eceb-389b-4904-b135-d5aa7c9b5a41",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "start"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
+              "name": "stop",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Qlik Sense Enterprise Stop task",
+                  "id": "124571b0-b77d-4651-886e-4fabac2875d2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/task/:id/stop?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "task",
+                        ":id",
+                        "stop"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e17da3ed-97bb-4f59-b3b5-14c1ef832b81",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier (GUID) of the entity"
+                        }
+                      ]
+                    },
+                    "description": "Stops the execution of a running task."
+                  },
+                  "response": [
+                    {
+                      "id": "3e4e7090-aec2-4598-809d-eb1f7f34f0e7",
+                      "name": "Task stopped successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/task/:id/stop?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            ":id",
+                            "stop"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-3e4e7090-aec2-4598-809d-eb1f7f34f0e7"
+                    },
+                    {
+                      "id": "13869c3a-8335-42c6-9514-bbba068469b7",
+                      "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/task/:id/stop?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            ":id",
+                            "stop"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-13869c3a-8335-42c6-9514-bbba068469b7"
+                    },
+                    {
+                      "id": "0f7c8d2e-e3e0-4bac-9767-e6d6cc8c7143",
+                      "name": "The requested entity was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/task/:id/stop?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            ":id",
+                            "stop"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-0f7c8d2e-e3e0-4bac-9767-e6d6cc8c7143"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:35:51.000Z",
+                  "updatedAt": "2026-10-21T20:35:51.000Z",
+                  "uid": "35240-124571b0-b77d-4651-886e-4fabac2875d2"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "234ae99a-285c-4c87-b3bf-5aca42db1f71",
+              "createdAt": "2026-10-21T20:35:51.000Z",
+              "updatedAt": "2026-10-21T20:35:51.000Z",
+              "uid": "35240-234ae99a-285c-4c87-b3bf-5aca42db1f71"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "e8eab7fd-0596-47c6-b33c-e0651cbfab7e",
+          "createdAt": "2026-10-21T20:35:51.000Z",
+          "updatedAt": "2026-10-21T20:35:51.000Z",
+          "uid": "35240-e8eab7fd-0596-47c6-b33c-e0651cbfab7e"
         },
         {
-          "id": "a1f31adc-8188-419d-9ba5-dd10f70179ec",
-          "name": "Qlik Sense Enterprise Start task synchronously",
-          "request": {
-            "name": "Qlik Sense Enterprise Start task synchronously",
-            "description": {
-              "content": "Starts the execution of a task synchronously, waiting for the task to reach an end state before returning.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "task",
-                ":id",
-                "start",
-                "synchronous"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
+          "name": "start",
+          "item": [
             {
-              "id": "9cf3f88a-0e49-4950-879d-6f49ea13911e",
-              "name": "Task completed successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "start",
-                    "synchronous"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
+              "name": "many",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "3d955c52-9280-4486-af4e-77331117ab56",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "start",
-                    "synchronous"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                  "name": "Qlik Sense Enterprise Start multiple tasks",
+                  "id": "d5f9bcbb-0420-4e1d-bd88-9e3e9467cdef",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "80f0ede1-7b20-42eb-9492-7deefd101747",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "start",
-                    "synchronous"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  \"<uuid>\",\n  \"<uuid>\"\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
+                    "url": {
+                      "raw": "{{baseUrl}}/task/start/many?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "task",
+                        "start",
+                        "many"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ]
                     },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "description": "Starts the execution of multiple tasks by their IDs."
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "response": [
+                    {
+                      "id": "85b52684-c458-458d-abec-2278965447fc",
+                      "name": "Tasks started successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "[\n  \"<uuid>\",\n  \"<uuid>\"\n]",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/task/start/many?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            "start",
+                            "many"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-85b52684-c458-458d-abec-2278965447fc"
+                    },
+                    {
+                      "id": "0b757187-10f6-4813-bbb1-6f927d90b998",
+                      "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-Qlik-Xrfkey",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "[\n  \"<uuid>\",\n  \"<uuid>\"\n]",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/task/start/many?Xrfkey=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "task",
+                            "start",
+                            "many"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                              "key": "Xrfkey",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:35:51.000Z",
+                      "updatedAt": "2026-10-21T20:35:51.000Z",
+                      "uid": "35240-0b757187-10f6-4813-bbb1-6f927d90b998"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:35:51.000Z",
+                  "updatedAt": "2026-10-21T20:35:51.000Z",
+                  "uid": "35240-d5f9bcbb-0420-4e1d-bd88-9e3e9467cdef"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "eb301690-4c9c-43ac-9d1b-a353be95fbb1",
+              "createdAt": "2026-10-21T20:35:51.000Z",
+              "updatedAt": "2026-10-21T20:35:51.000Z",
+              "uid": "35240-eb301690-4c9c-43ac-9d1b-a353be95fbb1"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "29dccbaa-f179-4e43-8a5e-823c812fb062",
-          "name": "Qlik Sense Enterprise Start multiple tasks",
-          "request": {
-            "name": "Qlik Sense Enterprise Start multiple tasks",
-            "description": {
-              "content": "Starts the execution of multiple tasks by their IDs.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "task",
-                "start",
-                "many"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "[\n  \"<uuid>\",\n  \"<uuid>\"\n]",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "5c911114-0985-4e77-9063-387f280ccbb2",
-              "name": "Tasks started successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    "start",
-                    "many"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "[\n  \"<uuid>\",\n  \"<uuid>\"\n]",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "8ef0f2ff-d8cb-4174-9bdc-f723118190b0",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    "start",
-                    "many"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "[\n  \"<uuid>\",\n  \"<uuid>\"\n]",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "aaa35b66-3220-4fd4-9d36-f769703f1f9d",
-          "name": "Qlik Sense Enterprise Stop task",
-          "request": {
-            "name": "Qlik Sense Enterprise Stop task",
-            "description": {
-              "content": "Stops the execution of a running task.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "task",
-                ":id",
-                "stop"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique identifier (GUID) of the entity"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fd7a638f-a945-4163-afba-522e9ff103d9",
-              "name": "Task stopped successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "stop"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "49c06a0a-053d-4881-a453-b97758ff468b",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "stop"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f4203c70-7a18-4927-951e-6524ee90caa0",
-              "name": "The requested entity was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "task",
-                    ":id",
-                    "stop"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique identifier (GUID) of the entity"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c93e0e39-c13c-4e56-b2e9-a3ea726fc688",
+          "createdAt": "2026-10-21T20:35:51.000Z",
+          "updatedAt": "2026-10-21T20:35:51.000Z",
+          "uid": "35240-c93e0e39-c13c-4e56-b2e9-a3ea726fc688"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "68e9934d-c99c-46be-8030-973c0ae5e0e1",
+      "createdAt": "2026-10-21T20:35:51.000Z",
+      "updatedAt": "2026-10-21T20:35:51.000Z",
+      "uid": "35240-68e9934d-c99c-46be-8030-973c0ae5e0e1"
     }
   ],
   "auth": {
@@ -966,25 +879,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "fddaeabc-efc4-4063-8e53-54a1e083491f",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Task API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4242/qrs"
     }
-  }
+  ]
 }

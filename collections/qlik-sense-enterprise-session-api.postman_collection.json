@@ -1,679 +1,583 @@
 {
+  "info": {
+    "_postman_id": "7d9fb3a4-578f-4562-9b20-2fca64d44f40",
+    "name": "Qlik Sense Enterprise Qlik Sense Proxy Service Session API",
+    "description": "REST API for managing user sessions, virtual proxies, load balancing, and authentication within the Qlik Sense Proxy Service (QPS). The QPS manages site authentication, session handling, and load balancing across Qlik Sense Engine Services. The API exposes endpoints for the Session module, Load Balancing module, and Proxy operations.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:35:27.000Z",
+    "updatedAt": "2026-10-21T20:35:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7d9fb3a4-578f-4562-9b20-2fca64d44f40"
+  },
   "item": [
     {
-      "id": "263bac6b-4adb-4c5d-b063-4baed787c427",
-      "name": "Session",
-      "description": {
-        "content": "Manage user sessions including listing, retrieving, and deleting sessions",
-        "type": "text/plain"
-      },
+      "name": "session",
       "item": [
         {
-          "id": "ccc07da7-e365-4eb9-bd87-41c19e343463",
-          "name": "Qlik Sense Enterprise List all sessions",
-          "request": {
-            "name": "Qlik Sense Enterprise List all sessions",
-            "description": {
-              "content": "Retrieves a list of all active user sessions managed by the proxy service. Each session represents an authenticated user connection.",
-              "type": "text/plain"
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise Get session by ID",
+              "id": "458a74da-5a07-45f5-8a0a-1ca814ff00c5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "f06f395b-0773-497f-9028-610b34b677d1",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique session identifier"
+                    }
+                  ]
+                },
+                "description": "Retrieves a specific user session by its unique session identifier."
+              },
+              "response": [
+                {
+                  "id": "76ec5898-5fbd-4882-8de8-13bf52d8f9c2",
+                  "name": "Session returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "session",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"sessionId\": \"<uuid>\",\n  \"userDirectory\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"sessionStart\": \"<dateTime>\",\n  \"lastActive\": \"<dateTime>\",\n  \"attributes\": [\n    {\n      \"name\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:35:28.000Z",
+                  "updatedAt": "2026-10-21T20:35:28.000Z",
+                  "uid": "35240-76ec5898-5fbd-4882-8de8-13bf52d8f9c2"
+                },
+                {
+                  "id": "d58f83ff-913e-43e0-9f88-33869f8da34a",
+                  "name": "Authentication failed or Xrfkey missing/mismatched.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "session",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:28.000Z",
+                  "updatedAt": "2026-10-21T20:35:28.000Z",
+                  "uid": "35240-d58f83ff-913e-43e0-9f88-33869f8da34a"
+                },
+                {
+                  "id": "0cee2c9c-e137-4995-b3f4-e368ed8d068c",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "session",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:28.000Z",
+                  "updatedAt": "2026-10-21T20:35:28.000Z",
+                  "uid": "35240-0cee2c9c-e137-4995-b3f4-e368ed8d068c"
+                }
+              ],
+              "createdAt": "2026-10-21T20:35:28.000Z",
+              "updatedAt": "2026-10-21T20:35:28.000Z",
+              "uid": "35240-458a74da-5a07-45f5-8a0a-1ca814ff00c5"
             },
+            {
+              "name": "Qlik Sense Enterprise Delete session",
+              "id": "50da0a67-a27b-4605-995b-ab540cf01ecf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "session",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "0cab77ab-20c5-4649-93d3-3a468e85a008",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) Unique session identifier to delete"
+                    }
+                  ]
+                },
+                "description": "Performs a teardown of all connections for a session. The Session module is notified, and the logout module is also notified if there are no more sessions for the user."
+              },
+              "response": [
+                {
+                  "id": "02dd8591-540d-4ce5-860b-7a40467caaec",
+                  "name": "Session deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "session",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:35:28.000Z",
+                  "updatedAt": "2026-10-21T20:35:28.000Z",
+                  "uid": "35240-02dd8591-540d-4ce5-860b-7a40467caaec"
+                },
+                {
+                  "id": "e8c83008-98e0-4424-92c7-a0ff2e1facac",
+                  "name": "Authentication failed or Xrfkey missing/mismatched.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "session",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:28.000Z",
+                  "updatedAt": "2026-10-21T20:35:28.000Z",
+                  "uid": "35240-e8c83008-98e0-4424-92c7-a0ff2e1facac"
+                },
+                {
+                  "id": "ccb4adb0-486e-471d-a790-9331788cb840",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/session/:id?Xrfkey=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "session",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:35:28.000Z",
+                  "updatedAt": "2026-10-21T20:35:28.000Z",
+                  "uid": "35240-ccb4adb0-486e-471d-a790-9331788cb840"
+                }
+              ],
+              "createdAt": "2026-10-21T20:35:28.000Z",
+              "updatedAt": "2026-10-21T20:35:28.000Z",
+              "uid": "35240-50da0a67-a27b-4605-995b-ab540cf01ecf"
+            }
+          ],
+          "id": "85c66992-46de-4cb5-ada8-2f0ceeca9ba0",
+          "createdAt": "2026-10-21T20:35:28.000Z",
+          "updatedAt": "2026-10-21T20:35:28.000Z",
+          "uid": "35240-85c66992-46de-4cb5-ada8-2f0ceeca9ba0"
+        },
+        {
+          "name": "Qlik Sense Enterprise List all sessions",
+          "id": "8d29e9f3-c61b-487e-89da-9df3d4c494f5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/session?Xrfkey=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "session"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                   "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
+                  "value": "<string>"
                 }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Retrieves a list of all active user sessions managed by the proxy service. Each session represents an authenticated user connection."
           },
           "response": [
             {
-              "id": "4785ecfe-15ca-4778-9f1c-7b886f02fa88",
+              "id": "8be5e5a2-a703-4ae1-b84e-d7780b3c1f36",
               "name": "List of active sessions returned successfully",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/session?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "session"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"sessionId\": \"de462b3a-e501-4396-aeb0-ad8a5deb2bd1\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"userName\": \"string\",\n    \"sessionStart\": \"1973-12-14T15:46:34.120Z\",\n    \"lastActive\": \"1967-07-27T12:37:59.820Z\",\n    \"attributes\": [\n      {\n        \"name\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  {\n    \"sessionId\": \"7ed45aa1-fef1-0e0c-f183-5809f8def0ad\",\n    \"userDirectory\": \"string\",\n    \"userId\": \"string\",\n    \"userName\": \"string\",\n    \"sessionStart\": \"1977-06-11T13:15:37.565Z\",\n    \"lastActive\": \"1972-02-22T01:47:06.203Z\",\n    \"attributes\": [\n      {\n        \"name\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"name\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"sessionId\": \"<uuid>\",\n    \"userDirectory\": \"<string>\",\n    \"userId\": \"<string>\",\n    \"userName\": \"<string>\",\n    \"sessionStart\": \"<dateTime>\",\n    \"lastActive\": \"<dateTime>\",\n    \"attributes\": [\n      {\n        \"name\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  },\n  {\n    \"sessionId\": \"<uuid>\",\n    \"userDirectory\": \"<string>\",\n    \"userId\": \"<string>\",\n    \"userName\": \"<string>\",\n    \"sessionStart\": \"<dateTime>\",\n    \"lastActive\": \"<dateTime>\",\n    \"attributes\": [\n      {\n        \"name\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"values\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n]",
+              "createdAt": "2026-10-21T20:35:28.000Z",
+              "updatedAt": "2026-10-21T20:35:28.000Z",
+              "uid": "35240-8be5e5a2-a703-4ae1-b84e-d7780b3c1f36"
             },
             {
-              "id": "4e4fec62-21d2-4de4-8029-93e533a32301",
+              "id": "0ad735ea-0a37-4f08-bc3a-142ddf19fd2e",
               "name": "Authentication failed or Xrfkey missing/mismatched.",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/session?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "session"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:35:28.000Z",
+              "updatedAt": "2026-10-21T20:35:28.000Z",
+              "uid": "35240-0ad735ea-0a37-4f08-bc3a-142ddf19fd2e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0efb05d9-0c0a-4c1f-b4a0-19a024e32aae",
-          "name": "Qlik Sense Enterprise Get session by ID",
-          "request": {
-            "name": "Qlik Sense Enterprise Get session by ID",
-            "description": {
-              "content": "Retrieves a specific user session by its unique session identifier.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "session",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique session identifier"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a983a2c9-c4eb-46e2-9ec3-b56af4740b9c",
-              "name": "Session returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "session",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique session identifier"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"sessionId\": \"09ce6a75-9c7d-d717-30b1-8f2000644aa9\",\n  \"userDirectory\": \"string\",\n  \"userId\": \"string\",\n  \"userName\": \"string\",\n  \"sessionStart\": \"1987-02-19T03:25:16.405Z\",\n  \"lastActive\": \"2009-04-04T01:22:56.970Z\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"values\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"values\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c70cc49c-d634-4551-af2b-59ad97724d8f",
-              "name": "Authentication failed or Xrfkey missing/mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "session",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique session identifier"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c49a2b22-2cf2-47c2-aa8b-b326ee8df1e2",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "session",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique session identifier"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7b85b90b-001b-4ee3-9262-92934af07fe7",
-          "name": "Qlik Sense Enterprise Delete session",
-          "request": {
-            "name": "Qlik Sense Enterprise Delete session",
-            "description": {
-              "content": "Performs a teardown of all connections for a session. The Session module is notified, and the logout module is also notified if there are no more sessions for the user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "session",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Unique session identifier to delete"
-                },
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "556a7727-ee4b-47ab-bf85-649e85ff9a1c",
-              "name": "Session deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "session",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique session identifier to delete"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "3763ee3c-9e22-4a07-a929-7e3cf50e4589",
-              "name": "Authentication failed or Xrfkey missing/mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "session",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique session identifier to delete"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f415e6e9-7c40-4f18-9dc4-fd4791b2e366",
-              "name": "The requested resource was not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "session",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Unique session identifier to delete"
-                    },
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:35:28.000Z",
+          "updatedAt": "2026-10-21T20:35:28.000Z",
+          "uid": "35240-8d29e9f3-c61b-487e-89da-9df3d4c494f5"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "0c484287-ef95-45cd-919d-5ca76567b187",
+      "createdAt": "2026-10-21T20:35:28.000Z",
+      "updatedAt": "2026-10-21T20:35:28.000Z",
+      "uid": "35240-0c484287-ef95-45cd-919d-5ca76567b187"
     }
   ],
   "auth": {
@@ -681,25 +585,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "42ec0b40-0e77-428a-8a53-e5aa518c41ed",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Session API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4243/qps"
     }
-  }
+  ]
 }

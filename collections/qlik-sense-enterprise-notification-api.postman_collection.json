@@ -1,46 +1,189 @@
 {
+  "info": {
+    "_postman_id": "ff111388-8027-45c5-8d7d-ac375490c682",
+    "name": "Qlik Sense Enterprise Qlik Sense Repository Service\u2026",
+    "description": "Core REST API for managing Qlik Sense Enterprise resources including apps, streams, users, security rules, and all configuration available through the Qlik Management Console (QMC). The QRS API provides CRUD operations for all entity types in the Qlik Sense repository, enabling programmatic administration of a Qlik Sense Enterprise deployment.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:34:49.000Z",
+    "updatedAt": "2026-10-21T20:34:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ff111388-8027-45c5-8d7d-ac375490c682"
+  },
   "item": [
     {
-      "id": "67de08f8-3fa8-4fa7-8ead-573c49dbf305",
-      "name": "Notification",
-      "description": {
-        "content": "Subscribe to and manage change notifications",
-        "type": "text/plain"
-      },
+      "name": "notification",
       "item": [
         {
-          "id": "64cef2ab-6356-45d5-9e72-dfe1de20a665",
+          "name": "changes",
+          "item": [
+            {
+              "name": "Qlik Sense Enterprise Get changes since last check",
+              "id": "b10bf41d-883f-4e3f-bfe7-99af465833b0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/notification/changes?Xrfkey=<string>&since=<dateTime>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notification",
+                    "changes"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Timestamp to retrieve changes since",
+                      "key": "since",
+                      "value": "<dateTime>"
+                    }
+                  ]
+                },
+                "description": "Retrieves a list of changes that have occurred since the last time this endpoint was called for the given subscription."
+              },
+              "response": [
+                {
+                  "id": "20e689d2-e196-4ec1-8352-51d2fc27cb73",
+                  "name": "Change notifications returned successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/notification/changes?Xrfkey=<string>&since=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "notification",
+                        "changes"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp to retrieve changes since",
+                          "key": "since",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"objectType\": \"<string>\",\n    \"objectID\": \"<uuid>\",\n    \"changedProperties\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"engineID\": \"<string>\",\n    \"changeType\": \"<string>\"\n  },\n  {\n    \"objectType\": \"<string>\",\n    \"objectID\": \"<uuid>\",\n    \"changedProperties\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"engineID\": \"<string>\",\n    \"changeType\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-10-21T20:34:49.000Z",
+                  "updatedAt": "2026-10-21T20:34:49.000Z",
+                  "uid": "35240-20e689d2-e196-4ec1-8352-51d2fc27cb73"
+                },
+                {
+                  "id": "4d0f66cd-7db1-41b8-88e4-8151ab772996",
+                  "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-Qlik-Xrfkey",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/notification/changes?Xrfkey=<string>&since=<dateTime>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "notification",
+                        "changes"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                          "key": "Xrfkey",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Timestamp to retrieve changes since",
+                          "key": "since",
+                          "value": "<dateTime>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:34:49.000Z",
+                  "updatedAt": "2026-10-21T20:34:49.000Z",
+                  "uid": "35240-4d0f66cd-7db1-41b8-88e4-8151ab772996"
+                }
+              ],
+              "createdAt": "2026-10-21T20:34:49.000Z",
+              "updatedAt": "2026-10-21T20:34:49.000Z",
+              "uid": "35240-b10bf41d-883f-4e3f-bfe7-99af465833b0"
+            }
+          ],
+          "id": "52970021-43e2-463d-a1f4-410a6e644b16",
+          "createdAt": "2026-10-21T20:34:49.000Z",
+          "updatedAt": "2026-10-21T20:34:49.000Z",
+          "uid": "35240-52970021-43e2-463d-a1f4-410a6e644b16"
+        },
+        {
           "name": "Qlik Sense Enterprise Subscribe to change notifications",
+          "id": "a6b2c10d-507e-40df-8694-b73688a29101",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise Subscribe to change notifications",
-            "description": {
-              "content": "Creates a subscription to receive notifications when changes occur to specified entity types or individual entities.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "notification"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -51,578 +194,376 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "raw",
               "raw": "{\n  \"handle\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"condition\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notification?Xrfkey=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notification"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                  "key": "Xrfkey",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a subscription to receive notifications when changes occur to specified entity types or individual entities."
           },
           "response": [
             {
-              "id": "bc892e7e-5004-41b9-92e2-d7f90916e74d",
+              "id": "6024d5b6-4318-4c3c-b9c1-e7691729d94a",
               "name": "Notification subscription created successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "notification"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"handle\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"condition\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/notification?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notification"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"handle\": \"string\",\n  \"type\": \"string\",\n  \"id\": \"483677b6-8002-94ba-5c06-60d45239bcae\",\n  \"condition\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"handle\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"condition\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:49.000Z",
+              "updatedAt": "2026-10-21T20:34:49.000Z",
+              "uid": "35240-6024d5b6-4318-4c3c-b9c1-e7691729d94a"
             },
             {
-              "id": "a336e18e-81ea-4333-b5ae-290ffdc1ed45",
+              "id": "96ee0a80-ae9b-4c99-b517-e80782b38e85",
               "name": "Invalid request. The request body or parameters are malformed.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "notification"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"handle\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"condition\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/notification?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notification"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:49.000Z",
+              "updatedAt": "2026-10-21T20:34:49.000Z",
+              "uid": "35240-96ee0a80-ae9b-4c99-b517-e80782b38e85"
             },
             {
-              "id": "481d1b01-c8a0-49bb-a575-6be8dca9c178",
+              "id": "266f5881-ffe4-4475-bf08-54958bf3760d",
               "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "notification"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"handle\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"condition\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/notification?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notification"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:49.000Z",
+              "updatedAt": "2026-10-21T20:34:49.000Z",
+              "uid": "35240-266f5881-ffe4-4475-bf08-54958bf3760d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:34:49.000Z",
+          "updatedAt": "2026-10-21T20:34:49.000Z",
+          "uid": "35240-a6b2c10d-507e-40df-8694-b73688a29101"
         },
         {
-          "id": "70f2208e-b12a-460d-b3e8-523d01645272",
           "name": "Qlik Sense Enterprise Remove change notification subscription",
+          "id": "ebc68e99-290c-421f-b881-bb21c17e4456",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise Remove change notification subscription",
-            "description": {
-              "content": "Removes an existing notification subscription. The subscription handle is passed as a query parameter.",
-              "type": "text/plain"
-            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/notification?Xrfkey=<string>&handle=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "notification"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                   "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "(Required) Handle identifying the notification subscription to remove",
                   "key": "handle",
-                  "value": "<string>",
-                  "description": "(Required) Handle identifying the notification subscription to remove"
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
+                  "value": "<string>"
                 }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
+            "description": "Removes an existing notification subscription. The subscription handle is passed as a query parameter."
           },
           "response": [
             {
-              "id": "a97d3a98-489d-462e-9066-0fc5d78024df",
+              "id": "1b3778ae-2be1-457f-9187-98e9aa5cb916",
               "name": "Subscription removed successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "notification"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "handle",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "DELETE",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
+                    "description": "Added as a part of security scheme: apikey",
                     "key": "X-Qlik-Xrfkey",
                     "value": "<API Key>"
                   }
                 ],
-                "method": "DELETE",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/notification?Xrfkey=<string>&handle=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "notification"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Handle identifying the notification subscription to remove",
+                      "key": "handle",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "No Content",
               "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:34:49.000Z",
+              "updatedAt": "2026-10-21T20:34:49.000Z",
+              "uid": "35240-1b3778ae-2be1-457f-9187-98e9aa5cb916"
             },
             {
-              "id": "6ad43e5e-a3f1-4202-b920-9ace44c14606",
+              "id": "8fb1f791-32f7-4471-acfb-07b23086ab4d",
               "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
               "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/notification?Xrfkey=<string>&handle=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "notification"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
                       "key": "Xrfkey",
                       "value": "<string>"
                     },
                     {
+                      "description": "(Required) Handle identifying the notification subscription to remove",
                       "key": "handle",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:34:49.000Z",
+              "updatedAt": "2026-10-21T20:34:49.000Z",
+              "uid": "35240-8fb1f791-32f7-4471-acfb-07b23086ab4d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8b1e1524-ee6f-47c4-acf9-9d9c2a98e28e",
-          "name": "Qlik Sense Enterprise Get changes since last check",
-          "request": {
-            "name": "Qlik Sense Enterprise Get changes since last check",
-            "description": {
-              "content": "Retrieves a list of changes that have occurred since the last time this endpoint was called for the given subscription.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "notification",
-                "changes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                },
-                {
-                  "disabled": false,
-                  "key": "since",
-                  "value": "<dateTime>",
-                  "description": "Timestamp to retrieve changes since"
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "bccd5895-e13c-462f-80e1-30d0f509eabb",
-              "name": "Change notifications returned successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "notification",
-                    "changes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"objectType\": \"string\",\n    \"objectID\": \"7b5ae6cd-fb3e-6cb8-0664-ba4058d4eda2\",\n    \"changedProperties\": [\n      \"string\",\n      \"string\"\n    ],\n    \"engineID\": \"string\",\n    \"changeType\": \"string\"\n  },\n  {\n    \"objectType\": \"string\",\n    \"objectID\": \"bdd29599-d609-3be6-5f2d-796731dfe7d6\",\n    \"changedProperties\": [\n      \"string\",\n      \"string\"\n    ],\n    \"engineID\": \"string\",\n    \"changeType\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bd26e9a9-c07b-4d76-89cb-ef04a524d4a2",
-              "name": "Authentication failed. The request lacks valid authentication credentials or the Xrfkey header/parameter is missing or mismatched.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "notification",
-                    "changes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:34:49.000Z",
+          "updatedAt": "2026-10-21T20:34:49.000Z",
+          "uid": "35240-ebc68e99-290c-421f-b881-bb21c17e4456"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "97608599-fd08-4006-9784-b3ab19c469ac",
+      "createdAt": "2026-10-21T20:34:49.000Z",
+      "updatedAt": "2026-10-21T20:34:49.000Z",
+      "uid": "35240-97608599-fd08-4006-9784-b3ab19c469ac"
     }
   ],
   "auth": {
@@ -630,25 +571,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "5157a7e5-45aa-4c29-8d4c-af92377c2a14",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Notification API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}:4242/qrs"
     }
-  }
+  ]
 }

@@ -1,191 +1,159 @@
 {
+  "info": {
+    "_postman_id": "0061e1ab-0912-4701-bbe7-e730e5ecd61f",
+    "name": "Qlik Sense Enterprise Qlik Sense About Service Components\u2026",
+    "description": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:33:31.000Z",
+    "updatedAt": "2026-10-21T20:33:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0061e1ab-0912-4701-bbe7-e730e5ecd61f"
+  },
   "item": [
     {
-      "id": "866bac96-65c2-4701-b01d-ef77a7557c88",
-      "name": "Components",
-      "description": {
-        "content": "Retrieve information about installed components",
-        "type": "text/plain"
-      },
+      "name": "components",
       "item": [
         {
-          "id": "f0f75220-3aab-4025-9a7c-adbc7c94c65a",
           "name": "Qlik Sense Enterprise Get installed components",
+          "id": "6162fa1c-26f4-4018-bff2-d6331ee5eabd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Qlik Sense Enterprise Get installed components",
-            "description": {
-              "content": "Retrieves a list of all components installed in the Qlik Sense system, including their names, versions, and status information.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "components"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "Xrfkey",
-                  "value": "<string>",
-                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value."
-                }
-              ],
-              "variable": [
-                {
-                  "description": "Qlik Sense server hostname",
-                  "type": "any",
-                  "value": "{{server}}",
-                  "key": "server"
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/components?Xrfkey=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "components"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                  "key": "Xrfkey",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of all components installed in the Qlik Sense system, including their names, versions, and status information."
           },
           "response": [
             {
-              "id": "e620f551-5feb-4609-b745-600acec88b37",
+              "id": "6b484ddb-6061-4d2b-a612-f7f999674688",
               "name": "Component list returned successfully",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "components"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/components?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "components"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "[\n  {\n    \"name\": \"string\",\n    \"version\": \"string\",\n    \"status\": \"string\",\n    \"hostName\": \"string\",\n    \"serviceType\": \"string\",\n    \"serviceState\": 8827,\n    \"uri\": \"https://fuLf.uwob618++uUh66PmPtgbLqg9o5S.Pj4\"\n  },\n  {\n    \"name\": \"string\",\n    \"version\": \"string\",\n    \"status\": \"string\",\n    \"hostName\": \"string\",\n    \"serviceType\": \"string\",\n    \"serviceState\": 8335,\n    \"uri\": \"https://gScOSoYmIVrPN.reyxJ,zbr\"\n  }\n]",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"version\": \"<string>\",\n    \"status\": \"<string>\",\n    \"hostName\": \"<string>\",\n    \"serviceType\": \"<string>\",\n    \"serviceState\": \"<integer>\",\n    \"uri\": \"<uri>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"version\": \"<string>\",\n    \"status\": \"<string>\",\n    \"hostName\": \"<string>\",\n    \"serviceType\": \"<string>\",\n    \"serviceState\": \"<integer>\",\n    \"uri\": \"<uri>\"\n  }\n]",
+              "createdAt": "2026-10-21T20:33:31.000Z",
+              "updatedAt": "2026-10-21T20:33:31.000Z",
+              "uid": "35240-6b484ddb-6061-4d2b-a612-f7f999674688"
             },
             {
-              "id": "779a22e9-2333-45d2-96ae-e84e0cc92c7a",
+              "id": "436faf59-4c0d-4e2e-aeab-36e40aa70f60",
               "name": "Authentication failed or Xrfkey missing/mismatched.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "components"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "Xrfkey",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "Qlik Sense server hostname",
-                      "type": "any",
-                      "value": "{{server}}",
-                      "key": "server"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-Qlik-Xrfkey",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-Qlik-Xrfkey",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/components?Xrfkey=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "components"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Cross-site request forgery prevention key. Must be 16 arbitrary characters matching the X-Qlik-Xrfkey header value.",
+                      "key": "Xrfkey",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:33:31.000Z",
+              "updatedAt": "2026-10-21T20:33:31.000Z",
+              "uid": "35240-436faf59-4c0d-4e2e-aeab-36e40aa70f60"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:33:31.000Z",
+          "updatedAt": "2026-10-21T20:33:31.000Z",
+          "uid": "35240-6162fa1c-26f4-4018-bff2-d6331ee5eabd"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "Qlik Sense server hostname",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost",
-      "key": "server"
-    },
-    {
-      "type": "string",
-      "value": "https://{{server}}/api/about/v1",
-      "key": "baseUrl"
+      "id": "cde97bf8-cb7f-48d1-9a39-3683ea29663a",
+      "createdAt": "2026-10-21T20:33:31.000Z",
+      "updatedAt": "2026-10-21T20:33:31.000Z",
+      "uid": "35240-cde97bf8-cb7f-48d1-9a39-3683ea29663a"
     }
   ],
   "auth": {
@@ -193,25 +161,29 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-Qlik-Xrfkey"
+        "value": "X-Qlik-Xrfkey",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "f52597e0-02f2-4362-861e-128ccd870720",
-    "name": "Qlik Sense Enterprise Qlik Sense Service About Components API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for retrieving product information about a Qlik Sense site, including system details, installed components, external URLs, and third-party software information. The About Service API provides read-only endpoints that return JSON-formatted information about the Qlik Sense deployment.\n\nContact Support:\n Name: Qlik Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{server}}/api/about/v1"
     }
-  }
+  ]
 }
